@@ -1,0 +1,36 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "UpHealth",
+    "theme_version": "0.1.0",
+    "theme_author": "UpHealth",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      { "type": "header", "content": "Base" },
+      { "type": "color", "id": "color_bg", "label": "Page background", "default": "#fefcf9" },
+      { "type": "color", "id": "color_bg_alt", "label": "Section band", "default": "#f3f0e9" },
+      { "type": "color", "id": "color_bg_card", "label": "Card", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Ink / dark panels", "default": "#1e2248" },
+      { "type": "color", "id": "color_text_muted", "label": "Muted text", "default": "#636f7f" },
+      { "type": "color", "id": "color_border", "label": "Border", "default": "#e7e2d8" },
+      { "type": "header", "content": "Accent (pink)" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#d65a92" },
+      { "type": "color", "id": "color_accent_soft", "label": "Accent soft", "default": "#f6cfe0" },
+      { "type": "color", "id": "color_accent_deep", "label": "Accent deep", "default": "#b23e72" },
+      { "type": "header", "content": "Brand (purple)" },
+      { "type": "color", "id": "color_purple", "label": "Buttons / bands", "default": "#74548e" },
+      { "type": "color", "id": "color_purple_deep", "label": "Button hover", "default": "#5e4275" },
+      { "type": "color", "id": "color_purple_soft", "label": "Purple soft", "default": "#d9cee4" }
+    ]
+  },
+  {
+    "name": "Product page",
+    "settings": [
+      { "type": "color", "id": "color_product_bg", "label": "Product page background", "default": "#fbf1f6" }
+    ]
+  }
+]

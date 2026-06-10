@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpHealth — Functional Wellness Supplements</title>
+  <meta name="description"
+    content="Clean, science-backed supplements that help you feel your best self. Five colour-coded formulas, bonus rewards on your first order, and a community that takes care of itself." />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body data-page="home">
+
+  <div data-partial="header"></div>
+
+  <main>
+
+    <!-- =====================================================================
+         SECTION: Hero slider          (Shopify section → "hero-slider")
+         5 slides, one per product photo. Each slide = one block.
+         Edit a slide: change eyebrow / title / lead / CTAs / image / colour
+         class (hero__slide--range|pink|orange|blue|mint).
+         ===================================================================== -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero__slider">
+
+        <!-- Slide 1 — The range (group shot) -->
+        <div class="hero__slide hero__slide--range">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">The UpHealth range</span>
+              <h1 class="hero__title">Five formulas.<br /><em>One clean ritual.</em></h1>
+              <p class="hero__lead">Functional supplements in five colour-coded formulas — pick the one that fits your
+                day, your body and your goal.</p>
+              <div class="hero__actions">
+                <a href="shop.html" class="btn btn--primary">Shop the range</a>
+                <a href="#community-products" class="btn btn--ghost">Bestsellers</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>5</span> formulas</li>
+                <li><span>60</span> capsules each</li>
+                <li><span>GMP</span> certified labs</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media">
+                <img src="assets/image/png/photo_2026-06-01_10-27-57.jpg"
+                  alt="The full UpHealth range — mint, pink, blue and orange bottles" loading="eager" />
+              </div>
+              <div class="hero__chip hero__chip--top">No added sugar</div>
+              <div class="hero__chip hero__chip--bottom">Doctor-formulated</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 — Beauty (pink) -->
+        <div class="hero__slide hero__slide--pink">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Beauty &amp; glow</span>
+              <h1 class="hero__title">Skin that<br /><em>feels its best.</em></h1>
+              <p class="hero__lead">Skin-loving actives for clarity, glow and balance that starts from within and shows
+                on the outside.</p>
+              <div class="hero__actions">
+                <a href="shop.html?state=beauty" class="btn btn--primary">Shop Beauty</a>
+                <a href="product.html" class="btn btn--ghost">Learn more</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>5 g</span> daily actives</li>
+                <li><span>Vegan</span> capsules</li>
+                <li><span>30</span> day supply</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media">
+                <img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="UpHealth Beauty formula — pink bottle"
+                  loading="lazy" />
+              </div>
+              <div class="hero__chip hero__chip--top">Glow from within</div>
+              <div class="hero__chip hero__chip--bottom">Clean label</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 — Energy (orange) -->
+        <div class="hero__slide hero__slide--orange">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Energy &amp; metabolism</span>
+              <h1 class="hero__title">Steady energy,<br /><em>all day long.</em></h1>
+              <p class="hero__lead">Metabolic support that helps keep blood sugar steady and afternoons crash-free —
+                clean fuel without the jitters.</p>
+              <div class="hero__actions">
+                <a href="shop.html?state=energy" class="btn btn--primary">Shop Energy</a>
+                <a href="product.html" class="btn btn--ghost">Learn more</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>0</span> crash</li>
+                <li><span>1×</span> a day</li>
+                <li><span>Sugar</span> free</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media">
+                <img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="UpHealth Energy formula — orange bottle"
+                  loading="lazy" />
+              </div>
+              <div class="hero__chip hero__chip--top">No jitters</div>
+              <div class="hero__chip hero__chip--bottom">Science-backed dose</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 — Calm (blue) -->
+        <div class="hero__slide hero__slide--blue">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Calm &amp; balance</span>
+              <h1 class="hero__title">Calm focus,<br /><em>clear nights.</em></h1>
+              <p class="hero__lead">Calming minerals that help the body wind down, balance stress and reset overnight.
+              </p>
+              <div class="hero__actions">
+                <a href="shop.html?state=relax" class="btn btn--primary">Shop Calm</a>
+                <a href="product.html" class="btn btn--ghost">Learn more</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>PM</span> ritual</li>
+                <li><span>Non</span> habit-forming</li>
+                <li><span>Gentle</span> minerals</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media">
+                <img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="UpHealth Calm formula — blue bottle"
+                  loading="lazy" />
+              </div>
+              <div class="hero__chip hero__chip--top">Wind-down support</div>
+              <div class="hero__chip hero__chip--bottom">Third-party tested</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5 — Gut & detox (mint) -->
+        <div class="hero__slide hero__slide--mint">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Gut &amp; detox</span>
+              <h1 class="hero__title">A gut that<br /><em>works with you.</em></h1>
+              <p class="hero__lead">Supports healthy digestion and a balanced microbiome — light, fresh and easy to take
+                every morning.</p>
+              <div class="hero__actions">
+                <a href="shop.html?state=strength" class="btn btn--primary">Shop Gut</a>
+                <a href="product.html" class="btn btn--ghost">Learn more</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>AM</span> ritual</li>
+                <li><span>Pre</span> &amp; postbiotic</li>
+                <li><span>Bloat</span> friendly</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media">
+                <img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="UpHealth Gut formula — mint bottle"
+                  loading="lazy" />
+              </div>
+              <div class="hero__chip hero__chip--top">Microbiome support</div>
+              <div class="hero__chip hero__chip--bottom">No fillers</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Marquee              (Shopify section → "marquee")
+         Edit: change the repeated phrase below (duplicated once for the loop).
+         ===================================================================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Clean ingredients</span>
+        <span class="marquee__item">Doctor-formulated</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">No added sugar</span>
+        <span class="marquee__item">GMP certified labs</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Clean ingredients</span>
+        <span class="marquee__item">Doctor-formulated</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">No added sugar</span>
+        <span class="marquee__item">GMP certified labs</span>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION: Community products    (Shopify section → "featured-collection")
+         Grid of product blocks. Edit / add / remove an <article> to change.
+         ===================================================================== -->
+    <section class="product-line" id="community-products" aria-label="Loved by our community">
+      <div class="container">
+        <header class="section-head section-head--center reveal">
+          <h2 class="section-head__title">Loved by our community</h2>
+        </header>
+
+        <div class="product-line__grid">
+
+          <article class="product-card product-card--compact reveal">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--gift">All formats</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+              <h3 class="product-card__title">Isotonic Mix</h3>
+              <p class="product-card__desc">Citrus · 20 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$26</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-1">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge">Gift inside</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
+              <h3 class="product-card__title">Beauty Marmalade</h3>
+              <p class="product-card__desc">Berry · 30 gummies</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$32</span><span
+                    class="product-card__price-old">$39</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-2">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--gift">All formats</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
+              <h3 class="product-card__title">Marine Collagen</h3>
+              <p class="product-card__desc">Neutral · 30 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$38</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-3">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+              <h3 class="product-card__title">Daily Isotonic</h3>
+              <p class="product-card__desc">Orange · 20 sticks</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$24</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--gift">All formats</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+              <h3 class="product-card__title">Vanilla Protein</h3>
+              <p class="product-card__desc">Vanilla · 30 scoops</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$48</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-1">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge">Gift inside</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+              <h3 class="product-card__title">High Energy</h3>
+              <p class="product-card__desc">Citrus · 20 sticks</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$28</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-2">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+              <h3 class="product-card__title">Creatine Power</h3>
+              <p class="product-card__desc">Unflavored · 30 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$30</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-3">
+            <a href="product.html" class="product-card__media" aria-hidden="true"><img
+                src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" /></a>
+            <button class="product-card__fav" aria-label="Add to wishlist">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+              </svg>
+            </button>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--gift">All formats</span>
+              <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
+              <h3 class="product-card__title">Berberine Caps</h3>
+              <p class="product-card__desc">60 capsules · 1 month</p>
+              <div class="product-card__footer">
+                <div class="product-card__price"><span class="product-card__price-now">$34</span></div>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="product-line__more reveal">
+          <a href="shop.html" class="btn btn--ghost">Load more</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Marquee
+         ===================================================================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Third-party tested</span>
+        <span class="marquee__item">Subscription saves 10%</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Free shipping over $80</span>
+        <span class="marquee__item">Clean labels</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Third-party tested</span>
+        <span class="marquee__item">Subscription saves 10%</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Free shipping over $80</span>
+        <span class="marquee__item">Clean labels</span>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION: Bonus banner          (Shopify section → "image-with-text")
+         500 points reward + lifestyle image. Edit heading / text / button / image.
+         ===================================================================== -->
+    <section class="bonus" aria-label="Loyalty bonus">
+      <div class="container">
+        <div class="bonus__card reveal">
+          <div class="bonus__body">
+            <h2 class="bonus__title">Bonus on your<br />first order</h2>
+            <p class="bonus__text">We give you 500 bonus points just for creating an account — that's $5 toward day one.
+            </p>
+            <a href="bonuses.html" class="btn btn--primary btn--lg">Sign up</a>
+          </div>
+          <div class="bonus__visual" aria-hidden="true">
+            <div class="bonus__media">
+              <video autoplay muted loop playsinline preload="metadata"
+                poster="https://assets.mixkit.co/videos/18045/18045-thumb-720-0.jpg">
+                <source src="https://assets.mixkit.co/videos/18045/18045-720.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <span class="bonus__coin">+500</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Benefits              (Shopify section → "benefits-3up")
+         3 image cards, hover reveals the description. Edit media / title / text.
+         ===================================================================== -->
+    <section class="why" id="about" aria-label="Why UpHealth">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-head__title">Why UpHealth?</h2>
+          <p class="section-head__lead">Hover a card to learn more.</p>
+        </header>
+
+        <div class="why__grid">
+          <article class="why-card reveal">
+            <div class="why-card__media">
+              <img src="/assets/image/personal/image.png" alt="In the lab" loading="lazy" />
+              <span class="why-card__chip">Scientific approach</span>
+              <span class="why-card__num">01</span>
+            </div>
+            <div class="why-card__reveal">
+              <p>We use only tested nutrients in meaningful doses — and leave out the needless extras.</p>
+            </div>
+          </article>
+
+          <article class="why-card reveal reveal--delay-1">
+            <div class="why-card__media">
+              <img src="/assets/image/personal/image3.png" alt="Clean ingredients" loading="lazy" />
+              <span class="why-card__chip">Clean formula</span>
+              <span class="why-card__num">02</span>
+            </div>
+            <div class="why-card__reveal">
+              <p>Every ingredient works in concert with the others, amplifying the overall effect.</p>
+            </div>
+          </article>
+
+          <article class="why-card reveal reveal--delay-2">
+            <div class="why-card__media">
+              <img src="/assets/image/personal/image2.png" alt="Daily ritual" loading="lazy" />
+              <span class="why-card__chip">Proven results</span>
+              <span class="why-card__num">03</span>
+            </div>
+            <div class="why-card__reveal">
+              <p>Developed with doctors and research labs, then tested batch by batch before it ships.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Formula for the perfect day  (Shopify → "perfect-day")
+         3 time-of-day product blocks (Morning / Day / Evening).
+         ===================================================================== -->
+    <section class="perfect-day" aria-label="Formula for the perfect day">
+      <div class="container">
+        <header class="product-line__head reveal">
+          <div>
+            <span class="section-head__eyebrow">Your daily routine</span>
+            <h2 class="product-line__title">Formula for the perfect day</h2>
+          </div>
+          <a href="shop.html" class="btn btn--ghost btn--sm">More options</a>
+        </header>
+
+        <div class="perfect-day__grid">
+          <article class="day-card reveal">
+            <a href="product.html" class="day-card__media" aria-hidden="true">
+              <img src="assets/image/png/matchalatte.png" alt="Matcha Latte" loading="lazy" />
+              <span class="day-card__time">Morning</span>
+            </a>
+            <div class="day-card__body">
+              <h3 class="day-card__title">Matcha Latte</h3>
+              <div class="day-card__footer">
+                <span class="product-card__price-now">$29</span>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card reveal reveal--delay-1">
+            <a href="product.html" class="day-card__media" aria-hidden="true">
+              <img src="assets/image/png/bcomplex.png" alt="B-Complex" loading="lazy" />
+              <span class="day-card__time">Day</span>
+            </a>
+            <div class="day-card__body">
+              <h3 class="day-card__title">B-Complex</h3>
+              <div class="day-card__footer">
+                <span class="product-card__price-now">$39</span>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card reveal reveal--delay-2">
+            <a href="product.html" class="day-card__media" aria-hidden="true">
+              <img src="assets/image/png/magnesiumcalm.png" alt="Magnesium Calm" loading="lazy" />
+              <span class="day-card__time">Evening</span>
+            </a>
+            <div class="day-card__body">
+              <h3 class="day-card__title">Magnesium Calm</h3>
+              <div class="day-card__footer">
+                <span class="product-card__price-now">$25</span>
+                <a href="product.html" class="btn btn--primary btn--sm">Details</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Big animated text     (Shopify section → "scrolling-statement")
+         ===================================================================== -->
+    <section class="bigtext" aria-label="Brand statement">
+      <div class="bigtext__track" aria-hidden="true">
+        <span class="bigtext__line">UpHealth is <em>balance</em> &middot; UpHealth is <em>energy</em> &middot; UpHealth
+          is <em>calm</em> &middot; UpHealth is <em>you</em> &middot;</span>
+        <span class="bigtext__line">UpHealth is <em>balance</em> &middot; UpHealth is <em>energy</em> &middot; UpHealth
+          is <em>calm</em> &middot; UpHealth is <em>you</em> &middot;</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Science video         (Shopify section → "video")
+         Single looping video. Swap <source>/poster for your own footage.
+         ===================================================================== -->
+    <section class="science" aria-label="The science, made simple">
+      <div class="container">
+        <div class="science__card reveal">
+          <video class="science__video" autoplay muted loop playsinline preload="metadata"
+            poster="https://assets.mixkit.co/videos/35377/35377-thumb-720-0.jpg">
+            <source src="https://assets.mixkit.co/videos/35377/35377-720.mp4" type="video/mp4" />
+          </video>
+          <div class="science__overlay">
+            <span class="section-head__eyebrow">Inside every capsule</span>
+            <h2 class="science__title">Science, but make it simple</h2>
+            <p class="science__text">Smooth, glossy capsules dosed to the milligram — what goes in is exactly what your
+              body can use.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Marquee
+         ===================================================================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Join the wellness gang</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Earn points on every order</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Join the wellness gang</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Join the wellness gang</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Earn points on every order</span>
+        <span class="marquee__item">Feel your best self</span>
+        <span class="marquee__item">Join the wellness gang</span>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION: Wellness gang         (Shopify section → "loyalty-perks")
+         Community intro + "what you get" checklist + image.
+         ===================================================================== -->
+    <section class="gang" aria-label="The wellness gang">
+      <div class="container">
+        <header class="gang__head reveal">
+          <span class="section-head__eyebrow">UpHealth is</span>
+          <h2 class="gang__title">Wellness gang</h2>
+          <p class="gang__lead">UpHealth isn't only what's in the bottle — it's a community of people for whom taking
+            care of themselves is part of life.</p>
+        </header>
+
+        <div class="gang__grid">
+          <div class="gang__perks reveal">
+            <h3 class="gang__perks-title">What you get after signing up:</h3>
+            <ul class="perks__list">
+              <li class="perks__item"><span>500 points</span> as a gift on your first purchase</li>
+              <li class="perks__item"><span>4 levels</span> of the loyalty program to pay with points</li>
+              <li class="perks__item"><span>Gifts &amp; perks</span> for every tier you reach</li>
+              <li class="perks__item"><span>Early access</span> to new launches and special projects</li>
+              <li class="perks__item"><span>Invitations</span> to closed brand events</li>
+            </ul>
+            <a href="bonuses.html" class="btn btn--primary">Sign up</a>
+          </div>
+
+          <div class="gang__visual reveal reveal--delay-1" aria-hidden="true">
+            <div class="gang__photo">
+              <img src="/assets/image/png/image.png" alt="" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Video reviews         (Shopify section → "video-reviews")
+         "People are talking about us" — vertical reels carousel.
+         Swap each <source>/poster for your own clips.
+         ===================================================================== -->
+    <section class="testimonials reels" aria-label="People are talking about us">
+      <div class="container">
+        <header class="section-head section-head--center reveal">
+          <h2 class="section-head__title">People are talking about us</h2>
+        </header>
+
+        <div class="carousel" data-carousel>
+          <div class="carousel__controls">
+            <button class="carousel__btn carousel__btn--prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="m15 6-6 6 6 6" />
+              </svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="m9 6 6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="carousel__viewport">
+            <div class="carousel__track">
+
+              <article class="carousel__slide">
+                <div class="reel">
+                  <div class="reel__media">
+                    <video autoplay muted loop playsinline preload="none"
+                      poster="https://assets.mixkit.co/videos/17540/17540-thumb-720-0.jpg">
+                      <source src="https://assets.mixkit.co/videos/17540/17540-720.mp4" type="video/mp4" />
+                    </video>
+                    <span class="reel__dur">0:18</span>
+                    <div class="reel__caption"><strong>Anna K.</strong> · Beauty formula</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="reel">
+                  <div class="reel__media">
+                    <video autoplay muted loop playsinline preload="none"
+                      poster="https://assets.mixkit.co/videos/34273/34273-thumb-720-0.jpg">
+                      <source src="https://assets.mixkit.co/videos/34273/34273-720.mp4" type="video/mp4" />
+                    </video>
+                    <span class="reel__dur">0:24</span>
+                    <div class="reel__caption"><strong>Marco D.</strong> · Energy formula</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="reel">
+                  <div class="reel__media">
+                    <video autoplay muted loop playsinline preload="none"
+                      poster="https://assets.mixkit.co/videos/16084/16084-thumb-720-0.jpg">
+                      <source src="https://assets.mixkit.co/videos/16084/16084-720.mp4" type="video/mp4" />
+                    </video>
+                    <span class="reel__dur">0:31</span>
+                    <div class="reel__caption"><strong>Sofia R.</strong> · Calm formula</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="reel">
+                  <div class="reel__media">
+                    <video autoplay muted loop playsinline preload="none"
+                      poster="https://assets.mixkit.co/videos/16420/16420-thumb-720-0.jpg">
+                      <source src="https://assets.mixkit.co/videos/16420/16420-720.mp4" type="video/mp4" />
+                    </video>
+                    <span class="reel__dur">0:15</span>
+                    <div class="reel__caption"><strong>Daniel P.</strong> · Gut formula</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="reel">
+                  <div class="reel__media">
+                    <video autoplay muted loop playsinline preload="none"
+                      poster="https://assets.mixkit.co/videos/1776/1776-thumb-720-0.jpg">
+                      <source src="https://assets.mixkit.co/videos/1776/1776-720.mp4" type="video/mp4" />
+                    </video>
+                    <span class="reel__dur">0:22</span>
+                    <div class="reel__caption"><strong>Eva M.</strong> · The Full Five</div>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="carousel__dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION: Press                 (Shopify section → "logo-list")
+         "As seen in" — edit the wordmark text in each <li>.
+         ===================================================================== -->
+    <section class="press-strip" aria-label="As seen in">
+      <div class="container">
+        <header class="section-head section-head--center reveal">
+          <h2 class="section-head__title">In the press</h2>
+        </header>
+        <ul class="press-strip__list reveal">
+          <li><a class="press-strip__logo" href="#">THE&nbsp;WELL</a></li>
+          <li><a class="press-strip__logo" href="#">VITALIS</a></li>
+          <li><a class="press-strip__logo" href="#">PURE</a></li>
+          <li><a class="press-strip__logo" href="#">FORMULA</a></li>
+          <li><a class="press-strip__logo" href="#">GLOW&nbsp;JOURNAL</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-partial="footer"></div>
+
+  <script src="js/partials.js"></script>
+
+  <!-- Slick slider deps -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+    (function () {
+      if (typeof window.jQuery === 'undefined') return;
+      jQuery(function ($) {
+        $('.hero__slider').slick({
+          dots: true,
+          arrows: false,
+          fade: true,
+          autoplay: true,
+          autoplaySpeed: 6000,
+          speed: 700,
+          pauseOnHover: false,
+          cssEase: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          adaptiveHeight: false
+        });
+      });
+    })();
+  </script>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+
+</html>

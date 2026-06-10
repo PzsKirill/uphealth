@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpHealth — Functional Wellness Supplements</title>
+  <meta name="description" content="Clean nutrition with bioavailable formulas. Collagen, protein, sleep and energy support — designed with science, sourced from nature." />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body data-page="home">
+
+  <div data-partial="header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         Hero (Slick slider — 3 slides)
+         ============================================================ -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero__slider">
+
+        <!-- Slide 1 — Technology -->
+        <div class="hero__slide">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Microparticle technology</span>
+              <h1 class="hero__title">
+                Smarter nutrients.<br />
+                <em>Better absorption.</em>
+              </h1>
+              <p class="hero__lead">
+                Bioavailable formulas with collagen peptides, whey isolates and adaptogens — built around what your body can actually use.
+              </p>
+              <div class="hero__actions">
+                <a href="shop.html" class="btn btn--primary">Shop now</a>
+                <a href="#wellness-test" class="btn btn--ghost">Take the wellness test</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span><span class="counter" data-counter="10" data-counter-decimals="0">0</span>k+</span> active customers</li>
+                <li><span><span class="counter" data-counter="4.9" data-counter-decimals="1">0</span></span> average rating</li>
+                <li><span>GMP</span> certified labs</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media" aria-hidden="true"></div>
+              <div class="hero__chip hero__chip--top">No added sugar</div>
+              <div class="hero__chip hero__chip--bottom">Doctor-formulated</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 — Loyalty -->
+        <div class="hero__slide">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Loyalty program</span>
+              <h1 class="hero__title">
+                Earn while you shop.<br />
+                <em>Start with 500 points.</em>
+              </h1>
+              <p class="hero__lead">
+                Every dollar earns a point. Every 100 points equals a dollar off. Sign up and the first 500 land in your account instantly — that's $5 toward day one.
+              </p>
+              <div class="hero__actions">
+                <a href="bonuses.html" class="btn btn--primary">See how it works</a>
+                <a href="#" class="btn btn--ghost">Sign up</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>500</span> on signup</li>
+                <li><span>2×</span> points at Gold tier</li>
+                <li><span>24 mo</span> point validity</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media" aria-hidden="true" style="background: linear-gradient(160deg, #ead0a3 0%, #c89878 45%, #5d6a4d 100%);"></div>
+              <div class="hero__chip hero__chip--top">+500 on signup</div>
+              <div class="hero__chip hero__chip--bottom">Free express at Silver</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 — Wellness test -->
+        <div class="hero__slide">
+          <div class="hero__inner container">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Personalized</span>
+              <h1 class="hero__title">
+                A two-minute test.<br />
+                <em>The right routine.</em>
+              </h1>
+              <p class="hero__lead">
+                Twelve questions about your sleep, energy and goals. We map your answers to the formulas your body actually needs — no guesswork, no upsell.
+              </p>
+              <div class="hero__actions">
+                <a href="#wellness-test" class="btn btn--primary">Take the test</a>
+                <a href="about.html" class="btn btn--ghost">Read the method</a>
+              </div>
+              <ul class="hero__meta">
+                <li><span>12</span> questions</li>
+                <li><span>~2 min</span> to complete</li>
+                <li><span>Tailored</span> recommendations</li>
+              </ul>
+            </div>
+            <div class="hero__visual">
+              <div class="hero__media" aria-hidden="true" style="background: var(--grad-wellness);"></div>
+              <div class="hero__chip hero__chip--top">Built with nutritionists</div>
+              <div class="hero__chip hero__chip--bottom">No email required</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Marquee — running line under hero
+         ============================================================ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Free shipping over $80</span>
+        <span class="marquee__item">Doctor-formulated</span>
+        <span class="marquee__item">GMP certified labs</span>
+        <span class="marquee__item">No added sugar</span>
+        <span class="marquee__item">Third-party tested</span>
+        <span class="marquee__item">Clean labels</span>
+        <span class="marquee__item">Science backed doses</span>
+        <span class="marquee__item">Subscription saves 10%</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee__item">Free shipping over $80</span>
+        <span class="marquee__item">Doctor-formulated</span>
+        <span class="marquee__item">GMP certified labs</span>
+        <span class="marquee__item">No added sugar</span>
+        <span class="marquee__item">Third-party tested</span>
+        <span class="marquee__item">Clean labels</span>
+        <span class="marquee__item">Science backed doses</span>
+        <span class="marquee__item">Subscription saves 10%</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Product line grid — limited preview
+         ============================================================ -->
+    <section class="product-line" id="products" aria-label="Shop the line">
+      <div class="container">
+        <header class="product-line__head reveal">
+          <h2 class="product-line__title">Shop the line</h2>
+          <a href="shop.html" class="product-line__link">View all products →</a>
+        </header>
+
+        <div class="product-line__grid">
+
+          <article class="product-card product-card--compact reveal">
+            <a href="product.html" class="product-card__media product-card__media--gummies" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <span class="product-card__badge">Hit</span>
+              <h3 class="product-card__title">Marine Collagen Gummies</h3>
+              <p class="product-card__desc">Cherry · 30 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$32</span>
+                  <span class="product-card__price-old">$39</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-1">
+            <a href="product.html" class="product-card__media product-card__media--protein" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--new">New</span>
+              <h3 class="product-card__title">Vanilla Whey Protein</h3>
+              <p class="product-card__desc">Vanilla · 30 scoops</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$48</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-2">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-energy);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <h3 class="product-card__title">Energy Sticks</h3>
+              <p class="product-card__desc">Citrus · 20 sticks</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$24</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-3">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-sleep);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <h3 class="product-card__title">Sleep Sticks</h3>
+              <p class="product-card__desc">Mint · 20 sticks</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$28</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <span class="product-card__badge">Hit</span>
+              <h3 class="product-card__title">Greens Drink</h3>
+              <p class="product-card__desc">Apple · 15 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$36</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-1">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-beauty);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <h3 class="product-card__title">Beauty Powder</h3>
+              <p class="product-card__desc">Berry · 21 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$42</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-2">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-strength);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <span class="product-card__badge product-card__badge--new">New</span>
+              <h3 class="product-card__title">Strength Stack</h3>
+              <p class="product-card__desc">Unflavored · 30 servings</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$54</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card product-card--compact reveal reveal--delay-3">
+            <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);" aria-hidden="true"></a>
+            <div class="product-card__body">
+              <span class="product-card__badge">Bundle</span>
+              <h3 class="product-card__title">Beauty Bundle</h3>
+              <p class="product-card__desc">Gummies + Powder · save 15%</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span class="product-card__price-now">$62</span>
+                  <span class="product-card__price-old">$74</span>
+                </div>
+                <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         States grid
+         ============================================================ -->
+    <section class="states" aria-label="Browse by state">
+      <div class="container">
+        <header class="section-head section-head--center reveal">
+          <span class="section-head__eyebrow">Find your fit</span>
+          <h2 class="section-head__title">What state do you need?</h2>
+          <p class="section-head__lead">Pick the outcome — we'll surface the right formulas.</p>
+        </header>
+
+        <ul class="states__list">
+          <li class="states__item reveal">
+            <a href="shop.html?state=energy" class="state-card" data-state="energy">
+              <span class="state-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+              </span>
+              <span class="state-card__label">Energy</span>
+            </a>
+          </li>
+          <li class="states__item reveal reveal--delay-1">
+            <a href="shop.html?state=sleep" class="state-card" data-state="sleep">
+              <span class="state-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+              </span>
+              <span class="state-card__label">Sleep</span>
+            </a>
+          </li>
+          <li class="states__item reveal reveal--delay-2">
+            <a href="shop.html?state=relax" class="state-card" data-state="relax">
+              <span class="state-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2c2 3 2 7 0 10-2-3-2-7 0-10z"/><path d="M4 14c4-2 8-2 16 0-4 4-12 4-16 0z"/></svg>
+              </span>
+              <span class="state-card__label">Relax</span>
+            </a>
+          </li>
+          <li class="states__item reveal reveal--delay-3">
+            <a href="shop.html?state=beauty" class="state-card" data-state="beauty">
+              <span class="state-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="4"/><path d="M5 21c1-4 4-6 7-6s6 2 7 6"/></svg>
+              </span>
+              <span class="state-card__label">Beauty</span>
+            </a>
+          </li>
+          <li class="states__item reveal reveal--delay-4">
+            <a href="shop.html?state=strength" class="state-card" data-state="strength">
+              <span class="state-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h3M19 12h3M7 8v8M17 8v8M7 12h10"/></svg>
+              </span>
+              <span class="state-card__label">Strength</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Benefits — 4 columns
+         ============================================================ -->
+    <section class="benefits" id="about" aria-label="Why UpHealth">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-head__eyebrow">Why UpHealth</span>
+          <h2 class="section-head__title">Built on what works, not what's trending</h2>
+        </header>
+
+        <div class="benefits__grid">
+          <div class="benefit reveal">
+            <span class="benefit__num">01</span>
+            <h3 class="benefit__title">Proven nutrients</h3>
+            <p class="benefit__text">Only ingredients with peer-reviewed evidence in meaningful doses — no marketing fluff.</p>
+          </div>
+          <div class="benefit reveal reveal--delay-1">
+            <span class="benefit__num">02</span>
+            <h3 class="benefit__title">Synergy by design</h3>
+            <p class="benefit__text">Formulas where every component supports another — for absorption you can feel.</p>
+          </div>
+          <div class="benefit reveal reveal--delay-2">
+            <span class="benefit__num">03</span>
+            <h3 class="benefit__title">Doctor-developed</h3>
+            <p class="benefit__text">Co-created with nutritionists and certified labs. Tested batch by batch.</p>
+          </div>
+          <div class="benefit reveal reveal--delay-3">
+            <span class="benefit__num">04</span>
+            <h3 class="benefit__title">Clean labels</h3>
+            <p class="benefit__text">No fillers, no synthetic sweeteners, no things you can't pronounce.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Stats
+         ============================================================ -->
+    <section class="stats" aria-label="By the numbers">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat reveal">
+            <span class="stat__num"><span class="counter" data-counter="10240" data-counter-duration="1600">0</span><span class="stat__num-suffix">+</span></span>
+            <span class="stat__label">Active customers</span>
+          </div>
+          <div class="stat reveal reveal--delay-1">
+            <span class="stat__num"><span class="counter" data-counter="4.9" data-counter-decimals="1">0</span></span>
+            <span class="stat__label">Average rating</span>
+          </div>
+          <div class="stat reveal reveal--delay-2">
+            <span class="stat__num"><span class="counter" data-counter="98" data-counter-duration="1400">0</span><span class="stat__num-suffix">%</span></span>
+            <span class="stat__label">Would reorder</span>
+          </div>
+          <div class="stat reveal reveal--delay-3">
+            <span class="stat__num"><span class="counter" data-counter="36" data-counter-duration="1200">0</span></span>
+            <span class="stat__label">Months in research</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Loyalty CTA
+         ============================================================ -->
+    <section class="loyalty" aria-label="Loyalty program">
+      <div class="container">
+        <div class="loyalty__card reveal">
+          <div class="loyalty__visual" aria-hidden="true">
+            <span class="loyalty__coin">500</span>
+          </div>
+          <div class="loyalty__body">
+            <span class="section-head__eyebrow">Loyalty</span>
+            <h2 class="loyalty__title">Get 500 bonus points on signup</h2>
+            <p class="loyalty__text">Apply to any order. Earn more on every purchase. Cards add up to free products faster than you think.</p>
+            <div class="loyalty__actions">
+              <a href="#" class="btn btn--primary">Sign up</a>
+              <a href="bonuses.html" class="btn btn--ghost">How it works</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Testimonials carousel
+         ============================================================ -->
+    <section class="testimonials" aria-label="Customer testimonials">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-head__eyebrow">Reviews</span>
+          <h2 class="section-head__title">What customers say</h2>
+        </header>
+
+        <div class="carousel" data-carousel>
+          <div class="carousel__controls">
+            <button class="carousel__btn carousel__btn--prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="carousel__viewport">
+            <div class="carousel__track">
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Six weeks in and my nails stopped breaking. The flavor is the cleanest cherry I've had in a gummy.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-beauty);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Anna K.</span>
+                      <span class="testimonial__author-meta">Verified · Collagen Gummies</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Mixes without a single clump. Tastes like dessert, not a workout. The vanilla is dialled in.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-protein);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Marco D.</span>
+                      <span class="testimonial__author-meta">Verified · Vanilla Whey</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Quality of sleep noticeably better — I wake up rested without the grogginess melatonin used to give me.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-sleep);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Sofia R.</span>
+                      <span class="testimonial__author-meta">Verified · Sleep Sticks</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Finally a brand that lists doses, not just buzzwords. The transparency is what got me to try them.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-relax);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Daniel P.</span>
+                      <span class="testimonial__author-meta">Verified · Energy Drink</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Bought the bundle for my mom — she's now asking when the next subscription ships. That's the highest compliment.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-energy);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Eva M.</span>
+                      <span class="testimonial__author-meta">Verified · Beauty Bundle</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel__slide">
+                <div class="testimonial">
+                  <p class="testimonial__quote">Customer support sorted my address change in minutes. Product arrived two days later, packed properly.</p>
+                  <div class="testimonial__author">
+                    <div class="testimonial__avatar" style="background: var(--grad-strength);"></div>
+                    <div>
+                      <span class="testimonial__author-name">Lucas W.</span>
+                      <span class="testimonial__author-meta">Verified · Strength Bundle</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="carousel__dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Wellness test CTA
+         ============================================================ -->
+    <section class="wellness" id="wellness-test" aria-label="Wellness test">
+      <div class="container">
+        <div class="wellness__card reveal">
+          <div class="wellness__body">
+            <span class="section-head__eyebrow">Personalized</span>
+            <h2 class="wellness__title">A two-minute test for the right routine</h2>
+            <p class="wellness__text">Twelve questions. We map your answers to the formulas your body actually needs — no guesswork.</p>
+            <a href="#" class="btn btn--primary">Take the test</a>
+          </div>
+          <div class="wellness__visual" aria-hidden="true">
+            <div class="wellness__dot wellness__dot--1"></div>
+            <div class="wellness__dot wellness__dot--2"></div>
+            <div class="wellness__dot wellness__dot--3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section class="faq" aria-label="Frequently asked questions">
+      <div class="container container--narrow">
+        <header class="section-head section-head--center reveal">
+          <span class="section-head__eyebrow">FAQ</span>
+          <h2 class="section-head__title">Common questions</h2>
+        </header>
+
+        <ul class="faq__list">
+          <li class="faq__item reveal">
+            <button class="faq__q" aria-expanded="false">
+              <span>How fast does shipping arrive?</span>
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__a">
+              <p>Standard delivery is 2 to 4 business days nationwide. Orders placed before 2 pm ship same day.</p>
+            </div>
+          </li>
+          <li class="faq__item reveal">
+            <button class="faq__q" aria-expanded="false">
+              <span>Is shipping really free over $80?</span>
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__a">
+              <p>Yes — for orders above $80 we cover standard delivery. The threshold applies after discounts.</p>
+            </div>
+          </li>
+          <li class="faq__item reveal">
+            <button class="faq__q" aria-expanded="false">
+              <span>How do gift cards work?</span>
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__a">
+              <p>Digital cards arrive by email within a few minutes. Values from $20 to $300, valid for 365 days from issue.</p>
+            </div>
+          </li>
+          <li class="faq__item reveal">
+            <button class="faq__q" aria-expanded="false">
+              <span>Can I return something I don't like?</span>
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__a">
+              <p>Unopened products can be returned within 14 days. For opened items, contact support — we look at each case individually.</p>
+            </div>
+          </li>
+          <li class="faq__item reveal">
+            <button class="faq__q" aria-expanded="false">
+              <span>Are your formulas vegan?</span>
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__a">
+              <p>Most are plant-based. Marine collagen and whey protein are exceptions and are clearly labeled.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="reveal" style="text-align: center; margin-top: var(--space-lg);">
+          <a href="faq.html" class="btn btn--ghost">See all questions</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-partial="footer"></div>
+
+  <script src="js/partials.js"></script>
+
+  <!-- Slick slider deps -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+    (function () {
+      if (typeof window.jQuery === 'undefined') return;
+      jQuery(function ($) {
+        $('.hero__slider').slick({
+          dots: true,
+          arrows: false,
+          fade: true,
+          autoplay: true,
+          autoplaySpeed: 6000,
+          speed: 700,
+          pauseOnHover: true,
+          cssEase: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          adaptiveHeight: false
+        });
+      });
+    })();
+  </script>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

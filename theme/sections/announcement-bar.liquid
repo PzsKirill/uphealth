@@ -1,0 +1,20 @@
+<div class="promo-bar" role="region" aria-label="Promotional announcement">
+  <div class="promo-bar__inner container">
+    <p class="promo-bar__text">{{ section.settings.text }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Spring offer — free shipping on orders over $80 · Express next-day delivery in major metros"
+    }
+  ],
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}

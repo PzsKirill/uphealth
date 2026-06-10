@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_purple }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+  {{ content_for_header }}
+
+  {{ 'reset.css' | asset_url | stylesheet_tag }}
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+  {{ 'responsive.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} Palette comes from theme settings → CSS variables (see migration/color-tokens.md) {%- endcomment -%}
+  <style>
+    :root{
+      --color-bg:{{ settings.color_bg }};
+      --color-bg-alt:{{ settings.color_bg_alt }};
+      --color-bg-card:{{ settings.color_bg_card }};
+      --color-text:{{ settings.color_text }};
+      --color-text-muted:{{ settings.color_text_muted }};
+      --color-border:{{ settings.color_border }};
+      --color-accent:{{ settings.color_accent }};
+      --color-accent-soft:{{ settings.color_accent_soft }};
+      --color-accent-deep:{{ settings.color_accent_deep }};
+      --color-purple:{{ settings.color_purple }};
+      --color-purple-deep:{{ settings.color_purple_deep }};
+      --color-purple-soft:{{ settings.color_purple_soft }};
+    }
+    body[data-page="product"]{ background:{{ settings.color_product_bg }}; }
+  </style>
+</head>
+
+<body data-page="{{ template.name }}">
+
+  {% sections 'header-group' %}
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <script src="{{ 'main.js' | asset_url }}" defer></script>
+  <script src="{{ 'animations.js' | asset_url }}" defer></script>
+</body>
+</html>

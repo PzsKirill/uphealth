@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — UpHealth</title>
+  <meta name="description" content="Browse the full UpHealth catalog. Filter by format, state and price to find the right formula." />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body data-page="shop">
+
+  <div data-partial="header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         Page hero
+         ============================================================ -->
+    <section class="page-hero" aria-label="Shop heading">
+      <div class="page-hero__inner container">
+        <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+              <li><a href="index.html">Home</a></li>
+              <li>Shop</li>
+            </ol>
+          </nav>
+          <h1 class="page-hero__title">All <em>products</em></h1>
+          <p class="page-hero__lead">The full catalog — filter by format, state or price to narrow down what fits your routine.</p>
+        </div>
+        <div class="page-hero__meta">
+          <div><strong>12</strong> products in stock</div>
+          <div><strong>5</strong> states covered</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Catalog
+         ============================================================ -->
+    <section class="catalog">
+      <div class="container">
+
+        <div class="catalog__toolbar">
+          <button class="catalog__filters-toggle" aria-label="Open filters">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+            Filters
+          </button>
+          <p class="catalog__count"><strong id="catalog-count">12</strong> products</p>
+          <label class="catalog__sort">
+            <span class="catalog__sort-label">Sort by</span>
+            <span class="catalog__sort-field">
+              <select id="catalog-sort" aria-label="Sort products">
+                <option value="popular">Popular</option>
+                <option value="new">New</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="rating">Rating</option>
+              </select>
+              <svg class="catalog__sort-caret" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </label>
+        </div>
+
+        <div class="catalog__grid">
+
+          <!-- Filters sidebar -->
+          <aside class="filters" id="filters" aria-label="Product filters">
+            <div class="filters__bar">
+              <span class="filters__heading">Filters</span>
+              <button class="filters__close" aria-label="Close filters">×</button>
+            </div>
+
+            <div class="filters__group">
+              <h3 class="filters__title">Format</h3>
+              <ul class="filters__list">
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="sticks"> Sticks <span class="filters__count">3</span></label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="gummies"> Gummies <span class="filters__count">1</span></label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="drinks"> Drinks <span class="filters__count">3</span></label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="protein"> Protein <span class="filters__count">3</span></label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="bundles"> Bundles <span class="filters__count">2</span></label></li>
+              </ul>
+            </div>
+
+            <div class="filters__group">
+              <h3 class="filters__title">State</h3>
+              <ul class="filters__list">
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="energy"> Energy</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="sleep"> Sleep</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="relax"> Relax</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="beauty"> Beauty</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="strength"> Strength</label></li>
+              </ul>
+            </div>
+
+            <div class="filters__group">
+              <h3 class="filters__title">Max price</h3>
+              <div class="filters__range">
+                <input type="range" min="10" max="120" value="120" step="2" class="filters__range-input" id="filter-price" aria-label="Maximum price">
+                <div class="filters__range-values">
+                  <span>$10</span>
+                  <span data-range-value>$120</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="filters__group">
+              <h3 class="filters__title">Tags</h3>
+              <ul class="filters__list">
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="vegan"> Vegan</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="sugar-free"> Sugar-free</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="gluten-free"> Gluten-free</label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="sale"> On sale</label></li>
+              </ul>
+            </div>
+
+            <div class="filters__actions">
+              <button class="btn btn--primary btn--full filters__apply" id="filters-apply">Apply filters</button>
+              <button class="filters__reset" id="filters-reset">Reset all</button>
+            </div>
+          </aside>
+
+          <!-- Product grid -->
+          <div class="catalog__main">
+            <div class="catalog__grid-products" id="catalog-grid">
+
+              <article class="product-card product-card--compact reveal" data-format="gummies" data-state="beauty" data-tags="sugar-free sale" data-price="32" data-rating="4.9" data-date="6" data-popular="1">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-gummies);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge">Hit</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
+                  <h3 class="product-card__title">Marine Collagen Gummies</h3>
+                  <p class="product-card__desc">Cherry · 30 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$32</span><span class="product-card__price-old">$39</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="gluten-free" data-price="48" data-rating="4.8" data-date="11" data-popular="2">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-protein);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Vanilla Whey Protein</h3>
+                  <p class="product-card__desc">Vanilla · 30 scoops</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$48</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="energy" data-tags="vegan sugar-free" data-price="24" data-rating="4.7" data-date="4" data-popular="3">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-energy);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+                  <h3 class="product-card__title">Energy Sticks</h3>
+                  <p class="product-card__desc">Citrus · 20 sticks</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$24</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="sleep" data-tags="sugar-free vegan" data-price="28" data-rating="4.7" data-date="5" data-popular="4">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-sleep);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+                  <h3 class="product-card__title">Sleep Sticks</h3>
+                  <p class="product-card__desc">Mint · 20 sticks</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$28</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="energy" data-tags="vegan gluten-free" data-price="36" data-rating="4.8" data-date="7" data-popular="5">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge">Hit</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Greens Drink</h3>
+                  <p class="product-card__desc">Apple · 15 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$36</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="relax" data-tags="vegan gluten-free" data-price="18" data-rating="4.6" data-date="3" data-popular="6">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-relax);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.6</span>
+                  <h3 class="product-card__title">Relax Tea</h3>
+                  <p class="product-card__desc">Chamomile · 14 sachets</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$18</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="beauty" data-tags="gluten-free" data-price="42" data-rating="4.8" data-date="8" data-popular="7">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-beauty);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Beauty Powder</h3>
+                  <p class="product-card__desc">Berry · 21 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$42</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="gluten-free" data-price="54" data-rating="4.7" data-date="12" data-popular="8">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-strength);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+                  <h3 class="product-card__title">Strength Stack</h3>
+                  <p class="product-card__desc">Unflavored · 30 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$54</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="beauty" data-tags="sale" data-price="62" data-rating="4.9" data-date="9" data-popular="9">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge">Bundle</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
+                  <h3 class="product-card__title">Beauty Bundle</h3>
+                  <p class="product-card__desc">Gummies + Powder · save 15%</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$62</span><span class="product-card__price-old">$74</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="energy" data-tags="sale" data-price="48" data-rating="4.8" data-date="10" data-popular="10">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge">Bundle</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Energy Bundle</h3>
+                  <p class="product-card__desc">Sticks + Drink · save 20%</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$48</span><span class="product-card__price-old">$60</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="relax" data-tags="vegan" data-price="26" data-rating="4.6" data-date="2" data-popular="11">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-sticks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.6</span>
+                  <h3 class="product-card__title">Calm Sticks</h3>
+                  <p class="product-card__desc">Lavender · 20 sticks</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$26</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="strength" data-tags="gluten-free" data-price="38" data-rating="4.7" data-date="1" data-popular="12">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+                  <h3 class="product-card__title">Recovery Drink</h3>
+                  <p class="product-card__desc">Pineapple · 12 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$38</span></div>
+                    <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <p class="catalog__empty" id="catalog-empty" hidden>No products match these filters. <button class="catalog__empty-reset" id="catalog-empty-reset">Reset filters</button></p>
+
+            <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-partial="footer"></div>
+
+  <script src="js/partials.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/catalog.js" defer></script>
+</body>
+</html>

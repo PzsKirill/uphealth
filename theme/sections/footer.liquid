@@ -1,0 +1,121 @@
+{%- assign root = routes.root_url -%}
+
+<footer class="footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer__marquee" aria-hidden="true">
+      <div class="footer__marquee-track">
+        <span class="footer__marquee-item">Feel your best self&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Wellness is a habit&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Feel your best self&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Wellness is a habit&nbsp;&nbsp;&#10022;</span>
+      </div>
+    </div>
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="{{ root }}" class="footer__logo">
+          <span class="header__logo-mark">up</span><span class="header__logo-word">health</span>
+        </a>
+        <p class="footer__tagline">{{ section.settings.tagline }}</p>
+        <div class="footer__socials">
+          <a href="{{ section.settings.social_youtube | default: '#' }}" class="footer__social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg>
+          </a>
+          <a href="{{ section.settings.social_telegram | default: '#' }}" class="footer__social" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.4 18.4 19.8c-.2.9-.7 1.1-1.5.7l-4.1-3-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.4-.5-.2l-9.6 6-4.1-1.3c-.9-.3-.9-.9.2-1.3L20.3 3.4c.7-.3 1.4.2 1.4 1z"/></svg>
+          </a>
+          <a href="{{ section.settings.social_whatsapp | default: '#' }}" class="footer__social" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Catalog</h4>
+        <ul class="footer__list">
+          <li><a href="{{ routes.all_products_collection_url }}">All products</a></li>
+          <li><a href="{{ root }}collections/sticks">Sticks</a></li>
+          <li><a href="{{ root }}collections/gummies">Gummies</a></li>
+          <li><a href="{{ root }}collections/drinks">Drinks</a></li>
+          <li><a href="{{ root }}collections/protein">Protein</a></li>
+          <li><a href="{{ root }}collections/bundles">Bundles</a></li>
+          <li><a href="{{ root }}collections/sale">Sale</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">States</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}collections/state-energy">Energy</a></li>
+          <li><a href="{{ root }}collections/state-sleep">Sleep</a></li>
+          <li><a href="{{ root }}collections/state-relax">Relax</a></li>
+          <li><a href="{{ root }}collections/state-beauty">Beauty</a></li>
+          <li><a href="{{ root }}collections/state-strength">Strength</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Company</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}pages/about">About</a></li>
+          <li><a href="{{ root }}pages/delivery">Contacts</a></li>
+          <li><a href="#">Wholesale</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Support</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}pages/delivery">Shipping</a></li>
+          <li><a href="{{ root }}pages/bonuses">Bonuses</a></li>
+          <li><a href="{{ root }}pages/faq">FAQ</a></li>
+          <li><a href="#">Gift cards</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <ul class="footer__legal">
+        <li><a href="{{ root }}policies/terms-of-service">Terms of service</a></li>
+        <li><a href="{{ root }}policies/privacy-policy">Privacy policy</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<aside class="cart-drawer" id="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
+  <div class="cart-drawer__header">
+    <h3>Your cart</h3>
+    <button class="cart-drawer__close" id="cart-close" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cart-drawer__body">
+    <p class="cart-drawer__empty">Your cart is empty.</p>
+  </div>
+</aside>
+
+<aside class="cart-drawer fav-drawer" id="fav-drawer" aria-hidden="true" aria-label="Favorites">
+  <div class="cart-drawer__header">
+    <h3>Favorites <span class="fav-drawer__count" id="fav-drawer-count"></span></h3>
+    <button class="cart-drawer__close" id="fav-close" aria-label="Close favorites">&times;</button>
+  </div>
+  <div class="fav-drawer__body" id="fav-body">
+    <p class="cart-drawer__empty">No favorites yet &mdash; tap the &#9829; on any product.</p>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Functional wellness with formulas you can trust." },
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "social_youtube", "label": "YouTube" },
+    { "type": "url", "id": "social_telegram", "label": "Telegram" },
+    { "type": "url", "id": "social_whatsapp", "label": "WhatsApp" }
+  ]
+}
+{% endschema %}

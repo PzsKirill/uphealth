@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "range",
+            "eyebrow": "The UpHealth range",
+            "heading": "Five formulas. <em>One clean ritual.</em>",
+            "lead": "Functional supplements in five colour-coded formulas — pick the one that fits your day, your body and your goal.",
+            "cta1_text": "Shop the range",
+            "cta1_url": "/collections/all",
+            "cta2_text": "Bestsellers",
+            "cta2_url": "#community-products",
+            "meta1_num": "5", "meta1_label": "formulas",
+            "meta2_num": "60", "meta2_label": "capsules each",
+            "meta3_num": "GMP", "meta3_label": "certified labs"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "pink",
+            "eyebrow": "Beauty & glow",
+            "heading": "Skin that <em>feels its best.</em>",
+            "lead": "Skin-loving actives for clarity, glow and balance that starts from within and shows on the outside.",
+            "cta1_text": "Shop Beauty",
+            "cta1_url": "/collections/state-beauty",
+            "cta2_text": "Learn more",
+            "cta2_url": "/products/marine-collagen-gummies",
+            "chip_top": "Glow from within",
+            "chip_bottom": "Clean label",
+            "meta1_num": "5 g", "meta1_label": "daily actives",
+            "meta2_num": "Vegan", "meta2_label": "capsules",
+            "meta3_num": "30", "meta3_label": "day supply"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "orange",
+            "eyebrow": "Energy & metabolism",
+            "heading": "Steady energy, <em>all day long.</em>",
+            "lead": "Metabolic support that helps keep blood sugar steady and afternoons crash-free — clean fuel without the jitters.",
+            "cta1_text": "Shop Energy",
+            "cta1_url": "/collections/state-energy",
+            "cta2_text": "Learn more",
+            "cta2_url": "/products/energy-sticks",
+            "chip_top": "No jitters",
+            "chip_bottom": "Science-backed dose",
+            "meta1_num": "0", "meta1_label": "crash",
+            "meta2_num": "1x", "meta2_label": "a day",
+            "meta3_num": "Sugar", "meta3_label": "free"
+          }
+        },
+        "slide-4": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "blue",
+            "eyebrow": "Calm & balance",
+            "heading": "Calm focus, <em>clear nights.</em>",
+            "lead": "Calming minerals that help the body wind down, balance stress and reset overnight.",
+            "cta1_text": "Shop Calm",
+            "cta1_url": "/collections/state-relax",
+            "cta2_text": "Learn more",
+            "cta2_url": "/products/sleep-sticks",
+            "chip_top": "Wind-down support",
+            "chip_bottom": "Third-party tested",
+            "meta1_num": "PM", "meta1_label": "ritual",
+            "meta2_num": "Non", "meta2_label": "habit-forming",
+            "meta3_num": "Gentle", "meta3_label": "minerals"
+          }
+        },
+        "slide-5": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "mint",
+            "eyebrow": "Gut & detox",
+            "heading": "A gut that <em>works with you.</em>",
+            "lead": "Supports healthy digestion and a balanced microbiome — light, fresh and easy to take every morning.",
+            "cta1_text": "Shop Gut",
+            "cta1_url": "/collections/state-strength",
+            "cta2_text": "Learn more",
+            "cta2_url": "/products/greens-drink",
+            "chip_top": "Microbiome support",
+            "chip_bottom": "No fillers",
+            "meta1_num": "AM", "meta1_label": "ritual",
+            "meta2_num": "Pre", "meta2_label": "& postbiotic",
+            "meta3_num": "Bloat", "meta3_label": "friendly"
+          }
+        }
+      },
+      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]
+    }
+  },
+  "order": ["hero"]
+}

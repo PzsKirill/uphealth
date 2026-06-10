@@ -1,0 +1,202 @@
+{%- liquid
+  assign root = routes.root_url
+  assign all = routes.all_products_collection_url
+-%}
+
+<header class="header" id="site-header">
+  <div class="header__inner container">
+
+    <div class="header__left">
+      <a href="{{ root }}" class="header__logo" aria-label="{{ shop.name }} home">
+        <span class="header__logo-mark">up</span><span class="header__logo-word">health</span>
+      </a>
+
+      <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="header__nav" aria-label="Primary navigation">
+        <ul class="header__nav-list">
+
+          <li class="header__nav-item header__nav-item--has-menu" data-menu="catalog" data-page="collection">
+            <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-catalog">
+              Catalog <span class="header__nav-caret">&#9662;</span>
+            </button>
+            <div class="mega-menu mega-menu--wide" id="menu-catalog" role="region" aria-label="Product catalog">
+              <div class="mega-menu__inner">
+                <div>
+                  <h4 class="mega-menu__col-title">Formats</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ all }}"                class="mega-menu__link">All products</a></li>
+                    <li><a href="{{ root }}collections/sticks"  class="mega-menu__link">Sticks</a></li>
+                    <li><a href="{{ root }}collections/gummies" class="mega-menu__link">Gummies</a></li>
+                    <li><a href="{{ root }}collections/drinks"  class="mega-menu__link">Drinks</a></li>
+                    <li><a href="{{ root }}collections/protein" class="mega-menu__link">Protein</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="mega-menu__col-title">Collections</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ root }}collections/bundles" class="mega-menu__link">Bundles</a></li>
+                    <li><a href="{{ root }}collections/sale"    class="mega-menu__link">Sale</a></li>
+                    <li><a href="{{ root }}collections/new"     class="mega-menu__link">New arrivals</a></li>
+                    <li><a href="#"                             class="mega-menu__link">Gift cards</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="mega-menu__col-title">Resources</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ root }}pages/about"    class="mega-menu__link">About the science</a></li>
+                    <li><a href="{{ root }}pages/bonuses"  class="mega-menu__link">Loyalty program</a></li>
+                    <li><a href="{{ root }}pages/delivery" class="mega-menu__link">Shipping &amp; returns</a></li>
+                    <li><a href="{{ root }}pages/faq"      class="mega-menu__link">FAQ</a></li>
+                  </ul>
+                </div>
+                <a class="mega-menu__featured" href="{{ root }}collections/all">
+                  <div class="mega-menu__featured-image" aria-hidden="true">
+                    <img src="{{ 'photo_2026-06-01_10-27-57.jpg' | asset_url }}" alt="" loading="lazy" />
+                  </div>
+                  <div class="mega-menu__featured-body">
+                    <span class="mega-menu__featured-label">Featured</span>
+                    <span class="mega-menu__featured-title">Shop the range</span>
+                    <span class="mega-menu__featured-cta">Shop now &rarr;</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li class="header__nav-item header__nav-item--has-menu" data-menu="states">
+            <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-states">
+              States <span class="header__nav-caret">&#9662;</span>
+            </button>
+            <div class="mega-menu" id="menu-states" role="region" aria-label="Wellness states">
+              <div class="mega-menu__inner">
+                <div>
+                  <h4 class="mega-menu__col-title">By outcome</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ root }}collections/state-energy"   class="mega-menu__link"><span class="mega-menu__bullet" data-state="energy"></span>Energy</a></li>
+                    <li><a href="{{ root }}collections/state-sleep"    class="mega-menu__link"><span class="mega-menu__bullet" data-state="sleep"></span>Sleep</a></li>
+                    <li><a href="{{ root }}collections/state-relax"    class="mega-menu__link"><span class="mega-menu__bullet" data-state="relax"></span>Relax</a></li>
+                    <li><a href="{{ root }}collections/state-beauty"   class="mega-menu__link"><span class="mega-menu__bullet" data-state="beauty"></span>Beauty</a></li>
+                    <li><a href="{{ root }}collections/state-strength" class="mega-menu__link"><span class="mega-menu__bullet" data-state="strength"></span>Strength</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="mega-menu__col-title">By need</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="#" class="mega-menu__link">Skin &amp; hair</a></li>
+                    <li><a href="#" class="mega-menu__link">Joints &amp; bones</a></li>
+                    <li><a href="#" class="mega-menu__link">Recovery</a></li>
+                    <li><a href="#" class="mega-menu__link">Focus &amp; mood</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="mega-menu__col-title">Lifestyle</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="#" class="mega-menu__link">Vegan</a></li>
+                    <li><a href="#" class="mega-menu__link">Sugar-free</a></li>
+                    <li><a href="#" class="mega-menu__link">Gluten-free</a></li>
+                  </ul>
+                </div>
+                <a class="mega-menu__featured" href="{{ root }}pages/wellness-test">
+                  <div class="mega-menu__featured-image" aria-hidden="true">
+                    <img src="{{ 'photo_2026-06-01_10-28-00.jpg' | asset_url }}" alt="" loading="lazy" />
+                  </div>
+                  <div class="mega-menu__featured-body">
+                    <span class="mega-menu__featured-label">Personalized</span>
+                    <span class="mega-menu__featured-title">Wellness Test</span>
+                    <span class="mega-menu__featured-cta">Find your fit &rarr;</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li class="header__nav-item" data-page="page">
+            <a href="{{ root }}pages/about" class="header__nav-link">About</a>
+          </li>
+        </ul>
+
+        <a href="{{ root }}pages/wellness-test" class="header__nav-cta" data-no-ripple="true">Wellness Test</a>
+      </nav>
+    </div>
+
+    <div class="header__right">
+      <form class="header__search" role="search" action="{{ routes.search_url }}" method="get">
+        <input type="search" name="q" class="header__search-input" placeholder="Search the catalog&hellip;" aria-label="Search the catalog" />
+        <button type="submit" class="header__search-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span>Find</span>
+        </button>
+      </form>
+
+      <div class="header__actions">
+        <button class="header__icon-btn header__icon-btn--wishlist" id="wishlist-btn" aria-label="Favorites">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
+          <span class="header__count header__count--wishlist" id="wishlist-count" aria-hidden="true">0</span>
+        </button>
+        <a href="{{ routes.cart_url }}" class="header__icon-btn header__icon-btn--cart" id="cart-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-2 11H8L6 6z"/><path d="M6 6 5 2H2"/><circle cx="10" cy="21" r="1.5"/><circle cx="17" cy="21" r="1.5"/></svg>
+          <span class="header__count" aria-hidden="true">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <div class="mobile-nav__inner">
+      <form class="header__search" role="search" action="{{ routes.search_url }}" method="get" style="width: 100%; margin-bottom: var(--space-md);">
+        <input type="search" name="q" class="header__search-input" placeholder="Search the catalog&hellip;" aria-label="Search the catalog" />
+        <button type="submit" class="header__search-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+      </form>
+
+      <ul class="mobile-nav__list">
+        <li class="mobile-nav__group">
+          <button class="mobile-nav__group-toggle" aria-expanded="false">Catalog <span>+</span></button>
+          <ul class="mobile-nav__sub">
+            <li><a href="{{ all }}">All products</a></li>
+            <li><a href="{{ root }}collections/sticks">Sticks</a></li>
+            <li><a href="{{ root }}collections/gummies">Gummies</a></li>
+            <li><a href="{{ root }}collections/drinks">Drinks</a></li>
+            <li><a href="{{ root }}collections/protein">Protein</a></li>
+            <li><a href="{{ root }}collections/bundles">Bundles</a></li>
+            <li><a href="{{ root }}collections/sale">Sale</a></li>
+          </ul>
+        </li>
+        <li class="mobile-nav__group">
+          <button class="mobile-nav__group-toggle" aria-expanded="false">States <span>+</span></button>
+          <ul class="mobile-nav__sub">
+            <li><a href="{{ root }}collections/state-energy">Energy</a></li>
+            <li><a href="{{ root }}collections/state-sleep">Sleep</a></li>
+            <li><a href="{{ root }}collections/state-relax">Relax</a></li>
+            <li><a href="{{ root }}collections/state-beauty">Beauty</a></li>
+            <li><a href="{{ root }}collections/state-strength">Strength</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ root }}pages/about" class="mobile-nav__link">About</a></li>
+        <li><a href="{{ root }}pages/wellness-test" class="mobile-nav__link">Wellness Test</a></li>
+        <li><a href="{{ root }}pages/faq" class="mobile-nav__link">FAQ</a></li>
+        <li><a href="{{ root }}pages/delivery" class="mobile-nav__link">Shipping</a></li>
+        <li><a href="{{ root }}pages/bonuses" class="mobile-nav__link">Bonuses</a></li>
+      </ul>
+      <div class="mobile-nav__footer">
+        <a href="{{ routes.account_login_url }}" class="btn btn--ghost btn--full">Sign in</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Skeleton header — nav links use collection/page handles (sticks, gummies, state-energy, /pages/about …). Wire to native linklists in the full build."
+    }
+  ]
+}
+{% endschema %}

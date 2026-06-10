@@ -1,0 +1,34 @@
+{
+  "current": {
+    "color_bg": "#fefcf9",
+    "color_bg_alt": "#f3f0e9",
+    "color_bg_card": "#ffffff",
+    "color_text": "#1e2248",
+    "color_text_muted": "#636f7f",
+    "color_border": "#e7e2d8",
+    "color_accent": "#d65a92",
+    "color_accent_soft": "#f6cfe0",
+    "color_accent_deep": "#b23e72",
+    "color_purple": "#74548e",
+    "color_purple_deep": "#5e4275",
+    "color_purple_soft": "#d9cee4",
+    "color_product_bg": "#fbf1f6"
+  },
+  "presets": {
+    "UpHealth": {
+      "color_bg": "#fefcf9",
+      "color_bg_alt": "#f3f0e9",
+      "color_bg_card": "#ffffff",
+      "color_text": "#1e2248",
+      "color_text_muted": "#636f7f",
+      "color_border": "#e7e2d8",
+      "color_accent": "#d65a92",
+      "color_accent_soft": "#f6cfe0",
+      "color_accent_deep": "#b23e72",
+      "color_purple": "#74548e",
+      "color_purple_deep": "#5e4275",
+      "color_purple_soft": "#d9cee4",
+      "color_product_bg": "#fbf1f6"
+    }
+  }
+}

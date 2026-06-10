@@ -1,0 +1,129 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero__slider">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign theme = block.settings.colour_theme
+        if block.settings.image != blank
+          assign img_url = block.settings.image | image_url: width: 1000
+        else
+          case theme
+            when 'range'  assign fb = 'photo_2026-06-01_10-27-57.jpg'
+            when 'pink'   assign fb = 'photo_2026-06-01_10-27-59.jpg'
+            when 'orange' assign fb = 'photo_2026-06-01_10-28-00.jpg'
+            when 'blue'   assign fb = 'photo_2026-06-01_10-28-02.jpg'
+            when 'mint'   assign fb = 'photo_2026-06-01_10-28-04.jpg'
+            else assign fb = 'photo_2026-06-01_10-27-57.jpg'
+          endcase
+          assign img_url = fb | asset_url
+        endif
+      -%}
+      <div class="hero__slide hero__slide--{{ theme }}"
+           {% if theme == 'range' %}style="background: url('{{ img_url }}') center right / cover no-repeat;"{% endif %}
+           {{ block.shopify_attributes }}>
+        <div class="hero__inner container">
+          <div class="hero__content">
+            {%- if block.settings.eyebrow != blank -%}<span class="hero__eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
+            <h1 class="hero__title">{{ block.settings.heading }}</h1>
+            {%- if block.settings.lead != blank -%}<p class="hero__lead">{{ block.settings.lead }}</p>{%- endif -%}
+            <div class="hero__actions">
+              {%- if block.settings.cta1_text != blank -%}<a href="{{ block.settings.cta1_url | default: '#' }}" class="btn btn--primary">{{ block.settings.cta1_text }}</a>{%- endif -%}
+              {%- if block.settings.cta2_text != blank -%}<a href="{{ block.settings.cta2_url | default: '#' }}" class="btn btn--ghost">{{ block.settings.cta2_text }}</a>{%- endif -%}
+            </div>
+            {%- if block.settings.meta1_num != blank or block.settings.meta2_num != blank or block.settings.meta3_num != blank -%}
+            <ul class="hero__meta">
+              {%- if block.settings.meta1_num != blank -%}<li><span>{{ block.settings.meta1_num }}</span> {{ block.settings.meta1_label }}</li>{%- endif -%}
+              {%- if block.settings.meta2_num != blank -%}<li><span>{{ block.settings.meta2_num }}</span> {{ block.settings.meta2_label }}</li>{%- endif -%}
+              {%- if block.settings.meta3_num != blank -%}<li><span>{{ block.settings.meta3_num }}</span> {{ block.settings.meta3_label }}</li>{%- endif -%}
+            </ul>
+            {%- endif -%}
+          </div>
+          {%- unless theme == 'range' -%}
+          <div class="hero__visual">
+            <div class="hero__media"><img src="{{ img_url }}" alt="{{ block.settings.heading | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" /></div>
+            {%- if block.settings.chip_top != blank -%}<div class="hero__chip hero__chip--top">{{ block.settings.chip_top }}</div>{%- endif -%}
+            {%- if block.settings.chip_bottom != blank -%}<div class="hero__chip hero__chip--bottom">{{ block.settings.chip_bottom }}</div>{%- endif -%}
+          </div>
+          {%- endunless -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%} Slider lib — scoped to where the hero is used (replace with a dependency-free slider in the full build) {%- endcomment -%}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  (function () {
+    if (typeof window.jQuery === 'undefined') return;
+    jQuery(function ($) {
+      var $s = $('#shopify-section-{{ section.id }} .hero__slider');
+      if (!$s.length || $s.hasClass('slick-initialized')) return;
+      $s.slick({
+        dots: true,
+        arrows: false,
+        fade: true,
+        autoplay: {{ section.settings.autoplay | default: true }},
+        autoplaySpeed: {{ section.settings.autoplay_speed | times: 1000 | default: 6000 }},
+        speed: 700,
+        pauseOnHover: false,
+        cssEase: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        adaptiveHeight: false
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero slider",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "autoplay_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Autoplay speed", "default": 6 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "select", "id": "colour_theme", "label": "Colour theme", "default": "range",
+          "options": [
+            { "value": "range", "label": "Range (full image)" },
+            { "value": "pink", "label": "Pink" },
+            { "value": "orange", "label": "Orange" },
+            { "value": "blue", "label": "Blue" },
+            { "value": "mint", "label": "Mint" }
+          ] },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Five formulas. <em>One clean ritual.</em>" },
+        { "type": "textarea", "id": "lead", "label": "Lead text" },
+        { "type": "text", "id": "cta1_text", "label": "Button 1 text", "default": "Shop the range" },
+        { "type": "url", "id": "cta1_url", "label": "Button 1 link" },
+        { "type": "text", "id": "cta2_text", "label": "Button 2 text" },
+        { "type": "url", "id": "cta2_url", "label": "Button 2 link" },
+        { "type": "text", "id": "chip_top", "label": "Chip (top)" },
+        { "type": "text", "id": "chip_bottom", "label": "Chip (bottom)" },
+        { "type": "header", "content": "Stats (optional)" },
+        { "type": "text", "id": "meta1_num", "label": "Stat 1 value" },
+        { "type": "text", "id": "meta1_label", "label": "Stat 1 label" },
+        { "type": "text", "id": "meta2_num", "label": "Stat 2 value" },
+        { "type": "text", "id": "meta2_label", "label": "Stat 2 label" },
+        { "type": "text", "id": "meta3_num", "label": "Stat 3 value" },
+        { "type": "text", "id": "meta3_label", "label": "Stat 3 label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider",
+      "blocks": [
+        { "type": "slide", "settings": { "colour_theme": "range" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

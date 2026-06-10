@@ -1,0 +1,8 @@
+{
+  "general": {
+    "page": "Page {{ page }}",
+    "search": {
+      "search": "Search"
+    }
+  }
+}
