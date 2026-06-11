@@ -1025,14 +1025,31 @@ body {
   /* full-bleed brand banner — beige fallback matches the artwork edges */
   background: #eae1d8 url("../assets/image/personal/banner.png") center center / cover no-repeat;
 }
-/* banner is a finished composition (own wordmark + products), so no scrim
-   and no headline overlay on this slide */
-.hero__slide--range::after { content: none; }
+/* soft scrim only along the bottom, so the light info stays legible
+   without washing out the artwork */
+.hero__slide--range::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 46%;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(254,252,249,0) 0%, rgba(254,252,249,0.55) 70%, rgba(254,252,249,0.85) 100%);
+  pointer-events: none;
+}
 .hero__slide--range .hero__inner {
   grid-template-columns: 1fr;
-  min-height: clamp(440px, 64vh, 720px);
+  align-items: end;
 }
-.hero__slide--range .hero__content { display: none; }
+/* light info, bottom-left — the banner already carries the wordmark + products */
+.hero__content--banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  max-width: 560px;
+}
+.hero__content--banner .hero__lead { margin-bottom: 0; }
+.hero__content--banner .hero__actions { margin-bottom: 0; }
 .hero__slide--range .hero__visual { display: none; }
 .hero__slide--pink {
   --slide-bg: linear-gradient(120deg, #fbe1ec 0%, #f6bcd6 60%, #ef9dc2 100%);
@@ -1057,7 +1074,7 @@ body {
   gap: var(--space-2xl);
   align-items: center;
   padding-block: var(--space-3xl) calc(var(--space-3xl) + var(--space-lg));
-  min-height: clamp(520px, 72vh, 760px);
+  min-height: clamp(560px, 72vh, 880px);
 }
 
 /* slick dots override вЂ” sit on the coloured band */

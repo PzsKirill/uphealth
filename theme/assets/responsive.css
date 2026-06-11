@@ -391,6 +391,8 @@
 
 @media (max-width: 640px) {
   .hero__visual       { max-width: 360px; }
+  /* banner slide: keep the overlay minimal so the artwork isn't crowded */
+  .hero__content--banner .hero__lead { display: none; }
   .bonus__card        { padding: var(--space-lg); }
   .bonus__title       { font-size: var(--fs-xl); }
   .science__card      { aspect-ratio: 4 / 5; }
