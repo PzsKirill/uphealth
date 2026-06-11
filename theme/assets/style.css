@@ -4125,18 +4125,33 @@ body.is-cart-open {
   font-weight: 500;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease),
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-base) var(--ease),
               color var(--dur-fast) var(--ease),
-              border-color var(--dur-fast) var(--ease);
+              background var(--dur-fast) var(--ease);
 }
-.state-tab:hover { border-color: var(--color-text); color: var(--color-text); }
 .state-tab.is-active {
   background: var(--color-purple);
   border-color: var(--color-purple);
   color: #fff;
 }
 
-/* state-tab icon — #74548e by default, #fefcf9 on the active tab */
+/* Same hover treatment as the mega-menu pills: lift + per-state gradient fill */
+.state-tab:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(42, 38, 32, 0.14);
+}
+.state-tab[data-filter="all"]:hover      { background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%); }
+.state-tab[data-filter="energy"]:hover   { background: var(--grad-energy); }
+.state-tab[data-filter="sleep"]:hover    { background: var(--grad-sleep); }
+.state-tab[data-filter="relax"]:hover    { background: var(--grad-relax); }
+.state-tab[data-filter="beauty"]:hover   { background: var(--grad-beauty); }
+.state-tab[data-filter="strength"]:hover { background: var(--grad-strength); }
+
+/* state-tab icon — #74548e by default, white on hover, #fefcf9 on the active tab */
 .state-tab__icon {
   display: inline-flex;
   width: 17px;
@@ -4145,7 +4160,7 @@ body.is-cart-open {
   transition: color var(--dur-fast) var(--ease);
 }
 .state-tab__icon svg { width: 100%; height: 100%; display: block; }
-.state-tab:hover .state-tab__icon { color: var(--color-purple-deep); }
+.state-tab:hover .state-tab__icon { color: #fff; }
 .state-tab.is-active .state-tab__icon { color: var(--color-bg); }
 
 /* ============================================================
