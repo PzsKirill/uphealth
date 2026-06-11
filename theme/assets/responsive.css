@@ -364,7 +364,7 @@
    ============================================================ */
 @media (max-width: 1024px) {
   .hero__inner {
-    min-height: 0;
+    min-height: clamp(620px, 80vh, 820px);
     padding-block: var(--space-2xl) var(--space-3xl);
   }
   .hero__visual { max-width: 420px; }
@@ -379,18 +379,34 @@
   .footer__marquee-item { font-size: var(--fs-2xl); }
 }
 
+/* ============================================================
+   Hero slide 1 — art-directed banner per device + orientation.
+   Each artwork is composed for its shape, so cover fills the
+   block without cropping the wordmark. Desktop = banner.png (base).
+   ============================================================ */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero__slide--range {
+    background-image: url("../assets/image/personal/bannertablet.png");
+    background-position: center;
+  }
+}
+@media (max-width: 1024px) and (orientation: portrait) {
+  .hero__slide--range {
+    background-image: url("../assets/image/personal/bannermobile.png");
+    background-position: center;
+    background-size: contain;
+  }
+}
+
 @media (max-width: 900px) {
   .why__grid          { grid-template-columns: 1fr; }
   .perfect-day__grid  { grid-template-columns: 1fr; }
   .product-line__head { flex-direction: row; align-items: center; }
-
-  /* hero slide 1 is a full banner — show it whole (contain) on narrow/portrait
-     screens so the wordmark and bottles never get cropped; beige bg fills the rest */
-  .hero__slide--range { background-position: center; background-size: contain; }
 }
 
 @media (max-width: 640px) {
   .hero__visual       { max-width: 360px; }
+  .hero__inner        { min-height: clamp(540px, 86vh, 740px); }
   /* banner slide: keep the overlay minimal so the artwork isn't crowded */
   .hero__content--banner .hero__lead { display: none; }
   .bonus__card        { padding: var(--space-lg); }
