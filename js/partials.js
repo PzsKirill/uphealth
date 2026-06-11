@@ -11,6 +11,17 @@
 (function () {
   'use strict';
 
+  /* Inline state icons — stroke uses currentColor so the colour is driven by CSS
+     (#74548e default / #fefcf9 when the pill or tab is active). */
+  const STATE_ICONS = {
+    energy:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13h6l-1 9 8-12h-6l1-8z"/></svg>',
+    sleep:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+    relax:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z"/><path d="M4 20c2-5 5-8 9-10.5"/></svg>',
+    beauty:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.6 4.2 1.8 5.4 6 6-4.2.6-5.4 1.8-6 6-.6-4.2-1.8-5.4-6-6 4.2-.6 5.4-1.8 6-6z"/></svg>',
+    strength: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>',
+    all:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>',
+  };
+
   const HEADER_HTML = `
   <div class="promo-bar" role="region" aria-label="Promotional announcement">
     <div class="promo-bar__inner container">
@@ -37,46 +48,45 @@
               <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-catalog">
                 Catalog <span class="header__nav-caret">▾</span>
               </button>
-              <div class="mega-menu mega-menu--wide" id="menu-catalog" role="region" aria-label="Product catalog">
-                <div class="mega-menu__inner">
-                  <div>
-                    <h4 class="mega-menu__col-title">Formats</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="shop.html"             class="mega-menu__link">All products</a></li>
-                      <li><a href="shop.html?cat=sticks"  class="mega-menu__link">Sticks</a></li>
-                      <li><a href="shop.html?cat=gummies" class="mega-menu__link">Gummies</a></li>
-                      <li><a href="shop.html?cat=drinks"  class="mega-menu__link">Drinks</a></li>
-                      <li><a href="shop.html?cat=protein" class="mega-menu__link">Protein</a></li>
+              <div class="mega-menu mega-menu--catalog" id="menu-catalog" role="region" aria-label="Product catalog">
+                <div class="mega-menu__inner mega-menu__inner--catalog">
+
+                  <div class="mega-cat">
+                    <a href="shop.html" class="mega-cat__title">All products <span class="mega-cat__title-arrow" aria-hidden="true">→</span></a>
+                    <ul class="mega-cat__links">
+                      <li><a href="shop.html?cat=sticks"  class="mega-cat__link">Sticks</a></li>
+                      <li><a href="shop.html?cat=drinks"  class="mega-cat__link">Drinks</a></li>
+                      <li><a href="shop.html?cat=gummies" class="mega-cat__link">Gummies</a></li>
+                      <li><a href="shop.html?cat=protein" class="mega-cat__link">Protein</a></li>
+                      <li><a href="shop.html?cat=sale"    class="mega-cat__link">Sale</a></li>
+                      <li><a href="shop.html?cat=bundles" class="mega-cat__link">Bundles</a></li>
                     </ul>
                   </div>
-                  <div>
-                    <h4 class="mega-menu__col-title">Collections</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="shop.html?cat=bundles" class="mega-menu__link">Bundles</a></li>
-                      <li><a href="shop.html?cat=sale"    class="mega-menu__link">Sale</a></li>
-                      <li><a href="shop.html?cat=new"     class="mega-menu__link">New arrivals</a></li>
-                      <li><a href="#"                     class="mega-menu__link">Gift cards</a></li>
-                    </ul>
+
+                  <div class="mega-cards">
+                    <a class="mega-card" href="product.html">
+                      <span class="mega-card__media">
+                        <img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" />
+                      </span>
+                      <span class="mega-card__foot">
+                        <span class="mega-card__label">Vanilla Whey Protein</span>
+                        <span class="mega-card__arrow" aria-hidden="true">→</span>
+                      </span>
+                    </a>
+                    <a class="mega-card mega-card--gift" href="#">
+                      <span class="mega-card__media mega-card__media--gift" aria-hidden="true">
+                        <span class="gift-art">
+                          <span class="gift-art__card gift-art__card--back"></span>
+                          <span class="gift-art__card gift-art__card--front">up·health</span>
+                        </span>
+                      </span>
+                      <span class="mega-card__foot">
+                        <span class="mega-card__label">Gift cards</span>
+                        <span class="mega-card__arrow" aria-hidden="true">→</span>
+                      </span>
+                    </a>
                   </div>
-                  <div>
-                    <h4 class="mega-menu__col-title">Resources</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="about.html"    class="mega-menu__link">About the science</a></li>
-                      <li><a href="bonuses.html"  class="mega-menu__link">Loyalty program</a></li>
-                      <li><a href="delivery.html" class="mega-menu__link">Shipping &amp; returns</a></li>
-                      <li><a href="faq.html"      class="mega-menu__link">FAQ</a></li>
-                    </ul>
-                  </div>
-                  <a class="mega-menu__featured" href="product.html">
-                    <div class="mega-menu__featured-image" aria-hidden="true">
-                      <img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" />
-                    </div>
-                    <div class="mega-menu__featured-body">
-                      <span class="mega-menu__featured-label">Featured</span>
-                      <span class="mega-menu__featured-title">Vanilla Whey Protein</span>
-                      <span class="mega-menu__featured-cta">Shop now →</span>
-                    </div>
-                  </a>
+
                 </div>
               </div>
             </li>
@@ -85,51 +95,90 @@
               <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-states">
                 States <span class="header__nav-caret">▾</span>
               </button>
-              <div class="mega-menu" id="menu-states" role="region" aria-label="Wellness states">
-                <div class="mega-menu__inner">
-                  <div>
-                    <h4 class="mega-menu__col-title">By outcome</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="shop.html?state=energy"   class="mega-menu__link"><span class="mega-menu__bullet" data-state="energy"></span>Energy</a></li>
-                      <li><a href="shop.html?state=sleep"    class="mega-menu__link"><span class="mega-menu__bullet" data-state="sleep"></span>Sleep</a></li>
-                      <li><a href="shop.html?state=relax"    class="mega-menu__link"><span class="mega-menu__bullet" data-state="relax"></span>Relax</a></li>
-                      <li><a href="shop.html?state=beauty"   class="mega-menu__link"><span class="mega-menu__bullet" data-state="beauty"></span>Beauty</a></li>
-                      <li><a href="shop.html?state=strength" class="mega-menu__link"><span class="mega-menu__bullet" data-state="strength"></span>Strength</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="mega-menu__col-title">By need</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="#" class="mega-menu__link">Skin &amp; hair</a></li>
-                      <li><a href="#" class="mega-menu__link">Joints &amp; bones</a></li>
-                      <li><a href="#" class="mega-menu__link">Recovery</a></li>
-                      <li><a href="#" class="mega-menu__link">Focus &amp; mood</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="mega-menu__col-title">Lifestyle</h4>
-                    <ul class="mega-menu__list">
-                      <li><a href="#" class="mega-menu__link">Vegan</a></li>
-                      <li><a href="#" class="mega-menu__link">Sugar-free</a></li>
-                      <li><a href="#" class="mega-menu__link">Gluten-free</a></li>
-                    </ul>
-                  </div>
-                  <a class="mega-menu__featured" href="index.html#wellness-test">
-                    <div class="mega-menu__featured-image" aria-hidden="true">
-                      <img src="https://assets.mixkit.co/videos/16084/16084-thumb-720-0.jpg" alt="" loading="lazy" />
+              <div class="mega-menu mega-menu--states" id="menu-states" role="region" aria-label="Wellness states">
+                <div class="mega-menu__inner mega-menu__inner--states">
+                  <div class="mega-states">
+                    <span class="mega-states__eyebrow">Pick an outcome</span>
+                    <div class="state-pills">
+                      <a class="state-pill" data-state="energy" href="shop.html?state=energy">
+                        <span class="state-pill__icon">${STATE_ICONS.energy}</span>Energy
+                      </a>
+                      <a class="state-pill" data-state="sleep" href="shop.html?state=sleep">
+                        <span class="state-pill__icon">${STATE_ICONS.sleep}</span>Sleep
+                      </a>
+                      <a class="state-pill" data-state="relax" href="shop.html?state=relax">
+                        <span class="state-pill__icon">${STATE_ICONS.relax}</span>Relax
+                      </a>
+                      <a class="state-pill" data-state="beauty" href="shop.html?state=beauty">
+                        <span class="state-pill__icon">${STATE_ICONS.beauty}</span>Beauty
+                      </a>
+                      <a class="state-pill" data-state="strength" href="shop.html?state=strength">
+                        <span class="state-pill__icon">${STATE_ICONS.strength}</span>Strength
+                      </a>
                     </div>
-                    <div class="mega-menu__featured-body">
-                      <span class="mega-menu__featured-label">Personalized</span>
-                      <span class="mega-menu__featured-title">Wellness Test</span>
-                      <span class="mega-menu__featured-cta">Find your fit →</span>
-                    </div>
-                  </a>
+                    <p class="mega-states__hint">Not sure where to start? <a href="index.html#wellness-test">Take the wellness test →</a></p>
+                  </div>
                 </div>
               </div>
             </li>
 
-            <li class="header__nav-item" data-page="about">
-              <a href="about.html" class="header__nav-link">About</a>
+            <li class="header__nav-item header__nav-item--has-menu" data-menu="about" data-page="about">
+              <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-about">
+                About <span class="header__nav-caret">▾</span>
+              </button>
+              <div class="mega-menu mega-menu--about" id="menu-about" role="region" aria-label="About UpHealth">
+                <div class="mega-menu__inner mega-menu__inner--about">
+
+                  <div class="mega-about__links">
+                    <h4 class="mega-menu__col-title">Company</h4>
+                    <ul class="mega-menu__list">
+                      <li><a href="about.html"    class="mega-menu__link">About us</a></li>
+                      <li><a href="#"             class="mega-menu__link">Wholesale</a></li>
+                      <li><a href="bonuses.html"  class="mega-menu__link">Bonuses</a></li>
+                      <li><a href="#"             class="mega-menu__link">Vacancies</a></li>
+                      <li><a href="delivery.html" class="mega-menu__link">Contacts</a></li>
+                      <li><a href="faq.html"      class="mega-menu__link">FAQ</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="mega-about__connect">
+                    <div class="mega-about__connect-block">
+                      <h4 class="mega-menu__col-title">Follow us</h4>
+                      <div class="mega-social">
+                        <a href="#" class="mega-social__btn" aria-label="Telegram">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.4 18.4 19.8c-.2.9-.7 1.1-1.5.7l-4.1-3-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.4-.5-.2l-9.6 6-4.1-1.3c-.9-.3-.9-.9.2-1.3L20.3 3.4c.7-.3 1.4.2 1.4 1z"/></svg>
+                        </a>
+                        <a href="#" class="mega-social__btn" aria-label="YouTube">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="mega-about__connect-block">
+                      <h4 class="mega-menu__col-title">Support</h4>
+                      <div class="mega-social">
+                        <a href="#" class="mega-social__btn" aria-label="Telegram">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.4 18.4 19.8c-.2.9-.7 1.1-1.5.7l-4.1-3-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.4-.5-.2l-9.6 6-4.1-1.3c-.9-.3-.9-.9.2-1.3L20.3 3.4c.7-.3 1.4.2 1.4 1z"/></svg>
+                        </a>
+                        <a href="#" class="mega-social__btn" aria-label="WhatsApp">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a class="mega-menu__featured mega-about__featured" href="about.html">
+                    <div class="mega-menu__featured-image" aria-hidden="true">
+                      <img src="assets/image/personal/image.png" alt="" loading="lazy" />
+                    </div>
+                    <div class="mega-menu__featured-body">
+                      <span class="mega-menu__featured-label">Our story</span>
+                      <span class="mega-menu__featured-title">Science you can trust</span>
+                      <span class="mega-menu__featured-cta">Read more →</span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
             </li>
           </ul>
 
@@ -191,11 +240,19 @@
               <li><a href="shop.html?state=strength">Strength</a></li>
             </ul>
           </li>
-          <li><a href="about.html" class="mobile-nav__link">About</a></li>
+          <li class="mobile-nav__group">
+            <button class="mobile-nav__group-toggle" aria-expanded="false">About <span>+</span></button>
+            <ul class="mobile-nav__sub">
+              <li><a href="about.html">About us</a></li>
+              <li><a href="#">Wholesale</a></li>
+              <li><a href="bonuses.html">Bonuses</a></li>
+              <li><a href="#">Vacancies</a></li>
+              <li><a href="delivery.html">Contacts</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </li>
           <li><a href="index.html#wellness-test" class="mobile-nav__link">Wellness Test</a></li>
-          <li><a href="faq.html" class="mobile-nav__link">FAQ</a></li>
           <li><a href="delivery.html" class="mobile-nav__link">Shipping</a></li>
-          <li><a href="bonuses.html" class="mobile-nav__link">Bonuses</a></li>
         </ul>
         <div class="mobile-nav__footer">
           <a href="#" class="btn btn--ghost btn--full">Sign in</a>
