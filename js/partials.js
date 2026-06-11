@@ -129,40 +129,61 @@
               <div class="mega-menu mega-menu--about" id="menu-about" role="region" aria-label="About UpHealth">
                 <div class="mega-menu__inner mega-menu__inner--about">
 
-                  <div class="mega-about__links">
+                  <div class="mega-about__col">
                     <h4 class="mega-menu__col-title">Company</h4>
                     <ul class="mega-menu__list">
-                      <li><a href="about.html"    class="mega-menu__link">About us</a></li>
-                      <li><a href="#"             class="mega-menu__link">Wholesale</a></li>
-                      <li><a href="bonuses.html"  class="mega-menu__link">Bonuses</a></li>
-                      <li><a href="#"             class="mega-menu__link">Vacancies</a></li>
-                      <li><a href="delivery.html" class="mega-menu__link">Contacts</a></li>
-                      <li><a href="faq.html"      class="mega-menu__link">FAQ</a></li>
+                      <li><a href="about.html"   class="mega-menu__link">About us</a></li>
+                      <li><a href="#"            class="mega-menu__link">Wholesale</a></li>
+                      <li><a href="bonuses.html" class="mega-menu__link">Bonuses</a></li>
+                      <li><a href="#"            class="mega-menu__link">Vacancies</a></li>
                     </ul>
                   </div>
 
-                  <div class="mega-about__connect">
-                    <div class="mega-about__connect-block">
-                      <h4 class="mega-menu__col-title">Follow us</h4>
-                      <div class="mega-social">
-                        <a href="#" class="mega-social__btn" aria-label="Telegram">
-                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.4 18.4 19.8c-.2.9-.7 1.1-1.5.7l-4.1-3-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.4-.5-.2l-9.6 6-4.1-1.3c-.9-.3-.9-.9.2-1.3L20.3 3.4c.7-.3 1.4.2 1.4 1z"/></svg>
-                        </a>
-                        <a href="#" class="mega-social__btn" aria-label="YouTube">
-                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="mega-about__connect-block">
-                      <h4 class="mega-menu__col-title">Support</h4>
-                      <div class="mega-social">
-                        <a href="#" class="mega-social__btn" aria-label="Telegram">
-                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.4 18.4 19.8c-.2.9-.7 1.1-1.5.7l-4.1-3-2 1.9c-.2.2-.4.4-.9.4l.3-4.3 7.8-7c.3-.3-.1-.4-.5-.2l-9.6 6-4.1-1.3c-.9-.3-.9-.9.2-1.3L20.3 3.4c.7-.3 1.4.2 1.4 1z"/></svg>
-                        </a>
-                        <a href="#" class="mega-social__btn" aria-label="WhatsApp">
-                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg>
-                        </a>
-                      </div>
+                  <div class="mega-about__col">
+                    <h4 class="mega-menu__col-title">Help</h4>
+                    <ul class="mega-menu__list">
+                      <li><a href="delivery.html" class="mega-menu__link">Contacts</a></li>
+                      <li><a href="faq.html"      class="mega-menu__link">FAQ</a></li>
+                      <li><a href="delivery.html" class="mega-menu__link">Shipping &amp; returns</a></li>
+                      <li><a href="bonuses.html"  class="mega-menu__link">Loyalty program</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="mega-about__contacts">
+                    <h4 class="mega-menu__col-title">Talk to us</h4>
+                    <ul class="mega-contacts">
+                      <li class="mega-contact">
+                        <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg></span>
+                        <span class="mega-contact__text">
+                          <span class="mega-contact__region">United States</span>
+                          <a href="tel:+18885550142" class="mega-contact__value">+1 (888) 555-0142</a>
+                        </span>
+                      </li>
+                      <li class="mega-contact">
+                        <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg></span>
+                        <span class="mega-contact__text">
+                          <span class="mega-contact__region">Europe</span>
+                          <a href="tel:+442079460123" class="mega-contact__value">+44 20 7946 0123</a>
+                        </span>
+                      </li>
+                      <li class="mega-contact">
+                        <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                        <span class="mega-contact__text">
+                          <span class="mega-contact__region">Email</span>
+                          <a href="mailto:care@uphealth.com" class="mega-contact__value">care@uphealth.com</a>
+                        </span>
+                      </li>
+                    </ul>
+                    <div class="mega-social">
+                      <a href="https://wa.me/18885550142" class="mega-social__btn" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg>
+                      </a>
+                      <a href="#" class="mega-social__btn" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+                      </a>
+                      <a href="#" class="mega-social__btn" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg>
+                      </a>
                     </div>
                   </div>
 
@@ -348,11 +369,29 @@
 
   <aside class="cart-drawer" id="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
     <div class="cart-drawer__header">
-      <h3>Your cart</h3>
+      <h3>Your cart <span class="cart-drawer__count" id="cart-drawer-count"></span></h3>
       <button class="cart-drawer__close" id="cart-close" aria-label="Close cart">×</button>
     </div>
-    <div class="cart-drawer__body">
+    <div class="cart-drawer__body" id="cart-body">
       <p class="cart-drawer__empty">Your cart is empty.</p>
+    </div>
+    <div class="cart-drawer__foot" id="cart-foot" hidden>
+      <form class="cart-promo" id="cart-promo">
+        <label class="cart-promo__label" for="cart-code">Have a gift card or promo code?</label>
+        <div class="cart-promo__row">
+          <input type="text" id="cart-code" class="cart-promo__input" placeholder="e.g. GIFT100" autocomplete="off" spellcheck="false" />
+          <button type="submit" class="cart-promo__apply">Apply</button>
+        </div>
+        <p class="cart-promo__msg" id="cart-promo-msg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="cart-totals">
+        <div class="cart-totals__row"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+        <div class="cart-totals__row cart-totals__row--discount" id="cart-discount-row" hidden>
+          <span id="cart-discount-label">Discount</span><span id="cart-discount">-$0</span>
+        </div>
+        <div class="cart-totals__row cart-totals__row--total"><span>Total</span><span id="cart-total">$0</span></div>
+      </div>
+      <button class="btn btn--primary btn--full" id="cart-checkout">Checkout</button>
     </div>
   </aside>
 

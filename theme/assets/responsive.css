@@ -36,7 +36,7 @@
 
   /* refeel-style menus on mid widths */
   .mega-menu__inner--catalog { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
-  .mega-menu__inner--about   { grid-template-columns: 1fr 1fr; gap: var(--space-lg) var(--space-xl); }
+  .mega-menu__inner--about   { grid-template-columns: repeat(3, 1fr); gap: var(--space-lg) var(--space-xl); }
   .mega-about__featured      { grid-column: 1 / -1; }
 
   .hero__slide { padding-block: var(--space-xl) var(--space-2xl); }

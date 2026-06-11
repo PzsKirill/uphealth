@@ -87,11 +87,29 @@
 
 <aside class="cart-drawer" id="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
   <div class="cart-drawer__header">
-    <h3>Your cart</h3>
+    <h3>Your cart <span class="cart-drawer__count" id="cart-drawer-count"></span></h3>
     <button class="cart-drawer__close" id="cart-close" aria-label="Close cart">&times;</button>
   </div>
-  <div class="cart-drawer__body">
+  <div class="cart-drawer__body" id="cart-body">
     <p class="cart-drawer__empty">Your cart is empty.</p>
+  </div>
+  <div class="cart-drawer__foot" id="cart-foot" hidden>
+    <form class="cart-promo" id="cart-promo">
+      <label class="cart-promo__label" for="cart-code">Have a gift card or promo code?</label>
+      <div class="cart-promo__row">
+        <input type="text" id="cart-code" class="cart-promo__input" placeholder="e.g. GIFT100" autocomplete="off" spellcheck="false" />
+        <button type="submit" class="cart-promo__apply">Apply</button>
+      </div>
+      <p class="cart-promo__msg" id="cart-promo-msg" role="status" aria-live="polite"></p>
+    </form>
+    <div class="cart-totals">
+      <div class="cart-totals__row"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+      <div class="cart-totals__row cart-totals__row--discount" id="cart-discount-row" hidden>
+        <span id="cart-discount-label">Discount</span><span id="cart-discount">-$0</span>
+      </div>
+      <div class="cart-totals__row cart-totals__row--total"><span>Total</span><span id="cart-total">$0</span></div>
+    </div>
+    <button class="btn btn--primary btn--full" id="cart-checkout">Checkout</button>
   </div>
 </aside>
 

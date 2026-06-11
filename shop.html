@@ -32,7 +32,7 @@
           <p class="page-hero__lead">The full catalog — filter by format, state or price to narrow down what fits your routine.</p>
         </div>
         <div class="page-hero__meta">
-          <div><strong>12</strong> products in stock</div>
+          <div><strong>15</strong> products in stock</div>
           <div><strong>5</strong> states covered</div>
         </div>
       </div>
@@ -49,7 +49,7 @@
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
             Filters
           </button>
-          <p class="catalog__count"><strong id="catalog-count">12</strong> products</p>
+          <p class="catalog__count"><strong id="catalog-count">15</strong> products</p>
           <label class="catalog__sort">
             <span class="catalog__sort-label">Sort by</span>
             <span class="catalog__sort-field">
@@ -82,6 +82,7 @@
                 <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="drinks"> Drinks <span class="filters__count">3</span></label></li>
                 <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="protein"> Protein <span class="filters__count">3</span></label></li>
                 <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="bundles"> Bundles <span class="filters__count">2</span></label></li>
+                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="gift"> Gift cards <span class="filters__count">3</span></label></li>
               </ul>
             </div>
 
@@ -99,10 +100,10 @@
             <div class="filters__group">
               <h3 class="filters__title">Max price</h3>
               <div class="filters__range">
-                <input type="range" min="10" max="120" value="120" step="2" class="filters__range-input" id="filter-price" aria-label="Maximum price">
+                <input type="range" min="10" max="250" value="250" step="5" class="filters__range-input" id="filter-price" aria-label="Maximum price">
                 <div class="filters__range-values">
                   <span>$10</span>
-                  <span data-range-value>$120</span>
+                  <span data-range-value>$250</span>
                 </div>
               </div>
             </div>
@@ -297,6 +298,64 @@
                   <div class="product-card__footer">
                     <div class="product-card__price"><span class="product-card__price-now">$38</span></div>
                     <a href="product.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ===== Gift cards ===== -->
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="30" data-rating="5" data-date="2" data-popular="13">
+                <span class="product-card__media product-card__media--gift" style="background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%);" aria-hidden="true">
+                  <span class="gift-art">
+                    <span class="gift-art__card gift-art__card--back"></span>
+                    <span class="gift-art__card gift-art__card--front">up·health<small class="gift-art__amount">$30</small></span>
+                  </span>
+                </span>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--gift">Gift card</span>
+                  <h3 class="product-card__title">UpHealth Gift Card</h3>
+                  <p class="product-card__desc">Digital · delivered by email</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$30</span></div>
+                    <button class="btn btn--primary btn--sm" data-add-to-cart>Add to cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="100" data-rating="5" data-date="2" data-popular="14">
+                <span class="product-card__media product-card__media--gift" style="background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%);" aria-hidden="true">
+                  <span class="gift-art">
+                    <span class="gift-art__card gift-art__card--back"></span>
+                    <span class="gift-art__card gift-art__card--front">up·health<small class="gift-art__amount">$100</small></span>
+                  </span>
+                </span>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--gift">Gift card</span>
+                  <h3 class="product-card__title">UpHealth Gift Card</h3>
+                  <p class="product-card__desc">Digital · delivered by email</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$100</span></div>
+                    <button class="btn btn--primary btn--sm" data-add-to-cart>Add to cart</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="250" data-rating="5" data-date="2" data-popular="15">
+                <span class="product-card__media product-card__media--gift" style="background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%);" aria-hidden="true">
+                  <span class="gift-art">
+                    <span class="gift-art__card gift-art__card--back"></span>
+                    <span class="gift-art__card gift-art__card--front">up·health<small class="gift-art__amount">$250</small></span>
+                  </span>
+                </span>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--gift">Gift card</span>
+                  <h3 class="product-card__title">UpHealth Gift Card</h3>
+                  <p class="product-card__desc">Digital · delivered by email</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$250</span></div>
+                    <button class="btn btn--primary btn--sm" data-add-to-cart>Add to cart</button>
                   </div>
                 </div>
               </article>

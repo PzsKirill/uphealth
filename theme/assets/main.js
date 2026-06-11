@@ -258,6 +258,183 @@
   if (cartClose)  cartClose.addEventListener('click', closeCart);
   if (overlay)    overlay.addEventListener('click', closeCart);
 
+  /* ---------- Cart state, line items, gift-card / promo codes ---------- */
+  (function initCart() {
+    const CART_KEY = 'uphealth_cart';
+    const CODE_KEY = 'uphealth_cart_code';
+    const body      = $('#cart-body');
+    const foot      = $('#cart-foot');
+    const drawerCnt = $('#cart-drawer-count');
+    const headerCnt = $('#cart-btn .header__count');
+    const subtotalEl= $('#cart-subtotal');
+    const discRow   = $('#cart-discount-row');
+    const discLabel = $('#cart-discount-label');
+    const discEl    = $('#cart-discount');
+    const totalEl   = $('#cart-total');
+    const promoForm = $('#cart-promo');
+    const codeInput = $('#cart-code');
+    const promoMsg  = $('#cart-promo-msg');
+    const checkout  = $('#cart-checkout');
+    if (!body || !cartDrawer) return;
+
+    // Demo redeem codes — gift cards take money off, WELCOME10 is a % promo.
+    const CODES = {
+      GIFT30:    { type: 'amount',  value: 30,  label: 'Gift card · GIFT30' },
+      GIFT100:   { type: 'amount',  value: 100, label: 'Gift card · GIFT100' },
+      GIFT250:   { type: 'amount',  value: 250, label: 'Gift card · GIFT250' },
+      WELCOME10: { type: 'percent', value: 10,  label: 'Promo · WELCOME10' },
+    };
+
+    let cart = [];
+    let code = '';
+    try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
+    try { code = localStorage.getItem(CODE_KEY) || ''; } catch (e) { code = ''; }
+
+    const save = () => {
+      try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+      try { localStorage.setItem(CODE_KEY, code); } catch (e) {}
+    };
+
+    const money = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('en-US');
+    const count = () => cart.reduce((n, i) => n + i.qty, 0);
+    const subtotal = () => cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+    const discountAmount = () => {
+      const c = CODES[code];
+      if (!c) return 0;
+      const sub = subtotal();
+      const raw = c.type === 'percent' ? sub * (c.value / 100) : c.value;
+      return Math.min(raw, sub); // never below zero
+    };
+
+    const titleOf = (card) => ($('.product-card__title', card)?.textContent || 'Product').trim();
+    const itemInfo = (card) => {
+      const media = $('.product-card__media', card);
+      const img = media && media.querySelector('img');
+      const price = parseFloat((($('.product-card__price-now', card)?.textContent) || '').replace(/[^0-9.]/g, '')) || 0;
+      const title = titleOf(card);
+      return {
+        id: title + '|' + price,           // denomination-aware (gift cards share a title)
+        title, price,
+        thumb: img ? img.getAttribute('src') : '',
+        bg: (!img && media) ? (media.getAttribute('style') || '') : '',
+      };
+    };
+
+    const updateCount = () => {
+      const n = count();
+      if (headerCnt) { headerCnt.textContent = n; headerCnt.style.display = n ? '' : 'none'; }
+      if (drawerCnt) drawerCnt.textContent = n ? '(' + n + ')' : '';
+    };
+
+    const render = () => {
+      cartDrawer.classList.toggle('has-items', cart.length > 0);
+      if (foot) foot.hidden = cart.length === 0;
+
+      if (!cart.length) {
+        body.innerHTML = '<p class="cart-drawer__empty">Your cart is empty.</p>';
+        updateCount();
+        return;
+      }
+
+      body.innerHTML = cart.map((i) => `
+        <div class="cart-item">
+          <span class="cart-item__thumb" style="${i.thumb ? "background-image:url('" + i.thumb + "')" : i.bg}"></span>
+          <span class="cart-item__info">
+            <span class="cart-item__name">${i.title}</span>
+            <span class="cart-item__price">${money(i.price)}</span>
+            <span class="cart-item__qty">
+              <button class="cart-item__step" data-cart-dec="${i.id}" aria-label="Decrease quantity">−</button>
+              <span class="cart-item__count">${i.qty}</span>
+              <button class="cart-item__step" data-cart-inc="${i.id}" aria-label="Increase quantity">+</button>
+            </span>
+          </span>
+          <button class="cart-item__remove" data-cart-remove="${i.id}" aria-label="Remove">×</button>
+        </div>`).join('');
+
+      const sub = subtotal();
+      const disc = discountAmount();
+      if (subtotalEl) subtotalEl.textContent = money(sub);
+      if (discRow) discRow.hidden = disc <= 0;
+      if (disc > 0) {
+        if (discLabel) discLabel.textContent = (CODES[code] && CODES[code].label) || 'Discount';
+        if (discEl) discEl.textContent = '−' + money(disc);
+      }
+      if (totalEl) totalEl.textContent = money(Math.max(0, sub - disc));
+      updateCount();
+    };
+
+    const addToCart = (card) => {
+      const info = itemInfo(card);
+      const existing = cart.find((i) => i.id === info.id);
+      if (existing) existing.qty += 1;
+      else cart.push({ ...info, qty: 1 });
+      save();
+      render();
+      openCart();
+    };
+
+    const setQty = (id, delta) => {
+      const i = cart.find((it) => it.id === id);
+      if (!i) return;
+      i.qty += delta;
+      if (i.qty <= 0) cart = cart.filter((it) => it.id !== id);
+      save();
+      render();
+    };
+
+    // Delegated clicks: add-to-cart, qty steppers, remove
+    document.addEventListener('click', (e) => {
+      const add = e.target.closest('[data-add-to-cart]');
+      if (add) {
+        e.preventDefault();
+        const card = add.closest('.product-card');
+        if (card) addToCart(card);
+        return;
+      }
+      const inc = e.target.closest('[data-cart-inc]');
+      if (inc) { setQty(inc.getAttribute('data-cart-inc'), +1); return; }
+      const dec = e.target.closest('[data-cart-dec]');
+      if (dec) { setQty(dec.getAttribute('data-cart-dec'), -1); return; }
+      const rm = e.target.closest('[data-cart-remove]');
+      if (rm) {
+        cart = cart.filter((it) => it.id !== rm.getAttribute('data-cart-remove'));
+        save();
+        render();
+      }
+    });
+
+    // Apply / clear a gift-card or promo code
+    const showMsg = (text, ok) => {
+      if (!promoMsg) return;
+      promoMsg.textContent = text;
+      promoMsg.classList.toggle('is-ok', !!ok);
+      promoMsg.classList.toggle('is-err', !ok);
+    };
+    if (promoForm) {
+      promoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const entered = (codeInput?.value || '').trim().toUpperCase();
+        if (!entered) return;
+        if (code === entered) { code = ''; save(); render(); showMsg('Code removed.', true); if (codeInput) codeInput.value = ''; return; }
+        if (CODES[entered]) {
+          code = entered;
+          save();
+          render();
+          showMsg('Applied — ' + CODES[entered].label + '. Enter again to remove.', true);
+        } else {
+          showMsg("That code isn't valid. Try GIFT30, GIFT100, GIFT250 or WELCOME10.", false);
+        }
+      });
+    }
+
+    if (checkout) checkout.addEventListener('click', () => {
+      showMsg('Demo checkout — wire to Shopify checkout in production.', true);
+    });
+
+    render();
+  })();
+
   /* ---------- Wishlist / favorites ---------- */
   (function initWishlist() {
     const FAV_KEY  = 'uphealth_favs';
