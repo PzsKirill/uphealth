@@ -384,11 +384,9 @@
   .perfect-day__grid  { grid-template-columns: 1fr; }
   .product-line__head { flex-direction: row; align-items: center; }
 
-  /* hero slide 1 photo: stronger top-down scrim so text stays readable */
-  .hero__slide--range { background-position: center; }
-  .hero__slide--range::after {
-    background: linear-gradient(180deg, rgba(254,252,249,0.94) 0%, rgba(254,252,249,0.78) 48%, rgba(254,252,249,0.3) 100%);
-  }
+  /* hero slide 1 is a full banner — show it whole (contain) on narrow/portrait
+     screens so the wordmark and bottles never get cropped; beige bg fills the rest */
+  .hero__slide--range { background-position: center; background-size: contain; }
 }
 
 @media (max-width: 640px) {

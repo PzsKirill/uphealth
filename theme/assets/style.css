@@ -1022,18 +1022,17 @@ body {
 .hero__slide--range {
   --slide-accent: #b23e72;
   position: relative;
-  background: url("../assets/image/png/photo_2026-06-01_10-27-57.jpg") center right / cover no-repeat;
+  /* full-bleed brand banner — beige fallback matches the artwork edges */
+  background: #eae1d8 url("../assets/image/personal/banner.png") center center / cover no-repeat;
 }
-/* readability scrim so the headline stays legible over the photo */
-.hero__slide--range::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(90deg, rgba(254,252,249,0.96) 0%, rgba(254,252,249,0.82) 34%, rgba(254,252,249,0.35) 56%, rgba(254,252,249,0) 78%);
+/* banner is a finished composition (own wordmark + products), so no scrim
+   and no headline overlay on this slide */
+.hero__slide--range::after { content: none; }
+.hero__slide--range .hero__inner {
+  grid-template-columns: 1fr;
+  min-height: clamp(440px, 64vh, 720px);
 }
-.hero__slide--range .hero__inner { grid-template-columns: 1fr; }
-.hero__slide--range .hero__content { max-width: 560px; }
+.hero__slide--range .hero__content { display: none; }
 .hero__slide--range .hero__visual { display: none; }
 .hero__slide--pink {
   --slide-bg: linear-gradient(120deg, #fbe1ec 0%, #f6bcd6 60%, #ef9dc2 100%);
