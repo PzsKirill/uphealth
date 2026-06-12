@@ -1502,7 +1502,8 @@ body {
 
 .product-card__media {
   display: block;
-  aspect-ratio: 4 / 3;
+  /* larger viewing area — scales down per breakpoint (see responsive.css) */
+  height: 500px;
   position: relative;
   overflow: hidden;
 }
@@ -2614,7 +2615,7 @@ body {
 
 .product-line__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
 
@@ -3036,9 +3037,9 @@ body.is-cart-open {
   gap: var(--space-lg);
 }
 
-/* Compact product card variant */
+/* Compact product card variant — keeps the taller media height from base */
 .product-card--compact .product-card__media {
-  aspect-ratio: 4 / 3;
+  height: 500px;
 }
 
 .product-card--compact .product-card__body {
