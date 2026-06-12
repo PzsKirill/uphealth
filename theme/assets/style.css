@@ -2619,6 +2619,16 @@ body {
   gap: var(--space-md);
 }
 
+/* Wider stage for the product showcase. Scoped with :has() to ONLY the
+   containers that directly wrap a product-line grid (homepage "community",
+   product-page "you may also like", about "states"). The catalog uses a
+   different grid (.catalog__grid-products) and every other section keeps the
+   standard 1440 width. Uses max-width (no vw cap) so screens ≤1440 are
+   unchanged — it only grows the stage on wider monitors. */
+.container:has(> .product-line__grid) {
+  max-width: 1800px;
+}
+
 /* ============================================================
    Reveal animations
    ============================================================ */
