@@ -1502,8 +1502,7 @@ body {
 
 .product-card__media {
   display: block;
-  /* larger viewing area — scales down per breakpoint (see responsive.css) */
-  height: 500px;
+  aspect-ratio: 4 / 3;
   position: relative;
   overflow: hidden;
 }
@@ -2615,18 +2614,8 @@ body {
 
 .product-line__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
-}
-
-/* Wider stage for the product showcase. Scoped with :has() to ONLY the
-   containers that directly wrap a product-line grid (homepage "community",
-   product-page "you may also like", about "states"). The catalog uses a
-   different grid (.catalog__grid-products) and every other section keeps the
-   standard 1440 width. Uses max-width (no vw cap) so screens ≤1440 are
-   unchanged — it only grows the stage on wider monitors. */
-.container:has(> .product-line__grid) {
-  max-width: 1800px;
 }
 
 /* ============================================================
@@ -3049,7 +3038,7 @@ body.is-cart-open {
 
 /* Compact product card variant — keeps the taller media height from base */
 .product-card--compact .product-card__media {
-  height: 500px;
+  aspect-ratio: 4 / 3;
 }
 
 .product-card--compact .product-card__body {

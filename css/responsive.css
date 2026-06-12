@@ -267,12 +267,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* product image scales down with the cards */
-  .product-card__media,
-  .product-card--compact .product-card__media {
-    height: 440px;
-  }
-
   .page-hero__inner {
     grid-template-columns: 1fr;
     align-items: start;
@@ -347,9 +341,6 @@
 
 @media (max-width: 640px) {
   .catalog__grid-products { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
-  /* 2-up on phones — keep the media proportional to the narrower cards */
-  .product-card__media,
-  .product-card--compact .product-card__media { height: 320px; }
   .reviews__grid          { grid-template-columns: 1fr; }
   .values__grid           { grid-template-columns: 1fr; }
   .stats__grid            { grid-template-columns: 1fr 1fr; }
@@ -365,10 +356,7 @@
 }
 
 @media (max-width: 480px) {
-  /* single column on small phones — full-width cards get a taller image again */
   .catalog__grid-products { grid-template-columns: 1fr; }
-  .product-card__media,
-  .product-card--compact .product-card__media { height: 420px; }
 }
 
 /* ============================================================
