@@ -4529,6 +4529,25 @@ body.is-cart-open {
   display: block;
 }
 
+/* Hover image swap — the second image crossfades in over the first.
+   Reusable: add a second <img class="product-card__img--hover"> to any card.
+   Gentle settle-scale keeps the change soft and comfortable. */
+.product-card__img--hover {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity var(--dur-slow) var(--ease),
+              transform var(--dur-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+.product-card:hover .product-card__img--hover,
+.product-card:focus-within .product-card__img--hover {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-card__img--hover { transition-duration: 0.01ms; transform: none; }
+}
+
 .why-card__media img {
   position: absolute;
   inset: 0;
