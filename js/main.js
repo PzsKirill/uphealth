@@ -279,9 +279,10 @@
 
     // Demo redeem codes — gift cards take money off, WELCOME10 is a % promo.
     const CODES = {
-      GIFT30:    { type: 'amount',  value: 30,  label: 'Gift card · GIFT30' },
+      GIFT25:    { type: 'amount',  value: 25,  label: 'Gift card · GIFT25' },
+      GIFT50:    { type: 'amount',  value: 50,  label: 'Gift card · GIFT50' },
       GIFT100:   { type: 'amount',  value: 100, label: 'Gift card · GIFT100' },
-      GIFT250:   { type: 'amount',  value: 250, label: 'Gift card · GIFT250' },
+      GIFT150:   { type: 'amount',  value: 150, label: 'Gift card · GIFT150' },
       WELCOME10: { type: 'percent', value: 10,  label: 'Promo · WELCOME10' },
     };
 
@@ -423,7 +424,7 @@
           render();
           showMsg('Applied — ' + CODES[entered].label + '. Enter again to remove.', true);
         } else {
-          showMsg("That code isn't valid. Try GIFT30, GIFT100, GIFT250 or WELCOME10.", false);
+          showMsg("That code isn't valid. Try GIFT25, GIFT50, GIFT100, GIFT150 or WELCOME10.", false);
         }
       });
     }
