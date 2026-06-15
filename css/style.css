@@ -5330,8 +5330,11 @@ body[data-page="product"] .reviews {
 }
 
 /* uniform inner padding for every content type inside a panel
-   (the base .faq__a only padded <p>, leaving lists/tables flush) */
-.product-details .faq__a {
+   (the base .faq__a only padded <p>, leaving lists/tables flush).
+   The padding lives on the OPEN state only — putting it on the collapsing
+   .faq__a directly stops max-height:0 from fully hiding the panel (padding
+   can't compress under border-box), so the first line leaks through. */
+.product-details .faq__item.is-open .faq__a {
   padding: 0 var(--space-lg) var(--space-lg);
 }
 
