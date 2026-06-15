@@ -60,6 +60,7 @@
                       <li><a href="shop.html?cat=protein" class="mega-cat__link">Protein</a></li>
                       <li><a href="shop.html?cat=sale"    class="mega-cat__link">Sale</a></li>
                       <li><a href="shop.html?cat=bundles" class="mega-cat__link">Bundles</a></li>
+                      <li><a href="shop.html?cat=gift"    class="mega-cat__link">Gift cards</a></li>
                     </ul>
                   </div>
 
@@ -73,7 +74,7 @@
                         <span class="mega-card__arrow" aria-hidden="true">→</span>
                       </span>
                     </a>
-                    <a class="mega-card mega-card--gift" href="#">
+                    <a class="mega-card mega-card--gift" href="shop.html?cat=gift">
                       <span class="mega-card__media mega-card__media--gift" aria-hidden="true">
                         <span class="gift-art">
                           <span class="gift-art__card gift-art__card--back"></span>
