@@ -30,7 +30,24 @@
     <section class="hero" aria-label="Hero">
       <div class="hero__slider">
 
-        <!-- Slide 1 (brand banner) temporarily disabled; markup preserved in git (commit cad85b7). Restore when a fix is ready. -->
+        <!-- Slide 1 — Brand banner (full-bleed <img>, art-directed per device) -->
+        <div class="hero__slide hero__slide--range">
+          <picture class="hero__banner" aria-hidden="true">
+            <source media="(max-width: 640px)" srcset="assets/image/personal/bannermobile.png" />
+            <source media="(max-width: 1024px)" srcset="assets/image/personal/bannertablet.png" />
+            <img src="assets/image/personal/banner.png" alt="" loading="eager" />
+          </picture>
+          <div class="hero__inner container">
+            <div class="hero__content hero__content--banner">
+              <span class="hero__eyebrow">The UpHealth range</span>
+              <p class="hero__lead">Five colour-coded formulas — one for every part of your day.</p>
+              <div class="hero__actions">
+                <a href="shop.html" class="btn btn--primary">Shop the range</a>
+                <a href="#community-products" class="btn btn--ghost">Bestsellers</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Slide 2 — Beauty (pink) -->
         <div class="hero__slide hero__slide--pink">

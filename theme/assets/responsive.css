@@ -379,24 +379,8 @@
   .footer__marquee-item { font-size: var(--fs-2xl); }
 }
 
-/* ============================================================
-   Hero slide 1 — art-directed banner per device + orientation.
-   Each artwork is composed for its shape, so cover fills the
-   block without cropping the wordmark. Desktop = banner.png (base).
-   ============================================================ */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .hero__slide--range {
-    background-image: url("../assets/image/personal/bannertablet.png");
-    background-position: center;
-  }
-}
-@media (max-width: 1024px) and (orientation: portrait) {
-  .hero__slide--range {
-    background-image: url("../assets/image/personal/bannermobile.png");
-    background-position: center;
-    background-size: contain;
-  }
-}
+/* Hero slide 1 banner is now a <picture> with art-directed <source>s
+   (desktop / tablet / mobile), so no CSS background-image swaps are needed. */
 
 @media (max-width: 900px) {
   .why__grid          { grid-template-columns: 1fr; }

@@ -1201,8 +1201,24 @@ body {
 .hero__slide--range {
   --slide-accent: #b23e72;
   position: relative;
-  /* full-bleed brand banner — beige fallback matches the artwork edges */
-  background: #eae1d8 url("../assets/image/personal/banner.png") center center / cover no-repeat;
+  overflow: hidden;
+  /* beige fallback matches the artwork edges */
+  background: #eae1d8;
+}
+
+/* full-bleed banner image — absolutely positioned so it fills the whole slide
+   and stays centred via object-fit:cover (no layout push, never drifts up) */
+.hero__banner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 /* soft scrim only along the bottom, so the light info stays legible
