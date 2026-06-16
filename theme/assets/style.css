@@ -740,43 +740,34 @@ body {
   background: linear-gradient(135deg, #efe9f4 0%, #e1d6ec 100%);
 }
 
-.gift-art {
+/* two real gift-card images, stacked + tilted, that fan out on hover */
+.gift-stack {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
 }
-
-.gift-art__card {
+.gift-stack__card {
   position: absolute;
-  width: 56%;
-  aspect-ratio: 1.6 / 1;
-  border-radius: 10px;
-  background: var(--grad-strength);
-  box-shadow: 0 10px 24px rgba(94, 66, 117, 0.28);
-}
-
-.gift-art__card--back {
-  transform: rotate(-11deg) translate(-16%, 10%);
-  opacity: 0.5;
-}
-
-.gift-art__card--front {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(7deg) translate(12%, -6%);
-  color: rgba(255, 255, 255, 0.92);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-sm);
-  letter-spacing: 0.01em;
+  width: 64%;
+  aspect-ratio: 1.55 / 1;
+  border-radius: 12px;
+  overflow: hidden;                      /* clip the zoomed image (drops the white margin) */
+  box-shadow: 0 12px 26px rgba(94, 66, 117, 0.32);
   transition: transform var(--dur-base) var(--ease-out);
 }
-
-.mega-card--gift:hover .gift-art__card--front {
-  transform: rotate(4deg) translate(10%, -10%);
+.gift-stack__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.16);                /* zoom past the artwork's white border */
+  display: block;
 }
+.gift-stack__card--back  { transform: rotate(-9deg) translate(-15%, 9%); }
+.gift-stack__card--front { transform: rotate(7deg) translate(13%, -6%); }
+
+.mega-card--gift:hover .gift-stack__card--back  { transform: rotate(-13deg) translate(-26%, 13%); }
+.mega-card--gift:hover .gift-stack__card--front { transform: rotate(11deg) translate(23%, -11%); }
 
 /* ---- States ---- */
 .mega-menu__inner--states {

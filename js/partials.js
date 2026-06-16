@@ -76,9 +76,9 @@
                     </a>
                     <a class="mega-card mega-card--gift" href="shop.html?cat=gift">
                       <span class="mega-card__media mega-card__media--gift" aria-hidden="true">
-                        <span class="gift-art">
-                          <span class="gift-art__card gift-art__card--back"></span>
-                          <span class="gift-art__card gift-art__card--front">up·health</span>
+                        <span class="gift-stack">
+                          <span class="gift-stack__card gift-stack__card--back"><img src="assets/image/giftcard/100horizontal.png" alt="" loading="lazy" /></span>
+                          <span class="gift-stack__card gift-stack__card--front"><img src="assets/image/giftcard/150horizontal.png" alt="" loading="lazy" /></span>
                         </span>
                       </span>
                       <span class="mega-card__foot">
