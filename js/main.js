@@ -308,15 +308,20 @@
       return Math.min(raw, sub); // never below zero
     };
 
+    const SUB_RATE = 0.10;                 // monthly subscription discount on products
     const titleOf = (card) => ($('.product-card__title', card)?.textContent || 'Product').trim();
-    const itemInfo = (card) => {
+    const itemInfo = (card, opts = {}) => {
       const media = $('.product-card__media', card);
       const img = media && media.querySelector('img');
-      const price = parseFloat((($('.product-card__price-now', card)?.textContent) || '').replace(/[^0-9.]/g, '')) || 0;
+      let price = parseFloat((($('.product-card__price-now', card)?.textContent) || '').replace(/[^0-9.]/g, '')) || 0;
       const title = titleOf(card);
+      const sub = !!opts.sub;
+      const isGift = card.classList.contains('product-card--gift');
+      // products get 10% off on subscription; gift cards stay at face value (just recurring)
+      if (sub && !isGift) price = Math.round(price * (1 - SUB_RATE));
       return {
-        id: title + '|' + price,           // denomination-aware (gift cards share a title)
-        title, price,
+        id: title + '|' + price + (sub ? '|sub' : ''),   // sub & one-time are separate lines
+        title, price, sub,
         thumb: img ? img.getAttribute('src') : '',
         bg: (!img && media) ? (media.getAttribute('style') || '') : '',
       };
@@ -339,11 +344,12 @@
       }
 
       body.innerHTML = cart.map((i) => `
-        <div class="cart-item">
+        <div class="cart-item${i.sub ? ' cart-item--sub' : ''}">
           <span class="cart-item__thumb" style="${i.thumb ? "background-image:url('" + i.thumb + "')" : i.bg}"></span>
           <span class="cart-item__info">
-            <span class="cart-item__name">${i.title}</span>
-            <span class="cart-item__price">${money(i.price)}</span>
+            <span class="cart-item__name">${i.title}${i.variant ? ' · ' + i.variant : ''}</span>
+            ${i.sub ? '<span class="cart-item__sub">Monthly subscription</span>' : ''}
+            <span class="cart-item__price">${money(i.price)}${i.sub ? '<span class="cart-item__per"> / mo</span>' : ''}</span>
             <span class="cart-item__qty">
               <button class="cart-item__step" data-cart-dec="${i.id}" aria-label="Decrease quantity">−</button>
               <span class="cart-item__count">${i.qty}</span>
@@ -365,15 +371,19 @@
       updateCount();
     };
 
-    const addToCart = (card) => {
-      const info = itemInfo(card);
+    // Generic add — used by product cards AND the product page (via window.UpCart)
+    const addItem = (info, qty = 1) => {
       const existing = cart.find((i) => i.id === info.id);
-      if (existing) existing.qty += 1;
-      else cart.push({ ...info, qty: 1 });
+      if (existing) existing.qty += qty;
+      else cart.push({ ...info, qty });
       save();
       render();
       openCart();
     };
+    const addToCart = (card, opts = {}) => addItem(itemInfo(card, opts), opts.qty || 1);
+
+    // Expose a tiny API so the product page can add fully-built items (with variant/sub)
+    window.UpCart = { add: addItem };
 
     const setQty = (id, delta) => {
       const i = cart.find((it) => it.id === id);
@@ -390,7 +400,10 @@
       if (add) {
         e.preventDefault();
         const card = add.closest('.product-card');
-        if (card) addToCart(card);
+        if (card) {
+          const subToggle = card.querySelector('[data-card-sub]');
+          addToCart(card, { sub: !!(subToggle && subToggle.checked) });
+        }
         return;
       }
       const inc = e.target.closest('[data-cart-inc]');
@@ -434,6 +447,62 @@
     });
 
     render();
+  })();
+
+  /* ---------- Product page: variant + qty + subscribe + add to cart ---------- */
+  (function initProductBuy() {
+    const buy = $('.showcase__buy');
+    if (!buy) return;                       // product page only
+
+    const SUB_RATE  = 0.10;
+    const title     = ($('.showcase__title')?.textContent || 'Product').trim();
+    const priceNow  = $('.showcase__price-now');
+    const basePrice = parseFloat((priceNow?.textContent || '').replace(/[^0-9.]/g, '')) || 0;
+    const subPrice  = Math.round(basePrice * (1 - SUB_RATE));
+    const mainImg   = $('#gallery-main');
+
+    let qty = 1;
+    let sub = false;
+    let variant = ($('.variant.is-active')?.textContent || '').trim();
+
+    // Flavour / variant
+    $$('.variant').forEach((v) => v.addEventListener('click', () => {
+      $$('.variant').forEach((x) => x.classList.remove('is-active'));
+      v.classList.add('is-active');
+      variant = v.textContent.trim();
+    }));
+
+    // Quantity stepper
+    const qtyVal = $('#qty-val');
+    $$('[data-qty]').forEach((b) => b.addEventListener('click', () => {
+      qty = Math.max(1, qty + (parseInt(b.dataset.qty, 10) || 0));
+      if (qtyVal) qtyVal.textContent = qty;
+    }));
+
+    // Subscribe & save toggle
+    const subEl     = $('[data-subscribe]');
+    const subToggle = $('[data-subscribe-toggle]');
+    const subSave   = $('[data-subscribe-price]');
+    if (subSave) subSave.textContent = '−$' + (basePrice - subPrice);
+    const syncSub = () => {
+      sub = !!(subToggle && subToggle.checked);
+      subEl && subEl.classList.toggle('is-active', sub);
+      if (priceNow) priceNow.textContent = '$' + (sub ? subPrice : basePrice);
+    };
+    subToggle && subToggle.addEventListener('change', syncSub);
+
+    // Add to cart
+    const addBtn = $('[data-product-add]');
+    addBtn && addBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const price = sub ? subPrice : basePrice;
+      window.UpCart && window.UpCart.add({
+        id: title + '|' + variant + '|' + price + (sub ? '|sub' : ''),
+        title, variant, price, sub,
+        thumb: mainImg ? mainImg.getAttribute('src') : '',
+        bg: '',
+      }, qty);
+    });
   })();
 
   /* ---------- Wishlist / favorites ---------- */

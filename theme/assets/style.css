@@ -5141,6 +5141,146 @@ body.is-cart-open {
   color: var(--color-text);
 }
 
+/* "Monthly subscription" badge on a cart line */
+.cart-item__sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin: 1px 0 1px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-purple-soft);
+  color: var(--color-purple-deep);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.cart-item__sub::before {
+  content: "↻";
+  font-size: 0.95em;
+  line-height: 1;
+}
+.cart-item__per { color: var(--color-text-muted); font-weight: 500; }
+.cart-item--sub .cart-item__thumb { box-shadow: 0 0 0 2px var(--color-purple-soft); }
+
+/* ============================================================
+   Subscribe & save toggle (product page) + compact gift toggle
+   ============================================================ */
+.subscribe {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+.subscribe:hover { border-color: var(--color-purple-soft); }
+.subscribe.is-active {
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg-card));
+  border-color: var(--color-purple);
+  box-shadow: 0 10px 26px -14px rgba(116, 84, 142, 0.5);
+}
+.subscribe input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
+.subscribe__visual {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex: none;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  transition: background var(--dur-fast) var(--ease);
+}
+.subscribe__visual-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.subscribe.is-active .subscribe__visual { background: var(--color-purple); }
+.subscribe.is-active .subscribe__visual-knob { transform: translateX(20px); }
+.subscribe__copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.subscribe__copy strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+.subscribe__badge {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-purple-soft);
+  color: var(--color-purple-deep);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+.subscribe__copy > span:last-child {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+.subscribe__price { text-align: right; flex: none; }
+.subscribe__price strong {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--color-purple-deep);
+}
+.subscribe__price span { font-size: var(--fs-xs); color: var(--color-text-muted); }
+
+/* compact "send monthly" toggle on gift-card cards */
+.gift-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+.gift-sub__toggle { position: absolute; opacity: 0; pointer-events: none; }
+.gift-sub__switch {
+  position: relative;
+  width: 34px;
+  height: 19px;
+  flex: none;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  transition: background var(--dur-fast) var(--ease);
+}
+.gift-sub__switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.gift-sub__toggle:checked + .gift-sub__switch { background: var(--color-purple); }
+.gift-sub__toggle:checked + .gift-sub__switch::after { transform: translateX(15px); }
+.gift-sub__toggle:checked ~ .gift-sub__label { color: var(--color-purple-deep); font-weight: 600; }
+
 /* Footer: promo field + totals + checkout */
 .cart-drawer__foot {
   border-top: 1px solid var(--color-border);
