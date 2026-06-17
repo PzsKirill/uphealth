@@ -772,8 +772,13 @@ body {
 .gift-stack__card--back  { transform: rotate(-9deg) translate(-15%, 9%); }
 .gift-stack__card--front { transform: rotate(7deg) translate(13%, -6%); }
 
-.mega-card--gift:hover .gift-stack__card--back  { transform: rotate(-13deg) translate(-26%, 13%); }
-.mega-card--gift:hover .gift-stack__card--front { transform: rotate(11deg) translate(23%, -11%); }
+/* keep the artwork filling the cards on hover — the generic ".mega-card:hover img"
+   zoom would otherwise shrink it back to scale 1.05 and expose the transparent margins */
+.mega-card--gift:hover .gift-stack__card--front img { transform: scale(1.48); }
+.mega-card--gift:hover .gift-stack__card--back img  { transform: scale(1.42); }
+/* gentle fan so the cards react on hover without opening up empty space */
+.mega-card--gift:hover .gift-stack__card--back  { transform: rotate(-11deg) translate(-18%, 11%); }
+.mega-card--gift:hover .gift-stack__card--front { transform: rotate(9deg) translate(16%, -8%); }
 
 /* ---- States ---- */
 .mega-menu__inner--states {
