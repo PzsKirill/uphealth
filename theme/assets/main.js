@@ -449,46 +449,50 @@
     render();
   })();
 
-  /* ---------- Product page: variant + qty + subscription + add to cart ---------- */
+  /* ---------- Product page: variant + bottle packs + subscription + add to cart ---------- */
   (function initProductBuy() {
     const buy = $('.showcase__buy');
     if (!buy) return;                       // product page only
 
-    const SUB_RATE  = 0.10;
+    const SUB_RATE  = 0.10;                 // extra discount layered on the chosen pack
     const title     = ($('.showcase__title')?.textContent || 'Product').trim();
     const priceNow  = $('.showcase__price-now');
     const priceOld  = $('.showcase__price-old');
-    const unit      = parseFloat((priceNow?.textContent || '').replace(/[^0-9.]/g, '')) || 0;
     const unitOld   = parseFloat((priceOld?.textContent || '').replace(/[^0-9.]/g, '')) || 0;
-    const subUnit   = Math.round(unit * (1 - SUB_RATE));   // per-bottle subscription price
     const mainImg   = $('#gallery-main');
     const money     = (n) => '$' + (Math.round(n * 100) / 100);
 
-    let qty = 1;        // one-time quantity (stepper)
-    let subQty = 1;     // bottles per monthly delivery
-    let sub = false;
+    let sub     = false;
     let variant = ($('.variant.is-active')?.textContent || '').trim();
 
-    const subEl     = $('[data-subscribe]');
-    const subToggle = $('[data-subscribe-toggle]');
-    const subSave   = $('[data-subscribe-price]');
-    const plansWrap = $('[data-subscribe-plans]');
-    const qtyWrap   = $('[data-qty-wrap]');
-    const qtyVal    = $('#qty-val');
-    const addBtn    = $('[data-product-add]');
+    const subEl      = $('[data-subscribe]');
+    const subToggle  = $('[data-subscribe-toggle]');
+    const subSave    = $('[data-subscribe-price]');
+    const addBtn     = $('[data-product-add]');
+    const packEls    = $$('[data-packs] .pack');
+    const packInputs = $$('[data-packs] input[name="pack"]');
 
-    // Recompute the whole buy block from current state (qty, subQty, sub)
+    // The selected pack carries qty + per-bottle price via data-attributes.
+    const current = () => packInputs.find((r) => r.checked) || packInputs[0];
+    const packData = () => {
+      const input = current();
+      return {
+        qty:  parseInt(input?.dataset.packQty, 10) || 1,
+        each: parseFloat(input?.dataset.packEach) || 0,
+      };
+    };
+
+    // Recompute the buy block from current state (selected pack + subscription)
     const refresh = () => {
-      const eq      = sub ? subQty : qty;
-      const perUnit = sub ? subUnit : unit;
-      if (priceNow) priceNow.textContent = money(perUnit * eq);     // price tracks quantity
-      if (priceOld) priceOld.textContent = money(unitOld * eq);
-      if (subSave)  subSave.textContent  = '−' + money((unit - subUnit) * subQty);
-      if (qtyWrap)  qtyWrap.hidden   = sub;     // one-time stepper hides while subscribing
-      if (plansWrap) plansWrap.hidden = !sub;   // bottle plans show only while subscribing
+      const { qty, each } = packData();
+      const packTotal = each * qty;
+      const perUnit   = sub ? each * (1 - SUB_RATE) : each;
+      if (priceNow) priceNow.textContent = money(perUnit * qty);          // what you'll pay
+      if (priceOld) priceOld.textContent = money(unitOld * qty);
+      if (subSave)  subSave.textContent  = '−' + money(packTotal * SUB_RATE);
       if (subEl)    subEl.classList.toggle('is-active', sub);
-      if (qtyVal)   qtyVal.textContent = qty;
-      if (addBtn)   addBtn.textContent = sub ? 'Start subscription' : 'Add to cart';
+      if (addBtn)   addBtn.textContent   = sub ? 'Start subscription' : 'Add to cart';
+      packEls.forEach((p) => p.classList.toggle('is-active', p.querySelector('input').checked));
     };
 
     // Flavour / variant
@@ -498,35 +502,23 @@
       variant = v.textContent.trim();
     }));
 
-    // One-time quantity stepper — drives the displayed price
-    $$('[data-qty]').forEach((b) => b.addEventListener('click', () => {
-      qty = Math.max(1, qty + (parseInt(b.dataset.qty, 10) || 0));
-      refresh();
-    }));
+    // Bottle pack (1 bottle / 3 bottles) — sets the quantity and base price
+    packInputs.forEach((r) => r.addEventListener('change', refresh));
 
-    // Subscribe monthly toggle
+    // Subscribe & save another 10%
     subToggle && subToggle.addEventListener('change', () => { sub = subToggle.checked; refresh(); });
-
-    // Subscription plan — bottles per delivery (1 / 3)
-    $$('[data-sub-qty]').forEach((p) => p.addEventListener('click', (e) => {
-      e.preventDefault();
-      $$('[data-sub-qty]').forEach((x) => x.classList.remove('is-active'));
-      p.classList.add('is-active');
-      subQty = parseInt(p.dataset.subQty, 10) || 1;
-      refresh();
-    }));
 
     // Add to cart (or start subscription)
     addBtn && addBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const perUnit = sub ? subUnit : unit;
-      const useQty  = sub ? subQty : qty;
+      const { qty, each } = packData();
+      const perUnit = Math.round((sub ? each * (1 - SUB_RATE) : each) * 100) / 100;
       window.UpCart && window.UpCart.add({
-        id: title + '|' + variant + '|' + perUnit + (sub ? '|sub' : ''),
+        id: title + '|' + variant + '|' + qty + '|' + perUnit + (sub ? '|sub' : ''),
         title, variant, price: perUnit, sub,
         thumb: mainImg ? mainImg.getAttribute('src') : '',
         bg: '',
-      }, useQty);
+      }, qty);
     });
 
     refresh();

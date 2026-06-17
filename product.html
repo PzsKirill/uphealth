@@ -72,37 +72,56 @@
               </div>
             </div>
 
+            <div class="showcase__field">
+              <span class="showcase__field-label">Build your routine</span>
+              <div class="packs" data-packs>
+                <label class="pack is-active">
+                  <input type="radio" name="pack" data-pack-qty="1" data-pack-each="32" checked />
+                  <span class="pack__radio" aria-hidden="true"></span>
+                  <span class="pack__body">
+                    <span class="pack__name">1 bottle · <em>starter</em></span>
+                    <span class="pack__note">Best for trying it out · 30-day supply</span>
+                  </span>
+                  <span class="pack__price">
+                    <span class="pack__now">$32</span>
+                    <span class="pack__old">$39</span>
+                  </span>
+                </label>
+                <label class="pack">
+                  <span class="pack__badge">Best value</span>
+                  <input type="radio" name="pack" data-pack-qty="3" data-pack-each="27" />
+                  <span class="pack__radio" aria-hidden="true"></span>
+                  <span class="pack__body">
+                    <span class="pack__name">3 bottles · <em>the 90-day protocol</em></span>
+                    <span class="pack__note">$27 / each · the full 90-day regimen</span>
+                  </span>
+                  <span class="pack__price">
+                    <span class="pack__now">$81</span>
+                    <span class="pack__old">$117</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
             <div class="subscribe" data-subscribe>
               <label class="subscribe__head">
                 <input type="checkbox" data-subscribe-toggle />
                 <span class="subscribe__visual" aria-hidden="true"><span class="subscribe__visual-knob"></span></span>
                 <span class="subscribe__copy">
-                  <strong>Subscribe monthly <span class="subscribe__badge">Save 10%</span></strong>
-                  <span>Delivered every month · free shipping · pause or cancel anytime</span>
+                  <strong>Subscribe &amp; save another 10% <span class="subscribe__badge">Free shipping</span></strong>
+                  <span>Delivered every 30 days · skip, pause or cancel anytime</span>
                 </span>
                 <span class="subscribe__price">
-                  <strong data-subscribe-price>−$3</strong>
-                  <span>/ month</span>
+                  <strong data-subscribe-price>−$3.20</strong>
+                  <span>per delivery</span>
                 </span>
               </label>
-              <div class="subscribe__plans" data-subscribe-plans hidden>
-                <span class="subscribe__plans-label">How many bottles each month?</span>
-                <div class="subscribe__plan-opts">
-                  <button type="button" class="subscribe__plan is-active" data-sub-qty="1">1 bottle</button>
-                  <button type="button" class="subscribe__plan" data-sub-qty="3">3 bottles <span class="subscribe__plan-tag">Best value</span></button>
-                </div>
-              </div>
             </div>
 
             <div class="showcase__buy">
               <div class="showcase__price">
                 <span class="showcase__price-now">$32</span>
                 <span class="showcase__price-old">$39</span>
-              </div>
-              <div class="showcase__qty" data-qty-wrap>
-                <button class="showcase__qty-btn" data-qty="-1" aria-label="Decrease">−</button>
-                <span class="showcase__qty-val" id="qty-val">1</span>
-                <button class="showcase__qty-btn" data-qty="1" aria-label="Increase">+</button>
               </div>
               <a href="#" class="btn btn--primary btn--lg btn--full" data-product-add>Add to cart</a>
             </div>

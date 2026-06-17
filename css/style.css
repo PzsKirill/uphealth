@@ -2118,7 +2118,7 @@ body {
 
 .showcase__buy {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 1fr;
   gap: var(--space-md);
   align-items: center;
   padding-top: var(--space-md);
@@ -5221,58 +5221,72 @@ body.is-cart-open {
 }
 .subscribe__price span { font-size: var(--fs-xs); color: var(--color-text-muted); }
 
-/* bottle-count plans, revealed once a subscription is switched on */
-.subscribe__plans {
+/* bottle packs — choose 1 bottle (starter) or 3 bottles (90-day protocol) */
+.packs {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding: 0 var(--space-lg) var(--space-md);
-  border-top: 1px dashed var(--color-border);
-  margin-top: -2px;
-  padding-top: var(--space-md);
 }
-.subscribe__plans[hidden] { display: none; }
-.subscribe__plans-label {
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  color: var(--color-text-muted);
-}
-.subscribe__plan-opts { display: flex; gap: var(--space-sm); }
-.subscribe__plan {
-  flex: 1;
-  display: inline-flex;
+.pack {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px var(--space-md);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--color-text);
-  background: var(--color-bg);
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-card);
   border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: border-color var(--dur-fast) var(--ease),
               background var(--dur-fast) var(--ease),
-              color var(--dur-fast) var(--ease);
+              box-shadow var(--dur-base) var(--ease);
 }
-.subscribe__plan:hover { border-color: var(--color-purple-soft); }
-.subscribe__plan.is-active {
+.pack:hover { border-color: var(--color-purple-soft); }
+.pack.is-active {
   border-color: var(--color-purple);
-  background: var(--color-purple-soft);
-  color: var(--color-purple-deep);
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg-card));
+  box-shadow: 0 10px 26px -16px rgba(116, 84, 142, 0.5);
 }
-.subscribe__plan-tag {
+.pack input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.pack__radio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.pack.is-active .pack__radio { border-color: var(--color-purple); }
+.pack.is-active .pack__radio::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--color-purple);
+  border-radius: 50%;
+}
+.pack__body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.pack__name { font-size: var(--fs-sm); font-weight: 600; color: var(--color-text); }
+.pack__name em { font-style: normal; color: var(--color-purple-deep); }
+.pack__note { font-size: var(--fs-xs); color: var(--color-text-muted); line-height: 1.4; }
+.pack__price { display: flex; flex-direction: column; text-align: right; flex: none; }
+.pack__now { font-size: var(--fs-md); font-weight: 700; color: var(--color-text); }
+.pack__old { font-size: var(--fs-xs); color: var(--color-text-muted); text-decoration: line-through; }
+.pack__badge {
+  position: absolute;
+  top: -9px;
+  right: var(--space-lg);
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 2px 6px;
+  padding: 3px 9px;
   border-radius: var(--radius-pill);
   background: var(--color-purple);
   color: #fff;
+  box-shadow: 0 4px 10px -4px rgba(116, 84, 142, 0.6);
 }
-.subscribe__plan.is-active .subscribe__plan-tag { background: var(--color-purple-deep); }
 
 /* compact "send monthly" toggle on gift-card cards */
 .gift-sub {
