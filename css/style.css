@@ -2149,6 +2149,7 @@ body {
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
+.showcase__qty[hidden] { display: none; }
 
 .showcase__qty-btn {
   width: 40px;
@@ -5141,19 +5142,21 @@ body.is-cart-open {
    Subscribe & save toggle (product page) + compact gift toggle
    ============================================================ */
 .subscribe {
+  margin-bottom: var(--space-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              box-shadow var(--dur-base) var(--ease);
+}
+.subscribe__head {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
   padding: var(--space-md) var(--space-lg);
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease),
-              background var(--dur-fast) var(--ease),
-              box-shadow var(--dur-base) var(--ease);
 }
 .subscribe:hover { border-color: var(--color-purple-soft); }
 .subscribe.is-active {
@@ -5217,6 +5220,59 @@ body.is-cart-open {
   color: var(--color-purple-deep);
 }
 .subscribe__price span { font-size: var(--fs-xs); color: var(--color-text-muted); }
+
+/* bottle-count plans, revealed once a subscription is switched on */
+.subscribe__plans {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: 0 var(--space-lg) var(--space-md);
+  border-top: 1px dashed var(--color-border);
+  margin-top: -2px;
+  padding-top: var(--space-md);
+}
+.subscribe__plans[hidden] { display: none; }
+.subscribe__plans-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.subscribe__plan-opts { display: flex; gap: var(--space-sm); }
+.subscribe__plan {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px var(--space-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease);
+}
+.subscribe__plan:hover { border-color: var(--color-purple-soft); }
+.subscribe__plan.is-active {
+  border-color: var(--color-purple);
+  background: var(--color-purple-soft);
+  color: var(--color-purple-deep);
+}
+.subscribe__plan-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-purple);
+  color: #fff;
+}
+.subscribe__plan.is-active .subscribe__plan-tag { background: var(--color-purple-deep); }
 
 /* compact "send monthly" toggle on gift-card cards */
 .gift-sub {

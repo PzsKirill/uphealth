@@ -72,25 +72,34 @@
               </div>
             </div>
 
-            <label class="subscribe" data-subscribe>
-              <input type="checkbox" data-subscribe-toggle />
-              <span class="subscribe__visual" aria-hidden="true"><span class="subscribe__visual-knob"></span></span>
-              <span class="subscribe__copy">
-                <strong>Subscribe monthly <span class="subscribe__badge">Save 10%</span></strong>
-                <span>Delivered every month · free shipping · pause or cancel anytime</span>
-              </span>
-              <span class="subscribe__price">
-                <strong data-subscribe-price>−$3</strong>
-                <span>/ month</span>
-              </span>
-            </label>
+            <div class="subscribe" data-subscribe>
+              <label class="subscribe__head">
+                <input type="checkbox" data-subscribe-toggle />
+                <span class="subscribe__visual" aria-hidden="true"><span class="subscribe__visual-knob"></span></span>
+                <span class="subscribe__copy">
+                  <strong>Subscribe monthly <span class="subscribe__badge">Save 10%</span></strong>
+                  <span>Delivered every month · free shipping · pause or cancel anytime</span>
+                </span>
+                <span class="subscribe__price">
+                  <strong data-subscribe-price>−$3</strong>
+                  <span>/ month</span>
+                </span>
+              </label>
+              <div class="subscribe__plans" data-subscribe-plans hidden>
+                <span class="subscribe__plans-label">How many bottles each month?</span>
+                <div class="subscribe__plan-opts">
+                  <button type="button" class="subscribe__plan is-active" data-sub-qty="1">1 bottle</button>
+                  <button type="button" class="subscribe__plan" data-sub-qty="3">3 bottles <span class="subscribe__plan-tag">Best value</span></button>
+                </div>
+              </div>
+            </div>
 
             <div class="showcase__buy">
               <div class="showcase__price">
                 <span class="showcase__price-now">$32</span>
                 <span class="showcase__price-old">$39</span>
               </div>
-              <div class="showcase__qty">
+              <div class="showcase__qty" data-qty-wrap>
                 <button class="showcase__qty-btn" data-qty="-1" aria-label="Decrease">−</button>
                 <span class="showcase__qty-val" id="qty-val">1</span>
                 <button class="showcase__qty-btn" data-qty="1" aria-label="Increase">+</button>
