@@ -15,10 +15,11 @@
      (#74548e default / #fefcf9 when the pill or tab is active). */
   const STATE_ICONS = {
     energy:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13h6l-1 9 8-12h-6l1-8z"/></svg>',
+    immune:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>',
+    strength: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/></svg>',
+    focus:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg>',
+    mood:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z"/><path d="M4 20c2-5 5-8 9-10.5"/></svg>',
     sleep:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
-    relax:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z"/><path d="M4 20c2-5 5-8 9-10.5"/></svg>',
-    beauty:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.6 4.2 1.8 5.4 6 6-4.2.6-5.4 1.8-6 6-.6-4.2-1.8-5.4-6-6 4.2-.6 5.4-1.8 6-6z"/></svg>',
-    strength: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>',
     all:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>',
   };
 
@@ -94,7 +95,7 @@
 
             <li class="header__nav-item header__nav-item--has-menu" data-menu="states">
               <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-states">
-                States <span class="header__nav-caret">▾</span>
+                Outcomes <span class="header__nav-caret">▾</span>
               </button>
               <div class="mega-menu mega-menu--states" id="menu-states" role="region" aria-label="Wellness states">
                 <div class="mega-menu__inner mega-menu__inner--states">
@@ -102,19 +103,22 @@
                     <span class="mega-states__eyebrow">Pick an outcome</span>
                     <div class="state-pills">
                       <a class="state-pill" data-state="energy" href="shop.html?state=energy">
-                        <span class="state-pill__icon">${STATE_ICONS.energy}</span>Energy
+                        <span class="state-pill__icon">${STATE_ICONS.energy}</span>Energy &amp; Stamina
                       </a>
-                      <a class="state-pill" data-state="sleep" href="shop.html?state=sleep">
-                        <span class="state-pill__icon">${STATE_ICONS.sleep}</span>Sleep
-                      </a>
-                      <a class="state-pill" data-state="relax" href="shop.html?state=relax">
-                        <span class="state-pill__icon">${STATE_ICONS.relax}</span>Relax
-                      </a>
-                      <a class="state-pill" data-state="beauty" href="shop.html?state=beauty">
-                        <span class="state-pill__icon">${STATE_ICONS.beauty}</span>Beauty
+                      <a class="state-pill" data-state="immune" href="shop.html?state=immune">
+                        <span class="state-pill__icon">${STATE_ICONS.immune}</span>Immune Support
                       </a>
                       <a class="state-pill" data-state="strength" href="shop.html?state=strength">
-                        <span class="state-pill__icon">${STATE_ICONS.strength}</span>Strength
+                        <span class="state-pill__icon">${STATE_ICONS.strength}</span>Strength &amp; Muscle Recovery
+                      </a>
+                      <a class="state-pill" data-state="focus" href="shop.html?state=focus">
+                        <span class="state-pill__icon">${STATE_ICONS.focus}</span>Memory, Focus &amp; Cognitive Support
+                      </a>
+                      <a class="state-pill" data-state="mood" href="shop.html?state=mood">
+                        <span class="state-pill__icon">${STATE_ICONS.mood}</span>Mood &amp; Relaxation
+                      </a>
+                      <a class="state-pill" data-state="sleep" href="shop.html?state=sleep">
+                        <span class="state-pill__icon">${STATE_ICONS.sleep}</span>Sleep &amp; Rest
                       </a>
                     </div>
                     <p class="mega-states__hint">Not sure where to start? <a href="index.html#wellness-test">Take the wellness test →</a></p>
@@ -253,13 +257,14 @@
             </ul>
           </li>
           <li class="mobile-nav__group">
-            <button class="mobile-nav__group-toggle" aria-expanded="false">States <span>+</span></button>
+            <button class="mobile-nav__group-toggle" aria-expanded="false">Outcomes <span>+</span></button>
             <ul class="mobile-nav__sub">
-              <li><a href="shop.html?state=energy">Energy</a></li>
-              <li><a href="shop.html?state=sleep">Sleep</a></li>
-              <li><a href="shop.html?state=relax">Relax</a></li>
-              <li><a href="shop.html?state=beauty">Beauty</a></li>
-              <li><a href="shop.html?state=strength">Strength</a></li>
+              <li><a href="shop.html?state=energy">Energy &amp; Stamina</a></li>
+              <li><a href="shop.html?state=immune">Immune Support</a></li>
+              <li><a href="shop.html?state=strength">Strength &amp; Muscle Recovery</a></li>
+              <li><a href="shop.html?state=focus">Memory, Focus &amp; Cognitive Support</a></li>
+              <li><a href="shop.html?state=mood">Mood &amp; Relaxation</a></li>
+              <li><a href="shop.html?state=sleep">Sleep &amp; Rest</a></li>
             </ul>
           </li>
           <li class="mobile-nav__group">
@@ -327,13 +332,14 @@
         </div>
 
         <div class="footer__col">
-          <h4 class="footer__title">States</h4>
+          <h4 class="footer__title">Outcomes</h4>
           <ul class="footer__list">
-            <li><a href="shop.html?state=energy">Energy</a></li>
-            <li><a href="shop.html?state=sleep">Sleep</a></li>
-            <li><a href="shop.html?state=relax">Relax</a></li>
-            <li><a href="shop.html?state=beauty">Beauty</a></li>
-            <li><a href="shop.html?state=strength">Strength</a></li>
+            <li><a href="shop.html?state=energy">Energy &amp; Stamina</a></li>
+            <li><a href="shop.html?state=immune">Immune Support</a></li>
+            <li><a href="shop.html?state=strength">Strength &amp; Muscle Recovery</a></li>
+            <li><a href="shop.html?state=focus">Memory, Focus &amp; Cognitive Support</a></li>
+            <li><a href="shop.html?state=mood">Mood &amp; Relaxation</a></li>
+            <li><a href="shop.html?state=sleep">Sleep &amp; Rest</a></li>
           </ul>
         </div>
 

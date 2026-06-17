@@ -158,11 +158,12 @@
   }
 
   /* ---------- Pre-apply a filter from the URL ----------
-     Lets links like shop.html?cat=gift (e.g. the mega-menu "Gift cards")
-     land on the catalog with that filter already selected. Works for any
-     filter value: sticks, drinks, gummies, protein, bundles, gift, sale… */
-  const urlCat = new URLSearchParams(location.search).get('cat');
-  const preCb = urlCat && $(`.filters__checkbox[data-filter-value="${urlCat}"]`);
+     Lets links land on the catalog with a filter already selected:
+       ?cat=gift   (mega-menu Gift cards, format/tag links)
+       ?state=energy (mega-menu outcome pills, footer, hero CTAs) */
+  const params  = new URLSearchParams(location.search);
+  const preVal  = params.get('state') || params.get('cat');
+  const preCb   = preVal && $(`.filters__checkbox[data-filter-value="${preVal}"]`);
   if (preCb) {
     preCb.checked = true;
     applyFilters();          // reads the now-checked control + renders

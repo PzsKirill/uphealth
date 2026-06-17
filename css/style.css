@@ -42,6 +42,9 @@
   --grad-relax: linear-gradient(135deg, #bcd0b0 0%, #6f9a78 100%);
   --grad-beauty: linear-gradient(135deg, #f3b8d2 0%, #c0407e 100%);
   --grad-strength: linear-gradient(135deg, #b0a0e0 0%, #5e4275 100%);
+  --grad-immune: linear-gradient(135deg, #8fd6bd 0%, #2c9a78 100%);
+  --grad-focus: linear-gradient(135deg, #a9bef2 0%, #4a5fb0 100%);
+  --grad-mood: linear-gradient(135deg, #f3b8d2 0%, #c0407e 100%);
 
   /* product / media gradients (placeholders) */
   --grad-gummies: linear-gradient(135deg, #f3c1cf 0%, #d97aa0 60%, #b04a78 100%);
@@ -839,25 +842,12 @@ body {
   color: #fff;
 }
 
-.state-pill[data-state="energy"]:hover {
-  background: var(--grad-energy);
-}
-
-.state-pill[data-state="sleep"]:hover {
-  background: var(--grad-sleep);
-}
-
-.state-pill[data-state="relax"]:hover {
-  background: var(--grad-relax);
-}
-
-.state-pill[data-state="beauty"]:hover {
-  background: var(--grad-beauty);
-}
-
-.state-pill[data-state="strength"]:hover {
-  background: var(--grad-strength);
-}
+.state-pill[data-state="energy"]:hover   { background: var(--grad-energy); }
+.state-pill[data-state="immune"]:hover    { background: var(--grad-immune); }
+.state-pill[data-state="strength"]:hover  { background: var(--grad-strength); }
+.state-pill[data-state="focus"]:hover     { background: var(--grad-focus); }
+.state-pill[data-state="mood"]:hover       { background: var(--grad-mood); }
+.state-pill[data-state="sleep"]:hover      { background: var(--grad-sleep); }
 
 .mega-states__hint {
   margin-top: var(--space-lg);
@@ -4858,29 +4848,13 @@ body.is-cart-open {
   box-shadow: 0 12px 24px rgba(42, 38, 32, 0.14);
 }
 
-.state-tab[data-filter="all"]:hover {
-  background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%);
-}
-
-.state-tab[data-filter="energy"]:hover {
-  background: var(--grad-energy);
-}
-
-.state-tab[data-filter="sleep"]:hover {
-  background: var(--grad-sleep);
-}
-
-.state-tab[data-filter="relax"]:hover {
-  background: var(--grad-relax);
-}
-
-.state-tab[data-filter="beauty"]:hover {
-  background: var(--grad-beauty);
-}
-
-.state-tab[data-filter="strength"]:hover {
-  background: var(--grad-strength);
-}
+.state-tab[data-filter="all"]:hover      { background: linear-gradient(135deg, #8f6cb0 0%, #5e4275 100%); }
+.state-tab[data-filter="energy"]:hover   { background: var(--grad-energy); }
+.state-tab[data-filter="immune"]:hover   { background: var(--grad-immune); }
+.state-tab[data-filter="strength"]:hover { background: var(--grad-strength); }
+.state-tab[data-filter="focus"]:hover    { background: var(--grad-focus); }
+.state-tab[data-filter="mood"]:hover      { background: var(--grad-mood); }
+.state-tab[data-filter="sleep"]:hover     { background: var(--grad-sleep); }
 
 /* state-tab icon — #74548e by default, white on hover, #fefcf9 on the active tab */
 .state-tab__icon {
