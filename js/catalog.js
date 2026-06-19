@@ -158,16 +158,20 @@
   }
 
   /* ---------- Pre-apply a filter from the URL ----------
-     Lets links land on the catalog with a filter already selected:
-       ?cat=gift   (mega-menu Gift cards, format/tag links)
-       ?state=energy (mega-menu outcome pills, footer, hero CTAs) */
-  const params  = new URLSearchParams(location.search);
-  const preVal  = params.get('state') || params.get('cat');
-  const preCb   = preVal && $(`.filters__checkbox[data-filter-value="${preVal}"]`);
-  if (preCb) {
-    preCb.checked = true;
-    applyFilters();          // reads the now-checked control + renders
-  } else {
-    render();
-  }
+     The catalog now filters straight from the URL (the outcome pills are
+     plain links), so this works with or without the legacy checkbox UI:
+       ?state=energy (outcome pills, mega-menu, footer, hero CTAs)
+       ?cat=gift     (category / gift-card links → product format) */
+  const params   = new URLSearchParams(location.search);
+  const preState = params.get('state');
+  const preCat   = params.get('cat');
+  if (preState) applied.state.add(preState);
+  if (preCat)   applied.format.add(preCat);
+
+  // Reflect the active outcome on the catalog pill bar
+  const activeKey = preState || 'all';
+  $$('.catalog__pills .state-pill').forEach((p) => p.classList.toggle('is-active', p.dataset.state === activeKey));
+
+  page = 1;
+  render();
 })();

@@ -296,7 +296,10 @@
       try { localStorage.setItem(CODE_KEY, code); } catch (e) {}
     };
 
-    const money = (n) => '$' + (Math.round(n * 100) / 100).toLocaleString('en-US');
+    const money = (n) => {
+      const r = Math.round(n * 100) / 100;
+      return '$' + r.toLocaleString('en-US', { minimumFractionDigits: Number.isInteger(r) ? 0 : 2, maximumFractionDigits: 2 });
+    };
     const count = () => cart.reduce((n, i) => n + i.qty, 0);
     const subtotal = () => cart.reduce((s, i) => s + i.price * i.qty, 0);
 
@@ -460,7 +463,7 @@
     const priceOld  = $('.showcase__price-old');
     const unitOld   = parseFloat((priceOld?.textContent || '').replace(/[^0-9.]/g, '')) || 0;
     const mainImg   = $('#gallery-main');
-    const money     = (n) => '$' + (Math.round(n * 100) / 100);
+    const money     = (n) => { const r = Math.round(n * 100) / 100; return '$' + (Number.isInteger(r) ? r : r.toFixed(2)); };
 
     let sub     = false;
     let variant = ($('.variant.is-active')?.textContent || '').trim();

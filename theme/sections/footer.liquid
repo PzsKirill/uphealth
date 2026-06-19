@@ -13,8 +13,8 @@
 
     <div class="footer__top">
       <div class="footer__brand">
-        <a href="{{ root }}" class="footer__logo">
-          <span class="header__logo-mark">up</span><span class="header__logo-word">health</span>
+        <a href="{{ root }}" class="footer__logo" aria-label="{{ shop.name }} home">
+          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" class="brand-logo brand-logo--light" />
         </a>
         <p class="footer__tagline">{{ section.settings.tagline }}</p>
         <div class="footer__socials">
@@ -75,6 +75,15 @@
       </div>
     </div>
 
+    <div class="footer__compliance">
+      {%- if section.settings.badge_1 != blank -%}<span class="footer__badge">{{ section.settings.badge_1 }}</span>{%- endif -%}
+      {%- if section.settings.badge_2 != blank -%}<span class="footer__badge">{{ section.settings.badge_2 }}</span>{%- endif -%}
+      {%- if section.settings.badge_3 != blank -%}<span class="footer__badge">{{ section.settings.badge_3 }}</span>{%- endif -%}
+    </div>
+    {%- if section.settings.fda_disclaimer != blank -%}
+      <p class="footer__disclaimer">{{ section.settings.fda_disclaimer }}</p>
+    {%- endif -%}
+
     <div class="footer__bottom">
       <p class="footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
       <ul class="footer__legal">
@@ -131,6 +140,12 @@
   "name": "Footer",
   "settings": [
     { "type": "text", "id": "tagline", "label": "Tagline", "default": "Functional wellness with formulas you can trust." },
+    { "type": "header", "content": "Compliance" },
+    { "type": "paragraph", "content": "Dietary supplements are not approved by the FDA — never use \"FDA approved\". Use truthful manufacturing claims only." },
+    { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Made in the USA" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "FDA-registered facility" },
+    { "type": "text", "id": "badge_3", "label": "Badge 3", "default": "cGMP certified" },
+    { "type": "textarea", "id": "fda_disclaimer", "label": "FDA disclaimer (DSHEA)", "default": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease." },
     { "type": "header", "content": "Social links" },
     { "type": "url", "id": "social_youtube", "label": "YouTube" },
     { "type": "url", "id": "social_telegram", "label": "Telegram" },

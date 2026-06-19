@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop — UpHealth</title>
-  <meta name="description" content="Browse the full UpHealth catalog. Filter by format, state and price to find the right formula." />
+  <meta name="description"
+    content="Browse the full UpHealth catalog. Filter by format, state and price to find the right formula." />
 
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
+
 <body data-page="shop">
 
   <div data-partial="header"></div>
@@ -29,10 +32,11 @@
             </ol>
           </nav>
           <h1 class="page-hero__title">All <em>products</em></h1>
-          <p class="page-hero__lead">The full catalog — filter by format, state or price to narrow down what fits your routine.</p>
+          <p class="page-hero__lead">The full catalog — filter by format, state or price to narrow down what fits your
+            routine.</p>
         </div>
         <div class="page-hero__meta">
-          <div><strong>16</strong> products in stock</div>
+          <div><strong>23</strong> products in stock</div>
           <div><strong>6</strong> outcomes covered</div>
         </div>
       </div>
@@ -44,12 +48,52 @@
     <section class="catalog">
       <div class="container">
 
+        <nav class="catalog__pills state-pills" aria-label="Shop by goal">
+          <a class="state-pill" data-state="all" href="shop.html"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="6.5" cy="6.5" r="2.5" />
+                <circle cx="17.5" cy="6.5" r="2.5" />
+                <circle cx="6.5" cy="17.5" r="2.5" />
+                <circle cx="17.5" cy="17.5" r="2.5" />
+              </svg></span>All</a>
+          <a class="state-pill" data-state="energy" href="shop.html?state=energy"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M13 2 5 13h6l-1 9 8-12h-6l1-8z" />
+              </svg></span>Energy &amp; Stamina</a>
+          <a class="state-pill" data-state="immune" href="shop.html?state=immune"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg></span>Immune Support</a>
+          <a class="state-pill" data-state="strength" href="shop.html?state=strength"><span
+              class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10" />
+              </svg></span>Strength &amp; Muscle Recovery</a>
+          <a class="state-pill" data-state="focus" href="shop.html?state=focus"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M9 18h6M10 21h4" />
+                <path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z" />
+              </svg></span>Memory, Focus &amp; Cognitive Support</a>
+          <a class="state-pill" data-state="mood" href="shop.html?state=mood"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z" />
+                <path d="M4 20c2-5 5-8 9-10.5" />
+              </svg></span>Mood &amp; Relaxation</a>
+          <a class="state-pill" data-state="sleep" href="shop.html?state=sleep"><span class="state-pill__icon"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+              </svg></span>Sleep &amp; Rest</a>
+        </nav>
+
         <div class="catalog__toolbar">
-          <button class="catalog__filters-toggle" aria-label="Open filters">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-            Filters
-          </button>
-          <p class="catalog__count"><strong id="catalog-count">16</strong> products</p>
+          <p class="catalog__count"><strong id="catalog-count">23</strong> products</p>
           <label class="catalog__sort">
             <span class="catalog__sort-label">Sort by</span>
             <span class="catalog__sort-field">
@@ -60,95 +104,199 @@
                 <option value="price-desc">Price: high to low</option>
                 <option value="rating">Rating</option>
               </select>
-              <svg class="catalog__sort-caret" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              <svg class="catalog__sort-caret" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </span>
           </label>
         </div>
 
         <div class="catalog__grid">
 
-          <!-- Filters sidebar -->
-          <aside class="filters" id="filters" aria-label="Product filters">
-            <div class="filters__bar">
-              <span class="filters__heading">Filters</span>
-              <button class="filters__close" aria-label="Close filters">×</button>
-            </div>
-
-            <div class="filters__group">
-              <h3 class="filters__title">Format</h3>
-              <ul class="filters__list">
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="sticks"> Sticks <span class="filters__count">3</span></label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="gummies"> Gummies <span class="filters__count">1</span></label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="drinks"> Drinks <span class="filters__count">3</span></label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="protein"> Protein <span class="filters__count">3</span></label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="bundles"> Bundles <span class="filters__count">2</span></label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="format" data-filter-value="gift"> Gift cards <span class="filters__count">4</span></label></li>
-              </ul>
-            </div>
-
-            <div class="filters__group">
-              <h3 class="filters__title">Outcome</h3>
-              <ul class="filters__list">
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="energy"> Energy &amp; Stamina</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="immune"> Immune Support</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="strength"> Strength &amp; Muscle Recovery</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="focus"> Memory, Focus &amp; Cognitive Support</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="mood"> Mood &amp; Relaxation</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="state" data-filter-value="sleep"> Sleep &amp; Rest</label></li>
-              </ul>
-            </div>
-
-            <div class="filters__group">
-              <h3 class="filters__title">Max price</h3>
-              <div class="filters__range">
-                <input type="range" min="10" max="160" value="160" step="5" class="filters__range-input" id="filter-price" aria-label="Maximum price">
-                <div class="filters__range-values">
-                  <span>$10</span>
-                  <span data-range-value>$160</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="filters__group">
-              <h3 class="filters__title">Tags</h3>
-              <ul class="filters__list">
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="vegan"> Vegan</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="sugar-free"> Sugar-free</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="gluten-free"> Gluten-free</label></li>
-                <li><label class="filters__option"><input type="checkbox" class="filters__checkbox" data-filter-group="tag" data-filter-value="sale"> On sale</label></li>
-              </ul>
-            </div>
-
-            <div class="filters__actions">
-              <button class="btn btn--primary btn--full filters__apply" id="filters-apply">Apply filters</button>
-              <button class="filters__reset" id="filters-reset">Reset all</button>
-            </div>
-          </aside>
-
           <!-- Product grid -->
           <div class="catalog__main">
             <div class="catalog__grid-products" id="catalog-grid">
 
-              <article class="product-card product-card--compact reveal" data-format="gummies" data-state="immune" data-tags="sugar-free sale" data-price="32" data-rating="4.9" data-date="6" data-popular="1">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-gummies);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image.png" alt="" loading="lazy" /></a>
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="strength" data-tags="vegan gluten-free sugar-free" data-price="42" data-rating="4.8" data-date="20" data-popular="0">
+                <a href="product-creatine.html" class="product-card__media" style="background: var(--grad-strength);" aria-hidden="true"><img src="assets/image/realproduct/CreatineHydrationPowder.jpeg" alt="" loading="lazy" />
+              <img class="product-card__img--hover" src="assets/image/realproduct/CreatineHydrationPowderHover.png" alt="" loading="lazy" /></a>
                 <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Creatine Hydration Powder</h3>
+                  <p class="product-card__desc">Lemon · 30 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$42</span><span class="product-card__price-old">$52</span></div>
+                    <a href="product-creatine.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="vegan gluten-free" data-price="29.90" data-rating="4.8" data-date="19" data-popular="0">
+                <a href="product-lglutamine.html" class="product-card__media" style="background: var(--grad-strength);" aria-hidden="true"><img src="assets/image/realproduct/LGlutamine.jpeg" alt="" loading="lazy" />
+              <img class="product-card__img--hover" src="assets/image/realproduct/LGlutaminehover.png" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">L-Glutamine</h3>
+                  <p class="product-card__desc">Powder · 30 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$29.90</span><span class="product-card__price-old">$36.90</span></div>
+                    <a href="product-lglutamine.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="vegan gluten-free" data-price="44.90" data-rating="4.8" data-date="18" data-popular="0">
+                <a href="product-plantprotein.html" class="product-card__media" style="background: var(--grad-protein);" aria-hidden="true"><img src="assets/image/realproduct/plaint.jpeg" alt="" loading="lazy" />
+              <img class="product-card__img--hover" src="assets/image/realproduct/plainthover.png" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Plant Protein</h3>
+                  <p class="product-card__desc">Chocolate · 24 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$44.90</span><span class="product-card__price-old">$54.90</span></div>
+                    <a href="product-plantprotein.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="energy"
+                data-tags="vegan sugar-free" data-price="24" data-rating="4.8" data-date="17" data-popular="0">
+                <a href="product-hydration.html" class="product-card__media" style="background: var(--grad-energy);"
+                  aria-hidden="true"><img src="assets/image/realproduct/hydrapow.jpeg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/realproduct/hydrapowhover.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Hydration Powder</h3>
+                  <p class="product-card__desc">Lemonade · 30 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$24</span><span
+                        class="product-card__price-old">$30</span></div>
+                    <a href="product-hydration.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength"
+                data-tags="gluten-free" data-price="44" data-rating="4.8" data-date="16" data-popular="0">
+                <a href="product-wheyprotein.html" class="product-card__media" style="background: var(--grad-protein);"
+                  aria-hidden="true"><img src="assets/image/realproduct/Isolate1.jpeg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/realproduct/isolatehover.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Whey Protein Isolate</h3>
+                  <p class="product-card__desc">Vanilla · 24 servings</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$44</span><span
+                        class="product-card__price-old">$54</span></div>
+                    <a href="product-wheyprotein.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="capsules" data-state="strength"
+                data-tags="vegan gluten-free" data-price="26" data-rating="4.7" data-date="15" data-popular="0">
+                <a href="product-nitricoxide.html" class="product-card__media" style="background: var(--grad-strength);"
+                  aria-hidden="true"><img src="assets/image/realproduct/nitricoxigenmain.png" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/realproduct/nitricoxigenhover.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
+                  <h3 class="product-card__title">Nitric Oxide</h3>
+                  <p class="product-card__desc">Capsules · 60 ct</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$26</span><span
+                        class="product-card__price-old">$32</span></div>
+                    <a href="product-nitricoxide.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="capsules" data-state="immune"
+                data-tags="vegan sugar-free" data-price="28" data-rating="4.8" data-date="14" data-popular="0">
+                <a href="product-seamoss.html" class="product-card__media" style="background: var(--grad-immune);"
+                  aria-hidden="true"><img src="assets/image/realproduct/seamoss1.png" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/realproduct/seamoss1.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
+                <div class="product-card__body">
+                  <span class="product-card__badge product-card__badge--new">New</span>
+                  <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
+                  <h3 class="product-card__title">Sea Moss</h3>
+                  <p class="product-card__desc">Capsules · 60 ct</p>
+                  <div class="product-card__footer">
+                    <div class="product-card__price"><span class="product-card__price-now">$28</span><span
+                        class="product-card__price-old">$34</span></div>
+                    <a href="product-seamoss.html" class="btn btn--primary btn--sm">Order</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="product-card product-card--compact reveal" data-format="gummies" data-state="immune"
+                data-tags="sugar-free sale" data-price="32" data-rating="4.9" data-date="6" data-popular="1">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-gummies);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge">Hit</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
                   <h3 class="product-card__title">Marine Collagen Gummies</h3>
                   <p class="product-card__desc">Cherry · 30 servings</p>
                   <div class="product-card__footer">
-                    <div class="product-card__price"><span class="product-card__price-now">$32</span><span class="product-card__price-old">$39</span></div>
+                    <div class="product-card__price"><span class="product-card__price-now">$32</span><span
+                        class="product-card__price-old">$39</span></div>
                     <a href="product.html" class="btn btn--primary btn--sm">Order</a>
                   </div>
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="gluten-free" data-price="48" data-rating="4.8" data-date="11" data-popular="2">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-protein);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength"
+                data-tags="gluten-free" data-price="48" data-rating="4.8" data-date="11" data-popular="2">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-protein);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover"
+                    src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--new">New</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
@@ -161,10 +309,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="energy" data-tags="vegan sugar-free" data-price="24" data-rating="4.7" data-date="4" data-popular="3">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-energy);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image copy.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="energy"
+                data-tags="vegan sugar-free" data-price="24" data-rating="4.7" data-date="4" data-popular="3">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-energy);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image copy.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
                   <h3 class="product-card__title">Energy Sticks</h3>
@@ -176,10 +331,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="sleep" data-tags="sugar-free vegan" data-price="28" data-rating="4.7" data-date="5" data-popular="4">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-sleep);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="sleep"
+                data-tags="sugar-free vegan" data-price="28" data-rating="4.7" data-date="5" data-popular="4">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-sleep);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover"
+                    src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
                   <h3 class="product-card__title">Sleep Sticks</h3>
@@ -191,10 +353,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="immune" data-tags="vegan gluten-free" data-price="36" data-rating="4.8" data-date="7" data-popular="5">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image copy.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="immune"
+                data-tags="vegan gluten-free" data-price="36" data-rating="4.8" data-date="7" data-popular="5">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-00.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image copy.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge">Hit</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
@@ -207,10 +376,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="mood" data-tags="vegan gluten-free" data-price="18" data-rating="4.6" data-date="3" data-popular="6">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-relax);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="mood"
+                data-tags="vegan gluten-free" data-price="18" data-rating="4.6" data-date="3" data-popular="6">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-relax);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.6</span>
                   <h3 class="product-card__title">Relax Tea</h3>
@@ -222,10 +398,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="protein" data-state="focus" data-tags="gluten-free" data-price="42" data-rating="4.8" data-date="8" data-popular="7">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-beauty);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="focus"
+                data-tags="gluten-free" data-price="42" data-rating="4.8" data-date="8" data-popular="7">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-beauty);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-59.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
                   <h3 class="product-card__title">Beauty Powder</h3>
@@ -237,10 +420,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength" data-tags="gluten-free" data-price="54" data-rating="4.7" data-date="12" data-popular="8">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-strength);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="protein" data-state="strength"
+                data-tags="gluten-free" data-price="54" data-rating="4.7" data-date="12" data-popular="8">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-strength);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--new">New</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
@@ -253,40 +443,63 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="immune" data-tags="sale" data-price="62" data-rating="4.9" data-date="9" data-popular="9">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="immune"
+                data-tags="sale" data-price="62" data-rating="4.9" data-date="9" data-popular="9">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge">Bundle</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.9</span>
                   <h3 class="product-card__title">Beauty Bundle</h3>
                   <p class="product-card__desc">Gummies + Powder · save 15%</p>
                   <div class="product-card__footer">
-                    <div class="product-card__price"><span class="product-card__price-now">$62</span><span class="product-card__price-old">$74</span></div>
+                    <div class="product-card__price"><span class="product-card__price-now">$62</span><span
+                        class="product-card__price-old">$74</span></div>
                     <a href="product.html" class="btn btn--primary btn--sm">Order</a>
                   </div>
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="energy" data-tags="sale" data-price="48" data-rating="4.8" data-date="10" data-popular="10">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="bundles" data-state="energy"
+                data-tags="sale" data-price="48" data-rating="4.8" data-date="10" data-popular="10">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-bundles);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-27-57.jpg" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge">Bundle</span>
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.8</span>
                   <h3 class="product-card__title">Energy Bundle</h3>
                   <p class="product-card__desc">Sticks + Drink · save 20%</p>
                   <div class="product-card__footer">
-                    <div class="product-card__price"><span class="product-card__price-now">$48</span><span class="product-card__price-old">$60</span></div>
+                    <div class="product-card__price"><span class="product-card__price-now">$48</span><span
+                        class="product-card__price-old">$60</span></div>
                     <a href="product.html" class="btn btn--primary btn--sm">Order</a>
                   </div>
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="mood" data-tags="vegan" data-price="26" data-rating="4.6" data-date="2" data-popular="11">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-sticks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="sticks" data-state="mood"
+                data-tags="vegan" data-price="26" data-rating="4.6" data-date="2" data-popular="11">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-sticks);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-04.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover" src="assets/image/hoverimage/image copy 2.png" alt=""
+                    loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.6</span>
                   <h3 class="product-card__title">Calm Sticks</h3>
@@ -298,10 +511,17 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="strength" data-tags="gluten-free" data-price="38" data-rating="4.7" data-date="1" data-popular="12">
-                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);" aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
-              <img class="product-card__img--hover" src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+              <article class="product-card product-card--compact reveal" data-format="drinks" data-state="strength"
+                data-tags="gluten-free" data-price="38" data-rating="4.7" data-date="1" data-popular="12">
+                <a href="product.html" class="product-card__media" style="background: var(--grad-drinks);"
+                  aria-hidden="true"><img src="assets/image/png/photo_2026-06-01_10-28-02.jpg" alt="" loading="lazy" />
+                  <img class="product-card__img--hover"
+                    src="assets/image/hoverimage/a6e00d26-c14d-4363-80b4-02066bc9f662.png" alt="" loading="lazy" /></a>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__rating"><span class="product-card__stars">★★★★★</span> 4.7</span>
                   <h3 class="product-card__title">Recovery Drink</h3>
@@ -314,11 +534,16 @@
               </article>
 
               <!-- ===== Gift cards ($25 / $50 / $100 / $150) ===== -->
-              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="25" data-rating="5" data-date="2" data-popular="13">
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift"
+                data-state="" data-tags="gift" data-price="25" data-rating="5" data-date="2" data-popular="13">
                 <span class="product-card__media product-card__media--gift" aria-hidden="true">
                   <img src="assets/image/giftcard/card25.png" alt="" loading="lazy" />
                 </span>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--gift">Gift card</span>
                   <h3 class="product-card__title">UpHealth Gift Card</h3>
@@ -335,11 +560,16 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="50" data-rating="5" data-date="2" data-popular="14">
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift"
+                data-state="" data-tags="gift" data-price="50" data-rating="5" data-date="2" data-popular="14">
                 <span class="product-card__media product-card__media--gift" aria-hidden="true">
                   <img src="assets/image/giftcard/card50.png" alt="" loading="lazy" />
                 </span>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--gift">Gift card</span>
                   <h3 class="product-card__title">UpHealth Gift Card</h3>
@@ -356,11 +586,16 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="100" data-rating="5" data-date="2" data-popular="15">
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift"
+                data-state="" data-tags="gift" data-price="100" data-rating="5" data-date="2" data-popular="15">
                 <span class="product-card__media product-card__media--gift" aria-hidden="true">
                   <img src="assets/image/giftcard/card100.png" alt="" loading="lazy" />
                 </span>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--gift">Gift card</span>
                   <h3 class="product-card__title">UpHealth Gift Card</h3>
@@ -377,11 +612,16 @@
                 </div>
               </article>
 
-              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift" data-state="" data-tags="gift" data-price="150" data-rating="5" data-date="2" data-popular="16">
+              <article class="product-card product-card--compact product-card--gift reveal" data-format="gift"
+                data-state="" data-tags="gift" data-price="150" data-rating="5" data-date="2" data-popular="16">
                 <span class="product-card__media product-card__media--gift" aria-hidden="true">
                   <img src="assets/image/giftcard/card150.png" alt="" loading="lazy" />
                 </span>
-                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+                <button class="product-card__fav" aria-label="Add to favorites"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <path
+                      d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z" />
+                  </svg></button>
                 <div class="product-card__body">
                   <span class="product-card__badge product-card__badge--gift">Gift card</span>
                   <h3 class="product-card__title">UpHealth Gift Card</h3>
@@ -400,7 +640,8 @@
 
             </div>
 
-            <p class="catalog__empty" id="catalog-empty" hidden>No products match these filters. <button class="catalog__empty-reset" id="catalog-empty-reset">Reset filters</button></p>
+            <p class="catalog__empty" id="catalog-empty" hidden>No products match these filters. <button
+                class="catalog__empty-reset" id="catalog-empty-reset">Reset filters</button></p>
 
             <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
           </div>
@@ -417,4 +658,5 @@
   <script src="js/animations.js" defer></script>
   <script src="js/catalog.js" defer></script>
 </body>
+
 </html>

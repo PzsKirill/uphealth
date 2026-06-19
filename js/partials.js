@@ -35,7 +35,7 @@
 
       <div class="header__left">
         <a href="index.html" class="header__logo" aria-label="UpHealth home">
-          <span class="header__logo-mark">up</span><span class="header__logo-word">health</span>
+          <img src="assets/logo.svg" alt="UpHealth" class="brand-logo" />
         </a>
 
         <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -301,8 +301,8 @@
       </div>
       <div class="footer__top">
         <div class="footer__brand">
-          <a href="index.html" class="footer__logo">
-            <span class="header__logo-mark">up</span><span class="header__logo-word">health</span>
+          <a href="index.html" class="footer__logo" aria-label="UpHealth home">
+            <img src="assets/logo.svg" alt="UpHealth" class="brand-logo brand-logo--light" />
           </a>
           <p class="footer__tagline">Functional wellness with formulas you can trust.</p>
           <div class="footer__socials">
@@ -362,6 +362,13 @@
           </ul>
         </div>
       </div>
+
+      <div class="footer__compliance">
+        <span class="footer__badge">Made in the USA</span>
+        <span class="footer__badge">FDA-registered facility</span>
+        <span class="footer__badge">cGMP certified</span>
+      </div>
+      <p class="footer__disclaimer">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
 
       <div class="footer__bottom">
         <p class="footer__copy">© <span id="year"></span> UpHealth. All rights reserved.</p>
