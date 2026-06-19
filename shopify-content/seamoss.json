@@ -1,0 +1,92 @@
+{
+  "eyebrow": "Capsules · Immune Support",
+  "rating": "4.8 · 980 reviews",
+  "lead": "Three organic superfoods — Irish sea moss, bladderwrack and burdock root — in one daily capsule. A wholefood multi-mineral that supports the thyroid, immunity, digestion and skin, the way it's been used for centuries.",
+  "benefits": ["Thyroid & metabolism support", "Immune & digestive health", "Skin, hair & nails"],
+  "note": "60 capsules · ships in 1–2 days · free shipping over $80",
+  "marquee1": ["92 trace minerals", "Wildcrafted seaweed", "Vegan capsules", "No added sugar", "Thyroid & immune support"],
+  "science": {
+    "lab": {
+      "eyebrow": "Old remedy, modern formula",
+      "title": "An ancient superfood, made simple",
+      "text": "Celebrities and fitness coaches rave about sea moss as the latest immune-boosting, skin-healing, digestion-friendly supplement — but it isn't new. It's been eaten for thousands of years across coastal cultures. We pair wildcrafted Irish sea moss with organic bladderwrack and burdock root, then standardise every batch so you get the same wholefood minerals in a clean daily capsule.",
+      "button": "How it's absorbed"
+    },
+    "format": {
+      "eyebrow": "New format",
+      "title": "Sea moss in a new format",
+      "text": "No more messy gels or fishy smoothies. We packed three organic superfoods into one easy, tasteless capsule you can take anywhere.",
+      "list": ["— 1 bottle = 60 vegan capsules (30 servings)", "— 2 capsules (daily dose) = 1000 mg sea moss & bladderwrack + 400 mg burdock"]
+    }
+  },
+  "popup": {
+    "eyebrow": "How it's absorbed",
+    "title": "Minerals your body can actually use",
+    "lead": "Sea moss delivers its minerals inside a natural wholefood matrix — not synthetic isolates — so they're recognised and absorbed gently.",
+    "shellTag": "Wholefood matrix",
+    "core": "92 trace minerals",
+    "coreTag": "Bioavailable",
+    "points": [
+      { "title": "Wholefood source", "text": "Minerals stay bound in the plant's natural matrix — gentler and easier to recognise than lab-made isolates." },
+      { "title": "Prebiotic carrier", "text": "The seaweed's soluble fibres feed your gut and help carry minerals across the digestive lining." },
+      { "title": "BioPerine® boost", "text": "A touch of black pepper extract helps your body take in more of what each capsule delivers." }
+    ]
+  },
+  "ingredients": {
+    "eyebrow": "What's inside?",
+    "title": "Three organic superfoods, one capsule",
+    "lead": "Together these wholefoods support the blood and lymphatic systems, aid the thyroid, boost immunity and promote a healthy inflammatory response.*",
+    "cards": [
+      { "icon": "waves", "name": "Organic Irish Moss", "latin": "Chondrus crispus · whole plant", "amount": "500 mg", "text": "A red seaweed carrying 92 of the body's essential trace minerals — naturally rich in iodine to support the thyroid, skin and immunity." },
+      { "icon": "leaf", "name": "Organic Bladderwrack", "latin": "Fucus vesiculosus · whole plant", "amount": "500 mg", "text": "A brown seaweed prized for iodine and antioxidants — a traditional ally for metabolism, thyroid balance and healthy energy." },
+      { "icon": "sprout", "name": "Organic Burdock", "latin": "Arctium lappa · root", "amount": "400 mg", "text": "A mineral-dense root used for centuries to support the blood and lymphatic systems and promote clearer, calmer skin." }
+    ]
+  },
+  "facts": {
+    "serving": "2 Capsules",
+    "servings": "30",
+    "rows": [
+      { "label": "Organic Irish Moss (Chondrus crispus)(whole plant)", "amount": "500 mg", "dv": "**" },
+      { "label": "Organic Bladderwrack (Fucus vesiculosus)(whole plant)", "amount": "500 mg", "dv": "**" },
+      { "label": "Organic Burdock (Arctium lappa)(root)", "amount": "400 mg", "dv": "**" },
+      { "label": "BioPerine® (Black Pepper Extract)(Piper nigrum)(fruit)", "amount": "5 mg", "dv": "**" }
+    ],
+    "note": "** Daily Value (DV) not established.",
+    "other": "Other Ingredients: Pullulan Capsules.",
+    "sideTitle": "A clean label you can pronounce",
+    "sideText": "BioPerine® black pepper extract is added in a small 5 mg dose to help your body take in the minerals more efficiently. Made in the USA in a GMP-certified facility — 60 vegan pullulan capsules, 1.8 oz / 52 g net."
+  },
+  "usage": {
+    "eyebrow": "When to take?",
+    "title": "An easy two-capsule ritual",
+    "doseNum": "2",
+    "doseLabel": "capsules · once a day",
+    "steps": [
+      { "icon": "clock", "title": "Once a day, every day", "text": "Take two capsules daily so minerals build up steadily — consistency is what brings results." },
+      { "icon": "sun", "title": "20–30 minutes before a meal", "text": "Best taken on an empty stomach for gentle, efficient absorption." },
+      { "icon": "drop", "title": "With a glass of water", "text": "Easy to swallow, no taste and no mixing — or take as directed by your healthcare professional." }
+    ]
+  },
+  "marquee2": ["Take 2 capsules daily", "Third-party tested", "Subscription saves 10%", "Free shipping over $80", "Made in the USA"],
+  "chart": {
+    "eyebrow": "Tracked over 16 weeks",
+    "title": "Sea moss supports how you feel",
+    "lineA": "#1f4347",
+    "lineB": "#4f9d8e",
+    "tabs": [
+      { "label": "Energy", "la": "Energy levels", "lb": "Daily focus", "title": "More steady energy, week by week", "text": "In a 16-week self-reported survey, people taking sea moss daily tracked a rising sense of energy and focus, building gradually after the first month.", "a": [2, 6, 10, 15, 18], "b": [1, 4, 8, 11, 14] },
+      { "label": "Digestion", "la": "Gut comfort", "lb": "Regularity", "title": "Gentler digestion over time", "text": "The seaweed's prebiotic fibres were associated with steadily improving gut comfort and regularity through the programme.", "a": [3, 7, 11, 14, 17], "b": [2, 5, 9, 12, 15] },
+      { "label": "Skin", "la": "Skin hydration", "lb": "Skin clarity", "title": "A visible glow by week 12", "text": "Mineral-rich sea moss tracked with self-reported improvements in skin hydration and clarity, most noticeable from week eight.", "a": [1, 5, 9, 13, 16], "b": [1, 3, 7, 10, 13] }
+    ]
+  },
+  "faq": {
+    "title": "Good to know",
+    "items": [
+      { "q": "Is Sea Moss vegan?", "a": "Yes. The capsules are made from pullulan (a plant-based tapioca ferment), with no gelatin, fillers or animal products." },
+      { "q": "When will I notice a difference?", "a": "Most people take it daily for 4–8 weeks before they notice steady changes in energy, digestion and skin. Minerals build up gradually, so consistency matters more than dose." },
+      { "q": "Can I take it with other supplements?", "a": "Generally yes. Because sea moss and bladderwrack are naturally rich in iodine, check with your doctor first if you take thyroid medication or already supplement iodine." },
+      { "q": "Who should avoid it?", "a": "Pregnant or nursing mothers, children under 18, and anyone with a known medical condition should consult a physician before using this or any dietary supplement. Do not exceed the recommended dose." },
+      { "q": "How should I store it?", "a": "Keep out of reach of children and store in a cool, dry place. Do not use if the safety seal is damaged or missing." }
+    ]
+  }
+}

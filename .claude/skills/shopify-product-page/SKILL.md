@@ -71,47 +71,87 @@ loop in Liquid.
 
 ---
 
-## 4. Per-product accent colour (the Tilda-style trick, done cleanly)
+## 4. Per-product colour — metafields → CSS variables (optimised)
 
-Each product gets its own page colour. **Do not** use scripts (Tilda's way).
-Use one Color metafield → CSS custom properties scoped to the page, and derive
-the tints/shades with `color-mix()` so the merchant picks only ONE colour.
+This **replaces** the prototype's hardcoded `body.theme-<slug>` blocks — one
+~25-line CSS block per product in `css/style.css` (`theme-seamoss`,
+`theme-highenergy`, … eight so far). Those do NOT scale on Shopify: every new
+product/colour would mean editing + redeploying theme code and growing the
+global stylesheet (the "overload" risk). On Shopify the colour comes from
+**product metafields**, injected as CSS variables, **server-rendered** (no
+flash/FOUC), with **zero theme code per product**.
 
-Admin: product metafield `custom.accent_color` (type **Color** → colour picker).
+### Inputs — 2–3 Color metafields, not 12 hand-typed values
+The merchant picks a couple of colours; CSS derives the rest with `color-mix()`.
 
-Theme — inject scoped variables (e.g. in the product template or a snippet),
-with a fallback to the brand purple when empty:
+| metafield | type | role |
+|---|---|---|
+| `custom.accent` | Color | brand colour — buttons, marquee, active states, chart line A |
+| `custom.bg` | Color | soft matte page background |
+| `custom.ink` | Color (opt) | dark text; if empty, derived from accent |
+| `custom.chart_b` | Color (opt) | second chart line (e.g. coral) |
+
+### Inject (product template / snippet) — derives the full `--color-*` palette
+Scope vars to the product wrapper so the shared header/footer keep brand
+colours; put the page background on `body.template-product`.
 
 ```liquid
-{%- assign accent = product.metafields.custom.accent_color -%}
-{%- if accent != blank -%}
+{%- liquid
+  assign accent = product.metafields.custom.accent | default: settings.brand_accent
+  assign bg     = product.metafields.custom.bg     | default: settings.brand_bg
+-%}
 <style>
+  body.template-product { background: {{ bg }}; }
   #product-{{ product.id }} {
-    --product-accent:      {{ accent }};
-    --product-accent-soft: color-mix(in srgb, {{ accent }} 14%, white);
-    --product-accent-deep: color-mix(in srgb, {{ accent }} 72%, black);
-    --product-bg-tint:     color-mix(in srgb, {{ accent }} 6%,  var(--color-bg));
+    --color-accent: {{ accent }}; --color-purple: {{ accent }};
+    --color-accent-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-purple-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-accent-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-purple-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-border:      color-mix(in srgb, {{ accent }} 20%, white);
+    --color-bg: {{ bg }};
+    --color-bg-alt:  color-mix(in srgb, {{ bg }}, black 7%);
+    --color-bg-card: color-mix(in srgb, {{ bg }} 35%, white);
+    {%- if product.metafields.custom.ink != blank %}
+    --color-text: {{ product.metafields.custom.ink }};
+    {%- else %}
+    --color-text: color-mix(in srgb, {{ accent }} 72%, black);
+    {%- endif %}
+    --color-text-muted: color-mix(in srgb, var(--color-text) 55%, {{ bg }});
   }
 </style>
-{%- endif -%}
 ```
 
-Wrap the page: `<div id="product-{{ product.id }}" class="product-page">…</div>`.
-In the product sections, reference the accent with a brand fallback so an
-empty metafield safely degrades to the default purple:
+Components already read `var(--color-purple, …)` etc., so an empty metafield
+degrades to the brand defaults in `css/style.css`. Chart strokes come from the
+metafields too: `stroke="{{ accent }}"` and
+`stroke="{{ chart_b | default: '#e89274' }}"` (also pass `chart_b` to the chart
+JS via a `data-` attribute).
 
-```css
-.product-page .pack.is-active { border-color: var(--product-accent, var(--color-purple)); }
-.product-page .pack__name em  { color: var(--product-accent-deep, var(--color-purple-deep)); }
-.product-page .subscribe.is-active { border-color: var(--product-accent, var(--color-purple)); }
+### Several colours on one product (per-variant)
+For a product whose variants are colour-coded (e.g. the teal/pink/blue/orange
+Berberine lineup), store a palette per variant and swap on selection — the
+server renders the first variant's colour (no flash); JS only switches live:
+
+- `palette` metaobject `{ accent: color, bg: color }`, referenced per variant
+  (variant metafield) or as an ordered `list.metaobject` on the product.
+- emit them as one JSON blob and update the vars on variant `change`:
+
+```js
+const palettes = {{ variant_palettes_json }};   // { "<variantId>": {accent,bg} }
+form.addEventListener('change', (e) => {
+  const p = palettes[e.target.value]; if (!p) return;
+  const root = document.getElementById('product-{{ product.id }}');
+  root.style.setProperty('--color-accent', p.accent);
+  root.style.setProperty('--color-purple', p.accent);
+  root.style.setProperty('--color-bg', p.bg);
+  document.body.style.background = p.bg;
+});
 ```
 
-Brand defaults already in `css/style.css`: `--color-purple`,
-`--color-purple-deep`, `--color-purple-soft`, `--color-bg`, `--color-bg-alt`,
-`--color-bg-card`, `--color-border`.
-
-For shared palettes (e.g. all "Sleep" products share one colour set) use the
-optional `palette` metaobject and read its fields instead of a single colour.
+The eight built products' exact accent/bg/ink/chart hexes are catalogued in the
+**`shopify-integration`** skill — extract them there before deleting the
+`theme-<slug>` blocks.
 
 ---
 
