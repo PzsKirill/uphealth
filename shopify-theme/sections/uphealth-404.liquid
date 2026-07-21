@@ -1,0 +1,56 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="error404">
+  <div class="container">
+    <div class="error404__inner">
+      <span class="error404__code">{{ section.settings.code | default: '404' }}</span>
+      <h1 class="error404__title">{{ section.settings.title }}</h1>
+      {%- if section.settings.text != blank -%}<p class="error404__text">{{ section.settings.text }}</p>{%- endif -%}
+
+      <div class="error404__actions">
+        <a href="{{ routes.root_url }}" class="btn btn--primary">{{ section.settings.btn_home }}</a>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--ghost">{{ section.settings.btn_shop }}</a>
+      </div>
+
+      {%- if section.settings.show_search -%}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="error404__search">
+        <input type="hidden" name="type" value="product">
+        <input type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" aria-label="Search">
+        <button type="submit" class="btn btn--primary">Search</button>
+      </form>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+      <div class="error404__links">
+        {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}" class="state-pill" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth 404",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "code", "label": "Big code", "default": "404" },
+    { "type": "text", "id": "title", "label": "Title", "default": "We can't find that page" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The link may be broken or the page may have moved. Let's get you back on track." },
+    { "type": "text", "id": "btn_home", "label": "Primary button", "default": "Back home" },
+    { "type": "text", "id": "btn_shop", "label": "Secondary button", "default": "Shop all products" },
+    { "type": "checkbox", "id": "show_search", "label": "Show search field", "default": true },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search products…" }
+  ],
+  "blocks": [
+    { "type": "link", "name": "Quick link", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Wellness test" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth 404" }]
+}
+{% endschema %}

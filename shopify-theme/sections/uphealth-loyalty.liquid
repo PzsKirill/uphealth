@@ -1,0 +1,44 @@
+<section class="loyalty">
+  <div class="container">
+    <div class="loyalty__card">
+      <div class="loyalty__visual" aria-hidden="true">
+        <div class="loyalty__rewards">
+          <span class="loyalty__rewards-brand">{{ section.settings.brand }}</span>
+          <span class="loyalty__rewards-points"><b>{{ section.settings.points }}</b> points</span>
+          <span class="loyalty__rewards-foot">{{ section.settings.foot }}</span>
+        </div>
+      </div>
+      <div class="loyalty__body">
+        {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="loyalty__title">{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="loyalty__text">{{ section.settings.text }}</p>{%- endif -%}
+        <div class="loyalty__actions">
+          {%- if section.settings.btn1_label != blank -%}<a href="{{ section.settings.btn1_link | default: '#' }}" class="btn btn--primary">{{ section.settings.btn1_label }}</a>{%- endif -%}
+          {%- if section.settings.btn2_label != blank -%}<a href="{{ section.settings.btn2_link | default: '#' }}" class="btn btn--ghost">{{ section.settings.btn2_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth loyalty",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Rewards card" },
+    { "type": "text", "id": "brand", "label": "Brand label", "default": "UpHealth Rewards" },
+    { "type": "text", "id": "points", "label": "Points", "default": "+500" },
+    { "type": "text", "id": "foot", "label": "Card footer", "default": "Welcome bonus · members only" },
+    { "type": "header", "content": "Body" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Loyalty" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Start with 500 points on us" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sign up before you order and the discount applies to your first purchase." },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "Sign up" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "How it works" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" }
+  ],
+  "presets": [{ "name": "UpHealth loyalty" }]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "settings": {
+        "title": "Get in <em>touch</em>",
+        "lead": "Questions about a formula, an order or a partnership? Drop us a line — we usually reply within four hours on weekdays."
+      }
+    },
+    "contact": {
+      "type": "uphealth-contact",
+      "blocks": {
+        "g1": {
+          "type": "group",
+          "settings": {
+            "title": "Reach us",
+            "items": "Email — hello@uphealth.example\nWhatsApp — +1 800 000 0000\nTelegram — @uphealthsupport\nLive chat — bottom right on any page"
+          }
+        },
+        "g2": {
+          "type": "group",
+          "settings": {
+            "title": "Press & partnerships",
+            "items": "Press — press@uphealth.example\nWholesale — wholesale@uphealth.example"
+          }
+        },
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "label": "Office:",
+            "text": "240 Wellness Avenue, Suite 12, New York NY 10001"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "c1"
+      ],
+      "settings": {
+        "intro": "Support is live seven days a week, 9 am to 9 pm. Outside those hours, email gets a reply within four hours during the week.",
+        "form_title": "Send us a message",
+        "button": "Send message",
+        "success": "Thanks — we got your message and will reply shortly."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "contact"
+  ]
+}

@@ -1,0 +1,131 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="cart-page">
+  <div class="container">
+    <div class="cart-page__head">
+      <h1 class="cart-page__title">Your cart</h1>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-page__back">&larr; Continue shopping</a>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+    <div class="cart-page__grid" data-cart-page>
+      <div class="cart-page__items">
+        {%- for item in cart.items -%}
+        <div class="cart-row" data-key="{{ item.key }}">
+          <a href="{{ item.url }}" class="cart-row__thumb">{%- if item.image -%}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.product.title | escape }}" />{%- endif -%}</a>
+          <div class="cart-row__info">
+            <a href="{{ item.url }}" class="cart-row__name">{{ item.product.title }}</a>
+            {%- unless item.variant.title == 'Default Title' -%}<span class="cart-row__variant">{{ item.variant.title }}</span>{%- endunless -%}
+            <span class="cart-row__unit">{{ item.final_price | money }} each</span>
+          </div>
+          <div class="cart-row__qty">
+            <button class="cart-item__step" type="button" data-step="-1" aria-label="Decrease quantity">−</button>
+            <span class="cart-item__count">{{ item.quantity }}</span>
+            <button class="cart-item__step" type="button" data-step="1" aria-label="Increase quantity">+</button>
+          </div>
+          <div class="cart-row__line" data-line-price>{{ item.final_line_price | money }}</div>
+          <button class="cart-row__remove" type="button" data-remove aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        {%- endfor -%}
+      </div>
+
+      <aside class="cart-page__summary">
+        <h3 class="cart-page__summary-title">Order summary</h3>
+        <div class="cart-totals">
+          <div class="cart-totals__row"><span>Subtotal</span><span data-subtotal>{{ cart.items_subtotal_price | money }}</span></div>
+          <div class="cart-totals__row cart-totals__row--discount" data-discount-row{% if cart.total_discount == 0 %} hidden{% endif %}><span>Discount</span><span data-discount>−{{ cart.total_discount | money }}</span></div>
+          <div class="cart-totals__row cart-totals__row--total"><span>Total</span><span data-total>{{ cart.total_price | money }}</span></div>
+        </div>
+        <form class="cart-promo" data-promo>
+          <label class="cart-promo__label" for="cart-page-code">Have a gift card or promo code?</label>
+          <div class="cart-promo__row">
+            <input type="text" id="cart-page-code" class="cart-promo__input" data-promo-code placeholder="e.g. WELCOME10" autocomplete="off" spellcheck="false" />
+            <button type="submit" class="cart-promo__apply">Apply</button>
+          </div>
+        </form>
+        <a href="/checkout" class="btn btn--primary btn--lg btn--full">Checkout</a>
+        <p class="cart-page__note">Taxes &amp; shipping calculated at checkout.</p>
+      </aside>
+    </div>
+    {%- else -%}
+    <div class="cart-page__empty">
+      <div class="cart-page__empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6h15l-2 11H8L6 6z"/><path d="M6 6 5 2H2"/><circle cx="10" cy="21" r="1.5"/><circle cx="17" cy="21" r="1.5"/></svg></div>
+      <h2>Your cart is empty</h2>
+      <p>Looks like you haven't added anything yet.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg">Browse products</a>
+    </div>
+    {%- endif -%}
+
+    {%- assign rec = section.settings.recommendations -%}
+    {%- if rec == blank -%}{%- assign rec = collections.all -%}{%- endif -%}
+    {%- if rec.products.size > 0 -%}
+    <div class="cart-page__recs">
+      <div class="section-head section-head--center">
+        <span class="section-head__eyebrow">You may also like</span>
+        <h2 class="section-head__title">{{ section.settings.recs_title | default: 'Complete your routine' }}</h2>
+      </div>
+      <div class="product-line__grid">
+        {%- for p in rec.products limit: 4 -%}{% render 'uphealth-product-card', product: p %}{%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var page = document.querySelector('[data-cart-page]');
+    var CURRENCY = '{{ shop.currency }}';
+    function money(c) { try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: CURRENCY }).format((c || 0) / 100); } catch (e) { return '$' + ((c || 0) / 100).toFixed(2); } }
+    function totals(cart) {
+      var s = document.querySelector('[data-subtotal]'); if (s) s.textContent = money(cart.items_subtotal_price);
+      var t = document.querySelector('[data-total]'); if (t) t.textContent = money(cart.total_price);
+      var dr = document.querySelector('[data-discount-row]'), d = document.querySelector('[data-discount]');
+      if (dr && d) { if (cart.total_discount > 0) { dr.hidden = false; d.textContent = '−' + money(cart.total_discount); } else { dr.hidden = true; } }
+      var hc = document.querySelector('#cart-btn .header__count'); if (hc) hc.textContent = cart.item_count ? cart.item_count : '';
+    }
+    function change(key, qty, row) {
+      if (row && qty > 0) { var c = row.querySelector('.cart-item__count'); if (c) c.textContent = qty; }
+      else if (row) { row.style.opacity = '0.4'; }
+      fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ id: key, quantity: Math.max(0, qty) }) })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          if (!cart.item_count) { window.location.reload(); return; }
+          if (row) {
+            var item = null; cart.items.forEach(function (i) { if (i.key === key) item = i; });
+            if (item) { var lp = row.querySelector('[data-line-price]'); if (lp) lp.textContent = money(item.final_line_price); row.style.opacity = ''; }
+            else if (row.parentNode) { row.parentNode.removeChild(row); }
+          }
+          totals(cart);
+        });
+    }
+    if (page) {
+      page.querySelectorAll('.cart-row').forEach(function (row) {
+        var key = row.getAttribute('data-key');
+        row.querySelectorAll('.cart-item__step').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var cur = parseInt(row.querySelector('.cart-item__count').textContent, 10) || 1;
+            change(key, cur + parseInt(b.getAttribute('data-step'), 10), row);
+          });
+        });
+        var rm = row.querySelector('[data-remove]'); if (rm) rm.addEventListener('click', function () { change(key, 0, row); });
+      });
+      var promo = page.querySelector('[data-promo]');
+      if (promo) promo.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var code = (page.querySelector('[data-promo-code]').value || '').trim();
+        if (code) window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=/cart';
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth cart",
+  "settings": [
+    { "type": "collection", "id": "recommendations", "label": "Recommendations collection (defaults to all products)" },
+    { "type": "text", "id": "recs_title", "label": "Recommendations title", "default": "Complete your routine" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,294 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "uphealth-product-showcase",
+      "blocks": {
+        "ing-1": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "sprout",
+            "name": "Bacillus Coagulans",
+            "latin": "spore-forming probiotic",
+            "amount": "50 mg · 10B CFU",
+            "text": "A hardy probiotic that survives stomach acid to reach the gut alive and support a balanced, healthy microbiome."
+          }
+        },
+        "ing-2": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "spark",
+            "name": "Protease",
+            "latin": "protein-digesting enzyme",
+            "amount": "10 mg",
+            "text": "Breaks proteins down into smaller pieces so heavier meals are easier to digest — less heaviness, less bloat."
+          }
+        },
+        "ing-3": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "name": "Papain",
+            "latin": "from papaya",
+            "amount": "15 mg",
+            "text": "A plant enzyme from papaya that helps break down protein and supports comfortable, efficient digestion."
+          }
+        },
+        "ing-4": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "drop",
+            "name": "Bromelain",
+            "latin": "from pineapple",
+            "amount": "15 mg",
+            "text": "A pineapple-derived enzyme that supports protein digestion and a calmer, lighter gut after meals."
+          }
+        },
+        "fact-1": {
+          "type": "fact_row",
+          "settings": {
+            "label": "Bacillus Coagulans (10 Billion CFU)",
+            "amount": "50 mg",
+            "dv": "†"
+          }
+        },
+        "fact-2": {
+          "type": "fact_row",
+          "settings": {
+            "label": "Digestive Enzymatic Blend",
+            "amount": "",
+            "dv": ""
+          }
+        },
+        "fact-3": {
+          "type": "fact_row",
+          "settings": {
+            "label": "Protease",
+            "amount": "10 mg",
+            "dv": "†"
+          }
+        },
+        "fact-4": {
+          "type": "fact_row",
+          "settings": {
+            "label": "Papain",
+            "amount": "15 mg",
+            "dv": "†"
+          }
+        },
+        "fact-5": {
+          "type": "fact_row",
+          "settings": {
+            "label": "Bromelain",
+            "amount": "15 mg",
+            "dv": "†"
+          }
+        },
+        "step-1": {
+          "type": "usage_step",
+          "settings": {
+            "icon": "clock",
+            "title": "Once a day",
+            "text": "Place one strip on your tongue and let it dissolve — no water, no pill to swallow."
+          }
+        },
+        "step-2": {
+          "type": "usage_step",
+          "settings": {
+            "icon": "drop",
+            "title": "Around a meal",
+            "text": "Take it with or just after eating to support digestion when your gut needs it most."
+          }
+        },
+        "step-3": {
+          "type": "usage_step",
+          "settings": {
+            "icon": "check",
+            "title": "Anywhere, anytime",
+            "text": "Pocket-sized tin — take it at your desk, travelling, or after a workout."
+          }
+        },
+        "chart-1": {
+          "type": "chart_series",
+          "settings": {
+            "label": "Digestion",
+            "legend_a": "Gut comfort",
+            "legend_b": "Regularity",
+            "title": "Gentler digestion over time",
+            "text": "In a self-reported survey, daily probiotics and enzymes tracked with steadily improving gut comfort and regularity through the programme.",
+            "values_a": "3, 8, 12, 15, 17",
+            "values_b": "2, 6, 10, 13, 15"
+          }
+        },
+        "chart-2": {
+          "type": "chart_series",
+          "settings": {
+            "label": "Bloating",
+            "legend_a": "Comfort after meals",
+            "legend_b": "Less bloating",
+            "title": "Lighter after meals",
+            "text": "The protease, papain and bromelain blend helps break food down, so meals were associated with feeling less heavy and bloated.",
+            "values_a": "4, 9, 13, 16, 18",
+            "values_b": "3, 7, 11, 14, 16"
+          }
+        },
+        "chart-3": {
+          "type": "chart_series",
+          "settings": {
+            "label": "Balance",
+            "legend_a": "Microbiome balance",
+            "legend_b": "Daily energy",
+            "title": "A balanced gut, day by day",
+            "text": "A balanced microbiome was linked with not just smoother digestion but steadier daily energy over the weeks.",
+            "values_a": "2, 6, 10, 14, 17",
+            "values_b": "2, 5, 9, 12, 15"
+          }
+        },
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need water to take it?",
+            "answer": "No — the strip dissolves on your tongue in seconds. Take it anywhere, no water and no pill to swallow."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it vegan?",
+            "answer": "Yes. The strips are plant-based (pullulan), sweetened with monk fruit and stevia, with no gelatin or animal products."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "What is Bacillus Coagulans?",
+            "answer": "A spore-forming probiotic that's hardy enough to survive stomach acid and reach your gut alive, where it supports a balanced microbiome — 10 billion CFU per strip."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "When should I take it?",
+            "answer": "Once a day, ideally around a meal. Consistency matters more than exact timing for gut balance — most people notice steadier digestion over a few weeks."
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "Who should avoid it?",
+            "answer": "If you're pregnant, nursing, under 18, immunocompromised or have a medical condition, consult a physician before taking probiotics or this supplement."
+          }
+        },
+        "pp-1": {
+          "type": "popup_point",
+          "settings": {
+            "title": "Survives stomach acid",
+            "text": "Bacillus Coagulans is spore-forming, so it reaches the gut alive — unlike many fragile probiotic strains."
+          }
+        },
+        "pp-2": {
+          "type": "popup_point",
+          "settings": {
+            "title": "Triple enzyme blend",
+            "text": "Protease, papain and bromelain break protein down so meals sit lighter and digest more comfortably."
+          }
+        },
+        "pp-3": {
+          "type": "popup_point",
+          "settings": {
+            "title": "Oral-strip delivery",
+            "text": "Dissolves on the tongue for fast, convenient intake — no pills, no powders, no water."
+          }
+        }
+      },
+      "block_order": [
+        "ing-1",
+        "ing-2",
+        "ing-3",
+        "ing-4",
+        "fact-1",
+        "fact-2",
+        "fact-3",
+        "fact-4",
+        "fact-5",
+        "step-1",
+        "step-2",
+        "step-3",
+        "chart-1",
+        "chart-2",
+        "chart-3",
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "pp-1",
+        "pp-2",
+        "pp-3"
+      ],
+      "settings": {
+        "accent": "#b04f7e",
+        "bg": "#fbecf1",
+        "eyebrow": "Oral strips · Digestive & Gut Health",
+        "rating": "4.8 · 510 reviews",
+        "lead": "Gut support that dissolves on your tongue. Each mixed-berry strip delivers 10 billion CFU of Bacillus Coagulans probiotics plus a protease, papain and bromelain enzyme blend — so digestion feels lighter and your microbiome stays balanced. No water, no pills.",
+        "benefits": "Probiotic gut balance\nEnzymes for easier digestion\nLess bloating after meals",
+        "note": "30 oral strips · Mixed Berry · ships in 1–2 days",
+        "marquee1": "10 Billion CFU probiotics\nTriple enzyme blend\nDissolves on your tongue\nMixed berry flavor\nMade in the USA",
+        "lab_eyebrow": "Gut health, simplified",
+        "lab_title": "Probiotics that actually reach your gut",
+        "lab_text": "Most probiotics get destroyed by stomach acid before they do anything. Bacillus Coagulans is different — it's spore-forming, so it survives the journey and reaches your gut alive. We pair 10 billion CFU of it with a protease, papain and bromelain enzyme blend that helps break food down, then deliver it all in a berry strip that dissolves on your tongue.",
+        "lab_button": "How it works",
+        "format_eyebrow": "New format",
+        "format_title": "Gut support, no pills to swallow",
+        "format_text": "No capsules, no powders, no water. One mixed-berry oral strip dissolves on your tongue in seconds — gut care you can take anywhere.",
+        "format_list": "— 1 tin = 30 oral strips (30 servings)\n— 1 strip daily = 10 Billion CFU + protease, papain & bromelain",
+        "popup_eyebrow": "How it works",
+        "popup_title": "Probiotics + enzymes, working together",
+        "popup_lead": "The probiotic rebalances your gut while the enzyme blend breaks food down — so digestion feels lighter from both ends.",
+        "popup_shell_tag": "Dissolves on tongue",
+        "popup_core": "10B CFU + enzymes",
+        "popup_core_tag": "No water needed",
+        "ing_eyebrow": "What's inside?",
+        "ing_title": "One probiotic, three enzymes",
+        "ing_lead": "A spore-forming probiotic to balance the gut, plus protease, papain and bromelain to help break food down.*",
+        "facts_serving": "1 Oral Strip (210 mg)",
+        "facts_servings": "30",
+        "facts_note": "† Daily value not established.",
+        "facts_other": "Other Ingredients: Pullulan, Mannitol, Monk Fruit Extract, Cellulose, Lecithin, Mixed Berry Flavor, Steviol Glycosides.",
+        "facts_side_title": "A clean strip that dissolves on your tongue",
+        "facts_side_text": "No water, no pills — one berry-flavoured oral strip delivers 10 billion CFU of probiotics plus a protease/papain/bromelain enzyme blend. Sweetened naturally with monk fruit and stevia. Made in the USA — 30 strips.",
+        "facts_warning": "",
+        "usage_eyebrow": "How to take",
+        "usage_title": "One strip, dissolves on your tongue",
+        "dose_num": "1",
+        "dose_label": "strip · once a day",
+        "marquee2": "1 strip a day\n10 Billion CFU\nDissolves on tongue\nSubscription saves 10%\nMade in the USA",
+        "chart_eyebrow": "Tracked over 8 weeks",
+        "chart_title": "Digestion that gets steadier",
+        "chart_line_a": "#9c4670",
+        "chart_line_b": "#d98ab0",
+        "faq_title": "Good to know"
+      }
+    },
+    "states": {
+      "type": "uphealth-states-shop",
+      "settings": {
+        "title": "Keep exploring",
+        "lead": "Pick an outcome and browse more formulas — no need to leave the page."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "states"
+  ]
+}

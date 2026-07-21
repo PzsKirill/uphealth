@@ -1,0 +1,115 @@
+<section class="ingredients" aria-label="{{ section.settings.title | escape }}">
+  <div class="container">
+    <header class="product-line__head product-line__head--solo">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="product-line__title">{{ section.settings.title }}</h2>{%- endif -%}
+      </div>
+    </header>
+
+    <div class="carousel" data-carousel>
+      <div class="carousel__controls">
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
+
+      <div class="carousel__viewport">
+        <div class="carousel__track">
+          {%- for block in section.blocks -%}
+          <article class="carousel__slide" {{ block.shopify_attributes }}>
+            <div class="ing-card">
+              <div class="ing-card__media">
+                {%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title | escape }}" loading="lazy" />
+                {%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" />{%- endif -%}
+              </div>
+              <h3 class="ing-card__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.origin != blank -%}<p class="ing-card__origin">{{ block.settings.origin }}</p>{%- endif -%}
+              {%- if block.settings.text != blank -%}<p class="ing-card__text">{{ block.settings.text }}</p>{%- endif -%}
+            </div>
+          </article>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="carousel__dots" aria-hidden="true"></div>
+    </div>
+
+    {%- if section.settings.btn_label != blank -%}
+    <div class="product-line__more">
+      <a href="{{ section.settings.btn_link | default: routes.all_products_collection_url }}" class="btn btn--ghost">{{ section.settings.btn_label }}</a>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var carousel = root.querySelector('[data-carousel]');
+    if (!carousel) return;
+    var track = carousel.querySelector('.carousel__track');
+    var slides = carousel.querySelectorAll('.carousel__slide');
+    var prevBtn = carousel.querySelector('.carousel__btn--prev');
+    var nextBtn = carousel.querySelector('.carousel__btn--next');
+    var dotsHost = carousel.querySelector('.carousel__dots');
+    if (!track || !slides.length) return;
+    var index = 0, perView = 3;
+    function getPerView() { var w = window.innerWidth; if (w <= 640) return 1; if (w <= 1024) return 2; return 3; }
+    function buildDots() {
+      if (!dotsHost) return; dotsHost.innerHTML = '';
+      var pages = Math.max(1, slides.length - perView + 1);
+      for (var i = 0; i < pages; i++) {
+        (function (i) {
+          var d = document.createElement('button');
+          d.className = 'carousel__dot'; d.type = 'button'; d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          if (i === index) d.classList.add('is-active');
+          d.addEventListener('click', function () { go(i); });
+          dotsHost.appendChild(d);
+        })(i);
+      }
+    }
+    function update() {
+      var slideWidth = slides[0].getBoundingClientRect().width;
+      var gap = parseFloat(getComputedStyle(track).gap) || 16;
+      track.style.transform = 'translateX(-' + ((slideWidth + gap) * index) + 'px)';
+      var maxIndex = Math.max(0, slides.length - perView);
+      if (prevBtn) prevBtn.toggleAttribute('disabled', index <= 0);
+      if (nextBtn) nextBtn.toggleAttribute('disabled', index >= maxIndex);
+      if (dotsHost) Array.prototype.forEach.call(dotsHost.querySelectorAll('.carousel__dot'), function (d, i) { d.classList.toggle('is-active', i === index); });
+    }
+    function go(i) { var maxIndex = Math.max(0, slides.length - perView); index = Math.min(Math.max(0, i), maxIndex); update(); }
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(index - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(index + 1); });
+    var startX = 0, currentX = 0, dragging = false;
+    track.addEventListener('pointerdown', function (e) { dragging = true; startX = e.clientX; currentX = 0; track.style.transition = 'none'; });
+    track.addEventListener('pointermove', function (e) { if (dragging) currentX = e.clientX - startX; });
+    track.addEventListener('pointerup', function () { if (!dragging) return; dragging = false; track.style.transition = ''; if (Math.abs(currentX) > 50) go(index + (currentX < 0 ? 1 : -1)); currentX = 0; });
+    window.addEventListener('resize', function () { var pv = getPerView(); if (pv !== perView) { perView = pv; index = Math.min(index, Math.max(0, slides.length - perView)); buildDots(); } update(); });
+    perView = getPerView(); buildDots(); update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth ingredients",
+  "tag": "section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What's inside" },
+    { "type": "text", "id": "title", "label": "Title", "default": "We use natural ingredients" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "See all ingredients" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "ingredient", "name": "Ingredient", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "Image — asset fallback" },
+      { "type": "text", "id": "title", "label": "Name" },
+      { "type": "text", "id": "origin", "label": "Origin" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth ingredients" }]
+}
+{% endschema %}

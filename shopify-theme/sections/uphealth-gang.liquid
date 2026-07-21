@@ -1,0 +1,46 @@
+<section class="gang" aria-label="The wellness gang">
+  <div class="container">
+    <header class="gang__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="gang__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.lead != blank -%}<p class="gang__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="gang__grid">
+      <div class="gang__perks">
+        {%- if section.settings.perks_title != blank -%}<h3 class="gang__perks-title">{{ section.settings.perks_title }}</h3>{%- endif -%}
+        {%- assign perks = section.settings.perks | newline_to_br | split: '<br />' -%}
+        <ul class="perks__list">
+          {%- for p in perks -%}{%- assign pp = p | strip -%}{%- if pp != '' -%}{%- assign parts = pp | split: '|' -%}<li class="perks__item"><span>{{ parts[0] | strip }}</span> {{ parts[1] | strip }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+        {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: '#' }}" class="btn btn--primary">{{ section.settings.button_label }}</a>{%- endif -%}
+      </div>
+
+      <div class="gang__visual" aria-hidden="true">
+        <div class="gang__photo">
+          {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 1000 }}" alt="" loading="lazy" />
+          {%- elsif section.settings.asset != blank -%}<img src="{{ section.settings.asset | asset_url }}" alt="" loading="lazy" />{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth gang",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "UpHealth is" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wellness gang" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "UpHealth isn't only what's in the bottle — it's a community of people for whom taking care of themselves is part of life." },
+    { "type": "text", "id": "perks_title", "label": "Perks title", "default": "What you get after signing up:" },
+    { "type": "textarea", "id": "perks", "label": "Perks (one per line: BOLD | rest)", "default": "500 points | as a gift on your first purchase\n4 levels | of the loyalty program to pay with points\nGifts & perks | for every tier you reach\nEarly access | to new launches and special projects\nInvitations | to closed brand events" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign up" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "Image — asset fallback", "default": "gang.png" }
+  ],
+  "presets": [{ "name": "UpHealth gang" }]
+}
+{% endschema %}

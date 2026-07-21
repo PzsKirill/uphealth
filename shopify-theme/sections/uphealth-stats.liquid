@@ -1,0 +1,67 @@
+<section class="stats">
+  <div class="container">
+    <div class="stats__grid">
+      {%- for block in section.blocks -%}
+      <div class="stat" {{ block.shopify_attributes }}>
+        <span class="stat__num"><span class="counter" data-counter="{{ block.settings.value }}" data-counter-duration="1400">0</span>{% if block.settings.suffix != blank %}<span class="stat__num-suffix">{{ block.settings.suffix }}</span>{% endif %}</span>
+        <span class="stat__label">{{ block.settings.label }}</span>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var counters = document.querySelectorAll('#shopify-section-{{ section.id }} .counter');
+    if (!counters.length) return;
+    function run(el) {
+      var target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+      var dur = parseInt(el.getAttribute('data-counter-duration'), 10) || 1400;
+      var start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString();
+      }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(function (c) { io.observe(c); });
+    } else {
+      counters.forEach(run);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth stats",
+  "tag": "section",
+  "max_blocks": 6,
+  "blocks": [
+    { "type": "stat", "name": "Stat", "settings": [
+      { "type": "text", "id": "value", "label": "Number", "default": "10240" },
+      { "type": "text", "id": "suffix", "label": "Suffix", "default": "+" },
+      { "type": "text", "id": "label", "label": "Label", "default": "Active customers" }
+    ]}
+  ],
+  "presets": [{
+    "name": "UpHealth stats",
+    "blocks": [
+      { "type": "stat", "settings": { "value": "10240", "suffix": "+", "label": "Active customers" } },
+      { "type": "stat", "settings": { "value": "26", "suffix": "", "label": "Formulas shipping" } },
+      { "type": "stat", "settings": { "value": "98", "suffix": "%", "label": "Would reorder" } },
+      { "type": "stat", "settings": { "value": "4", "suffix": "", "label": "Lab partners" } }
+    ]
+  }]
+}
+{% endschema %}

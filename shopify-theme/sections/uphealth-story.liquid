@@ -1,0 +1,41 @@
+<section class="story">
+  <div class="container">
+    <div class="story__grid{% if section.settings.reverse %} story__grid--reverse{% endif %}">
+      <div class="story__visual" aria-hidden="true">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="" loading="lazy" />
+        {%- elsif section.settings.asset != blank -%}
+          <img src="{{ section.settings.asset | asset_url }}" alt="" loading="lazy" />
+        {%- else -%}
+          <img src="{{ 'story.png' | asset_url }}" alt="" loading="lazy" />
+        {%- endif -%}
+      </div>
+      <div class="story__body">
+        {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 class="section-head__title">{{ section.settings.title }}</h2>{%- endif -%}
+        {{ section.settings.body }}
+        {%- if section.settings.sign != blank -%}<p class="story__sign"><strong>{{ section.settings.sign }}</strong></p>{%- endif -%}
+        {%- if section.settings.btn_label != blank -%}<div class="story__cta"><a href="{{ section.settings.btn_link | default: '#' }}" class="btn btn--primary">{{ section.settings.btn_label }}</a></div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth story",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Visual" },
+    { "type": "text", "id": "asset", "label": "Visual — asset fallback (e.g. story.png)" },
+    { "type": "checkbox", "id": "reverse", "label": "Reverse (text left / image right)", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our approach" },
+    { "type": "text", "id": "title", "label": "Title", "default": "There are many ways to care for yourself." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>We choose the scientific one: a method backed by evidence, with formulas built only from components that have proven effects.</p><p>Marketing is loud, science is quiet — so we built the brand we wanted to buy. Doses that match published studies, delivery systems that make a difference, labels you can actually read.</p>" },
+    { "type": "text", "id": "sign", "label": "Signature", "default": "Alina Park — founder, UpHealth" },
+    { "type": "text", "id": "btn_label", "label": "Button label" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "UpHealth story" }]
+}
+{% endschema %}

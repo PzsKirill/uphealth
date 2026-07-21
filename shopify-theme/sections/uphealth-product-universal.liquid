@@ -1,0 +1,501 @@
+{{ 'uphealth.css' | asset_url | stylesheet_tag }}
+{{ 'uphealth-responsive.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign d = product.metafields.custom.content.value
+  assign accent = d.colors.accent | default: '#74548e'
+  assign bg = d.colors.bg | default: '#fefcf9'
+  assign cv = product.selected_or_first_available_variant
+-%}
+
+<style>
+  body { background: {{ bg }}; }
+  #product-{{ section.id }} {
+    --color-accent: {{ accent }}; --color-purple: {{ accent }};
+    --color-accent-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-purple-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-accent-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-purple-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-border: color-mix(in srgb, {{ accent }} 20%, white);
+    --color-bg: {{ bg }};
+    --color-bg-alt: color-mix(in srgb, {{ bg }}, black 7%);
+    --color-bg-card: color-mix(in srgb, {{ bg }} 35%, white);
+    --color-text: color-mix(in srgb, {{ accent }} 72%, black);
+    --color-text-muted: color-mix(in srgb, var(--color-text) 55%, {{ bg }});
+  }
+</style>
+
+<div id="product-{{ section.id }}" class="uphealth">
+
+  <!-- ===== Showcase ===== -->
+  <section class="product-page" aria-label="Product detail">
+    <div class="container">
+      {%- liquid
+        # breadcrumb category: the collection the shopper came through, else the product's first real collection
+        assign bc = collection
+        if bc.handle == blank or bc.handle == 'all' or bc.handle == 'frontpage'
+          assign bc = null
+          for c in product.collections
+            unless c.handle == 'all' or c.handle == 'frontpage'
+              assign bc = c
+              break
+            endunless
+          endfor
+        endif
+      -%}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+          {%- if bc != null -%}<li><a href="{{ bc.url }}">{{ bc.title }}</a></li>{%- endif -%}
+          <li>{{ product.title }}</li>
+        </ol>
+      </nav>
+      <div class="showcase__grid">
+        <div class="showcase__gallery">
+          <div class="up-gallery" data-gallery>
+            <div class="up-gallery__viewport">
+              <div class="up-gallery__track" data-gallery-track>
+                {%- for media in product.media -%}<div class="up-gallery__slide"><img src="{{ media | image_url: width: 900 }}" alt="{{ product.title | escape }}"{% unless forloop.first %} loading="lazy"{% endunless %} /></div>
+                {%- else -%}{%- if product.featured_media -%}<div class="up-gallery__slide"><img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" /></div>{%- endif -%}{%- endfor -%}
+              </div>
+            </div>
+            {%- if product.media.size > 1 -%}
+              <button type="button" class="gallery__arrow gallery__arrow--prev" data-gallery-prev aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button type="button" class="gallery__arrow gallery__arrow--next" data-gallery-next aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            {%- endif -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+          <div class="up-gallery-nav" data-gallery-nav>
+            {%- for media in product.media -%}<button type="button" class="up-gallery-nav__item{% if forloop.first %} is-active{% endif %}" data-gallery-go="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}"><img src="{{ media | image_url: width: 300 }}" alt="" loading="lazy" /></button>{%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+
+        <div class="showcase__info">
+          {%- if d.eyebrow != blank -%}<span class="section-head__eyebrow">{{ d.eyebrow }}</span>{%- endif -%}
+          <h1 class="showcase__title">{{ product.title }}</h1>
+          <div class="showcase__rating"><span class="showcase__stars" aria-hidden="true">★★★★★</span>{%- if d.rating != blank -%}<span>{{ d.rating }}</span>{%- endif -%}</div>
+          {%- if d.lead != blank -%}<div class="showcase__lead">{{ d.lead }}</div>{%- else -%}<div class="showcase__lead">{{ product.description }}</div>{%- endif -%}
+          {%- if d.benefits -%}<ul class="showcase__benefits">{%- for b in d.benefits -%}<li>{{ b }}</li>{%- endfor -%}</ul>{%- endif -%}
+
+          {%- liquid
+            assign the_plan = null
+            for grp in product.selling_plan_groups
+              for pl in grp.selling_plans
+                assign the_plan = pl
+                break
+              endfor
+              if the_plan != null
+                break
+              endif
+            endfor
+            assign cv_sub = 0
+            if the_plan != null
+              for a in cv.selling_plan_allocations
+                if a.selling_plan.id == the_plan.id
+                  assign cv_sub = a.per_delivery_price
+                  break
+                endif
+              endfor
+            endif
+          -%}
+          {%- form 'product', product -%}
+            {%- if product.variants.size > 1 -%}
+            <div class="showcase__field">
+              <span class="showcase__field-label">Build your routine</span>
+              {%- liquid
+                assign best_idx = 0
+                assign best_per = 2147483647
+                assign vi = 0
+                for bv in product.variants
+                  assign bq = bv.title | split: ' ' | first | plus: 0
+                  if bq < 1
+                    assign bq = 1
+                  endif
+                  assign bper = bv.price | divided_by: bq
+                  if bper < best_per
+                    assign best_per = bper
+                    assign best_idx = vi
+                  endif
+                  assign vi = vi | plus: 1
+                endfor
+              -%}
+              <div class="packs" data-packs>
+                {%- for v in product.variants -%}
+                  {%- liquid
+                    assign v_sub = 0
+                    if the_plan != null
+                      for a in v.selling_plan_allocations
+                        if a.selling_plan.id == the_plan.id
+                          assign v_sub = a.per_delivery_price
+                          break
+                        endif
+                      endfor
+                    endif
+                    assign nm = v.title
+                    assign q = nm | split: ' ' | first | plus: 0
+                    if q < 1
+                      assign q = 1
+                    endif
+                  -%}
+                  <label class="pack{% if v == cv %} is-active{% endif %}{% unless v.available %} is-soldout{% endunless %}" data-pack data-price="{{ v.price }}"{% if v.compare_at_price > v.price %} data-compare="{{ v.compare_at_price }}"{% endif %}{% if v_sub > 0 %} data-sub="{{ v_sub }}"{% endif %}>
+                    {%- if forloop.index0 == best_idx -%}<span class="pack__badge">Best value</span>{%- endif -%}
+                    <input type="radio" name="id" value="{{ v.id }}"{% if v == cv %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+                    <span class="pack__radio" aria-hidden="true"></span>
+                    <span class="pack__body">
+                      <span class="pack__name">{%- if nm contains ' · ' -%}{{ nm | split: ' · ' | first }} · <em>{{ nm | split: ' · ' | last }}</em>{%- else -%}{{ nm }}{%- endif -%}</span>
+                      <span class="pack__note">{%- if v.metafields.custom.pack_note != blank -%}{{ v.metafields.custom.pack_note }}{%- elsif q > 1 -%}{{ v.price | divided_by: q | money }} / each{%- elsif d.note != blank -%}{{ d.note | split: ' · ship' | first | split: ' · free' | first }}{%- endif -%}</span>
+                    </span>
+                    <span class="pack__price">
+                      <span class="pack__now">{{ v.price | money }}</span>
+                      {%- if v.compare_at_price > v.price -%}<span class="pack__old">{{ v.compare_at_price | money }}</span>{%- endif -%}
+                    </span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </div>
+            {%- else -%}
+            <input type="hidden" name="id" value="{{ cv.id }}" data-single-id data-price="{{ cv.price }}"{% if cv.compare_at_price > cv.price %} data-compare="{{ cv.compare_at_price }}"{% endif %}{% if cv_sub > 0 %} data-sub="{{ cv_sub }}"{% endif %} />
+            {%- endif -%}
+
+            {%- if the_plan != null -%}
+            {%- assign sp_adj = the_plan.price_adjustments | first -%}
+            <div class="subscribe" data-subscribe data-plan="{{ the_plan.id }}">
+              <label class="subscribe__head">
+                <input type="checkbox" data-sub-toggle />
+                <span class="subscribe__visual" aria-hidden="true"><span class="subscribe__visual-knob"></span></span>
+                <span class="subscribe__copy">
+                  <strong>Subscribe &amp; save{% if sp_adj.value_type == 'percentage' %} another {{ sp_adj.value }}%{% endif %} <span class="subscribe__badge">Free shipping</span></strong>
+                  <span>{{ the_plan.name }} · skip, pause or cancel anytime</span>
+                </span>
+                <span class="subscribe__price">
+                  <strong data-sub-save></strong>
+                  <span>per delivery</span>
+                </span>
+              </label>
+            </div>
+            <input type="hidden" name="selling_plan" value="" data-selling-plan>
+            {%- endif -%}
+
+            <div class="subscriptions_app_embed_block" hidden></div>
+            <div class="showcase__buy">
+              <div class="showcase__price">
+                <span class="showcase__price-now" data-price-now>{{ cv.price | money }}</span>
+                <span class="showcase__price-old" data-price-old{% unless cv.compare_at_price > cv.price %} hidden{% endunless %}>{% if cv.compare_at_price > cv.price %}{{ cv.compare_at_price | money }}{% endif %}</span>
+              </div>
+              <button type="submit" name="add" class="btn btn--primary btn--lg btn--full"{% unless cv.available %} disabled{% endunless %}>{% if cv.available %}Add to cart{% else %}Sold out{% endif %}</button>
+            </div>
+          {%- endform -%}
+          {%- if d.note != blank -%}<p class="showcase__note">{{ d.note }}</p>{%- endif -%}
+          <button type="button" class="up-fav-toggle" data-fav data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-image="{{ product.featured_media | image_url: width: 200 }}" data-price="{{ cv.price | money }}" data-url="{{ product.url }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
+            <span>Save to favorites</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- if d.marquee_top -%}<div class="marquee" aria-hidden="true"><div class="marquee__track">{%- for i in (1..2) -%}{%- for m in d.marquee_top -%}<span class="marquee__item">{{ m }}</span>{%- endfor -%}{%- endfor -%}</div></div>{%- endif -%}
+
+  <!-- ===== Science ===== -->
+  {%- if d.science.title != blank or d.format.title != blank -%}
+  <section class="feature" aria-label="The science">
+    <div class="container">
+      {%- if d.science.title != blank -%}
+      <div class="feature-split">
+        <div class="feature-split__media">{%- if product.media[1] -%}<img src="{{ product.media[1] | image_url: width: 800 }}" alt="" />{%- elsif product.featured_media -%}<img src="{{ product.featured_media | image_url: width: 800 }}" alt="" />{%- endif -%}</div>
+        <div class="feature-split__body">
+          {%- if d.science.eyebrow != blank -%}<span class="pill-eyebrow">{{ d.science.eyebrow }}</span>{%- endif -%}
+          <h2 class="feature-split__title">{{ d.science.title }}</h2>
+          <p class="feature-split__text">{{ d.science.text }}</p>
+          {%- if d.absorb.title != blank -%}<a href="#" class="btn btn--primary" data-absorb-open>{{ d.science.button | default: 'Learn more' }}</a>{%- endif -%}
+        </div>
+      </div>
+      {%- endif -%}
+      {%- if d.format.title != blank -%}
+      <div class="feature-split feature-split--reverse">
+        <div class="feature-split__media">{%- if product.media[2] -%}<img src="{{ product.media[2] | image_url: width: 800 }}" alt="" />{%- elsif product.featured_media -%}<img src="{{ product.featured_media | image_url: width: 800 }}" alt="" />{%- endif -%}</div>
+        <div class="feature-split__body">
+          {%- if d.format.eyebrow != blank -%}<span class="pill-eyebrow">{{ d.format.eyebrow }}</span>{%- endif -%}
+          <h2 class="feature-split__title">{{ d.format.title }}</h2>
+          <p class="feature-split__text">{{ d.format.text }}</p>
+          {%- if d.format.list -%}<ul class="feature-split__list">{%- for li in d.format.list -%}<li>{{ li }}</li>{%- endfor -%}</ul>{%- endif -%}
+          <a href="#" class="btn btn--primary" data-add-proxy>Add to cart</a>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Ingredients + Supplement facts ===== -->
+  {%- if d.ingredients.items or d.facts.rows or d.facts.side_title != blank -%}
+  <section class="ingredients" aria-label="What's inside">
+    <div class="container">
+      {%- if d.ingredients.items -%}
+      <div class="section-head section-head--center">
+        {%- if d.ingredients.eyebrow != blank -%}<span class="section-head__eyebrow">{{ d.ingredients.eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ d.ingredients.title }}</h2>
+        {%- if d.ingredients.lead != blank -%}<p class="section-head__lead">{{ d.ingredients.lead }}</p>{%- endif -%}
+      </div>
+      <div class="ingredients__grid">
+        {%- for it in d.ingredients.items -%}
+        <article class="ingredient-card">
+          <span class="ingredient-card__icon">{% render 'uphealth-icon', key: it.icon %}</span>
+          <h3 class="ingredient-card__name">{{ it.name }}</h3>
+          {%- if it.latin != blank -%}<span class="ingredient-card__latin">{{ it.latin }}</span>{%- endif -%}
+          {%- if it.amount != blank -%}<span class="ingredient-card__amount">{{ it.amount }}</span>{%- endif -%}
+          <p class="ingredient-card__text">{{ it.text }}</p>
+        </article>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      {%- if d.facts.rows or d.facts.side_title != blank -%}
+      <div class="ingredients__facts">
+        {%- if d.facts.rows -%}
+        <div class="supp-facts">
+          <div class="supp-facts__title">Supplement Facts</div>
+          <div class="supp-facts__meta">Serving Size: {{ d.facts.serving }} · Servings Per Container: {{ d.facts.servings }}</div>
+          <div class="supp-facts__head"><span>Amount Per Serving</span><span>% DV</span></div>
+          {%- for r in d.facts.rows -%}<div class="supp-facts__row"><span>{{ r.label }}</span><b>{{ r.amount }}</b><span>{{ r.dv }}</span></div>{%- endfor -%}
+          {%- if d.facts.note != blank -%}<div class="supp-facts__note">{{ d.facts.note }}</div>{%- endif -%}
+          {%- if d.facts.other != blank -%}<div class="supp-facts__other">{{ d.facts.other }}</div>{%- endif -%}
+        </div>
+        {%- endif -%}
+        <div>
+          {%- if d.facts.side_title != blank -%}<h3 class="feature-split__title">{{ d.facts.side_title }}</h3>{%- endif -%}
+          {%- if d.facts.side_text != blank -%}<p class="feature-split__text">{{ d.facts.side_text }}</p>{%- endif -%}
+          {%- if d.facts.warning != blank -%}<p class="fine-print"><strong>WARNING:</strong> {{ d.facts.warning }}</p>{%- endif -%}
+          <p class="fine-print">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</p>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Usage ===== -->
+  {%- if d.usage.steps -%}
+  <section class="usage" aria-label="When to take">
+    <div class="container">
+      <div class="section-head section-head--center">
+        {%- if d.usage.eyebrow != blank -%}<span class="section-head__eyebrow">{{ d.usage.eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ d.usage.title }}</h2>
+      </div>
+      <div class="usage__card">
+        <div class="usage__dose"><div class="usage__dose-num">{{ d.usage.dose_num }}</div><div class="usage__dose-label">{{ d.usage.dose_label }}</div></div>
+        <div class="usage__steps">
+          {%- for st in d.usage.steps -%}<div class="usage__step"><span class="usage__step-ic">{% render 'uphealth-icon', key: st.icon %}</span><div><h4>{{ st.title }}</h4><p>{{ st.text }}</p></div></div>{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if d.marquee_bottom -%}<div class="marquee" aria-hidden="true"><div class="marquee__track">{%- for i in (1..2) -%}{%- for m in d.marquee_bottom -%}<span class="marquee__item">{{ m }}</span>{%- endfor -%}{%- endfor -%}</div></div>{%- endif -%}
+
+  <!-- ===== Chart ===== -->
+  {%- if d.chart.series -%}
+  <section class="chart-block" aria-label="Tracked over time">
+    <div class="container">
+      <div class="chart-block__head">
+        <div class="section-head" style="margin-bottom:0;">
+          {%- if d.chart.eyebrow != blank -%}<span class="section-head__eyebrow">{{ d.chart.eyebrow }}</span>{%- endif -%}
+          <h2 class="section-head__title">{{ d.chart.title }}</h2>
+        </div>
+        <a href="#" class="btn btn--primary" data-add-proxy>Add to cart</a>
+      </div>
+      <div class="chart-tabs" role="tablist">
+        {%- for ser in d.chart.series -%}<button class="chart-tab{% if forloop.first %} is-active{% endif %}" data-chart-i="{{ forloop.index0 }}" role="tab">{{ ser.label }}</button>{%- endfor -%}
+      </div>
+      <div class="chart-card">
+        <div>
+          <h3 class="chart-card__title" data-chart-title></h3>
+          <p class="chart-card__text" data-chart-text></p>
+          <div class="chart-legend">
+            <div class="chart-legend__item"><span class="chart-legend__sw" style="background:{{ d.chart.line_a | default: '#74548e' }}"></span><span data-legend-a></span></div>
+            <div class="chart-legend__item"><span class="chart-legend__sw" style="background:{{ d.chart.line_b | default: '#c79a5a' }}"></span><span data-legend-b></span></div>
+          </div>
+          <p class="fine-print">Illustrative, self-reported data for presentation only — not a clinical claim.</p>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 540 290" role="img">
+            <g class="chart__grid"><line x1="60" y1="240" x2="500" y2="240"/><line x1="60" y1="190" x2="500" y2="190"/><line x1="60" y1="140" x2="500" y2="140"/><line x1="60" y1="90" x2="500" y2="90"/><line x1="60" y1="40" x2="500" y2="40"/></g>
+            <g class="chart__axis" text-anchor="end"><text x="48" y="244">0</text><text x="48" y="194">5</text><text x="48" y="144">10</text><text x="48" y="94">15</text><text x="48" y="44">20</text></g>
+            <polyline id="up-line-b" fill="none" stroke="{{ d.chart.line_b | default: '#c79a5a' }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points=""></polyline>
+            <polyline id="up-line-a" fill="none" stroke="{{ d.chart.line_a | default: '#74548e' }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points=""></polyline>
+            <g id="up-dots"></g>
+          </svg>
+        </div>
+      </div>
+      <script type="application/json" data-up-chart>
+      { "lineA": {{ d.chart.line_a | default: '#74548e' | json }}, "lineB": {{ d.chart.line_b | default: '#c79a5a' | json }}, "tabs": [
+        {%- for ser in d.chart.series -%}{%- unless forloop.first %},{% endunless %}{ "label": {{ ser.label | json }}, "la": {{ ser.legend_a | json }}, "lb": {{ ser.legend_b | json }}, "title": {{ ser.title | json }}, "text": {{ ser.text | json }}, "a": {{ ser.values_a | json }}, "b": {{ ser.values_b | json }} }{%- endfor -%}
+      ] }
+      </script>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== FAQ ===== -->
+  {%- if d.faq.items -%}
+  <section class="product-details" aria-label="FAQ">
+    <div class="container container--narrow">
+      <div class="section-head section-head--center"><span class="section-head__eyebrow">FAQ</span><h2 class="section-head__title">{{ d.faq.title | default: 'Good to know' }}</h2></div>
+      <ul class="faq__list">
+        {%- for f in d.faq.items -%}
+        <li class="faq__item{% if forloop.first %} is-open{% endif %}">
+          <button class="faq__q" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"><span>{{ f.q }}</span><span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a"><p>{{ f.a }}</p></div>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Absorb popup ===== -->
+  {%- if d.absorb.title != blank -%}
+  <div class="modal" id="up-modal" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true">
+      <button class="modal__close" data-modal-close aria-label="Close">×</button>
+      <div class="section-head">
+        {%- if d.absorb.eyebrow != blank -%}<span class="section-head__eyebrow">{{ d.absorb.eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ d.absorb.title }}</h2>
+        {%- if d.absorb.lead != blank -%}<p class="section-head__lead">{{ d.absorb.lead }}</p>{%- endif -%}
+      </div>
+      <div class="absorb__inner">
+        <div class="absorb__diagram">
+          <span class="absorb__ring"></span><span class="absorb__ring absorb__ring--mid"></span>
+          {%- if d.absorb.shell_tag != blank -%}<span class="absorb__tag absorb__tag--shell">{{ d.absorb.shell_tag }}</span>{%- endif -%}
+          <span class="absorb__core">{{ d.absorb.core }}</span>
+          {%- if d.absorb.core_tag != blank -%}<span class="absorb__tag absorb__tag--core">{{ d.absorb.core_tag }}</span>{%- endif -%}
+        </div>
+        <div class="absorb__points">
+          {%- assign pi = 0 -%}
+          {%- for p in d.absorb.points -%}{%- assign pi = pi | plus: 1 -%}<div class="absorb__point"><span class="absorb__point-num">{{ pi }}</span><div><h4>{{ p.title }}</h4><p>{{ p.text }}</p></div></div>{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('product-{{ section.id }}');
+    if (!root) return;
+    (function () {
+      var track = root.querySelector('[data-gallery-track]');
+      if (!track) return;
+      var n = track.children.length;
+      var nav = Array.prototype.slice.call(root.querySelectorAll('[data-gallery-go]'));
+      var prev = root.querySelector('[data-gallery-prev]'), next = root.querySelector('[data-gallery-next]'), i = 0;
+      function go(idx) { i = Math.max(0, Math.min(n - 1, idx)); track.style.transform = 'translateX(' + (-i * 100) + '%)'; nav.forEach(function (b, k) { b.classList.toggle('is-active', k === i); }); if (prev) prev.classList.toggle('is-disabled', i === 0); if (next) next.classList.toggle('is-disabled', i === n - 1); }
+      if (prev) prev.addEventListener('click', function () { go(i - 1); });
+      if (next) next.addEventListener('click', function () { go(i + 1); });
+      nav.forEach(function (b) { b.addEventListener('click', function () { go(parseInt(b.getAttribute('data-gallery-go'), 10)); }); });
+      go(0);
+    })();
+    root.querySelectorAll('.faq__q').forEach(function (q) { q.addEventListener('click', function () { var item = q.closest('.faq__item'); var open = item.classList.toggle('is-open'); q.setAttribute('aria-expanded', open ? 'true' : 'false'); }); });
+    var modal = document.getElementById('up-modal');
+    if (modal) {
+      var openM = function (e) { if (e) e.preventDefault(); modal.classList.add('is-open'); document.body.style.overflow = 'hidden'; };
+      var closeM = function () { modal.classList.remove('is-open'); document.body.style.overflow = ''; };
+      root.querySelectorAll('[data-absorb-open]').forEach(function (b) { b.addEventListener('click', openM); });
+      modal.querySelectorAll('[data-modal-close]').forEach(function (b) { b.addEventListener('click', closeM); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeM(); });
+    }
+    var realBtn = root.querySelector('.showcase__buy button[name="add"]');
+    root.querySelectorAll('[data-add-proxy]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); if (realBtn) realBtn.click(); }); });
+
+    /* ---- Build your routine: packs + subscription ---- */
+    (function () {
+      var form = root.querySelector('.showcase__info form');
+      if (!form) return;
+      var moneyFormat = {{ shop.money_format | json }};
+      function formatMoney(cents) {
+        cents = Math.round(cents || 0);
+        var whole = Math.round(cents / 100).toString();
+        var withDec = (cents / 100).toFixed(2);
+        return moneyFormat.replace(/\{\{\s*(\w+)\s*\}\}/g, function (m, name) {
+          switch (name) {
+            case 'amount': return withDec;
+            case 'amount_with_comma_separator': return withDec.replace('.', ',');
+            case 'amount_no_decimals': return whole;
+            case 'amount_no_decimals_with_comma_separator': return whole;
+            default: return withDec;
+          }
+        });
+      }
+      var priceNow = form.querySelector('[data-price-now]');
+      var priceOld = form.querySelector('[data-price-old]');
+      var packs = Array.prototype.slice.call(form.querySelectorAll('[data-pack]'));
+      var single = form.querySelector('[data-single-id]');
+      var subToggle = form.querySelector('[data-sub-toggle]');
+      var subSave = form.querySelector('[data-sub-save]');
+      var subRow = form.querySelector('[data-subscribe]');
+      var planInput = form.querySelector('[data-selling-plan]');
+      var planId = subRow ? subRow.getAttribute('data-plan') : '';
+      function num(el, attr) { return parseInt((el && el.getAttribute(attr)) || '0', 10); }
+      /* best-value badge + pack notes are rendered server-side in Liquid */
+      function current() {
+        var checked = form.querySelector('[data-pack] input:checked');
+        if (checked) return checked.closest('[data-pack]');
+        if (packs.length) return packs[0];
+        return single;
+      }
+      function update() {
+        var el = current();
+        if (!el) return;
+        var price = num(el, 'data-price'), compare = num(el, 'data-compare'), sub = num(el, 'data-sub');
+        packs.forEach(function (p) { p.classList.toggle('is-active', p === el); });
+        var wantSub = !!(subToggle && subToggle.checked);
+        if (subRow) subRow.classList.toggle('is-active', wantSub);
+        var on = wantSub && sub > 0;
+        if (priceNow) priceNow.textContent = formatMoney(on ? sub : price);
+        if (priceOld) {
+          if (on) { priceOld.textContent = formatMoney(price); priceOld.hidden = false; }
+          else if (compare > price) { priceOld.textContent = formatMoney(compare); priceOld.hidden = false; }
+          else { priceOld.hidden = true; }
+        }
+        if (subSave) subSave.textContent = (sub > 0 && price > sub) ? ('−' + formatMoney(price - sub)) : '';
+        if (planInput) planInput.value = wantSub ? planId : '';
+      }
+      packs.forEach(function (p) { var r = p.querySelector('input'); if (r) r.addEventListener('change', update); });
+      if (subToggle) subToggle.addEventListener('change', update);
+      update();
+    })();
+    var chartEl = root.querySelector('[data-up-chart]');
+    if (chartEl) {
+      var chart; try { chart = JSON.parse(chartEl.textContent); } catch (e) { chart = {}; }
+      var tabs = chart.tabs || [], ca = chart.lineA || '#74548e', cb = chart.lineB || '#c79a5a';
+      var lineA = document.getElementById('up-line-a'), lineB = document.getElementById('up-line-b'), dots = document.getElementById('up-dots');
+      var titleEl = root.querySelector('[data-chart-title]'), textEl = root.querySelector('[data-chart-text]'), laEl = root.querySelector('[data-legend-a]'), lbEl = root.querySelector('[data-legend-b]');
+      var X = function (i) { return 60 + i * 110; }, Y = function (v) { return 240 - (v / 20) * 200; };
+      var pts = function (arr) { return arr.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' '); };
+      var NS = 'http://www.w3.org/2000/svg';
+      var drawDots = function (arr, color) { arr.forEach(function (v, i) { var el = document.createElementNS(NS, 'circle'); el.setAttribute('cx', X(i)); el.setAttribute('cy', Y(v)); el.setAttribute('r', 4.5); el.setAttribute('fill', color); el.setAttribute('stroke', '#fff'); el.setAttribute('stroke-width', '1.5'); dots.appendChild(el); }); };
+      var render = function (i) { var dd = tabs[i]; if (!dd) return; lineA.setAttribute('points', pts(dd.a || [])); lineB.setAttribute('points', pts(dd.b || [])); dots.textContent = ''; drawDots(dd.b || [], cb); drawDots(dd.a || [], ca); titleEl.textContent = dd.title || ''; textEl.textContent = dd.text || ''; laEl.textContent = dd.la || ''; lbEl.textContent = dd.lb || ''; };
+      root.querySelectorAll('.chart-tab').forEach(function (t) { t.addEventListener('click', function () { root.querySelectorAll('.chart-tab').forEach(function (x) { x.classList.remove('is-active'); }); t.classList.add('is-active'); render(parseInt(t.dataset.chartI, 10)); }); });
+      if (tabs.length) render(0);
+    }
+  })();
+</script>
+
+{%- render 'uphealth-jsonld-product' -%}
+
+{% schema %}
+{
+  "name": "UpHealth universal",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Reads all content from the product JSON metafield custom.content. Commerce (gallery, price, variants, add-to-cart) is automatic. Empty metafield → clean basic page." }
+  ]
+}
+{% endschema %}

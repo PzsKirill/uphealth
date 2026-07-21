@@ -1,0 +1,19 @@
+<section class="marquee-section" aria-hidden="true">
+  <div class="marquee">
+    <div class="marquee__track">
+      {%- assign items = section.settings.phrases | newline_to_br | split: '<br />' -%}
+      {%- for i in (1..2) -%}{%- for it in items -%}{%- assign t = it | strip -%}{%- if t != '' -%}<span class="marquee__item">{{ t }}</span>{%- endif -%}{%- endfor -%}{%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth marquee",
+  "tag": "section",
+  "settings": [
+    { "type": "textarea", "id": "phrases", "label": "Phrases (one per line)", "default": "Feel your best self\nClean, science-backed formulas\nVegan & third-party tested\nMade in the USA" }
+  ],
+  "presets": [{ "name": "UpHealth marquee" }]
+}
+{% endschema %}

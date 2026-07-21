@@ -1,0 +1,113 @@
+<style>body { background: var(--color-bg); }</style>
+
+{%- liquid
+  assign h = collection.handle
+  assign is_all = false
+  if h == blank or h == 'all' or h == 'frontpage'
+    assign is_all = true
+  endif
+-%}
+
+<section class="page-hero" aria-label="{{ collection.title | escape }}">
+  <div class="page-hero__inner container">
+    <div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li>{{ collection.title | default: 'Shop' }}</li>
+        </ol>
+      </nav>
+      <h1 class="page-hero__title">{{ collection.title | default: 'All products' }}</h1>
+      {%- if collection.description != blank -%}<p class="page-hero__lead">{{ collection.description | strip_html | truncatewords: 40 }}</p>
+      {%- elsif section.settings.lead != blank -%}<p class="page-hero__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </div>
+    <div class="page-hero__meta">
+      <div><strong>{{ collection.products_count }}</strong> products</div>
+      <div><strong>10</strong> outcomes covered</div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="container">
+
+    {%- if section.settings.show_pills -%}
+    <nav class="catalog__pills state-pills" aria-label="Shop by goal">
+      <a class="state-pill{% if is_all %} is-active{% endif %}" data-state="all" href="{{ routes.all_products_collection_url }}"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>All</a>
+      <a class="state-pill{% if h == 'state-energy' %} is-active{% endif %}" data-state="energy" href="{{ routes.root_url }}collections/state-energy"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13h6l-1 9 8-12h-6l1-8z"/></svg></span>Energy &amp; Stamina</a>
+      <a class="state-pill{% if h == 'state-immune' %} is-active{% endif %}" data-state="immune" href="{{ routes.root_url }}collections/state-immune"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Immune Support</a>
+      <a class="state-pill{% if h == 'state-strength' %} is-active{% endif %}" data-state="strength" href="{{ routes.root_url }}collections/state-strength"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/></svg></span>Strength &amp; Muscle Recovery</a>
+      <a class="state-pill{% if h == 'state-focus' %} is-active{% endif %}" data-state="focus" href="{{ routes.root_url }}collections/state-focus"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg></span>Memory &amp; Focus</a>
+      <a class="state-pill{% if h == 'state-mood' %} is-active{% endif %}" data-state="mood" href="{{ routes.root_url }}collections/state-mood"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z"/><path d="M4 20c2-5 5-8 9-10.5"/></svg></span>Mood &amp; Relaxation</a>
+      <a class="state-pill{% if h == 'state-sleep' %} is-active{% endif %}" data-state="sleep" href="{{ routes.root_url }}collections/state-sleep"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>Sleep &amp; Rest</a>
+      <a class="state-pill{% if h == 'metabolic-health-weight-support' %} is-active{% endif %}" data-state="metabolic" href="{{ routes.root_url }}collections/metabolic-health-weight-support"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18a8 8 0 1 1 15 0"/><circle cx="12" cy="18" r="1.4"/><path d="m12 18 3.6-3.8"/></svg></span>Metabolic Health &amp; Weight Support</a>
+      <a class="state-pill{% if h == 'liver-health' %} is-active{% endif %}" data-state="liver" href="{{ routes.root_url }}collections/liver-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 5.2 5.5 9.5a5.5 5.5 0 0 1-11 0c0-4.3 5.5-9.5 5.5-9.5z"/><path d="M9.5 13a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>Liver Health</a>
+      <a class="state-pill{% if h == 'joint-bone-health' %} is-active{% endif %}" data-state="joint" href="{{ routes.root_url }}collections/joint-bone-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5z"/></svg></span>Joint &amp; Bone Health</a>
+      <a class="state-pill{% if h == 'hair-skin-nail-health' %} is-active{% endif %}" data-state="beauty" href="{{ routes.root_url }}collections/hair-skin-nail-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg></span>Hair, Skin &amp; Nail Health</a>
+    </nav>
+    {%- endif -%}
+
+    <div class="catalog__toolbar">
+      <p class="catalog__count"><strong>{{ collection.products_count }}</strong> products</p>
+      {%- if collection.sort_options.size > 0 -%}
+      <label class="catalog__sort">
+        <span class="catalog__sort-label">Sort by</span>
+        <span class="catalog__sort-field">
+          <select id="catalog-sort" aria-label="Sort products">
+            {%- for option in collection.sort_options -%}<option value="{{ option.value }}"{% if option.value == collection.sort_by %} selected{% endif %}>{{ option.name }}</option>{%- endfor -%}
+          </select>
+          <svg class="catalog__sort-caret" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </label>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collection.products by section.settings.per_page -%}
+    <div class="catalog__grid catalog__grid--nofilters">
+      <div class="catalog__main">
+        {%- if collection.products.size > 0 -%}
+        <div class="catalog__grid-products">
+          {%- for product in collection.products -%}{% render 'uphealth-product-card', product: product %}{%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+        <nav class="catalog__pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="catalog__page catalog__page--nav" aria-label="Previous">‹</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}" class="catalog__page">{{ part.title }}</a>
+            {%- else -%}<span class="catalog__page{% if part.title == paginate.current_page %} is-active{% endif %}">{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="catalog__page catalog__page--nav" aria-label="Next">›</a>{%- endif -%}
+        </nav>
+        {%- endif -%}
+        {%- else -%}
+        <p class="catalog__empty">No products match these filters.{% if collection.filters.size > 0 %} <a class="catalog__empty-reset" href="{{ collection.url }}">Reset filters</a>{% endif %}</p>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endpaginate -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sel = document.getElementById('catalog-sort');
+    if (sel) sel.addEventListener('change', function () {
+      var url = new URL(window.location.href);
+      url.searchParams.set('sort_by', sel.value);
+      url.searchParams.delete('page');
+      window.location.href = url.toString();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth collection",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_pills", "label": "Show outcome pills", "default": true },
+    { "type": "textarea", "id": "lead", "label": "Fallback lead (if no collection description)", "default": "The full catalog — filter by format, state or price to narrow down what fits your routine." },
+    { "type": "range", "id": "per_page", "min": 8, "max": 24, "step": 4, "label": "Products per page", "default": 12 }
+  ]
+}
+{% endschema %}

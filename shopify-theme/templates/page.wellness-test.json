@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "settings": {
+        "title": "Find your <em>formula</em>",
+        "lead": "Answer a few quick questions and we'll point you to the outcomes that fit your body and routine."
+      }
+    },
+    "quiz": {
+      "type": "uphealth-quiz",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "What would you most like to improve?", "options": "More energy & stamina::energy\nA stronger immune system::immune\nStrength & recovery::strength\nFocus & memory::focus\nMood & calm::mood\nBetter sleep::sleep\nMetabolism & weight::metabolic\nLiver & detox support::liver\nJoint & bone health::joint\nHair, skin & nails::beauty" } },
+        "q2": { "type": "question", "settings": { "question": "How do your afternoons usually feel?", "options": "I crash and need a boost::energy\nFoggy, hard to concentrate::focus\nTense or stressed::mood\nSore from training::strength" } },
+        "q3": { "type": "question", "settings": { "question": "What gets in your way the most?", "options": "Low energy::energy\nGetting sick often::immune\nRestless nights::sleep\nEveryday stress::mood" } },
+        "q4": { "type": "question", "settings": { "question": "How is your sleep lately?", "options": "Hard to fall asleep::sleep\nLight and restless::sleep\nFine, but I wake up tired::energy\nGood — I just want to stay sharp::focus" } },
+        "r1": { "type": "result", "settings": { "outcome": "energy", "title": "Energy & Stamina", "text": "Clean, steady energy — without the spikes and the crash.", "cta_label": "Shop Energy formulas", "cta_link": "/collections/state-energy" } },
+        "r2": { "type": "result", "settings": { "outcome": "immune", "title": "Immune Support", "text": "Daily defense to keep you resilient year-round.", "cta_label": "Shop Immune formulas", "cta_link": "/collections/state-immune" } },
+        "r3": { "type": "result", "settings": { "outcome": "strength", "title": "Strength & Muscle Recovery", "text": "Build, recover and bounce back faster after every session.", "cta_label": "Shop Strength formulas", "cta_link": "/collections/state-strength" } },
+        "r4": { "type": "result", "settings": { "outcome": "focus", "title": "Memory & Focus", "text": "Sharper focus and clear, calm concentration.", "cta_label": "Shop Focus formulas", "cta_link": "/collections/state-focus" } },
+        "r5": { "type": "result", "settings": { "outcome": "mood", "title": "Mood & Relaxation", "text": "Find your calm and lift your mood, naturally.", "cta_label": "Shop Mood formulas", "cta_link": "/collections/state-mood" } },
+        "r6": { "type": "result", "settings": { "outcome": "sleep", "title": "Sleep & Rest", "text": "Fall asleep easier and wake up genuinely restored.", "cta_label": "Shop Sleep formulas", "cta_link": "/collections/state-sleep" } },
+        "r7": { "type": "result", "settings": { "outcome": "metabolic", "title": "Metabolic Health & Weight Support", "text": "Support a healthy metabolism, balanced blood sugar and your weight-management goals.", "cta_label": "Shop Metabolic formulas", "cta_link": "/collections/metabolic-health-weight-support" } },
+        "r8": { "type": "result", "settings": { "outcome": "liver", "title": "Liver Health", "text": "Everyday support for your body's natural detox and a healthy, hard-working liver.", "cta_label": "Shop Liver formulas", "cta_link": "/collections/liver-health" } },
+        "r9": { "type": "result", "settings": { "outcome": "joint", "title": "Joint & Bone Health", "text": "Keep joints comfortable and bones strong so you can keep moving.", "cta_label": "Shop Joint & Bone formulas", "cta_link": "/collections/joint-bone-health" } },
+        "r10": { "type": "result", "settings": { "outcome": "beauty", "title": "Hair, Skin & Nail Health", "text": "Nourish your hair, skin and nails from within for a natural, healthy glow.", "cta_label": "Shop Hair, Skin & Nail formulas", "cta_link": "/collections/hair-skin-nail-health" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "quiz"]
+}

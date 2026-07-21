@@ -1,0 +1,494 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+{{ 'uphealth.css' | asset_url | stylesheet_tag }}
+{{ 'uphealth-responsive.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign accent = section.settings.accent | default: '#74548e'
+  assign bg = section.settings.bg | default: '#fefcf9'
+  assign cv = product.selected_or_first_available_variant
+  assign s = section.settings
+-%}
+
+<style>
+  body { background: {{ bg }}; }
+  #product-{{ section.id }} {
+    --color-accent: {{ accent }};
+    --color-purple: {{ accent }};
+    --color-accent-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-purple-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-accent-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-purple-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-border: color-mix(in srgb, {{ accent }} 20%, white);
+    --color-bg: {{ bg }};
+    --color-bg-alt: color-mix(in srgb, {{ bg }}, black 7%);
+    --color-bg-card: color-mix(in srgb, {{ bg }} 35%, white);
+    --color-text: color-mix(in srgb, {{ accent }} 72%, black);
+    --color-text-muted: color-mix(in srgb, var(--color-text) 55%, {{ bg }});
+  }
+</style>
+
+<div id="product-{{ section.id }}" class="uphealth">
+
+  <!-- ===== Showcase ===== -->
+  <section class="product-page" aria-label="Product detail">
+    <div class="container">
+      <div class="showcase__grid">
+        <div class="showcase__gallery">
+          <div class="up-gallery" data-gallery>
+            <div class="up-gallery__viewport">
+              <div class="up-gallery__track" data-gallery-track>
+                {%- for media in product.media -%}
+                  <div class="up-gallery__slide"><img src="{{ media | image_url: width: 900 }}" alt="{{ product.title | escape }}"{% unless forloop.first %} loading="lazy"{% endunless %} /></div>
+                {%- else -%}
+                  {%- if product.featured_media -%}<div class="up-gallery__slide"><img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" /></div>{%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+            {%- if product.media.size > 1 -%}
+              <button type="button" class="gallery__arrow gallery__arrow--prev" data-gallery-prev aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button type="button" class="gallery__arrow gallery__arrow--next" data-gallery-next aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            {%- endif -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+          <div class="up-gallery-nav" data-gallery-nav>
+            {%- for media in product.media -%}
+              <button type="button" class="up-gallery-nav__item{% if forloop.first %} is-active{% endif %}" data-gallery-go="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}"><img src="{{ media | image_url: width: 300 }}" alt="" loading="lazy" /></button>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+
+        <div class="showcase__info">
+          {%- if s.eyebrow != blank -%}<span class="section-head__eyebrow">{{ s.eyebrow }}</span>{%- endif -%}
+          <h1 class="showcase__title">{{ product.title }}</h1>
+          <div class="showcase__rating"><span class="showcase__stars" aria-hidden="true">★★★★★</span>{%- if s.rating != blank -%}<span>{{ s.rating }}</span>{%- endif -%}</div>
+          {%- if s.lead != blank -%}<div class="showcase__lead">{{ s.lead }}</div>{%- else -%}<div class="showcase__lead">{{ product.description }}</div>{%- endif -%}
+          {%- assign benefits = s.benefits | newline_to_br | split: '<br />' -%}
+          {%- if s.benefits != blank -%}<ul class="showcase__benefits">{%- for b in benefits -%}{%- assign b = b | strip -%}{%- if b != '' -%}<li>{{ b }}</li>{%- endif -%}{%- endfor -%}</ul>{%- endif -%}
+
+          <div class="showcase__buy">
+            <div class="showcase__price">
+              <span class="showcase__price-now">{{ cv.price | money }}</span>
+              {%- if cv.compare_at_price > cv.price -%}<span class="showcase__price-old">{{ cv.compare_at_price | money }}</span>{%- endif -%}
+            </div>
+            {%- form 'product', product -%}
+              <input type="hidden" name="id" value="{{ cv.id }}" />
+              <div class="subscriptions_app_embed_block"></div>
+              <button type="submit" name="add" class="btn btn--primary btn--lg btn--full"{% unless cv.available %} disabled{% endunless %}>{% if cv.available %}Add to cart{% else %}Sold out{% endif %}</button>
+            {%- endform -%}
+          </div>
+          {%- if s.note != blank -%}<p class="showcase__note">{{ s.note }}</p>{%- endif -%}
+          <button type="button" class="up-fav-toggle" data-fav data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-image="{{ product.featured_media | image_url: width: 200 }}" data-price="{{ cv.price | money }}" data-url="{{ product.url }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
+            <span>Save to favorites</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- assign marquee1 = s.marquee1 | newline_to_br | split: '<br />' -%}
+  {%- if s.marquee1 != blank -%}<div class="marquee" aria-hidden="true"><div class="marquee__track">{%- for i in (1..2) -%}{%- for m in marquee1 -%}{%- assign m = m | strip -%}{%- if m != '' -%}<span class="marquee__item">{{ m }}</span>{%- endif -%}{%- endfor -%}{%- endfor -%}</div></div>{%- endif -%}
+
+  <!-- ===== Science ===== -->
+  {%- if s.lab_title != blank or s.format_title != blank -%}
+  <section class="feature" aria-label="The science">
+    <div class="container">
+      {%- if s.lab_title != blank -%}
+      <div class="feature-split">
+        <div class="feature-split__media">
+          {%- if s.lab_image != blank -%}<img src="{{ s.lab_image | image_url: width: 800 }}" alt="" />
+          {%- elsif product.media[1] -%}<img src="{{ product.media[1] | image_url: width: 800 }}" alt="" />
+          {%- elsif product.featured_media -%}<img src="{{ product.featured_media | image_url: width: 800 }}" alt="" />{%- endif -%}
+        </div>
+        <div class="feature-split__body">
+          {%- if s.lab_eyebrow != blank -%}<span class="pill-eyebrow">{{ s.lab_eyebrow }}</span>{%- endif -%}
+          <h2 class="feature-split__title">{{ s.lab_title }}</h2>
+          <p class="feature-split__text">{{ s.lab_text }}</p>
+          {%- if s.popup_title != blank -%}<a href="#" class="btn btn--primary" data-absorb-open>{{ s.lab_button | default: 'Learn more' }}</a>{%- endif -%}
+        </div>
+      </div>
+      {%- endif -%}
+      {%- if s.format_title != blank -%}
+      <div class="feature-split feature-split--reverse">
+        <div class="feature-split__media">
+          {%- if s.format_image != blank -%}<img src="{{ s.format_image | image_url: width: 800 }}" alt="" />
+          {%- elsif product.media[2] -%}<img src="{{ product.media[2] | image_url: width: 800 }}" alt="" />
+          {%- elsif product.featured_media -%}<img src="{{ product.featured_media | image_url: width: 800 }}" alt="" />{%- endif -%}
+        </div>
+        <div class="feature-split__body">
+          {%- if s.format_eyebrow != blank -%}<span class="pill-eyebrow">{{ s.format_eyebrow }}</span>{%- endif -%}
+          <h2 class="feature-split__title">{{ s.format_title }}</h2>
+          <p class="feature-split__text">{{ s.format_text }}</p>
+          {%- assign flist = s.format_list | newline_to_br | split: '<br />' -%}
+          {%- if s.format_list != blank -%}<ul class="feature-split__list">{%- for li in flist -%}{%- assign li = li | strip -%}{%- if li != '' -%}<li>{{ li }}</li>{%- endif -%}{%- endfor -%}</ul>{%- endif -%}
+          <a href="#" class="btn btn--primary" data-add-proxy>Add to cart</a>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Ingredients + Supplement facts ===== -->
+  {%- assign has_ing = false -%}{%- assign has_fact = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}{%- assign has_ing = true -%}{%- endif -%}{%- if block.type == 'fact_row' -%}{%- assign has_fact = true -%}{%- endif -%}{%- endfor -%}
+  {%- if has_ing or has_fact or s.facts_side_title != blank -%}
+  <section class="ingredients" aria-label="What's inside">
+    <div class="container">
+      {%- if has_ing -%}
+      <div class="section-head section-head--center">
+        {%- if s.ing_eyebrow != blank -%}<span class="section-head__eyebrow">{{ s.ing_eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ s.ing_title }}</h2>
+        {%- if s.ing_lead != blank -%}<p class="section-head__lead">{{ s.ing_lead }}</p>{%- endif -%}
+      </div>
+      <div class="ingredients__grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
+        <article class="ingredient-card" {{ block.shopify_attributes }}>
+          <span class="ingredient-card__icon">{% render 'uphealth-icon', key: block.settings.icon %}</span>
+          <h3 class="ingredient-card__name">{{ block.settings.name }}</h3>
+          {%- if block.settings.latin != blank -%}<span class="ingredient-card__latin">{{ block.settings.latin }}</span>{%- endif -%}
+          {%- if block.settings.amount != blank -%}<span class="ingredient-card__amount">{{ block.settings.amount }}</span>{%- endif -%}
+          <p class="ingredient-card__text">{{ block.settings.text }}</p>
+        </article>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      {%- if has_fact or s.facts_side_title != blank -%}
+      <div class="ingredients__facts">
+        <div class="supp-facts">
+          <div class="supp-facts__title">Supplement Facts</div>
+          <div class="supp-facts__meta">Serving Size: {{ s.facts_serving }} · Servings Per Container: {{ s.facts_servings }}</div>
+          <div class="supp-facts__head"><span>Amount Per Serving</span><span>% DV</span></div>
+          {%- for block in section.blocks -%}{%- if block.type == 'fact_row' -%}<div class="supp-facts__row" {{ block.shopify_attributes }}><span>{{ block.settings.label }}</span><b>{{ block.settings.amount }}</b><span>{{ block.settings.dv }}</span></div>{%- endif -%}{%- endfor -%}
+          {%- if s.facts_note != blank -%}<div class="supp-facts__note">{{ s.facts_note }}</div>{%- endif -%}
+          {%- if s.facts_other != blank -%}<div class="supp-facts__other">{{ s.facts_other }}</div>{%- endif -%}
+        </div>
+        <div>
+          {%- if s.facts_side_title != blank -%}<h3 class="feature-split__title">{{ s.facts_side_title }}</h3>{%- endif -%}
+          {%- if s.facts_side_text != blank -%}<p class="feature-split__text">{{ s.facts_side_text }}</p>{%- endif -%}
+          {%- if s.facts_warning != blank -%}<p class="fine-print"><strong>WARNING:</strong> {{ s.facts_warning }}</p>{%- endif -%}
+          <p class="fine-print">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</p>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Usage ===== -->
+  {%- assign has_step = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'usage_step' -%}{%- assign has_step = true -%}{%- endif -%}{%- endfor -%}
+  {%- if has_step -%}
+  <section class="usage" aria-label="When to take">
+    <div class="container">
+      <div class="section-head section-head--center">
+        {%- if s.usage_eyebrow != blank -%}<span class="section-head__eyebrow">{{ s.usage_eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ s.usage_title }}</h2>
+      </div>
+      <div class="usage__card">
+        <div class="usage__dose"><div class="usage__dose-num">{{ s.dose_num }}</div><div class="usage__dose-label">{{ s.dose_label }}</div></div>
+        <div class="usage__steps">
+          {%- for block in section.blocks -%}{%- if block.type == 'usage_step' -%}
+          <div class="usage__step" {{ block.shopify_attributes }}><span class="usage__step-ic">{% render 'uphealth-icon', key: block.settings.icon %}</span><div><h4>{{ block.settings.title }}</h4><p>{{ block.settings.text }}</p></div></div>
+          {%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- assign marquee2 = s.marquee2 | newline_to_br | split: '<br />' -%}
+  {%- if s.marquee2 != blank -%}<div class="marquee" aria-hidden="true"><div class="marquee__track">{%- for i in (1..2) -%}{%- for m in marquee2 -%}{%- assign m = m | strip -%}{%- if m != '' -%}<span class="marquee__item">{{ m }}</span>{%- endif -%}{%- endfor -%}{%- endfor -%}</div></div>{%- endif -%}
+
+  <!-- ===== Chart ===== -->
+  {%- assign has_chart = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'chart_series' -%}{%- assign has_chart = true -%}{%- endif -%}{%- endfor -%}
+  {%- if has_chart -%}
+  <section class="chart-block" aria-label="Tracked over time">
+    <div class="container">
+      <div class="chart-block__head">
+        <div class="section-head" style="margin-bottom:0;">
+          {%- if s.chart_eyebrow != blank -%}<span class="section-head__eyebrow">{{ s.chart_eyebrow }}</span>{%- endif -%}
+          <h2 class="section-head__title">{{ s.chart_title }}</h2>
+        </div>
+        <a href="#" class="btn btn--primary" data-add-proxy>Add to cart</a>
+      </div>
+      <div class="chart-tabs" role="tablist">
+        {%- assign ci = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'chart_series' -%}<button class="chart-tab{% if ci == 0 %} is-active{% endif %}" data-chart-i="{{ ci }}" role="tab" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>{%- assign ci = ci | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      </div>
+      <div class="chart-card">
+        <div>
+          <h3 class="chart-card__title" data-chart-title></h3>
+          <p class="chart-card__text" data-chart-text></p>
+          <div class="chart-legend">
+            <div class="chart-legend__item"><span class="chart-legend__sw" style="background:{{ s.chart_line_a | default: '#74548e' }}"></span><span data-legend-a></span></div>
+            <div class="chart-legend__item"><span class="chart-legend__sw" style="background:{{ s.chart_line_b | default: '#c79a5a' }}"></span><span data-legend-b></span></div>
+          </div>
+          <p class="fine-print">Illustrative, self-reported data for presentation only — not a clinical claim.</p>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 540 290" role="img">
+            <g class="chart__grid"><line x1="60" y1="240" x2="500" y2="240"/><line x1="60" y1="190" x2="500" y2="190"/><line x1="60" y1="140" x2="500" y2="140"/><line x1="60" y1="90" x2="500" y2="90"/><line x1="60" y1="40" x2="500" y2="40"/></g>
+            <g class="chart__axis" text-anchor="end"><text x="48" y="244">0</text><text x="48" y="194">5</text><text x="48" y="144">10</text><text x="48" y="94">15</text><text x="48" y="44">20</text></g>
+            <g class="chart__axis" text-anchor="middle"><text x="60" y="262">0</text><text x="170" y="262">4</text><text x="280" y="262">8</text><text x="390" y="262">12</text><text x="500" y="262">16</text><text x="280" y="282">weeks</text></g>
+            <polyline id="up-line-b" fill="none" stroke="{{ s.chart_line_b | default: '#c79a5a' }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points=""></polyline>
+            <polyline id="up-line-a" fill="none" stroke="{{ s.chart_line_a | default: '#74548e' }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points=""></polyline>
+            <g id="up-dots"></g>
+          </svg>
+        </div>
+      </div>
+      <script type="application/json" data-up-chart>
+      {
+        "lineA": {{ s.chart_line_a | default: '#74548e' | json }},
+        "lineB": {{ s.chart_line_b | default: '#c79a5a' | json }},
+        "tabs": [
+          {%- assign first = true -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'chart_series' -%}
+          {%- unless first %},{% endunless %}{%- assign first = false -%}
+          { "label": {{ block.settings.label | json }}, "la": {{ block.settings.legend_a | json }}, "lb": {{ block.settings.legend_b | json }}, "title": {{ block.settings.title | json }}, "text": {{ block.settings.text | json }}, "a": [{{ block.settings.values_a }}], "b": [{{ block.settings.values_b }}] }
+          {%- endif -%}{%- endfor -%}
+        ]
+      }
+      </script>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== FAQ ===== -->
+  {%- assign has_faq = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}{%- assign has_faq = true -%}{%- endif -%}{%- endfor -%}
+  {%- if has_faq -%}
+  <section class="product-details" aria-label="FAQ">
+    <div class="container container--narrow">
+      <div class="section-head section-head--center"><span class="section-head__eyebrow">FAQ</span><h2 class="section-head__title">{{ s.faq_title | default: 'Good to know' }}</h2></div>
+      <ul class="faq__list">
+        {%- assign fi = 0 -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}
+        <li class="faq__item{% if fi == 0 %} is-open{% endif %}" {{ block.shopify_attributes }}>
+          <button class="faq__q" aria-expanded="{% if fi == 0 %}true{% else %}false{% endif %}"><span>{{ block.settings.question }}</span><span class="faq__icon" aria-hidden="true">+</span></button>
+          <div class="faq__a"><p>{{ block.settings.answer }}</p></div>
+        </li>
+        {%- assign fi = fi | plus: 1 -%}
+        {%- endif -%}{%- endfor -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <!-- ===== Absorb popup ===== -->
+  {%- if s.popup_title != blank -%}
+  <div class="modal" id="up-modal" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true">
+      <button class="modal__close" data-modal-close aria-label="Close">×</button>
+      <div class="section-head">
+        {%- if s.popup_eyebrow != blank -%}<span class="section-head__eyebrow">{{ s.popup_eyebrow }}</span>{%- endif -%}
+        <h2 class="section-head__title">{{ s.popup_title }}</h2>
+        {%- if s.popup_lead != blank -%}<p class="section-head__lead">{{ s.popup_lead }}</p>{%- endif -%}
+      </div>
+      <div class="absorb__inner">
+        <div class="absorb__diagram">
+          <span class="absorb__ring"></span><span class="absorb__ring absorb__ring--mid"></span>
+          {%- if s.popup_shell_tag != blank -%}<span class="absorb__tag absorb__tag--shell">{{ s.popup_shell_tag }}</span>{%- endif -%}
+          <span class="absorb__core">{{ s.popup_core }}</span>
+          {%- if s.popup_core_tag != blank -%}<span class="absorb__tag absorb__tag--core">{{ s.popup_core_tag }}</span>{%- endif -%}
+        </div>
+        <div class="absorb__points">
+          {%- assign pi = 0 -%}
+          {%- for block in section.blocks -%}{%- if block.type == 'popup_point' -%}{%- assign pi = pi | plus: 1 -%}<div class="absorb__point" {{ block.shopify_attributes }}><span class="absorb__point-num">{{ pi }}</span><div><h4>{{ block.settings.title }}</h4><p>{{ block.settings.text }}</p></div></div>{%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('product-{{ section.id }}');
+    if (!root) return;
+
+    // ===== Gallery (CSS transform carousel — always exactly container width) =====
+    (function () {
+      var track = root.querySelector('[data-gallery-track]');
+      if (!track) return;
+      var n = track.children.length;
+      var nav = Array.prototype.slice.call(root.querySelectorAll('[data-gallery-go]'));
+      var prev = root.querySelector('[data-gallery-prev]');
+      var next = root.querySelector('[data-gallery-next]');
+      var i = 0;
+      function go(idx) {
+        i = Math.max(0, Math.min(n - 1, idx));
+        track.style.transform = 'translateX(' + (-i * 100) + '%)';
+        nav.forEach(function (b, k) { b.classList.toggle('is-active', k === i); });
+        if (prev) prev.classList.toggle('is-disabled', i === 0);
+        if (next) next.classList.toggle('is-disabled', i === n - 1);
+      }
+      if (prev) prev.addEventListener('click', function () { go(i - 1); });
+      if (next) next.addEventListener('click', function () { go(i + 1); });
+      nav.forEach(function (b) { b.addEventListener('click', function () { go(parseInt(b.getAttribute('data-gallery-go'), 10)); }); });
+      go(0);
+    })();
+
+    root.querySelectorAll('.faq__q').forEach(function (q) {
+      q.addEventListener('click', function () {
+        var item = q.closest('.faq__item');
+        var open = item.classList.toggle('is-open');
+        q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    var modal = document.getElementById('up-modal');
+    if (modal) {
+      var openM = function (e) { if (e) e.preventDefault(); modal.classList.add('is-open'); document.body.style.overflow = 'hidden'; };
+      var closeM = function () { modal.classList.remove('is-open'); document.body.style.overflow = ''; };
+      root.querySelectorAll('[data-absorb-open]').forEach(function (b) { b.addEventListener('click', openM); });
+      modal.querySelectorAll('[data-modal-close]').forEach(function (b) { b.addEventListener('click', closeM); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeM(); });
+    }
+
+    var realBtn = root.querySelector('.showcase__buy button[name="add"]');
+    root.querySelectorAll('[data-add-proxy]').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.preventDefault(); if (realBtn) realBtn.click(); });
+    });
+
+    var chartEl = root.querySelector('[data-up-chart]');
+    if (chartEl) {
+      var chart; try { chart = JSON.parse(chartEl.textContent); } catch (e) { chart = {}; }
+      var tabs = chart.tabs || [];
+      var ca = chart.lineA || '#74548e', cb = chart.lineB || '#c79a5a';
+      var lineA = document.getElementById('up-line-a'), lineB = document.getElementById('up-line-b'), dots = document.getElementById('up-dots');
+      var titleEl = root.querySelector('[data-chart-title]'), textEl = root.querySelector('[data-chart-text]'), laEl = root.querySelector('[data-legend-a]'), lbEl = root.querySelector('[data-legend-b]');
+      var X = function (i) { return 60 + i * 110; }, Y = function (v) { return 240 - (v / 20) * 200; };
+      var pts = function (arr) { return arr.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' '); };
+      var NS = 'http://www.w3.org/2000/svg';
+      var drawDots = function (arr, color) { arr.forEach(function (v, i) { var el = document.createElementNS(NS, 'circle'); el.setAttribute('cx', X(i)); el.setAttribute('cy', Y(v)); el.setAttribute('r', 4.5); el.setAttribute('fill', color); el.setAttribute('stroke', '#fff'); el.setAttribute('stroke-width', '1.5'); dots.appendChild(el); }); };
+      var render = function (i) {
+        var d = tabs[i]; if (!d) return;
+        lineA.setAttribute('points', pts(d.a || [])); lineB.setAttribute('points', pts(d.b || []));
+        dots.textContent = ''; drawDots(d.b || [], cb); drawDots(d.a || [], ca);
+        titleEl.textContent = d.title || ''; textEl.textContent = d.text || ''; laEl.textContent = d.la || ''; lbEl.textContent = d.lb || '';
+      };
+      root.querySelectorAll('.chart-tab').forEach(function (t) {
+        t.addEventListener('click', function () {
+          root.querySelectorAll('.chart-tab').forEach(function (x) { x.classList.remove('is-active'); });
+          t.classList.add('is-active'); render(parseInt(t.dataset.chartI, 10));
+        });
+      });
+      if (tabs.length) render(0);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth product",
+  "tag": "section",
+  "max_blocks": 50,
+  "settings": [
+    { "type": "header", "content": "🎨 Colours" },
+    { "type": "color", "id": "accent", "label": "Accent colour", "default": "#74548e" },
+    { "type": "color", "id": "bg", "label": "Page background", "default": "#fefcf9" },
+    { "type": "header", "content": "Showcase" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "rating", "label": "Rating line" },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph" },
+    { "type": "textarea", "id": "benefits", "label": "Benefits (one per line)" },
+    { "type": "text", "id": "note", "label": "Note under button" },
+    { "type": "header", "content": "Marquee — top" },
+    { "type": "textarea", "id": "marquee1", "label": "Phrases (one per line)" },
+    { "type": "header", "content": "Science — Lab story" },
+    { "type": "text", "id": "lab_eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "lab_title", "label": "Title" },
+    { "type": "textarea", "id": "lab_text", "label": "Text" },
+    { "type": "text", "id": "lab_button", "label": "Button label", "default": "How it's absorbed" },
+    { "type": "image_picker", "id": "lab_image", "label": "Image (optional — else uses product photo)" },
+    { "type": "header", "content": "Science — New format" },
+    { "type": "text", "id": "format_eyebrow", "label": "Eyebrow", "default": "New format" },
+    { "type": "text", "id": "format_title", "label": "Title" },
+    { "type": "textarea", "id": "format_text", "label": "Text" },
+    { "type": "textarea", "id": "format_list", "label": "List (one per line)" },
+    { "type": "image_picker", "id": "format_image", "label": "Image (optional)" },
+    { "type": "header", "content": "Absorb popup" },
+    { "type": "text", "id": "popup_eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "popup_title", "label": "Title" },
+    { "type": "textarea", "id": "popup_lead", "label": "Lead" },
+    { "type": "text", "id": "popup_shell_tag", "label": "Outer ring tag" },
+    { "type": "text", "id": "popup_core", "label": "Core label" },
+    { "type": "text", "id": "popup_core_tag", "label": "Core tag" },
+    { "type": "header", "content": "Ingredients" },
+    { "type": "text", "id": "ing_eyebrow", "label": "Eyebrow", "default": "What's inside?" },
+    { "type": "text", "id": "ing_title", "label": "Title" },
+    { "type": "textarea", "id": "ing_lead", "label": "Lead" },
+    { "type": "header", "content": "Supplement facts" },
+    { "type": "text", "id": "facts_serving", "label": "Serving size" },
+    { "type": "text", "id": "facts_servings", "label": "Servings per container" },
+    { "type": "text", "id": "facts_note", "label": "Footnote" },
+    { "type": "textarea", "id": "facts_other", "label": "Other ingredients" },
+    { "type": "text", "id": "facts_side_title", "label": "Side title" },
+    { "type": "textarea", "id": "facts_side_text", "label": "Side text" },
+    { "type": "textarea", "id": "facts_warning", "label": "Warning" },
+    { "type": "header", "content": "Usage" },
+    { "type": "text", "id": "usage_eyebrow", "label": "Eyebrow", "default": "When to take?" },
+    { "type": "text", "id": "usage_title", "label": "Title" },
+    { "type": "text", "id": "dose_num", "label": "Dose number" },
+    { "type": "text", "id": "dose_label", "label": "Dose label" },
+    { "type": "header", "content": "Marquee — bottom" },
+    { "type": "textarea", "id": "marquee2", "label": "Phrases (one per line)" },
+    { "type": "header", "content": "Chart" },
+    { "type": "text", "id": "chart_eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "chart_title", "label": "Title" },
+    { "type": "color", "id": "chart_line_a", "label": "Line A colour", "default": "#74548e" },
+    { "type": "color", "id": "chart_line_b", "label": "Line B colour", "default": "#c79a5a" },
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Good to know" }
+  ],
+  "blocks": [
+    { "type": "ingredient", "name": "Ingredient", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "waves", "options": [
+        {"value":"waves","label":"Waves"},{"value":"leaf","label":"Leaf"},{"value":"sprout","label":"Sprout"},{"value":"spark","label":"Spark"},{"value":"shield","label":"Shield"},{"value":"atom","label":"Atom"},{"value":"pulse","label":"Pulse"},{"value":"drop","label":"Drop"},{"value":"flame","label":"Flame"},{"value":"clock","label":"Clock"},{"value":"sun","label":"Sun"},{"value":"dumbbell","label":"Dumbbell"},{"value":"shaker","label":"Shaker"},{"value":"check","label":"Check"}
+      ]},
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "text", "id": "latin", "label": "Latin / subtitle" },
+      { "type": "text", "id": "amount", "label": "Amount" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ]},
+    { "type": "fact_row", "name": "Supplement fact row", "settings": [
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "text", "id": "amount", "label": "Amount" },
+      { "type": "text", "id": "dv", "label": "% DV", "default": "**" }
+    ]},
+    { "type": "usage_step", "name": "Usage step", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "default": "clock", "options": [
+        {"value":"clock","label":"Clock"},{"value":"sun","label":"Sun"},{"value":"drop","label":"Drop"},{"value":"waves","label":"Waves"},{"value":"leaf","label":"Leaf"},{"value":"spark","label":"Spark"},{"value":"shield","label":"Shield"},{"value":"flame","label":"Flame"},{"value":"shaker","label":"Shaker"},{"value":"check","label":"Check"}
+      ]},
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ]},
+    { "type": "chart_series", "name": "Chart tab", "settings": [
+      { "type": "text", "id": "label", "label": "Tab label" },
+      { "type": "text", "id": "legend_a", "label": "Legend A name" },
+      { "type": "text", "id": "legend_b", "label": "Legend B name" },
+      { "type": "text", "id": "title", "label": "Card title" },
+      { "type": "textarea", "id": "text", "label": "Card text" },
+      { "type": "text", "id": "values_a", "label": "Line A values (5 numbers, comma-separated)", "info": "e.g. 2, 6, 10, 15, 18 — weeks 0/4/8/12/16, scale 0–20" },
+      { "type": "text", "id": "values_b", "label": "Line B values (5 numbers, comma-separated)", "info": "e.g. 1, 4, 8, 11, 14" }
+    ]},
+    { "type": "faq", "name": "FAQ item", "settings": [
+      { "type": "text", "id": "question", "label": "Question" },
+      { "type": "textarea", "id": "answer", "label": "Answer" }
+    ]},
+    { "type": "popup_point", "name": "Popup point", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth product" }]
+}
+{% endschema %}

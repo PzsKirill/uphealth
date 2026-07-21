@@ -1,0 +1,533 @@
+/* ============================================================
+   responsive.css — breakpoint overrides
+   Desktop-first cascade from 1280 → 1024 → 768 → 480
+   ============================================================ */
+
+/* ============================================================
+   Large desktop / down to laptop  (≤ 1200px)
+   ============================================================ */
+@media (max-width: 1200px) {
+  :root {
+    --space-2xl: 3.5rem;
+    --space-3xl: 5rem;
+  }
+
+  .footer__top {
+    grid-template-columns: 1.6fr repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+/* ============================================================
+   Tablet landscape  (≤ 1024px)
+   ============================================================ */
+@media (max-width: 1200px) {
+  .header__search        { width: clamp(180px, 22vw, 280px); }
+  .product-line__grid    { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .header__nav-list   { gap: var(--space-md); }
+  .header__search-btn span { display: none; }
+  .header__search        { width: 220px; }
+  .mega-menu__inner      { grid-template-columns: repeat(2, 1fr); }
+  .mega-menu--wide .mega-menu__inner { grid-template-columns: repeat(2, 1fr); }
+  .mega-menu__featured   { grid-column: 1 / -1; }
+
+  /* refeel-style menus on mid widths */
+  .mega-menu__inner--catalog { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+  .mega-menu__inner--about   { grid-template-columns: repeat(3, 1fr); gap: var(--space-lg) var(--space-xl); }
+  .mega-about__featured      { grid-column: 1 / -1; }
+
+  .hero__slide { height: auto; padding-block: var(--space-xl) var(--space-2xl); }
+  .hero__inner {
+    height: auto;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: left;
+  }
+  .hero__visual {
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .states__list {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .loyalty__card {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+  }
+
+  .showcase__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .showcase__gallery {
+    position: static;
+    max-width: 560px;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+  /* sticky is off here, so clipping is safe — kills any horizontal blow-out */
+  .product-page {
+    overflow-x: clip;
+  }
+
+  .wellness__card {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: left;
+  }
+  .wellness__visual {
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
+  .footer__top {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-lg);
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   Tablet portrait  (≤ 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Hide desktop nav + search, show burger */
+  .header__nav        { display: none; }
+  .header__search     { display: none; }
+  .header__burger     { display: inline-flex; }
+
+  .header__left,
+  .header__right {
+    gap: var(--space-xs);
+  }
+
+  .header__inner {
+    gap: var(--space-md);
+  }
+
+  .product-line__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .marquee__item { font-size: var(--fs-xs); }
+
+  .featured__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .loyalty__card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .loyalty__visual {
+    max-width: 200px;
+    margin-inline: auto;
+  }
+  .loyalty__actions {
+    justify-content: center;
+  }
+
+  .showcase__buy {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  .showcase__buy .btn { width: 100%; }
+}
+
+/* ============================================================
+   Mobile  (≤ 640px)
+   ============================================================ */
+@media (max-width: 640px) {
+  :root {
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --header-height: 64px;
+  }
+
+  .promo-bar__text {
+    font-size: 11px;
+  }
+
+  .hero__media {
+    border-radius: var(--radius-lg);
+  }
+  .hero__chip {
+    padding: 0.5rem 0.8rem;
+    font-size: 10px;
+  }
+  .hero__chip--top    { top: 4%; left: 2%; }
+  .hero__chip--bottom { bottom: 6%; right: 2%; }
+
+  .hero__meta {
+    gap: var(--space-md);
+  }
+
+  /* States: 2 col on mobile (5th wraps centered) */
+  .states__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+  .states__item:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .state-card {
+    aspect-ratio: 1.4 / 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-inline: var(--space-md);
+    gap: var(--space-md);
+    text-align: left;
+  }
+  .state-card__icon {
+    width: 44px;
+    height: 44px;
+  }
+  .state-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .benefits__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .loyalty__card    { padding: var(--space-lg); }
+  .wellness__card   { padding: var(--space-lg); }
+
+  .showcase__tabs {
+    margin-inline: calc(var(--container-pad) * -1);
+    padding-inline: var(--container-pad);
+  }
+
+  .footer__top {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .footer__legal {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  /* Section heads — left align on mobile */
+  .section-head--center { text-align: left; }
+  .section-head--center .section-head__lead { margin-inline: 0; }
+}
+
+/* ============================================================
+   Small mobile  (≤ 380px)
+   ============================================================ */
+@media (max-width: 380px) {
+  .header__logo {
+    font-size: 1.2rem;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .footer__top {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Sub-page components — responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .catalog__grid {
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-lg);
+  }
+  .catalog__grid-products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-hero__inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-lg);
+  }
+  .page-hero__meta {
+    text-align: left;
+    flex-direction: row;
+    gap: var(--space-xl);
+  }
+
+  .reviews__grid       { grid-template-columns: repeat(2, 1fr); }
+  .story__grid         { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .story__visual       { max-width: 480px; margin-inline: auto; }
+  .values__grid        { grid-template-columns: repeat(2, 1fr); }
+  .stats__grid         { grid-template-columns: repeat(2, 1fr); }
+  .stat                { border-right: none; border-bottom: 1px solid var(--color-border); padding-block: var(--space-md); }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+  .tiers__grid         { grid-template-columns: 1fr; }
+
+  .content-page__grid  { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .toc { position: static; }
+
+  .carousel__slide {
+    flex: 0 0 calc((100% - var(--space-md)) / 2);
+  }
+}
+
+@media (max-width: 900px) {
+  .catalog__grid {
+    grid-template-columns: 1fr;
+  }
+  .filters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(320px, 90vw);
+    height: 100dvh;
+    background: var(--color-bg);
+    z-index: var(--z-drawer);
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform var(--dur-base) var(--ease-out);
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+  }
+  .filters.is-open {
+    transform: translateX(0);
+  }
+  .catalog__filters-toggle {
+    display: inline-flex;
+  }
+  .filters__bar { display: flex; }
+  .filters__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: var(--fs-xl);
+    color: var(--color-text-muted);
+  }
+
+  .product-page__attributes { grid-template-columns: 1fr; }
+
+  .carousel__controls {
+    position: static;
+    margin-bottom: var(--space-md);
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog__grid-products { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+  .reviews__grid          { grid-template-columns: 1fr; }
+  .values__grid           { grid-template-columns: 1fr; }
+  .stats__grid            { grid-template-columns: 1fr 1fr; }
+
+  .page-hero__meta {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .carousel__slide {
+    flex: 0 0 calc(100% - var(--space-md));
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog__grid-products { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   New homepage blocks — responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero__slide { height: auto; }
+  .hero__inner {
+    height: auto;
+    padding-block: var(--space-2xl) var(--space-3xl);
+  }
+  .hero__visual { max-width: 420px; }
+
+  .bonus__card        { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .why__grid          { grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+  .perfect-day__grid  { grid-template-columns: repeat(3, 1fr); }
+  .science__card      { aspect-ratio: 16 / 10; }
+  .science__overlay   { max-width: none; background: linear-gradient(180deg, transparent 30%, rgba(30,34,72,0.8) 100%); justify-content: flex-end; }
+  .gang__grid         { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .bigtext__line      { font-size: var(--fs-2xl); }
+  .footer__marquee-item { font-size: var(--fs-2xl); }
+}
+
+/* Hero slide 1 banner is now a <picture> with art-directed <source>s
+   (desktop / tablet / mobile), so no CSS background-image swaps are needed. */
+
+@media (max-width: 900px) {
+  .why__grid          { grid-template-columns: 1fr; }
+  .perfect-day__grid  { grid-template-columns: 1fr; }
+  .product-line__head { flex-direction: row; align-items: center; }
+}
+
+@media (max-width: 640px) {
+  .hero__visual       { max-width: 360px; }
+  .hero__inner        { height: auto; }
+  /* banner slide: keep the overlay minimal so the artwork isn't crowded */
+  .hero__content--banner .hero__lead { display: none; }
+  .bonus__card        { padding: var(--space-lg); }
+  .bonus__title       { font-size: var(--fs-xl); }
+  .science__card      { aspect-ratio: 4 / 5; }
+  .science__overlay   { padding: var(--space-lg); }
+  .press-strip__list  { gap: var(--space-md) var(--space-lg); }
+  .press-strip__logo  { font-size: var(--fs-md); }
+}
+
+/* ============================================================
+   About-page blocks — responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .srate__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .srate__media { max-width: 460px; }
+}
+
+@media (max-width: 640px) {
+  .ing-ticker__dot   { width: 36px; height: 36px; }
+  .ing-ticker__item  { font-size: var(--fs-xs); }
+  .state-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    margin-inline: calc(var(--container-pad) * -1);
+    padding-inline: var(--container-pad);
+  }
+  .state-tabs::-webkit-scrollbar { display: none; }
+  .state-tab { flex: 0 0 auto; }
+}
+
+/* ============================================================
+   Hover capability — disable hover lifts on touch
+   ============================================================ */
+@media (hover: none) {
+  .product-card:hover,
+  .state-card:hover,
+  .benefit:hover,
+  .footer__social:hover,
+  .mega-menu__featured:hover,
+  .tier:hover,
+  .value:hover,
+  .bundle:hover,
+  .reel:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Product gallery — mobile (slider stays fluid; 2 compact thumbs)
+   ============================================================ */
+@media (max-width: 640px) {
+  .up-gallery-nav {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+}
+
+/* ============================================================
+   product-line grid (states-shop “Keep exploring” / About)
+   Mirrors the .catalog__grid-products ladder. Below 900px the
+   ladder previously stopped at 2 columns: the card’s image sets a
+   ~265px min-content, so `1fr` tracks refused to shrink and pushed
+   the page into horizontal scroll at ≤576px. minmax(0,1fr) lets the
+   track shrink; the item needs min-width:0 to follow it.
+   Desktop (>640px) is untouched.
+   ============================================================ */
+@media (max-width: 640px) {
+  .product-line__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .states-shop__item  { min-width: 0; }
+}
+
+@media (max-width: 480px) {
+  .product-line__grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Mobile header height — on phones the 72px header bar plus the
+   promo strip (whose long text wraps to two lines) stacked to
+   ~130px, crowding the top of the screen. Trim both to a
+   comfortable mobile height. The sticky-header JS re-measures the
+   header at runtime (setH → header.offsetHeight) and re-syncs the
+   spacer, so no gap appears. Desktop (>900px) keeps 72px untouched.
+   ============================================================ */
+@media (max-width: 900px) {
+  .header__inner { min-height: 56px; }
+
+  .promo-bar__inner {
+    min-height: 0;
+    padding-block: 5px;
+    line-height: 1.35;
+  }
+}
+
+/* ============================================================
+   chart-card inner padding on phones — base padding is
+   --space-2xl (64px), which eats most of the width on narrow
+   screens. Tighten to 20px at ≤767px for readability.
+   Desktop / tablet (>767px) keeps 64px.
+   ============================================================ */
+@media (max-width: 767px) {
+  .chart-card { padding: 20px; }
+}
+
+/* ============================================================
+   Card inner padding on phones — several content cards keep a
+   64px (--space-2xl) inner padding that eats readable width on
+   narrow screens. The theme already trims these to --space-lg,
+   but only from ≤640px (quiz ≤560px), leaving the 767–641 band —
+   and .auth/.usage/.modal cards entirely — oversized. Apply the
+   theme's OWN compact card padding from ≤767px (same values, just
+   earlier). Values at existing breakpoints are unchanged.
+   Hero sections use fixed heights (not this padding) → untouched.
+   .chart-card is handled separately (20px, per request).
+   ============================================================ */
+@media (max-width: 767px) {
+  .auth__card,
+  .loyalty__card,
+  .wellness__card,
+  .bonus__card,
+  .science__overlay,
+  .usage__card,
+  .modal__dialog {
+    padding: var(--space-lg);
+  }
+
+  .quiz__card {
+    padding: var(--space-xl) var(--space-lg);
+  }
+}

@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "settings": {
+        "title": "Our <em>ingredients</em>",
+        "lead": "No fillers, no mystery blends — just actives sourced from where they grow best, dosed to what the research supports."
+      }
+    },
+    "map": {
+      "type": "uphealth-ingredients-map",
+      "blocks": {
+        "b1": { "type": "ingredient", "settings": { "asset": "ing-matcha.png", "title": "Matcha", "origin": "Japan, Shizuoka", "text": "Beyond caffeine, matcha brings L-theanine for calm, gradual energy without the spikes and crash of coffee.", "pin_x": 85, "pin_y": 33 } },
+        "b2": { "type": "ingredient", "settings": { "asset": "ing-chocolate.png", "title": "Cacao", "origin": "Côte d'Ivoire, Abidjan", "text": "Raw cacao is rich in flavanols and magnesium that support mood, focus and recovery.", "pin_x": 48, "pin_y": 53 } },
+        "b3": { "type": "ingredient", "settings": { "asset": "ing-turmeric.png", "title": "Turmeric", "origin": "India, Erode", "text": "Curcumin supports a healthy inflammatory response and everyday joint comfort.", "pin_x": 70, "pin_y": 47 } },
+        "b4": { "type": "ingredient", "settings": { "asset": "ing-spirulina.png", "title": "Spirulina", "origin": "Hawaii, Kona", "text": "A blue-green algae packed with plant protein, iron and antioxidants.", "pin_x": 13, "pin_y": 42 } },
+        "b5": { "type": "ingredient", "settings": { "asset": "ing-coconutmct.png", "title": "Coconut MCT", "origin": "Vietnam, Hanoi", "text": "Medium-chain triglycerides convert quickly into clean, usable energy.", "pin_x": 79, "pin_y": 45 } },
+        "b6": { "type": "ingredient", "settings": { "asset": "ing-ginger.png", "title": "Ginger", "origin": "Peru, Junín", "text": "A warming root that soothes digestion and supports healthy circulation.", "pin_x": 30, "pin_y": 63 } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "map"]
+}

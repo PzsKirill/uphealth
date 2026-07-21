@@ -1,0 +1,79 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="ing-page">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="section-head__title">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lead != blank -%}<p class="section-head__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="ing-map" id="ing-map-{{ section.id }}">
+      <img class="ing-map__bg" src="{{ 'world-map.svg' | asset_url }}" alt="" loading="lazy" width="4378" height="2435">
+      {%- for block in section.blocks -%}
+      <button class="ing-map__pin" type="button" data-ing="{{ forloop.index }}" style="left: {{ block.settings.pin_x }}%; top: {{ block.settings.pin_y }}%;" aria-label="{{ block.settings.title | escape }} — {{ block.settings.origin | escape }}" {{ block.shopify_attributes }}>
+        <span class="ing-map__pin-label">{{ block.settings.title }}</span>
+      </button>
+      {%- endfor -%}
+    </div>
+
+    <div class="ing-grid">
+      {%- for block in section.blocks -%}
+      <article class="ing-card ing-card--tile" data-ing="{{ forloop.index }}">
+        <div class="ing-card__media">
+          {%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title | escape }}" loading="lazy" />
+          {%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" />{%- endif -%}
+        </div>
+        <h3 class="ing-card__title">{{ block.settings.title }}</h3>
+        {%- if block.settings.origin != blank -%}<p class="ing-card__origin">{{ block.settings.origin }}</p>{%- endif -%}
+        {%- if block.settings.text != blank -%}<p class="ing-card__text">{{ block.settings.text }}</p>{%- endif -%}
+      </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var nodes = root.querySelectorAll('[data-ing]');
+    function setActive(id, on) {
+      var matches = root.querySelectorAll('[data-ing="' + id + '"]');
+      Array.prototype.forEach.call(matches, function (el) { el.classList.toggle('is-active', on); });
+    }
+    Array.prototype.forEach.call(nodes, function (el) {
+      var id = el.getAttribute('data-ing');
+      el.addEventListener('mouseenter', function () { setActive(id, true); });
+      el.addEventListener('mouseleave', function () { setActive(id, false); });
+      el.addEventListener('focus', function () { setActive(id, true); });
+      el.addEventListener('blur', function () { setActive(id, false); });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth ingredients map",
+  "tag": "section",
+  "max_blocks": 20,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sourced worldwide" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Where our ingredients come from" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Every active is sourced from the place that grows it best. Hover a pin to meet the ingredient." }
+  ],
+  "blocks": [
+    { "type": "ingredient", "name": "Ingredient", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "Image — asset fallback" },
+      { "type": "text", "id": "title", "label": "Name" },
+      { "type": "text", "id": "origin", "label": "Origin" },
+      { "type": "textarea", "id": "text", "label": "Text" },
+      { "type": "header", "content": "Pin position on the map" },
+      { "type": "range", "id": "pin_x", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pin X (left→right)", "default": 50 },
+      { "type": "range", "id": "pin_y", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pin Y (top→bottom)", "default": 50 }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth ingredients map" }]
+}
+{% endschema %}

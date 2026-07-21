@@ -1,0 +1,71 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "blocks": {
+        "m1": { "type": "stat", "settings": { "value": "1 point", "label": "per dollar" } },
+        "m2": { "type": "stat", "settings": { "value": "100 pts", "label": "= $1 off" } },
+        "m3": { "type": "stat", "settings": { "value": "500", "label": "on signup" } }
+      },
+      "block_order": ["m1", "m2", "m3"],
+      "settings": {
+        "title": "Earn while you <em>shop</em>",
+        "lead": "A simple loyalty program — points for every order, perks at every tier, no hidden expiration."
+      }
+    },
+    "steps": {
+      "type": "uphealth-steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Sign up", "text": "Create an account and get 500 points instantly — that's $5 toward your first order." } },
+        "s2": { "type": "step", "settings": { "title": "Earn on every order", "text": "1 point per dollar spent. Extra for reviews, referrals, birthdays and subscription orders." } },
+        "s3": { "type": "step", "settings": { "title": "Redeem at checkout", "text": "Every 100 points equals $1 off. Apply any amount on any order — no minimums." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {}
+    },
+    "tiers": {
+      "type": "uphealth-tiers",
+      "blocks": {
+        "t1": { "type": "tier", "settings": { "badge": "Starter", "name": "Bronze", "threshold": "$0 – $200 spent", "perks": "1× points on every order\nBirthday bonus: 250 points\nEarly access to new launches", "featured": false } },
+        "t2": { "type": "tier", "settings": { "badge": "Popular", "name": "Silver", "threshold": "$200 – $600 spent", "perks": "1.5× points on every order\nBirthday bonus: 500 points\nFree express delivery\nQuarterly sample box", "featured": true } },
+        "t3": { "type": "tier", "settings": { "badge": "Top tier", "name": "Gold", "threshold": "$600+ spent", "perks": "2× points on every order\nBirthday bonus: 1 000 points\nFree express delivery\nDedicated wellness coach\nPriority new-product access", "featured": false } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
+    },
+    "earn": {
+      "type": "uphealth-story",
+      "settings": {
+        "reverse": true,
+        "asset": "avatr4.png",
+        "eyebrow": "Bonus actions",
+        "title": "Ways to earn extra",
+        "body": "<ul><li><strong>Refer a friend</strong> — 1 000 points when they place their first order</li><li><strong>Write a review</strong> — 100 points per verified review</li><li><strong>Photo review</strong> — 250 points for a photo review</li><li><strong>Follow on social</strong> — 200 points one-time</li><li><strong>Subscribe</strong> — 1.5× points on every recurring order</li></ul>",
+        "sign": "",
+        "btn_label": "Start earning",
+        "btn_link": "/account/register"
+      }
+    },
+    "faq": {
+      "type": "uphealth-faq",
+      "blocks": {
+        "f1": { "type": "qa", "settings": { "category": "Bonuses", "question": "Do points expire?", "answer": "<p>Points stay active for 24 months from the last order. Place an order and the clock resets.</p>" } },
+        "f2": { "type": "qa", "settings": { "category": "Bonuses", "question": "Can I gift my points?", "answer": "<p>Yes — convert points into a gift card any time from your account dashboard.</p>" } },
+        "f3": { "type": "qa", "settings": { "category": "Bonuses", "question": "Does subscription count toward tier status?", "answer": "<p>Absolutely — subscription orders count toward annual spend and earn the tier multiplier.</p>" } },
+        "f4": { "type": "qa", "settings": { "category": "Bonuses", "question": "What happens at the year boundary?", "answer": "<p>Your tier carries over to the next year. Spend resets so you have a fresh shot at climbing — but the floor is whatever you achieved last year.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": { "show_toc": false, "eyebrow": "FAQ", "heading": "Quick answers", "btn_label": "See full FAQ", "btn_link": "/pages/faq" }
+    }
+  },
+  "order": ["hero", "steps", "tiers", "earn", "faq"]
+}

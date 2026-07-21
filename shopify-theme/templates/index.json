@@ -1,0 +1,387 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-hero",
+      "blocks": {
+        "intro": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "cream",
+            "bg_color": "#f2ece1",
+            "accent_color": "#8a6d4f",
+            "eyebrow": "New",
+            "title": "Wellness that <em>works with you.</em>",
+            "lead": "Clean, science-backed supplements for energy, recovery and calm — made in GMP-certified USA labs.",
+            "cta_label": "Shop the range",
+            "cta_link": "/collections/all",
+            "image_fit": "cover",
+            "image": "shopify://shop_images/30893a0c-126d-4908-9d53-5fc211cf9697.png",
+            "image_url": "",
+            "asset": ""
+          }
+        },
+        "energy": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "peach",
+            "bg_color": "#ece1cf",
+            "accent_color": "#a23e30",
+            "eyebrow": "New",
+            "title": "Clean energy, <em>zero crash.</em>",
+            "lead": "Caffeine paired with L-theanine for smooth, steady focus — sugar-free fruit punch, no jitters.",
+            "cta_label": "Order now",
+            "cta_link": "/products/energy-powder-fruit-punch",
+            "image_fit": "contain",
+            "image_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/fruitpunshhover.png?v=1782463207",
+            "asset": ""
+          }
+        },
+        "hangover": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "mint",
+            "bg_color": "#f5d6a1",
+            "accent_color": "#a5622c",
+            "eyebrow": "Bounce back",
+            "title": "Recover, <em>the morning after.</em>",
+            "lead": "Fast-dissolving oral strips with a mango-orange flavour — feel human again after a big night.",
+            "cta_label": "Order now",
+            "cta_link": "/products/hangover-strips",
+            "image_fit": "contain",
+            "image_url": "",
+            "asset": "hangoverhover.png"
+          }
+        },
+        "recovery": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "pink",
+            "bg_color": "#dfe7e4",
+            "accent_color": "#4894a0",
+            "eyebrow": "Body care",
+            "title": "Soothe & <em>recover.</em>",
+            "lead": "A silky aloe and menthol cream that soothes tired muscles, joints and skin.",
+            "cta_label": "Order now",
+            "cta_link": "/products/recovery-cream",
+            "image_fit": "contain",
+            "image_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/recoverycreamhover.png?v=1782723140",
+            "asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "intro",
+        "energy",
+        "hangover",
+        "recovery"
+      ],
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": 6000,
+        "show_dots": true,
+        "dot_color": "#cbc6bf",
+        "dot_active_color": "#74548e"
+      }
+    },
+    "marquee": {
+      "type": "uphealth-marquee",
+      "settings": {
+        "phrases": "Feel your best self\n92 trace minerals\nClean, science-backed formulas\nVegan & third-party tested\nMade in the USA"
+      }
+    },
+    "featured": {
+      "type": "uphealth-featured",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Loved by our community",
+        "lead": "",
+        "collection": "",
+        "max_products": 8,
+        "button_label": "Load more",
+        "button_link": ""
+      }
+    },
+    "marquee2": {
+      "type": "uphealth-marquee",
+      "settings": {
+        "phrases": "Feel your best self\nThird-party tested\nSubscription saves 10%\nFree shipping over $80\nClean labels"
+      }
+    },
+    "bonus": {
+      "type": "uphealth-bonus",
+      "settings": {
+        "heading": "Bonus on your first order",
+        "text": "We give you 500 bonus points just for creating an account — that's $5 toward day one.",
+        "button_label": "Sign up",
+        "button_link": "",
+        "coin": "+500",
+        "image": "shopify://shop_images/tabletnewbanner.png",
+        "video_url": ""
+      }
+    },
+    "benefits": {
+      "type": "uphealth-benefits",
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/newavatar.png",
+            "asset": "newavatar.png",
+            "chip": "Scientific approach",
+            "text": "We use only tested nutrients in meaningful doses — and leave out the needless extras."
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/avatar2.png",
+            "asset": "avatar2.png",
+            "chip": "Clean formula",
+            "text": "Every ingredient works in concert with the others, amplifying the overall effect. 123"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/30893a0c-126d-4908-9d53-5fc211cf9697.png",
+            "asset": "avatr3.png",
+            "chip": "Proven results",
+            "text": "Developed with doctors and research labs, then tested batch by batch before it ships."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "heading": "Why UpHealth?",
+        "lead": "Hover a card to learn more."
+      }
+    },
+    "perfect": {
+      "type": "uphealth-perfect-day",
+      "blocks": {
+        "d1": {
+          "type": "day",
+          "settings": {
+            "image": "shopify://shop_images/matchalatte.png",
+            "asset": "matchalatte.png",
+            "time": "Morning",
+            "title": "Matcha Latte",
+            "price": "$29",
+            "link": ""
+          }
+        },
+        "d2": {
+          "type": "day",
+          "settings": {
+            "image": "shopify://shop_images/bcomplex.png",
+            "asset": "bcomplex.png",
+            "time": "Day",
+            "title": "B-Complex",
+            "price": "$39",
+            "link": ""
+          }
+        },
+        "d3": {
+          "type": "day",
+          "settings": {
+            "image": "shopify://shop_images/magnesiumcalm.png",
+            "asset": "magnesiumcalm.png",
+            "time": "Evening",
+            "title": "Magnesium Calm",
+            "price": "$25",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "settings": {
+        "eyebrow": "Your daily routine",
+        "heading": "Formula for the perfect day",
+        "button_label": "More options",
+        "button_link": ""
+      }
+    },
+    "statement": {
+      "type": "uphealth-statement",
+      "settings": {
+        "text": "UpHealth is <em>balance</em> · UpHealth is <em>energy</em> · UpHealth is <em>calm</em> · UpHealth is <em>you</em> ·"
+      }
+    },
+    "video": {
+      "type": "uphealth-video",
+      "settings": {
+        "eyebrow": "Inside every capsule",
+        "heading": "Science, but make it simple",
+        "text": "Smooth, glossy capsules dosed to the milligram — what goes in is exactly what your body can use.",
+        "video_url": "https://assets.mixkit.co/videos/35377/35377-720.mp4",
+        "poster": "https://assets.mixkit.co/videos/35377/35377-thumb-720-0.jpg"
+      }
+    },
+    "marquee3": {
+      "type": "uphealth-marquee",
+      "settings": {
+        "phrases": "Feel your best self\nJoin the wellness gang\nEarn points on every order"
+      }
+    },
+    "gang": {
+      "type": "uphealth-gang",
+      "settings": {
+        "eyebrow": "UpHealth is",
+        "heading": "Wellness gang",
+        "lead": "UpHealth isn't only what's in the bottle — it's a community of people for whom taking care of themselves is part of life.",
+        "perks_title": "What you get after signing up:",
+        "perks": "500 points | as a gift on your first purchase\n4 levels | of the loyalty program to pay with points\nGifts & perks | for every tier you reach\nEarly access | to new launches and special projects\nInvitations | to closed brand events",
+        "button_label": "Sign up",
+        "button_link": "",
+        "asset": "gang.png"
+      }
+    },
+    "reviews": {
+      "type": "uphealth-reviews",
+      "blocks": {
+        "r1": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-1.mp4?v=1784276511",
+            "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-1-poster.jpg?v=1784276717",
+            "duration": "0:06",
+            "name": "Anna K.",
+            "formula": "Beauty formula"
+          }
+        },
+        "r2": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-2.mp4?v=1784276512",
+            "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-2-poster.jpg?v=1784276717",
+            "duration": "0:16",
+            "name": "Marco D.",
+            "formula": "Energy formula"
+          }
+        },
+        "r3": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-3.mp4?v=1784280491",
+            "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-3-poster.jpg?v=1784280487",
+            "duration": "0:16",
+            "name": "Sofia R.",
+            "formula": "Calm formula"
+          }
+        },
+        "r4": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-4.mp4?v=1784281836",
+            "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-4-poster.jpg?v=1784281835",
+            "duration": "0:16",
+            "name": "Daniel P.",
+            "formula": "Gut formula"
+          }
+        },
+        "r5": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://assets.mixkit.co/videos/1776/1776-720.mp4",
+            "poster": "https://assets.mixkit.co/videos/1776/1776-thumb-720-0.jpg",
+            "duration": "0:22",
+            "name": "Eva M.",
+            "formula": "The Full Five"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
+      "settings": {
+        "heading": "People are talking about us"
+      }
+    },
+    "press": {
+      "type": "uphealth-press",
+      "blocks": {
+        "p1": {
+          "type": "logo",
+          "settings": {
+            "name": "THE WELL",
+            "link": ""
+          }
+        },
+        "p2": {
+          "type": "logo",
+          "settings": {
+            "name": "VITALIS",
+            "link": ""
+          }
+        },
+        "p3": {
+          "type": "logo",
+          "settings": {
+            "name": "PURE",
+            "link": ""
+          }
+        },
+        "p4": {
+          "type": "logo",
+          "settings": {
+            "name": "FORMULA",
+            "link": ""
+          }
+        },
+        "p5": {
+          "type": "logo",
+          "settings": {
+            "name": "GLOW JOURNAL",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
+      "settings": {
+        "heading": "In the press"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured",
+    "marquee2",
+    "bonus",
+    "benefits",
+    "perfect",
+    "statement",
+    "video",
+    "marquee3",
+    "gang",
+    "reviews",
+    "press"
+  ]
+}

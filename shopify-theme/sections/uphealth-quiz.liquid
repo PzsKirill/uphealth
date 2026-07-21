@@ -1,0 +1,134 @@
+<style>body { background: var(--color-bg); }</style>
+
+{%- liquid
+  assign qcount = 0
+  for block in section.blocks
+    if block.type == 'question'
+      assign qcount = qcount | plus: 1
+    endif
+  endfor
+-%}
+
+<section class="quiz">
+  <div class="container container--narrow">
+    <div class="quiz__card" data-quiz>
+
+      <div class="quiz__progress" aria-hidden="true"><span class="quiz__progress-bar" data-quiz-bar></span></div>
+
+      {%- assign qi = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'question' -%}
+        <div class="quiz__step" data-quiz-step="{{ qi }}"{% unless qi == 0 %} hidden{% endunless %} {{ block.shopify_attributes }}>
+          <span class="quiz__count">Question {{ qi | plus: 1 }} / {{ qcount }}</span>
+          <h2 class="quiz__q">{{ block.settings.question }}</h2>
+          <div class="quiz__options">
+            {%- assign opts = block.settings.options | newline_to_br | split: '<br />' -%}
+            {%- for o in opts -%}
+              {%- assign parts = o | split: '::' -%}
+              {%- assign label = parts[0] | strip -%}
+              {%- assign outcome = parts[1] | strip -%}
+              {%- if label != blank -%}<button class="quiz__option" type="button" data-outcome="{{ outcome }}"><span>{{ label }}</span><span class="quiz__option-arrow" aria-hidden="true">&rarr;</span></button>{%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- assign qi = qi | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <div class="quiz__result" data-quiz-result hidden>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'result' -%}
+          <div class="quiz__result-card" data-result="{{ block.settings.outcome | strip }}" hidden {{ block.shopify_attributes }}>
+            <span class="quiz__result-eyebrow">{{ section.settings.result_eyebrow }}</span>
+            <h2 class="quiz__result-title">{{ block.settings.title }}</h2>
+            {%- if block.settings.text != blank -%}<p class="quiz__result-text">{{ block.settings.text }}</p>{%- endif -%}
+            <div class="quiz__result-actions">
+              {%- if block.settings.cta_label != blank -%}<a href="{{ block.settings.cta_link | default: routes.all_products_collection_url }}" class="btn btn--primary">{{ block.settings.cta_label }}</a>{%- endif -%}
+              <button class="btn btn--ghost" type="button" data-quiz-restart>{{ section.settings.restart_label }}</button>
+            </div>
+          </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var quiz = root.querySelector('[data-quiz]');
+    if (!quiz) return;
+    var steps = quiz.querySelectorAll('[data-quiz-step]');
+    var resultWrap = quiz.querySelector('[data-quiz-result]');
+    var resultCards = quiz.querySelectorAll('[data-result]');
+    var bar = quiz.querySelector('[data-quiz-bar]');
+    var total = steps.length;
+    var current = 0;
+    var scores = {};
+    function setBar(n) { if (bar) bar.style.width = (total ? (n / total * 100) : 0) + '%'; }
+    function show(i) {
+      Array.prototype.forEach.call(steps, function (s, idx) { s.hidden = idx !== i; });
+      setBar(i);
+    }
+    function finish() {
+      Array.prototype.forEach.call(steps, function (s) { s.hidden = true; });
+      setBar(total);
+      var best = null, bestN = -1;
+      Object.keys(scores).forEach(function (k) { if (scores[k] > bestN) { bestN = scores[k]; best = k; } });
+      var shown = false;
+      Array.prototype.forEach.call(resultCards, function (c) {
+        var match = c.getAttribute('data-result') === best;
+        c.hidden = !match;
+        if (match) shown = true;
+      });
+      if (!shown && resultCards[0]) resultCards[0].hidden = false;
+      if (resultWrap) resultWrap.hidden = false;
+    }
+    Array.prototype.forEach.call(quiz.querySelectorAll('.quiz__option'), function (btn) {
+      btn.addEventListener('click', function () {
+        var o = btn.getAttribute('data-outcome');
+        if (o) scores[o] = (scores[o] || 0) + 1;
+        current++;
+        if (current >= total) finish();
+        else show(current);
+      });
+    });
+    var restart = quiz.querySelector('[data-quiz-restart]');
+    if (restart) restart.addEventListener('click', function () {
+      scores = {}; current = 0;
+      if (resultWrap) resultWrap.hidden = true;
+      Array.prototype.forEach.call(resultCards, function (c) { c.hidden = true; });
+      show(0);
+    });
+    show(0);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth quiz",
+  "tag": "section",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "text", "id": "result_eyebrow", "label": "Result eyebrow", "default": "Your focus" },
+    { "type": "text", "id": "restart_label", "label": "Restart label", "default": "Retake the test" }
+  ],
+  "blocks": [
+    { "type": "question", "name": "Question", "settings": [
+      { "type": "text", "id": "question", "label": "Question", "default": "What would you most like to improve?" },
+      { "type": "textarea", "id": "options", "label": "Options — one per line as: Label::outcome", "info": "outcome = energy / immune / strength / focus / mood / sleep", "default": "More energy & stamina::energy\nA stronger immune system::immune\nStrength & recovery::strength\nFocus & memory::focus\nMood & calm::mood\nBetter sleep::sleep" }
+    ]},
+    { "type": "result", "name": "Result", "settings": [
+      { "type": "text", "id": "outcome", "label": "Outcome key", "info": "energy / immune / strength / focus / mood / sleep" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Energy & Stamina" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Clean, steady energy — without the crash." },
+      { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Energy formulas" },
+      { "type": "url", "id": "cta_link", "label": "Button link" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth quiz" }]
+}
+{% endschema %}

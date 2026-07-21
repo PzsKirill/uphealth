@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "settings": {
+        "title": "Shipping &amp; <em>delivery</em>",
+        "lead": "Everything about getting your order — options, pickup points, international shipping and payment."
+      }
+    },
+    "content": {
+      "type": "uphealth-content",
+      "blocks": {
+        "b1": { "type": "section", "settings": { "heading": "Shipping options", "body": "<p>Standard delivery covers the country in 2 to 4 business days. Express delivery is available in major metros next day for an additional fee.</p><ul><li>Standard — $6 (free over $80)</li><li>Express — $14, next business day in major metros</li><li>Pickup — free at any partnered location</li></ul>", "callout": "Orders placed before 2 pm local time ship the same day. After 2 pm they go out the next business morning." } },
+        "b2": { "type": "section", "settings": { "heading": "Pickup points", "body": "<p>We partner with 320+ pickup hubs nationally. Pick the closest one at checkout — most are open seven days a week.</p><p><strong>Major metros</strong></p><ul><li>New York — 28 points</li><li>Los Angeles — 22 points</li><li>Chicago — 18 points</li><li>Houston — 14 points</li><li>San Francisco — 12 points</li></ul>" } },
+        "b3": { "type": "section", "settings": { "heading": "International", "body": "<p>We currently ship to the EU, UK and Canada. Estimated transit time is 5 to 9 business days depending on customs.</p><p>Import duties and taxes are calculated at checkout — no surprises at delivery.</p>" } },
+        "b4": { "type": "section", "settings": { "heading": "Payment", "body": "<p>We accept all major cards, Apple Pay and Google Pay. For orders over $200, four-payment installments are available at checkout.</p><ul><li>Cards: Visa, Mastercard, Amex, Discover</li><li>Wallets: Apple Pay, Google Pay, Shop Pay</li><li>Installments: 4x interest-free</li><li>Invoice on request for business accounts</li></ul>" } },
+        "b5": { "type": "section", "settings": { "heading": "Contacts", "body": "<p>Support is live seven days a week, 9 am to 9 pm. Outside those hours, email gets a reply within four hours during the week.</p><p><strong>Reach us</strong></p><ul><li>Email — hello@uphealth.example</li><li>WhatsApp — +1 800 000 0000</li><li>Telegram — @uphealthsupport</li><li>Live chat — bottom right on any page</li></ul>", "callout": "Office: 240 Wellness Avenue, Suite 12, New York NY 10001" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "content"]
+}

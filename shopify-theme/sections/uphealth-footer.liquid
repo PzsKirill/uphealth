@@ -1,0 +1,353 @@
+{%- assign root = routes.root_url -%}
+
+<footer class="footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer__marquee" aria-hidden="true">
+      <div class="footer__marquee-track">
+        <span class="footer__marquee-item">Feel your best self&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Wellness is a habit&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Feel your best self&nbsp;&nbsp;&#10022;</span>
+        <span class="footer__marquee-item">Wellness is a habit&nbsp;&nbsp;&#10022;</span>
+      </div>
+    </div>
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="{{ root }}" class="footer__logo" aria-label="{{ shop.name }} home">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" class="brand-logo brand-logo--light" />
+          {%- else -%}
+            <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" class="brand-logo brand-logo--light" />
+          {%- endif -%}
+        </a>
+        <p class="footer__tagline">{{ section.settings.tagline }}</p>
+        <div class="footer__socials">
+          {%- if section.settings.social_youtube != blank -%}<a href="{{ section.settings.social_youtube }}" class="footer__social" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg></a>{%- endif -%}
+          {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" class="footer__social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>{%- endif -%}
+          {%- if section.settings.social_whatsapp != blank -%}<a href="{{ section.settings.social_whatsapp }}" class="footer__social" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg></a>{%- endif -%}
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Catalog</h4>
+        <ul class="footer__list">
+          <li><a href="{{ routes.all_products_collection_url }}">All products</a></li>
+          <li><a href="{{ root }}collections/sticks">Sticks</a></li>
+          <li><a href="{{ root }}collections/gummies">Gummies</a></li>
+          <li><a href="{{ root }}collections/drinks">Drinks</a></li>
+          <li><a href="{{ root }}collections/protein">Protein</a></li>
+          <li><a href="{{ root }}collections/bundles">Bundles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Outcomes</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}collections/state-energy">Energy &amp; Stamina</a></li>
+          <li><a href="{{ root }}collections/state-immune">Immune Support</a></li>
+          <li><a href="{{ root }}collections/state-strength">Strength &amp; Muscle Recovery</a></li>
+          <li><a href="{{ root }}collections/state-focus">Memory &amp; Focus</a></li>
+          <li><a href="{{ root }}collections/state-mood">Mood &amp; Relaxation</a></li>
+          <li><a href="{{ root }}collections/state-sleep">Sleep &amp; Rest</a></li>
+          <li><a href="{{ root }}collections/metabolic-health-weight-support">Metabolic Health &amp; Weight Support</a></li>
+          <li><a href="{{ root }}collections/liver-health">Liver Health</a></li>
+          <li><a href="{{ root }}collections/joint-bone-health">Joint &amp; Bone Health</a></li>
+          <li><a href="{{ root }}collections/hair-skin-nail-health">Hair, Skin &amp; Nail Health</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Company</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}pages/about">About</a></li>
+          <li><a href="{{ root }}pages/contact">Contacts</a></li>
+          <li><a href="{{ root }}pages/bonuses">Bonuses</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Support</h4>
+        <ul class="footer__list">
+          <li><a href="{{ root }}pages/delivery">Shipping</a></li>
+          <li><a href="{{ root }}pages/faq">FAQ</a></li>
+          <li><a href="{{ root }}pages/wellness-test">Wellness Test</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__compliance">
+      {%- if section.settings.badge_1 != blank -%}<span class="footer__badge">{{ section.settings.badge_1 }}</span>{%- endif -%}
+      {%- if section.settings.badge_2 != blank -%}<span class="footer__badge">{{ section.settings.badge_2 }}</span>{%- endif -%}
+      {%- if section.settings.badge_3 != blank -%}<span class="footer__badge">{{ section.settings.badge_3 }}</span>{%- endif -%}
+    </div>
+    {%- if section.settings.fda_disclaimer != blank -%}
+      <p class="footer__disclaimer">{{ section.settings.fda_disclaimer }}</p>
+    {%- endif -%}
+
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <ul class="footer__legal">
+        <li><a href="{{ root }}policies/terms-of-service">Terms of service</a></li>
+        <li><a href="{{ root }}policies/privacy-policy">Privacy policy</a></li>
+        {%- if section.settings.company_line != blank -%}<li>{{ section.settings.company_line }}</li>{%- endif -%}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Cart drawer (Shopify AJAX cart) ===== -->
+<aside class="cart-drawer" id="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
+  <div class="cart-drawer__header">
+    <h3>Your cart <span class="cart-drawer__count" id="cart-drawer-count"></span></h3>
+    <button class="cart-drawer__close" id="cart-close" type="button" aria-label="Close cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="cart-drawer__body" id="cart-body">
+    <p class="cart-drawer__empty">Your cart is empty.</p>
+  </div>
+  <div class="cart-drawer__foot" id="cart-foot" hidden>
+    <form class="cart-promo" id="cart-promo">
+      <label class="cart-promo__label" for="cart-code">Have a gift card or promo code?</label>
+      <div class="cart-promo__row">
+        <input type="text" id="cart-code" class="cart-promo__input" placeholder="e.g. WELCOME10" autocomplete="off" spellcheck="false" />
+        <button type="submit" class="cart-promo__apply">Apply</button>
+      </div>
+      <p class="cart-promo__msg" id="cart-promo-msg" role="status" aria-live="polite"></p>
+    </form>
+    <div class="cart-totals">
+      <div class="cart-totals__row"><span>Subtotal</span><span id="cart-subtotal">—</span></div>
+      <div class="cart-totals__row cart-totals__row--discount" id="cart-discount-row" hidden>
+        <span id="cart-discount-label">Discount</span><span id="cart-discount">—</span>
+      </div>
+      <div class="cart-totals__row cart-totals__row--total"><span>Total</span><span id="cart-total">—</span></div>
+    </div>
+    <a class="btn btn--primary btn--full" id="cart-checkout" href="/checkout">Checkout</a>
+  </div>
+</aside>
+
+<!-- ===== Favorites drawer (localStorage wishlist) ===== -->
+<aside class="cart-drawer fav-drawer" id="fav-drawer" aria-hidden="true" aria-label="Favorites">
+  <div class="cart-drawer__header">
+    <h3>Favorites <span class="fav-drawer__count" id="fav-drawer-count"></span></h3>
+    <button class="cart-drawer__close" id="fav-close" type="button" aria-label="Close favorites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="fav-drawer__body" id="fav-body">
+    <p class="cart-drawer__empty">No favorites yet &mdash; tap the &#9829; on any product.</p>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<script>
+  (function () {
+    var CURRENCY = '{{ shop.currency }}';
+    function money(cents) {
+      try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: CURRENCY }).format((cents || 0) / 100); }
+      catch (e) { return '$' + ((cents || 0) / 100).toFixed(2); }
+    }
+
+    var overlay = document.getElementById('overlay');
+    function openDrawer(d) {
+      if (!d) return;
+      d.classList.add('is-open'); d.setAttribute('aria-hidden', 'false');
+      if (overlay) overlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawers() {
+      document.querySelectorAll('.cart-drawer').forEach(function (d) { d.classList.remove('is-open'); d.setAttribute('aria-hidden', 'true'); });
+      if (overlay) overlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+    if (overlay) overlay.addEventListener('click', closeDrawers);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawers(); });
+    var cc = document.getElementById('cart-close'); if (cc) cc.addEventListener('click', closeDrawers);
+    var fc = document.getElementById('fav-close'); if (fc) fc.addEventListener('click', closeDrawers);
+
+    /* ---------- Cart (Shopify AJAX) ---------- */
+    function setCount(n) {
+      var hc = document.querySelector('#cart-btn .header__count'); if (hc) hc.textContent = n ? n : '';
+      var dc = document.getElementById('cart-drawer-count'); if (dc) dc.textContent = n ? '(' + n + ')' : '';
+    }
+    function lineHTML(item) {
+      var variant = (item.variant_title && item.variant_title !== 'Default Title') ? ' · ' + item.variant_title : '';
+      var thumb = item.image ? ' style="background-image:url(\'' + item.image + '\')"' : '';
+      return '<div class="cart-item" data-key="' + item.key + '">' +
+        '<span class="cart-item__thumb"' + thumb + '></span>' +
+        '<span class="cart-item__info">' +
+          '<span class="cart-item__name">' + item.product_title + variant + '</span>' +
+          '<span class="cart-item__price">' + money(item.final_price) + '</span>' +
+          '<span class="cart-item__qty">' +
+            '<button class="cart-item__step" type="button" data-step="-1" aria-label="Decrease quantity">−</button>' +
+            '<span class="cart-item__count">' + item.quantity + '</span>' +
+            '<button class="cart-item__step" type="button" data-step="1" aria-label="Increase quantity">+</button>' +
+          '</span>' +
+        '</span>' +
+        '<button class="cart-item__remove" type="button" data-remove aria-label="Remove">×</button>' +
+      '</div>';
+    }
+    function updateTotals(cart) {
+      var sub = document.getElementById('cart-subtotal'); if (sub) sub.textContent = money(cart.items_subtotal_price);
+      var total = document.getElementById('cart-total'); if (total) total.textContent = money(cart.total_price);
+      var row = document.getElementById('cart-discount-row');
+      var disc = document.getElementById('cart-discount');
+      if (row && disc) {
+        if (cart.total_discount > 0) { row.hidden = false; disc.textContent = '−' + money(cart.total_discount); }
+        else { row.hidden = true; }
+      }
+    }
+    function wireLine(el) {
+      var key = el.getAttribute('data-key');
+      el.querySelectorAll('.cart-item__step').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var countEl = el.querySelector('.cart-item__count');
+          var next = (parseInt(countEl.textContent, 10) || 1) + parseInt(b.getAttribute('data-step'), 10);
+          if (next > 0) { countEl.textContent = next; } else { el.style.opacity = '0.4'; }
+          changeCart(key, next);
+        });
+      });
+      var rm = el.querySelector('[data-remove]');
+      if (rm) rm.addEventListener('click', function () { el.style.opacity = '0.4'; changeCart(key, 0); });
+    }
+    function renderCart(cart) {
+      setCount(cart.item_count);
+      var body = document.getElementById('cart-body');
+      var foot = document.getElementById('cart-foot');
+      var drawer = document.getElementById('cart-drawer');
+      if (!body) return;
+      if (!cart.item_count) {
+        body.innerHTML = '<p class="cart-drawer__empty">Your cart is empty.</p>';
+        if (foot) foot.hidden = true;
+        if (drawer) drawer.classList.remove('has-items');
+        return;
+      }
+      if (drawer) drawer.classList.add('has-items');
+      if (foot) foot.hidden = false;
+      // in-place update when the same line set is present (no rebuild → no image flash)
+      var existing = Array.prototype.map.call(body.querySelectorAll('.cart-item'), function (el) { return el.getAttribute('data-key'); });
+      var incoming = cart.items.map(function (i) { return i.key; });
+      var same = existing.length === incoming.length && existing.every(function (k, i) { return k === incoming[i]; });
+      if (same) {
+        cart.items.forEach(function (item, i) {
+          var el = body.children[i];
+          var c = el.querySelector('.cart-item__count'); if (c) c.textContent = item.quantity;
+          var p = el.querySelector('.cart-item__price'); if (p) p.textContent = money(item.final_price);
+          el.style.opacity = '';
+        });
+      } else {
+        body.innerHTML = cart.items.map(lineHTML).join('');
+        body.querySelectorAll('.cart-item').forEach(wireLine);
+      }
+      updateTotals(cart);
+    }
+    function fetchCart() { return fetch('/cart.js', { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); }); }
+    function refreshCart() { return fetchCart().then(renderCart); }
+    function changeCart(key, qty) {
+      fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ id: key, quantity: Math.max(0, qty) }) })
+        .then(function (r) { return r.json(); }).then(renderCart);
+    }
+    function openCart() { openDrawer(document.getElementById('cart-drawer')); refreshCart(); }
+
+    var cartBtn = document.getElementById('cart-btn');
+    if (cartBtn) cartBtn.addEventListener('click', function (e) { e.preventDefault(); openCart(); });
+
+    // promo / gift-card code -> apply via Shopify discount route
+    var promo = document.getElementById('cart-promo');
+    if (promo) promo.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var code = (document.getElementById('cart-code').value || '').trim();
+      if (!code) return;
+      var msg = document.getElementById('cart-promo-msg'); if (msg) { msg.textContent = 'Applying…'; msg.className = 'cart-promo__msg'; }
+      window.location.href = '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent(window.location.pathname);
+    });
+
+    // intercept add-to-cart forms -> open drawer instantly, then AJAX add
+    document.addEventListener('submit', function (e) {
+      var form = e.target.closest('form[action*="/cart/add"]');
+      if (!form) return;
+      e.preventDefault();
+      openDrawer(document.getElementById('cart-drawer'));
+      fetch('/cart/add.js', { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+        .then(function (r) { return r.json(); })
+        .then(function () { refreshCart(); })
+        .catch(function () { form.submit(); });
+    });
+
+    /* ---------- Favorites (localStorage) ---------- */
+    var FAV_KEY = 'uphealth_favs';
+    function favs() { try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch (e) { return []; } }
+    function saveFavs(l) { try { localStorage.setItem(FAV_KEY, JSON.stringify(l)); } catch (e) {} }
+    function isFav(h) { return favs().some(function (f) { return f.handle === h; }); }
+    function toggleFav(data) {
+      var l = favs();
+      var i = -1;
+      l.forEach(function (f, k) { if (f.handle === data.handle) i = k; });
+      if (i >= 0) l.splice(i, 1); else l.push(data);
+      saveFavs(l); renderFavs(); syncFavButtons();
+    }
+    function favLineHTML(f) {
+      var thumb = f.image ? ' style="background-image:url(\'' + f.image + '\')"' : '';
+      return '<div class="fav-item" data-fav-handle="' + f.handle + '">' +
+        '<span class="fav-item__thumb"' + thumb + '></span>' +
+        '<span class="fav-item__info">' +
+          '<span class="fav-item__name">' + f.title + '</span>' +
+          '<span class="fav-item__price">' + (f.price || '') + '</span>' +
+        '</span>' +
+        '<button class="fav-item__remove" type="button" data-fav-remove aria-label="Remove">×</button>' +
+      '</div>';
+    }
+    function renderFavs() {
+      var l = favs();
+      var hc = document.getElementById('fav-count'); if (hc) hc.textContent = l.length ? l.length : '';
+      var dc = document.getElementById('fav-drawer-count'); if (dc) dc.textContent = l.length ? '(' + l.length + ')' : '';
+      var body = document.getElementById('fav-body'); if (!body) return;
+      if (!l.length) { body.innerHTML = '<p class="cart-drawer__empty">No favorites yet &mdash; tap the &#9829; on any product.</p>'; return; }
+      body.innerHTML = l.map(favLineHTML).join('');
+      body.querySelectorAll('[data-fav-remove]').forEach(function (b) {
+        b.addEventListener('click', function () { toggleFav({ handle: b.closest('[data-fav-handle]').getAttribute('data-fav-handle') }); });
+      });
+    }
+    function syncFavButtons() {
+      document.querySelectorAll('[data-fav]').forEach(function (b) { b.classList.toggle('is-active', isFav(b.getAttribute('data-handle'))); });
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-fav]');
+      if (!b) return;
+      e.preventDefault();
+      toggleFav({
+        handle: b.getAttribute('data-handle'),
+        title: b.getAttribute('data-title'),
+        image: b.getAttribute('data-image'),
+        price: b.getAttribute('data-price'),
+        url: b.getAttribute('data-url')
+      });
+    });
+    var favBtn = document.getElementById('fav-btn');
+    if (favBtn) favBtn.addEventListener('click', function (e) { e.preventDefault(); renderFavs(); openDrawer(document.getElementById('fav-drawer')); });
+
+    // init
+    refreshCart();
+    renderFavs();
+    syncFavButtons();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth footer",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (optional)" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Functional wellness with formulas you can trust." },
+    { "type": "header", "content": "Compliance" },
+    { "type": "paragraph", "content": "Dietary supplements are not approved by the FDA — never use \"FDA approved\". Use truthful manufacturing claims only." },
+    { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Made in the USA" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "FDA-registered facility" },
+    { "type": "text", "id": "badge_3", "label": "Badge 3", "default": "cGMP certified" },
+    { "type": "textarea", "id": "fda_disclaimer", "label": "FDA disclaimer (DSHEA)", "default": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease." },
+    { "type": "text", "id": "company_line", "label": "Company line (registration)", "default": "DCK D. GLOBAL LTD · Company No. 15076839" },
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "social_youtube", "label": "YouTube" },
+    { "type": "url", "id": "social_instagram", "label": "Instagram" },
+    { "type": "url", "id": "social_whatsapp", "label": "WhatsApp" }
+  ]
+}
+{% endschema %}

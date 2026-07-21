@@ -1,0 +1,43 @@
+{%- comment -%}
+  Product structured data (schema.org) for Google rich results.
+  Renders price range, availability and brand from the live product.
+  Note: aggregateRating intentionally omitted — no verified reviews yet.
+{%- endcomment -%}
+{%- liquid
+  assign avail = 'https://schema.org/OutOfStock'
+  if product.available
+    assign avail = 'https://schema.org/InStock'
+  endif
+  assign jsonld_desc = product.metafields.global.description_tag | default: product.description | strip_html | truncate: 300
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ jsonld_desc | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  "image": [
+    {%- for image in product.images limit: 6 -%}
+      {{ image | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last %},{% endunless -%}
+    {%- endfor -%}
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | default: shop.name | json }}
+  },
+  {%- assign sku = product.selected_or_first_available_variant.sku -%}
+  {%- if sku != blank %}
+  "sku": {{ sku | json }},
+  {%- endif %}
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
+    "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+    "offerCount": {{ product.variants.size }},
+    "availability": {{ avail | json }},
+    "url": {{ shop.url | append: product.url | json }}
+  }
+}
+</script>

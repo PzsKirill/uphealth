@@ -1,0 +1,72 @@
+<section class="contact-section">
+  <div class="container">
+    <div class="contact__grid">
+      <div class="contact__info">
+        {%- if section.settings.intro != blank -%}<p class="contact__intro">{{ section.settings.intro }}</p>{%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'group' -%}
+              <div class="contact__group" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+                <ul class="contact__list">
+                  {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+                  {%- for line in lines -%}{%- assign l = line | strip -%}{%- if l != blank -%}<li>{{ l }}</li>{%- endif -%}{%- endfor -%}
+                </ul>
+              </div>
+            {%- when 'callout' -%}
+              <div class="contact__callout" {{ block.shopify_attributes }}><strong>{{ block.settings.label }}</strong> {{ block.settings.text }}</div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="contact__form-wrap">
+        <h3 class="contact__form-title">{{ section.settings.form_title }}</h3>
+        {%- form 'contact', class: 'contact__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="contact__success">{{ section.settings.success }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p class="contact__error">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+          <div class="contact__field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" required>
+          </div>
+          <div class="contact__field">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required>
+          </div>
+          <div class="contact__field">
+            <label for="contact-body">Message</label>
+            <textarea id="contact-body" name="contact[body]" rows="5" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">{{ section.settings.button }}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth contact",
+  "tag": "section",
+  "settings": [
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Support is live seven days a week, 9 am to 9 pm. Outside those hours, email gets a reply within four hours during the week." },
+    { "type": "text", "id": "form_title", "label": "Form title", "default": "Send us a message" },
+    { "type": "text", "id": "button", "label": "Button label", "default": "Send message" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "Thanks — we got your message and will reply shortly." }
+  ],
+  "blocks": [
+    { "type": "group", "name": "Contact group", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Reach us" },
+      { "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Email — hello@uphealth.example\nWhatsApp — +1 800 000 0000\nTelegram — @uphealthsupport\nLive chat — bottom right on any page" }
+    ]},
+    { "type": "callout", "name": "Callout", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Office:" },
+      { "type": "text", "id": "text", "label": "Text", "default": "240 Wellness Avenue, Suite 12, New York NY 10001" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth contact" }]
+}
+{% endschema %}

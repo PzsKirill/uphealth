@@ -10,6 +10,5 @@ desktop.ini
 node_modules/
 .cache/
 
-# Shopify theme working copy (lives on Shopify, not GitHub Pages)
-shopify-theme/
+# Shopify CLI local state
 .shopify/

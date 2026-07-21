@@ -1,0 +1,73 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="account">
+  <div class="container">
+    <div class="account__head">
+      <div>
+        <h1 class="account__title">Order {{ order.name }}</h1>
+        <p>Placed on {{ order.created_at | date: "%d %b %Y" }}</p>
+      </div>
+      <a href="{{ routes.account_url }}" class="btn btn--ghost btn--sm">&larr; Back to account</a>
+    </div>
+
+    {%- if order.cancelled -%}<div class="auth__errors">Cancelled {{ order.cancelled_at | date: "%d %b %Y" }} — {{ order.cancel_reason_label }}</div>{%- endif -%}
+
+    <div class="order__status">
+      <span class="order__pill">Payment: {{ order.financial_status_label }}</span>
+      <span class="order__pill">Fulfillment: {{ order.fulfillment_status_label }}</span>
+    </div>
+
+    <div class="account__table-wrap">
+      <table class="account__table order__table">
+        <thead>
+          <tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          {%- for line in order.line_items -%}
+          <tr>
+            <td>
+              <span class="order__product">
+                {%- if line.image -%}<span class="order__thumb" style="background-image:url('{{ line.image | image_url: width: 120 }}')"></span>{%- endif -%}
+                <span>
+                  <a href="{{ line.product.url }}">{{ line.title }}</a>
+                  {%- if line.variant.title and line.variant.title != 'Default Title' -%}<small>{{ line.variant.title }}</small>{%- endif -%}
+                  {%- if line.sku != blank -%}<small>SKU: {{ line.sku }}</small>{%- endif -%}
+                </span>
+              </span>
+            </td>
+            <td>{{ line.final_price | money }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.final_line_price | money }}</td>
+          </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3">Subtotal</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          {%- for discount in order.cart_level_discount_applications -%}
+          <tr><td colspan="3">Discount ({{ discount.title }})</td><td>&minus;{{ discount.total_allocated_amount | money }}</td></tr>
+          {%- endfor -%}
+          {%- for method in order.shipping_methods -%}
+          <tr><td colspan="3">Shipping ({{ method.title }})</td><td>{{ method.price | money }}</td></tr>
+          {%- endfor -%}
+          {%- for tax in order.tax_lines -%}
+          <tr><td colspan="3">Tax ({{ tax.title }})</td><td>{{ tax.price | money }}</td></tr>
+          {%- endfor -%}
+          <tr class="order__total"><td colspan="3">Total</td><td>{{ order.total_price | money }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="order__addresses">
+      {%- if order.shipping_address -%}
+      <div class="account__side"><h2>Shipping address</h2><address>{{ order.shipping_address | format_address }}</address></div>
+      {%- endif -%}
+      {%- if order.billing_address -%}
+      <div class="account__side"><h2>Billing address</h2><address>{{ order.billing_address | format_address }}</address></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "UpHealth order", "tag": "section", "settings": [] }
+{% endschema %}

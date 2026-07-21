@@ -1,0 +1,383 @@
+<script>document.documentElement.classList.add('reveal-on');window.setTimeout(function(){if(!window.__upAnim){document.documentElement.classList.add('reveal-done');}},1800);</script>
+{{ 'uphealth.css' | asset_url | stylesheet_tag }}
+{{ 'uphealth-responsive.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'uphealth-anim.js' | asset_url }}" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+{%- liquid
+  assign root = routes.root_url
+  assign all = routes.all_products_collection_url
+-%}
+
+<div class="promo-bar" role="region" aria-label="Promotional announcement">
+  <div class="promo-bar__inner container">
+    <p class="promo-bar__text">Spring offer — free shipping on orders over $80 · Express next-day delivery in major metros</p>
+  </div>
+</div>
+
+<header class="header" id="site-header">
+  <div class="header__inner container">
+
+    <div class="header__left">
+      <a href="{{ root }}" class="header__logo" aria-label="{{ shop.name }} home">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" class="brand-logo" />
+        {%- else -%}
+          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" class="brand-logo" />
+        {%- endif -%}
+      </a>
+
+      <button class="header__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="header__nav" aria-label="Primary navigation">
+        <ul class="header__nav-list">
+
+          <li class="header__nav-item header__nav-item--has-menu" data-menu="catalog">
+            <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-catalog">
+              Catalog <span class="header__nav-caret">&#9662;</span>
+            </button>
+            <div class="mega-menu mega-menu--catalog" id="menu-catalog" role="region" aria-label="Product catalog">
+              <div class="mega-menu__inner mega-menu__inner--catalog">
+                <div class="mega-cat">
+                  <a href="{{ all }}" class="mega-cat__title">All products <span class="mega-cat__title-arrow" aria-hidden="true">&rarr;</span></a>
+                  <ul class="mega-cat__links">
+                    <li><a href="{{ root }}collections/sticks"  class="mega-cat__link">Sticks</a></li>
+                    <li><a href="{{ root }}collections/drinks"  class="mega-cat__link">Drinks</a></li>
+                    <li><a href="{{ root }}collections/gummies" class="mega-cat__link">Gummies</a></li>
+                    <li><a href="{{ root }}collections/protein" class="mega-cat__link">Protein</a></li>
+                    <li><a href="{{ root }}collections/sale"    class="mega-cat__link">Sale</a></li>
+                    <li><a href="{{ root }}collections/bundles" class="mega-cat__link">Bundles</a></li>
+                  </ul>
+                </div>
+                <div class="mega-cards">
+                  <a class="mega-card" href="{{ section.settings.card1_link | default: all }}">
+                    <span class="mega-card__media">
+                      {%- if section.settings.card1_image != blank -%}<img src="{{ section.settings.card1_image | image_url: width: 460 }}" alt="" loading="lazy" />
+                      {%- else -%}<img src="{{ 'mega-protein.jpg' | asset_url }}" alt="" loading="lazy" />{%- endif -%}
+                    </span>
+                    <span class="mega-card__foot">
+                      <span class="mega-card__label">{{ section.settings.card1_label | default: 'Catalog' }}</span>
+                      <span class="mega-card__arrow" aria-hidden="true">&rarr;</span>
+                    </span>
+                  </a>
+                  <a class="mega-card mega-card--gift" href="{{ section.settings.gift_url | default: all }}">
+                    <span class="mega-card__media mega-card__media--gift" aria-hidden="true">
+                      <span class="gift-stack">
+                        <span class="gift-stack__card gift-stack__card--back"><img src="{{ 'giftcard-100.png' | asset_url }}" alt="" loading="lazy" /></span>
+                        <span class="gift-stack__card gift-stack__card--front"><img src="{{ 'giftcard-150.png' | asset_url }}" alt="" loading="lazy" /></span>
+                      </span>
+                    </span>
+                    <span class="mega-card__foot">
+                      <span class="mega-card__label">Gift cards</span>
+                      <span class="mega-card__arrow" aria-hidden="true">&rarr;</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="header__nav-item header__nav-item--has-menu" data-menu="states">
+            <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-states">
+              Outcomes <span class="header__nav-caret">&#9662;</span>
+            </button>
+            <div class="mega-menu mega-menu--states" id="menu-states" role="region" aria-label="Wellness states">
+              <div class="mega-menu__inner mega-menu__inner--states">
+                <div class="mega-states">
+                  <span class="mega-states__eyebrow">Pick an outcome</span>
+                  <div class="state-pills">
+                    <a class="state-pill" data-state="energy" href="{{ root }}collections/state-energy"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 5 13h6l-1 9 8-12h-6l1-8z"/></svg></span>Energy &amp; Stamina</a>
+                    <a class="state-pill" data-state="immune" href="{{ root }}collections/state-immune"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Immune Support</a>
+                    <a class="state-pill" data-state="strength" href="{{ root }}collections/state-strength"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/></svg></span>Strength &amp; Muscle Recovery</a>
+                    <a class="state-pill" data-state="focus" href="{{ root }}collections/state-focus"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg></span>Memory &amp; Focus</a>
+                    <a class="state-pill" data-state="mood" href="{{ root }}collections/state-mood"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c10 2 16-4 16-15-9 0-16 4-16 13z"/><path d="M4 20c2-5 5-8 9-10.5"/></svg></span>Mood &amp; Relaxation</a>
+                    <a class="state-pill" data-state="sleep" href="{{ root }}collections/state-sleep"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>Sleep &amp; Rest</a>
+                    <a class="state-pill" data-state="metabolic" href="{{ root }}collections/metabolic-health-weight-support"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18a8 8 0 1 1 15 0"/><circle cx="12" cy="18" r="1.4"/><path d="m12 18 3.6-3.8"/></svg></span>Metabolic Health &amp; Weight Support</a>
+                    <a class="state-pill" data-state="liver" href="{{ root }}collections/liver-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s5.5 5.2 5.5 9.5a5.5 5.5 0 0 1-11 0c0-4.3 5.5-9.5 5.5-9.5z"/><path d="M9.5 13a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>Liver Health</a>
+                    <a class="state-pill" data-state="joint" href="{{ root }}collections/joint-bone-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5z"/></svg></span>Joint &amp; Bone Health</a>
+                    <a class="state-pill" data-state="beauty" href="{{ root }}collections/hair-skin-nail-health"><span class="state-pill__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg></span>Hair, Skin &amp; Nail Health</a>
+                  </div>
+                  <p class="mega-states__hint">Not sure where to start? <a href="{{ root }}pages/wellness-test">Take the wellness test &rarr;</a></p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="header__nav-item header__nav-item--has-menu" data-menu="about">
+            <button class="header__nav-link header__nav-link--button" aria-expanded="false" aria-controls="menu-about">
+              About <span class="header__nav-caret">&#9662;</span>
+            </button>
+            <div class="mega-menu mega-menu--about" id="menu-about" role="region" aria-label="About {{ shop.name }}">
+              <div class="mega-menu__inner mega-menu__inner--about">
+                <div class="mega-about__col">
+                  <h4 class="mega-menu__col-title">Company</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ root }}pages/about"   class="mega-menu__link">About us</a></li>
+                    <li><a href="{{ root }}pages/bonuses" class="mega-menu__link">Bonuses</a></li>
+                    <li><a href="{{ root }}pages/contact" class="mega-menu__link">Contacts</a></li>
+                  </ul>
+                </div>
+                <div class="mega-about__col">
+                  <h4 class="mega-menu__col-title">Help</h4>
+                  <ul class="mega-menu__list">
+                    <li><a href="{{ root }}pages/faq"      class="mega-menu__link">FAQ</a></li>
+                    <li><a href="{{ root }}pages/delivery" class="mega-menu__link">Shipping &amp; returns</a></li>
+                    <li><a href="{{ root }}pages/bonuses"  class="mega-menu__link">Loyalty program</a></li>
+                  </ul>
+                </div>
+                <div class="mega-about__contacts">
+                  <h4 class="mega-menu__col-title">Talk to us</h4>
+                  <ul class="mega-contacts">
+                    <li class="mega-contact">
+                      <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg></span>
+                      <span class="mega-contact__text"><span class="mega-contact__region">United States</span><a href="tel:+18885550142" class="mega-contact__value">+1 (888) 555-0142</a></span>
+                    </li>
+                    <li class="mega-contact">
+                      <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg></span>
+                      <span class="mega-contact__text"><span class="mega-contact__region">Europe</span><a href="tel:+442079460123" class="mega-contact__value">+44 20 7946 0123</a></span>
+                    </li>
+                    <li class="mega-contact">
+                      <span class="mega-contact__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                      <span class="mega-contact__text"><span class="mega-contact__region">Email</span><a href="mailto:care@uphealth.com" class="mega-contact__value">care@uphealth.com</a></span>
+                    </li>
+                  </ul>
+                  <div class="mega-social">
+                    <a href="https://wa.me/18885550142" class="mega-social__btn" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 1 0-15.1 3.6L4 20l4.5-.9A8 8 0 0 0 20 12zm-3 2.4c-.2.5-1 1-1.5 1.1-.4.1-.9.1-1.5-.1l-1.4-.5a8.5 8.5 0 0 1-3.4-3 5.7 5.7 0 0 1-1-2.4c0-.6.2-1.1.5-1.5.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .4.3l.6 1.5c.1.2 0 .4 0 .5l-.3.4-.2.2c-.1.1-.2.2-.1.4l.6 1c.4.7 1 1.2 1.7 1.5l.4.2c.2 0 .3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.4.2.4.3v.5z"/></svg></a>
+                    {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" class="mega-social__btn" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>{%- endif -%}
+                    {%- if section.settings.social_youtube != blank -%}<a href="{{ section.settings.social_youtube }}" class="mega-social__btn" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5 3-5 3z"/></svg></a>{%- endif -%}
+                  </div>
+                </div>
+                <a class="mega-menu__featured mega-about__featured" href="{% if section.settings.about_link != blank %}{{ section.settings.about_link }}{% else %}{{ root }}pages/about{% endif %}">
+                  <div class="mega-menu__featured-image" aria-hidden="true">
+                    {%- if section.settings.about_image != blank -%}<img src="{{ section.settings.about_image | image_url: width: 520 }}" alt="" loading="lazy" />
+                    {%- else -%}<img src="{{ 'about-featured.png' | asset_url }}" alt="" loading="lazy" />{%- endif -%}
+                  </div>
+                  <div class="mega-menu__featured-body">
+                    <span class="mega-menu__featured-label">{{ section.settings.about_label | default: 'Our story' }}</span>
+                    <span class="mega-menu__featured-title">{{ section.settings.about_title | default: 'Science you can trust' }}</span>
+                    <span class="mega-menu__featured-cta">Read more &rarr;</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <a href="{{ root }}pages/wellness-test" class="header__nav-cta" data-no-ripple="true">Wellness Test</a>
+      </nav>
+    </div>
+
+    <div class="header__right">
+      <form class="header__search" role="search" action="{{ routes.search_url }}" method="get">
+        <input type="search" name="q" class="header__search-input" placeholder="Search the catalog&hellip;" aria-label="Search the catalog" />
+        <button type="submit" class="header__search-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span>Find</span>
+        </button>
+      </form>
+
+      <div class="header__actions">
+        <a href="{{ routes.account_url }}" class="header__icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </a>
+        <button type="button" class="header__icon-btn header__icon-btn--fav" id="fav-btn" aria-label="Favorites">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
+          <span class="header__count header__count--fav" id="fav-count" aria-hidden="true">0</span>
+        </button>
+        <a href="{{ routes.cart_url }}" class="header__icon-btn header__icon-btn--cart" id="cart-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-2 11H8L6 6z"/><path d="M6 6 5 2H2"/><circle cx="10" cy="21" r="1.5"/><circle cx="17" cy="21" r="1.5"/></svg>
+          <span class="header__count" aria-hidden="true">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <div class="mobile-nav__inner">
+      <form class="header__search" role="search" action="{{ routes.search_url }}" method="get" style="width: 100%; margin-bottom: var(--space-md);">
+        <input type="search" name="q" class="header__search-input" placeholder="Search the catalog&hellip;" aria-label="Search the catalog" />
+        <button type="submit" class="header__search-btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      </form>
+
+      <ul class="mobile-nav__list">
+        <li class="mobile-nav__group">
+          <button class="mobile-nav__group-toggle" aria-expanded="false">Catalog <span>+</span></button>
+          <ul class="mobile-nav__sub">
+            <li><a href="{{ all }}">All products</a></li>
+            <li><a href="{{ root }}collections/sticks">Sticks</a></li>
+            <li><a href="{{ root }}collections/gummies">Gummies</a></li>
+            <li><a href="{{ root }}collections/drinks">Drinks</a></li>
+            <li><a href="{{ root }}collections/protein">Protein</a></li>
+            <li><a href="{{ root }}collections/bundles">Bundles</a></li>
+          </ul>
+        </li>
+        <li class="mobile-nav__group">
+          <button class="mobile-nav__group-toggle" aria-expanded="false">Outcomes <span>+</span></button>
+          <ul class="mobile-nav__sub">
+            <li><a href="{{ root }}collections/state-energy">Energy &amp; Stamina</a></li>
+            <li><a href="{{ root }}collections/state-immune">Immune Support</a></li>
+            <li><a href="{{ root }}collections/state-strength">Strength &amp; Muscle Recovery</a></li>
+            <li><a href="{{ root }}collections/state-focus">Memory &amp; Focus</a></li>
+            <li><a href="{{ root }}collections/state-mood">Mood &amp; Relaxation</a></li>
+            <li><a href="{{ root }}collections/state-sleep">Sleep &amp; Rest</a></li>
+            <li><a href="{{ root }}collections/metabolic-health-weight-support">Metabolic Health &amp; Weight Support</a></li>
+            <li><a href="{{ root }}collections/liver-health">Liver Health</a></li>
+            <li><a href="{{ root }}collections/joint-bone-health">Joint &amp; Bone Health</a></li>
+            <li><a href="{{ root }}collections/hair-skin-nail-health">Hair, Skin &amp; Nail Health</a></li>
+          </ul>
+        </li>
+        <li class="mobile-nav__group">
+          <button class="mobile-nav__group-toggle" aria-expanded="false">About <span>+</span></button>
+          <ul class="mobile-nav__sub">
+            <li><a href="{{ root }}pages/about">About us</a></li>
+            <li><a href="{{ root }}pages/bonuses">Bonuses</a></li>
+            <li><a href="{{ root }}pages/contact">Contacts</a></li>
+            <li><a href="{{ root }}pages/faq">FAQ</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ root }}pages/wellness-test" class="mobile-nav__link">Wellness Test</a></li>
+      </ul>
+      <div class="mobile-nav__footer">
+        <a href="{{ routes.account_login_url }}" class="btn btn--ghost btn--full">Sign in</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="header-spacer" aria-hidden="true"></div>
+
+<script>
+  (function () {
+    var header = document.getElementById('site-header');
+    if (!header) return;
+
+    function setH() { document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px'); }
+
+    // Sticky header + docking promo. IMPORTANT: Horizon makes `.page-wrapper` the
+    // scroll container on desktop (height:100dvh; overflow-y:auto), so the page
+    // scrolls inside that div, not the window. Listen on it (and window as a
+    // fallback) and read the correct scrollTop, or nothing ever fires.
+    var spacer = document.querySelector('.header-spacer');
+    var promoBar = document.querySelector('.promo-bar');
+    var scroller = document.querySelector('.page-wrapper');
+    var footerEl = null;
+    function scrollY() {
+      if (scroller && scroller.scrollHeight > scroller.clientHeight + 4) return scroller.scrollTop;
+      return window.pageYOffset || document.documentElement.scrollTop || 0;
+    }
+    function onScroll() {
+      var y = scrollY();
+      var stuck = y > 60;
+      if (spacer) { spacer.style.height = header.offsetHeight + 'px'; spacer.style.display = stuck ? 'block' : 'none'; }
+      header.classList.toggle('is-stuck', stuck);
+      if (promoBar) {
+        footerEl = footerEl || document.querySelector('.footer');
+        var footerVisible = footerEl ? footerEl.getBoundingClientRect().top < window.innerHeight : false;
+        promoBar.classList.toggle('is-docked', stuck && !footerVisible);
+      }
+    }
+    setH();
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (scroller) scroller.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { setH(); onScroll(); }, { passive: true });
+
+    // ----- desktop dropdowns -----
+    var items = Array.prototype.slice.call(header.querySelectorAll('.header__nav-item--has-menu'));
+    var canHover = window.matchMedia('(hover: hover)').matches;
+    var closeTimer = null;
+    function closeAll(except) {
+      items.forEach(function (it) {
+        if (it === except) return;
+        it.classList.remove('is-open');
+        var b = it.querySelector('.header__nav-link--button');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    }
+    function open(it) {
+      closeAll(it);
+      it.classList.add('is-open');
+      var b = it.querySelector('.header__nav-link--button');
+      if (b) b.setAttribute('aria-expanded', 'true');
+    }
+    items.forEach(function (it) {
+      var b = it.querySelector('.header__nav-link--button');
+      if (!b) return;
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        clearTimeout(closeTimer);
+        var isOpen = it.classList.contains('is-open');
+        closeAll();
+        if (!isOpen) open(it);
+      });
+      it.addEventListener('mouseenter', function () { if (canHover) { clearTimeout(closeTimer); open(it); } });
+      it.addEventListener('mouseleave', function () { if (canHover) { clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeAll(); }, 220); } });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.header__nav-item--has-menu')) closeAll(); });
+
+    // ----- mobile burger + drawer -----
+    var burger = document.getElementById('burger');
+    var mobileNav = document.getElementById('mobile-nav');
+    function closeMobile() {
+      if (!mobileNav || !burger) return;
+      mobileNav.classList.remove('is-open');
+      burger.classList.remove('is-active');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('is-nav-open');
+    }
+    if (burger && mobileNav) {
+      burger.addEventListener('click', function () {
+        var openNow = mobileNav.classList.toggle('is-open');
+        burger.classList.toggle('is-active', openNow);
+        burger.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+        document.body.classList.toggle('is-nav-open', openNow);
+        if (openNow) {
+          // Sit flush under the header's actual bottom (no promo gap, any scroll state)
+          var hb = header.getBoundingClientRect().bottom;
+          mobileNav.style.top = hb + 'px';
+          mobileNav.style.height = (window.innerHeight - hb) + 'px';
+        }
+      });
+      mobileNav.querySelectorAll('.mobile-nav__link, .mobile-nav__sub a').forEach(function (l) {
+        l.addEventListener('click', closeMobile);
+      });
+    }
+    header.querySelectorAll('.mobile-nav__group').forEach(function (g) {
+      var t = g.querySelector('.mobile-nav__group-toggle');
+      if (!t) return;
+      t.addEventListener('click', function () {
+        var openNow = g.classList.toggle('is-open');
+        t.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+      });
+    });
+
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); closeMobile(); } });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (optional — defaults to brand logo)" },
+    { "type": "header", "content": "Mega-menu cards" },
+    { "type": "image_picker", "id": "card1_image", "label": "Card 1 image (defaults to protein photo)" },
+    { "type": "text", "id": "card1_label", "label": "Card 1 label", "default": "Catalog" },
+    { "type": "url", "id": "card1_link", "label": "Card 1 link (defaults to catalogue)" },
+    { "type": "url", "id": "gift_url", "label": "Gift cards link (defaults to catalogue)" },
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "social_youtube", "label": "YouTube URL" },
+    { "type": "header", "content": "About menu card" },
+    { "type": "image_picker", "id": "about_image", "label": "Card image (defaults to about-featured.png)" },
+    { "type": "text", "id": "about_label", "label": "Card label", "default": "Our story" },
+    { "type": "text", "id": "about_title", "label": "Card title", "default": "Science you can trust" },
+    { "type": "url", "id": "about_link", "label": "Card link (defaults to /pages/about)" }
+  ]
+}
+{% endschema %}

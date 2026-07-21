@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "settings": {
+        "title": "Frequently asked <em>questions</em>",
+        "lead": "Answers on shipping, products, gift cards, account and bonuses. Still stuck? Our support team is one message away."
+      }
+    },
+    "faq": {
+      "type": "uphealth-faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "category": "Shipping & returns", "question": "How fast does shipping arrive?", "answer": "<p>Standard delivery is 2 to 4 business days nationwide. Orders placed before 2 pm ship same day.</p>" } },
+        "q2": { "type": "qa", "settings": { "category": "Shipping & returns", "question": "Is shipping really free over $80?", "answer": "<p>Yes — for orders above $80 we cover standard delivery. The threshold applies after discounts.</p>" } },
+        "q3": { "type": "qa", "settings": { "category": "Shipping & returns", "question": "Where are your pickup points?", "answer": "<p>We have hubs in major metros. Once you enter your address at checkout, the nearest one shows up automatically.</p>" } },
+        "q4": { "type": "qa", "settings": { "category": "Shipping & returns", "question": "Do you ship internationally?", "answer": "<p>Currently we ship to the EU, UK and Canada. Other regions on request — write to support.</p>" } },
+        "q5": { "type": "qa", "settings": { "category": "Shipping & returns", "question": "Can I return something I don't like?", "answer": "<p>Unopened products can be returned within 14 days. For opened items, contact support — we look at each case individually.</p>" } },
+        "q6": { "type": "qa", "settings": { "category": "Products & formulas", "question": "Are your formulas vegan?", "answer": "<p>Most are plant-based. Marine collagen and whey protein are exceptions and are clearly labeled.</p>" } },
+        "q7": { "type": "qa", "settings": { "category": "Products & formulas", "question": "How long until I notice an effect?", "answer": "<p>It depends on the formula. Energy and sleep often show within a week; collagen and beauty support take six to eight weeks for visible change.</p>" } },
+        "q8": { "type": "qa", "settings": { "category": "Products & formulas", "question": "Can I combine multiple products?", "answer": "<p>Most of our formulas pair safely. Each product page lists known interactions. When in doubt, our wellness test recommends a bundle.</p>" } },
+        "q9": { "type": "qa", "settings": { "category": "Products & formulas", "question": "Where are the Certificates of Analysis?", "answer": "<p>Linked on every product page under the Composition tab, batch by batch.</p>" } },
+        "q10": { "type": "qa", "settings": { "category": "Gift cards", "question": "How do gift cards work?", "answer": "<p>Digital cards arrive by email within a few minutes. Values from $20 to $300, valid for 365 days from issue.</p>" } },
+        "q11": { "type": "qa", "settings": { "category": "Gift cards", "question": "Can I combine a gift card with a promo code?", "answer": "<p>Yes. The gift card applies last so promo discounts are honored first.</p>" } },
+        "q12": { "type": "qa", "settings": { "category": "Account & orders", "question": "Can I change my address after ordering?", "answer": "<p>If the order hasn't shipped, yes. Drop a note to support with the new address and we'll update it.</p>" } },
+        "q13": { "type": "qa", "settings": { "category": "Account & orders", "question": "Do you offer subscriptions?", "answer": "<p>Yes — monthly or bi-monthly, with 10% off the recurring price. Pause or cancel any time.</p>" } },
+        "q14": { "type": "qa", "settings": { "category": "Bonuses", "question": "How do I earn points?", "answer": "<p>1 point per dollar spent. Plus bonuses for reviews, referrals and birthdays. The <a href=\"/pages/bonuses\">bonuses page</a> lays it all out.</p>" } },
+        "q15": { "type": "qa", "settings": { "category": "Bonuses", "question": "Can I redeem points partially?", "answer": "<p>Yes — at checkout, choose how many points to apply. Each 100 points equals $1 off.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14", "q15"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "faq"]
+}

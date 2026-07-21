@@ -1,0 +1,26 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="auth">
+  <div class="container">
+    <div class="auth__card">
+      <h1 class="auth__title">Set a new password</h1>
+      <p class="auth__sub">Choose a new password for your account.</p>
+      {%- form 'reset_customer_password', class: 'auth__form' -%}
+        {%- if form.errors -%}<div class="auth__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="auth__field">
+          <label for="reset-pass">New password</label>
+          <input type="password" id="reset-pass" name="customer[password]" autocomplete="new-password" required>
+        </div>
+        <div class="auth__field">
+          <label for="reset-confirm">Confirm password</label>
+          <input type="password" id="reset-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Reset password</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "UpHealth reset", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,105 @@
+<section class="testimonials reels" aria-label="{{ section.settings.heading | escape }}">
+  <div class="container">
+    <header class="section-head section-head--center">
+      <h2 class="section-head__title">{{ section.settings.heading }}</h2>
+    </header>
+
+    <div class="carousel" data-carousel>
+      <div class="carousel__controls">
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
+
+      <div class="carousel__viewport">
+        <div class="carousel__track">
+          {%- for block in section.blocks -%}
+          <article class="carousel__slide" {{ block.shopify_attributes }}>
+            <div class="reel">
+              <div class="reel__media">
+                {%- if block.settings.video_url != blank -%}
+                  <video autoplay muted loop playsinline preload="none"{% if block.settings.poster != blank %} poster="{{ block.settings.poster }}"{% endif %}><source src="{{ block.settings.video_url }}" type="video/mp4" /></video>
+                {%- elsif block.settings.poster != blank -%}
+                  <img src="{{ block.settings.poster }}" alt="" loading="lazy" />
+                {%- endif -%}
+                {%- if block.settings.duration != blank -%}<span class="reel__dur">{{ block.settings.duration }}</span>{%- endif -%}
+                {%- if block.settings.name != blank -%}<div class="reel__caption"><strong>{{ block.settings.name }}</strong>{% if block.settings.formula != blank %} · {{ block.settings.formula }}{% endif %}</div>{%- endif -%}
+              </div>
+            </div>
+          </article>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="carousel__dots" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var carousel = root.querySelector('[data-carousel]');
+    if (!carousel) return;
+    var track = carousel.querySelector('.carousel__track');
+    var slides = carousel.querySelectorAll('.carousel__slide');
+    var prevBtn = carousel.querySelector('.carousel__btn--prev');
+    var nextBtn = carousel.querySelector('.carousel__btn--next');
+    var dotsHost = carousel.querySelector('.carousel__dots');
+    if (!track || !slides.length) return;
+    var index = 0, perView = 3;
+    function getPerView() { var w = window.innerWidth; if (w <= 640) return 1; if (w <= 1024) return 2; return 3; }
+    function buildDots() {
+      if (!dotsHost) return; dotsHost.innerHTML = '';
+      var pages = Math.max(1, slides.length - perView + 1);
+      for (var i = 0; i < pages; i++) {
+        (function (i) {
+          var d = document.createElement('button');
+          d.className = 'carousel__dot'; d.type = 'button'; d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          if (i === index) d.classList.add('is-active');
+          d.addEventListener('click', function () { go(i); });
+          dotsHost.appendChild(d);
+        })(i);
+      }
+    }
+    function update() {
+      var slideWidth = slides[0].getBoundingClientRect().width;
+      var gap = parseFloat(getComputedStyle(track).gap) || 16;
+      track.style.transform = 'translateX(-' + ((slideWidth + gap) * index) + 'px)';
+      var maxIndex = Math.max(0, slides.length - perView);
+      if (prevBtn) prevBtn.toggleAttribute('disabled', index <= 0);
+      if (nextBtn) nextBtn.toggleAttribute('disabled', index >= maxIndex);
+      if (dotsHost) Array.prototype.forEach.call(dotsHost.querySelectorAll('.carousel__dot'), function (d, i) { d.classList.toggle('is-active', i === index); });
+    }
+    function go(i) { var maxIndex = Math.max(0, slides.length - perView); index = Math.min(Math.max(0, i), maxIndex); update(); }
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(index - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(index + 1); });
+    var startX = 0, currentX = 0, dragging = false;
+    track.addEventListener('pointerdown', function (e) { dragging = true; startX = e.clientX; currentX = 0; track.style.transition = 'none'; });
+    track.addEventListener('pointermove', function (e) { if (dragging) currentX = e.clientX - startX; });
+    track.addEventListener('pointerup', function () { if (!dragging) return; dragging = false; track.style.transition = ''; if (Math.abs(currentX) > 50) go(index + (currentX < 0 ? 1 : -1)); currentX = 0; });
+    window.addEventListener('resize', function () { var pv = getPerView(); if (pv !== perView) { perView = pv; index = Math.min(index, Math.max(0, slides.length - perView)); buildDots(); } update(); });
+    perView = getPerView(); buildDots(); update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth reviews",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "People are talking about us" }
+  ],
+  "blocks": [
+    { "type": "reel", "name": "Video reel", "settings": [
+      { "type": "text", "id": "video_url", "label": "Video URL (.mp4)" },
+      { "type": "text", "id": "poster", "label": "Poster image URL" },
+      { "type": "text", "id": "duration", "label": "Duration label" },
+      { "type": "text", "id": "name", "label": "Person name" },
+      { "type": "text", "id": "formula", "label": "Formula / tag" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth reviews" }]
+}
+{% endschema %}

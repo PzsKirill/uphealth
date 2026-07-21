@@ -1,0 +1,39 @@
+<section class="benefits">
+  <div class="container">
+    <header class="section-head">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="section-head__title">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lead != blank -%}<p class="section-head__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="benefits__grid" style="grid-template-columns: repeat({{ section.blocks.size | at_most: 4 }}, 1fr);">
+      {%- for block in section.blocks -%}
+      <div class="benefit" {{ block.shopify_attributes }}>
+        <span class="benefit__num">{{ forloop.index | prepend: '0' }}</span>
+        <h3 class="benefit__title">{{ block.settings.title }}</h3>
+        <p class="benefit__text">{{ block.settings.text }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth steps",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Three steps, no small print" },
+    { "type": "textarea", "id": "lead", "label": "Lead" }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Step description." }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth steps" }]
+}
+{% endschema %}

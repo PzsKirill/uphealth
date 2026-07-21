@@ -1,0 +1,40 @@
+{%- assign raw = product.metafields.custom.ingredients -%}
+{%- if raw != blank -%}
+<section class="ing-highlights">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="section-head__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    </header>
+    <div class="ing-highlights__grid">
+      {%- assign lines = raw | newline_to_br | split: '<br />' -%}
+      {%- for line in lines -%}
+        {%- assign parts = line | split: '|' -%}
+        {%- assign name = parts[0] | strip -%}
+        {%- if name != blank -%}
+        <div class="ing-highlight">
+          <h3 class="ing-highlight__name">{{ name }}</h3>
+          {%- assign amount = parts[1] | strip -%}
+          {%- if amount != blank -%}<span class="ing-highlight__amount">{{ amount }}</span>{%- endif -%}
+          {%- assign text = parts[2] | strip -%}
+          {%- if text != blank -%}<p class="ing-highlight__text">{{ text }}</p>{%- endif -%}
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "UpHealth highlights",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Reads the product metafield custom.ingredients — one ingredient per line as: Name | Amount | Text. Hidden when empty." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What's inside" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Key ingredients" }
+  ],
+  "presets": [{ "name": "UpHealth highlights" }]
+}
+{% endschema %}

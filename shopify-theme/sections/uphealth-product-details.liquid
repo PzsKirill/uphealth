@@ -1,0 +1,21 @@
+{%- if product.description != blank -%}
+<section class="pdp-details">
+  <div class="container">
+    <div class="pdp-details__inner">
+      {%- if section.settings.heading != blank -%}<h2 class="pdp-details__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      <div class="pdp-details__body rte">{{ product.description }}</div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "UpHealth product details",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Product details" }
+  ],
+  "presets": [{ "name": "UpHealth product details" }]
+}
+{% endschema %}

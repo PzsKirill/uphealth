@@ -1,0 +1,63 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="auth">
+  <div class="container">
+    <div class="auth__card" id="login-pane">
+      <h1 class="auth__title">{{ section.settings.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="auth__sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+      {%- form 'customer_login', class: 'auth__form' -%}
+        {%- if form.errors -%}<div class="auth__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="auth__field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="customer[email]" autocomplete="email" required>
+        </div>
+        <div class="auth__field">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" name="customer[password]" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Sign in</button>
+      {%- endform -%}
+      <div class="auth__links">
+        <a href="#recover" data-recover-toggle>Forgot your password?</a>
+        <span>New here? <a href="{{ routes.account_register_url }}">Create an account</a></span>
+      </div>
+    </div>
+
+    <div class="auth__card" id="recover-pane" hidden>
+      <h1 class="auth__title">Reset your password</h1>
+      <p class="auth__sub">Enter your email and we'll send a reset link.</p>
+      {%- form 'recover_customer_password', class: 'auth__form' -%}
+        {%- if form.posted_successfully? -%}<div class="auth__success">We've sent you an email with a link to reset your password.</div>{%- endif -%}
+        {%- if form.errors -%}<div class="auth__errors">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="auth__field">
+          <label for="recover-email">Email</label>
+          <input type="email" id="recover-email" name="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Send reset link</button>
+      {%- endform -%}
+      <div class="auth__links"><a href="#login" data-login-toggle>&larr; Back to sign in</a></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var login = document.getElementById('login-pane'), recover = document.getElementById('recover-pane');
+    if (!login || !recover) return;
+    function show(which) { login.hidden = which !== 'login'; recover.hidden = which !== 'recover'; }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-recover-toggle]'), function (b) { b.addEventListener('click', function (e) { e.preventDefault(); show('recover'); }); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-login-toggle]'), function (b) { b.addEventListener('click', function (e) { e.preventDefault(); show('login'); }); });
+    if (window.location.hash === '#recover') show('recover');
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth login",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Welcome back" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Sign in to your UpHealth account." }
+  ]
+}
+{% endschema %}

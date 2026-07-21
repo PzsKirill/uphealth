@@ -1,0 +1,114 @@
+<style>body { background: var(--color-bg); }</style>
+{{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+
+{%- liquid
+  assign countries = shop.enabled_currencies | default: ''
+-%}
+
+<section class="account">
+  <div class="container">
+    <div class="account__head">
+      <div><h1 class="account__title">Your addresses</h1></div>
+      <a href="{{ routes.account_url }}" class="btn btn--ghost btn--sm">&larr; Back to account</a>
+    </div>
+
+    <div class="addr__new">
+      <button type="button" class="btn btn--primary" data-addr-toggle="add">Add a new address</button>
+    </div>
+
+    <div class="addr__form-wrap" id="addr-add" hidden>
+      <h2 class="addr__form-title">New address</h2>
+      {%- form 'customer_address', customer.new_address, class: 'auth__form addr__form' -%}
+        <div class="auth__row">
+          <div class="auth__field"><label>First name</label><input type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name"></div>
+          <div class="auth__field"><label>Last name</label><input type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name"></div>
+        </div>
+        <div class="auth__field"><label>Company</label><input type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization"></div>
+        <div class="auth__field"><label>Address</label><input type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1"></div>
+        <div class="auth__field"><label>Apartment, suite, etc.</label><input type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2"></div>
+        <div class="auth__row">
+          <div class="auth__field"><label>City</label><input type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2"></div>
+          <div class="auth__field"><label>Postal/ZIP code</label><input type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code"></div>
+        </div>
+        <div class="auth__row">
+          <div class="auth__field"><label>Country/region</label><select name="address[country]" id="AddressCountryNew" data-default="{{ form.country }}">{{ all_country_option_tags }}</select></div>
+          <div class="auth__field" id="AddressProvinceContainerNew"><label>Province/state</label><select name="address[province]" id="AddressProvinceNew" data-default="{{ form.province }}"></select></div>
+        </div>
+        <div class="auth__field"><label>Phone</label><input type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel"></div>
+        <label class="addr__default"><input type="checkbox" name="address[default]" value="1"> Set as default address</label>
+        <div class="addr__actions">
+          <button type="submit" class="btn btn--primary">Save address</button>
+          <button type="button" class="btn btn--ghost" data-addr-cancel="add">Cancel</button>
+        </div>
+      {%- endform -%}
+    </div>
+
+    <div class="addr__list">
+      {%- for address in customer.addresses -%}
+      <div class="addr__card">
+        {%- if address == customer.default_address -%}<span class="addr__badge">Default</span>{%- endif -%}
+        <address>{{ address | format_address }}</address>
+        <div class="addr__card-actions">
+          <button type="button" class="btn btn--ghost btn--sm" data-addr-toggle="edit-{{ address.id }}">Edit</button>
+          {%- form 'customer_address', address, method: 'delete' -%}
+            <button type="submit" class="btn btn--ghost btn--sm addr__delete" data-confirm="Delete this address?">Delete</button>
+          {%- endform -%}
+        </div>
+
+        <div class="addr__form-wrap" id="addr-edit-{{ address.id }}" hidden>
+          {%- form 'customer_address', address, class: 'auth__form addr__form' -%}
+            <div class="auth__row">
+              <div class="auth__field"><label>First name</label><input type="text" name="address[first_name]" value="{{ address.first_name }}"></div>
+              <div class="auth__field"><label>Last name</label><input type="text" name="address[last_name]" value="{{ address.last_name }}"></div>
+            </div>
+            <div class="auth__field"><label>Company</label><input type="text" name="address[company]" value="{{ address.company }}"></div>
+            <div class="auth__field"><label>Address</label><input type="text" name="address[address1]" value="{{ address.address1 }}"></div>
+            <div class="auth__field"><label>Apartment, suite, etc.</label><input type="text" name="address[address2]" value="{{ address.address2 }}"></div>
+            <div class="auth__row">
+              <div class="auth__field"><label>City</label><input type="text" name="address[city]" value="{{ address.city }}"></div>
+              <div class="auth__field"><label>Postal/ZIP code</label><input type="text" name="address[zip]" value="{{ address.zip }}"></div>
+            </div>
+            <div class="auth__row">
+              <div class="auth__field"><label>Country/region</label><select name="address[country]" id="AddressCountry_{{ address.id }}" data-default="{{ address.country }}">{{ all_country_option_tags }}</select></div>
+              <div class="auth__field" id="AddressProvinceContainer_{{ address.id }}"><label>Province/state</label><select name="address[province]" id="AddressProvince_{{ address.id }}" data-default="{{ address.province }}"></select></div>
+            </div>
+            <div class="auth__field"><label>Phone</label><input type="tel" name="address[phone]" value="{{ address.phone }}"></div>
+            <label class="addr__default"><input type="checkbox" name="address[default]" value="1"{% if address == customer.default_address %} checked{% endif %}> Set as default address</label>
+            <div class="addr__actions">
+              <button type="submit" class="btn btn--primary">Update address</button>
+              <button type="button" class="btn btn--ghost" data-addr-cancel="edit-{{ address.id }}">Cancel</button>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    function toggle(id, state) { var el = document.getElementById('addr-' + id); if (el) el.hidden = !state; }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-addr-toggle]'), function (b) {
+      b.addEventListener('click', function () { toggle(b.getAttribute('data-addr-toggle'), true); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-addr-cancel]'), function (b) {
+      b.addEventListener('click', function () { toggle(b.getAttribute('data-addr-cancel'), false); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-confirm]'), function (b) {
+      b.addEventListener('click', function (e) { if (!window.confirm(b.getAttribute('data-confirm'))) e.preventDefault(); });
+    });
+    function initCPS() {
+      if (typeof Shopify === 'undefined' || !Shopify.CountryProvinceSelector) { return setTimeout(initCPS, 200); }
+      new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', { hideElement: 'AddressProvinceContainerNew' });
+      {%- for address in customer.addresses -%}
+      new Shopify.CountryProvinceSelector('AddressCountry_{{ address.id }}', 'AddressProvince_{{ address.id }}', { hideElement: 'AddressProvinceContainer_{{ address.id }}' });
+      {%- endfor -%}
+    }
+    initCPS();
+  })();
+</script>
+
+{% schema %}
+{ "name": "UpHealth addresses", "tag": "section", "settings": [] }
+{% endschema %}

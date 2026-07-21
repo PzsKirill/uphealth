@@ -1,0 +1,30 @@
+{%- comment -%}
+  Per-product colour: reads the custom.accent / custom.bg Color metafields and
+  derives the full --color-* palette via color-mix(). Server-rendered → no FOUC.
+  Falls back to the brand purple/cream when the metafields are empty.
+{%- endcomment -%}
+{%- liquid
+  assign accent = product.metafields.custom.accent.value | default: '#74548e'
+  assign bg     = product.metafields.custom.bg.value     | default: '#fefcf9'
+-%}
+<style>
+  body { background: {{ bg }}; }
+  #product-{{ product.id }} {
+    --color-accent: {{ accent }};
+    --color-purple: {{ accent }};
+    --color-accent-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-purple-soft: color-mix(in srgb, {{ accent }} 22%, white);
+    --color-accent-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-purple-deep: color-mix(in srgb, {{ accent }} 70%, black);
+    --color-border:      color-mix(in srgb, {{ accent }} 20%, white);
+    --color-bg: {{ bg }};
+    --color-bg-alt:  color-mix(in srgb, {{ bg }}, black 7%);
+    --color-bg-card: color-mix(in srgb, {{ bg }} 35%, white);
+    {%- if product.metafields.custom.ink != blank %}
+    --color-text: {{ product.metafields.custom.ink.value }};
+    {%- else %}
+    --color-text: color-mix(in srgb, {{ accent }} 72%, black);
+    {%- endif %}
+    --color-text-muted: color-mix(in srgb, var(--color-text) 55%, {{ bg }});
+  }
+</style>

@@ -1,0 +1,120 @@
+<style>body { background: var(--color-bg); }</style>
+
+{%- liquid
+  assign cats = ''
+  for block in section.blocks
+    unless cats contains block.settings.category
+      assign cats = cats | append: block.settings.category | append: '|||'
+    endunless
+  endfor
+  assign catlist = cats | split: '|||'
+-%}
+
+{%- if section.settings.show_toc -%}
+<section class="content-page">
+  <div class="container">
+    <div class="content-page__grid">
+
+      <nav class="toc" aria-label="On this page">
+        <span class="toc__title">{{ section.settings.toc_title }}</span>
+        <ul class="toc__list">
+          {%- for c in catlist -%}<li><a href="#{{ c | handleize }}" class="toc__link{% if forloop.first %} is-active{% endif %}">{{ c }}</a></li>{%- endfor -%}
+        </ul>
+      </nav>
+
+      <div class="content">
+        {%- assign current = '' -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.category != current -%}
+            {%- unless forloop.first -%}</ul></section>{%- endunless -%}
+            {%- assign current = block.settings.category -%}
+            <section id="{{ current | handleize }}"><h2>{{ current }}</h2><ul class="faq__list">
+          {%- endif -%}
+          <li class="faq__item" {{ block.shopify_attributes }}>
+            <button class="faq__q" type="button" aria-expanded="false"><span>{{ block.settings.question }}</span><span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a">{{ block.settings.answer }}</div>
+          </li>
+          {%- if forloop.last -%}</ul></section>{%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+{%- else -%}
+<section class="faq">
+  <div class="container container--narrow">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <header class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="section-head__title">{{ section.settings.heading }}</h2>{%- endif -%}
+    </header>
+    {%- endif -%}
+    <ul class="faq__list">
+      {%- for block in section.blocks -%}
+      <li class="faq__item" {{ block.shopify_attributes }}>
+        <button class="faq__q" type="button" aria-expanded="false"><span>{{ block.settings.question }}</span><span class="faq__icon" aria-hidden="true">+</span></button>
+        <div class="faq__a">{{ block.settings.answer }}</div>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.btn_label != blank -%}
+    <div class="faq__more">
+      <a href="{{ section.settings.btn_link | default: '#' }}" class="btn btn--ghost">{{ section.settings.btn_label }}</a>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var qs = root.querySelectorAll('.faq__q');
+    Array.prototype.forEach.call(qs, function (q) {
+      q.addEventListener('click', function () {
+        var item = q.parentNode;
+        var open = item.classList.toggle('is-open');
+        q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+    var links = root.querySelectorAll('.toc__link');
+    var targets = root.querySelectorAll('.content > section');
+    if ('IntersectionObserver' in window && targets.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var id = e.target.id;
+          Array.prototype.forEach.call(links, function (l) { l.classList.toggle('is-active', l.getAttribute('href') === '#' + id); });
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      Array.prototype.forEach.call(targets, function (t) { io.observe(t); });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth FAQ",
+  "tag": "section",
+  "max_blocks": 50,
+  "settings": [
+    { "type": "checkbox", "id": "show_toc", "label": "Show sidebar (categories)", "default": true },
+    { "type": "text", "id": "toc_title", "label": "Sidebar title", "default": "Categories" },
+    { "type": "header", "content": "Compact mode (sidebar off)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Quick answers" },
+    { "type": "text", "id": "btn_label", "label": "Button label" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "qa", "name": "Q&A", "settings": [
+      { "type": "text", "id": "category", "label": "Category", "default": "General" },
+      { "type": "text", "id": "question", "label": "Question", "default": "Question?" },
+      { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer.</p>" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth FAQ" }]
+}
+{% endschema %}

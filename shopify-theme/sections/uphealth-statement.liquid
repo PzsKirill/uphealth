@@ -1,0 +1,17 @@
+<section class="bigtext" aria-label="Brand statement">
+  <div class="bigtext__track" aria-hidden="true">
+    <span class="bigtext__line">{{ section.settings.text }}</span>
+    <span class="bigtext__line">{{ section.settings.text }}</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth statement",
+  "tag": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "text", "label": "Statement", "default": "UpHealth is <em>balance</em> · UpHealth is <em>energy</em> · UpHealth is <em>calm</em> · UpHealth is <em>you</em> ·" }
+  ],
+  "presets": [{ "name": "UpHealth statement" }]
+}
+{% endschema %}

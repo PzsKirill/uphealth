@@ -1,0 +1,31 @@
+<div class="ing-ticker" aria-hidden="true">
+  <div class="ing-ticker__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+      <span class="ing-ticker__item">
+        <span class="ing-ticker__dot">
+          {%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 80 }}" alt="" />
+          {%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="" />{%- endif -%}
+        </span><b>{{ block.settings.name }}</b> {{ block.settings.location }}
+      </span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "UpHealth ticker",
+  "tag": "section",
+  "max_blocks": 16,
+  "blocks": [
+    { "type": "item", "name": "Ticker item", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "Image — asset fallback" },
+      { "type": "text", "id": "name", "label": "Name" },
+      { "type": "text", "id": "location", "label": "Location" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth ticker" }]
+}
+{% endschema %}

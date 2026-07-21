@@ -1,0 +1,46 @@
+<section class="tiers">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="section-head__title">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lead != blank -%}<p class="section-head__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="tiers__grid">
+      {%- for block in section.blocks -%}
+      <div class="tier{% if block.settings.featured %} tier--featured{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.badge != blank -%}<span class="tier__badge">{{ block.settings.badge }}</span>{%- endif -%}
+        <span class="tier__name">{{ block.settings.name }}</span>
+        <span class="tier__threshold">{{ block.settings.threshold }}</span>
+        <ul class="tier__perks">
+          {%- assign perks = block.settings.perks | newline_to_br | split: '<br />' -%}
+          {%- for p in perks -%}{%- assign pp = p | strip -%}{%- if pp != blank -%}<li class="tier__perk">{{ pp }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth tiers",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Tiers" },
+    { "type": "text", "id": "title", "label": "Title", "default": "More you order, more you get" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Tier status carries over each year — no resets, no surprises." }
+  ],
+  "blocks": [
+    { "type": "tier", "name": "Tier", "settings": [
+      { "type": "text", "id": "badge", "label": "Badge", "default": "Starter" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Bronze" },
+      { "type": "text", "id": "threshold", "label": "Threshold", "default": "$0 – $200 spent" },
+      { "type": "textarea", "id": "perks", "label": "Perks (one per line)", "default": "1× points on every order\nBirthday bonus: 250 points\nEarly access to new launches" },
+      { "type": "checkbox", "id": "featured", "label": "Featured (highlight)", "default": false }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth tiers" }]
+}
+{% endschema %}

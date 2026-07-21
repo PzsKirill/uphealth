@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "uphealth-product-simple",
+      "settings": { "show_description": false }
+    },
+    "ingredients": {
+      "type": "uphealth-ingredients-highlights",
+      "settings": {}
+    },
+    "details": {
+      "type": "uphealth-product-details",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "uphealth-benefits",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "asset": "newavatar.png", "chip": "Scientific approach", "text": "We use only tested nutrients in meaningful doses — and leave out the needless extras." } },
+        "c2": { "type": "card", "settings": { "asset": "avatar2.png", "chip": "Clean formula", "text": "Every ingredient works in concert with the others, amplifying the overall effect." } },
+        "c3": { "type": "card", "settings": { "asset": "avatr3.png", "chip": "Proven results", "text": "Developed with doctors and research labs, then tested batch by batch before it ships." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "heading": "Why UpHealth?", "lead": "Hover a card to learn more." }
+    },
+    "science": {
+      "type": "uphealth-video",
+      "settings": {}
+    },
+    "related": {
+      "type": "uphealth-related",
+      "settings": {}
+    }
+  },
+  "order": ["main", "ingredients", "details", "benefits", "science", "related"]
+}

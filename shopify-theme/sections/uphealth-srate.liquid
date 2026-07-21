@@ -1,0 +1,84 @@
+<section class="srate" aria-label="{{ section.settings.title | escape }}">
+  <div class="container">
+    <header class="section-head">
+      {%- if section.settings.eyebrow != blank -%}<span class="section-head__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.title != blank -%}<h2 class="section-head__title">{{ section.settings.title }}</h2>{%- endif -%}
+      {%- if section.settings.lead != blank -%}<p class="section-head__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="srate__grid">
+      <div class="srate__media">
+        {%- if section.settings.video_url != blank -%}
+        <video autoplay muted loop playsinline preload="metadata"{% if section.settings.poster != blank %} poster="{{ section.settings.poster }}"{% endif %}>
+          <source src="{{ section.settings.video_url }}" type="video/mp4" />
+        </video>
+        {%- elsif section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="" loading="lazy" />
+        {%- endif -%}
+        {%- if section.settings.media_tag != blank -%}<span class="srate__media-tag">{{ section.settings.media_tag }}</span>{%- endif -%}
+      </div>
+
+      <ul class="srate__list">
+        {%- for block in section.blocks -%}
+        <li class="srate__item" {{ block.shopify_attributes }}>
+          <div class="srate__head">
+            <span class="srate__name">{{ block.settings.name }}</span>
+            <span class="srate__score">{{ block.settings.score }}<small>/{{ block.settings.score_max }}</small></span>
+          </div>
+          <div class="srate__track"><span class="srate__fill" style="--w:{{ block.settings.percent }}%"></span></div>
+          {%- if block.settings.note != blank -%}<p class="srate__note">{{ block.settings.note }}</p>{%- endif -%}
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var fills = document.querySelectorAll('#shopify-section-{{ section.id }} .srate__fill');
+    if (!fills.length) return;
+    function fill(el) { el.style.width = el.style.getPropertyValue('--w') || '0'; }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.3 });
+      fills.forEach(function (f) { io.observe(f); });
+    } else { fills.forEach(fill); }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth science rating",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The evidence" },
+    { "type": "text", "id": "title", "label": "Title", "default": "We rely on science" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Our products are built on carefully studied components and supported by dozens of high-quality randomized trials." },
+    { "type": "header", "content": "Media" },
+    { "type": "text", "id": "video_url", "label": "Video MP4 URL", "default": "https://assets.mixkit.co/videos/3768/3768-720.mp4" },
+    { "type": "text", "id": "poster", "label": "Poster URL", "default": "https://assets.mixkit.co/videos/3768/3768-thumb-720-0.jpg" },
+    { "type": "image_picker", "id": "image", "label": "Image (fallback if no video)" },
+    { "type": "text", "id": "media_tag", "label": "Media tag", "default": "How we score it" }
+  ],
+  "blocks": [
+    { "type": "rating", "name": "Rating bar", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Studied" },
+      { "type": "text", "id": "score", "label": "Score", "default": "4" },
+      { "type": "text", "id": "score_max", "label": "Max", "default": "4" },
+      { "type": "range", "id": "percent", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Fill", "default": 100 },
+      { "type": "textarea", "id": "note", "label": "Note", "default": "Plenty of data — multiple high-quality papers behind each active." }
+    ]}
+  ],
+  "presets": [{
+    "name": "UpHealth science rating",
+    "blocks": [
+      { "type": "rating", "settings": { "name": "Studied", "score": "4", "score_max": "4", "percent": 100, "note": "Plenty of data — multiple high-quality papers behind each active." } },
+      { "type": "rating", "settings": { "name": "Effectiveness", "score": "3", "score_max": "4", "percent": 75, "note": "Studies show a noticeable benefit after taking our supplements." } },
+      { "type": "rating", "settings": { "name": "Safety", "score": "4", "score_max": "4", "percent": 100, "note": "Very low risk — no side effects or overdose potential found." } }
+    ]
+  }]
+}
+{% endschema %}

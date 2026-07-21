@@ -1,0 +1,60 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="search-page">
+  <div class="container">
+    <div class="search-page__head">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li>Search</li>
+        </ol>
+      </nav>
+      <h1 class="page-hero__title">{{ section.settings.title }}</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+        <input type="hidden" name="type" value="product">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder }}" aria-label="Search">
+        <button type="submit" class="btn btn--primary">Search</button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+      <p class="search-page__count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms }}&rdquo;</p>
+      {%- paginate search.results by section.settings.per_page -%}
+      <div class="catalog__grid-products">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}{% render 'uphealth-product-card', product: item %}{%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+      <nav class="catalog__pagination" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="catalog__page catalog__page--nav" aria-label="Previous">‹</a>{%- endif -%}
+        {%- for part in paginate.parts -%}{%- if part.is_link -%}<a href="{{ part.url }}" class="catalog__page">{{ part.title }}</a>{%- else -%}<span class="catalog__page is-active">{{ part.title }}</span>{%- endif -%}{%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="catalog__page catalog__page--nav" aria-label="Next">›</a>{%- endif -%}
+      </nav>
+      {%- endif -%}
+      {%- endpaginate -%}
+      {%- else -%}
+      <div class="search-page__empty">
+        <p class="search-page__empty-title">No results for &ldquo;{{ search.terms }}&rdquo;</p>
+        <p>Try a different term, check the spelling, or <a href="{{ routes.all_products_collection_url }}">browse all products</a>.</p>
+      </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="search-page__count">{{ section.settings.prompt }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth search",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Search" },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Search products…" },
+    { "type": "text", "id": "prompt", "label": "Empty prompt", "default": "Type a product, ingredient or outcome to get started." },
+    { "type": "range", "id": "per_page", "min": 8, "max": 24, "step": 4, "label": "Results per page", "default": 12 }
+  ]
+}
+{% endschema %}

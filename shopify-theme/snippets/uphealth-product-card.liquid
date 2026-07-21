@@ -1,0 +1,35 @@
+{%- comment -%}
+  Product card — 1:1 with the prototype. Unique class prefix `up-card`
+  to avoid the collision with Horizon's own `.product-card`.
+  Usage: {% render 'uphealth-product-card', product: product %}
+  Optional metafields (custom): card_badge, card_subtitle, rating.
+{%- endcomment -%}
+{%- liquid
+  assign img1 = product.featured_media
+  assign img2 = product.media.last
+  assign badge = product.metafields.custom.card_badge | default: product.metafields.custom.servings | default: product.type
+  assign sub = product.metafields.custom.card_subtitle
+  assign rating = product.metafields.custom.rating
+-%}
+<article class="up-card">
+  <a href="{{ product.url }}" class="up-card__media">
+    {%- if img1 -%}<img src="{{ img1 | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" />{%- endif -%}
+    {%- if product.media.size > 1 -%}<img class="up-card__img--hover" src="{{ img2 | image_url: width: 600 }}" alt="" loading="lazy" />{%- endif -%}
+  </a>
+  {%- if badge != blank -%}<span class="up-card__badge">{{ badge }}</span>{%- endif -%}
+  <button type="button" class="up-card__fav" data-fav data-handle="{{ product.handle }}" data-title="{{ product.title | escape }}" data-image="{{ img1 | image_url: width: 200 }}" data-price="{{ product.price | money }}" data-url="{{ product.url }}" aria-label="Add to wishlist">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3.5 5 7 5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 3.5 0 6 3.5 4.5 7-2.5 4.5-9.5 9-9.5 9z"/></svg>
+  </button>
+  <div class="up-card__body">
+    <span class="up-card__rating"><span class="up-card__stars">★★★★★</span>{% if rating != blank %} {{ rating }}{% endif %}</span>
+    <h3 class="up-card__title">{{ product.title }}</h3>
+    {%- if sub != blank -%}<p class="up-card__desc">{{ sub }}</p>{%- endif -%}
+    <div class="up-card__footer">
+      <div class="up-card__price">
+        <span class="up-card__price-now">{{ product.price | money }}</span>
+        {%- if product.compare_at_price > product.price -%}<span class="up-card__price-old">{{ product.compare_at_price | money }}</span>{%- endif -%}
+      </div>
+      <a href="{{ product.url }}" class="btn btn--primary btn--sm">Details</a>
+    </div>
+  </div>
+</article>

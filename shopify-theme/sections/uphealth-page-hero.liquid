@@ -1,0 +1,40 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="page-hero" aria-label="{{ page.title | escape }}">
+  <div class="page-hero__inner container">
+    <div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          <li><a href="{{ routes.root_url }}">Home</a></li>
+          <li>{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1 class="page-hero__title">{{ section.settings.title | default: page.title }}</h1>
+      {%- if section.settings.lead != blank -%}<p class="page-hero__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </div>
+    {%- if section.blocks.size > 0 -%}
+    <div class="page-hero__meta">
+      {%- for block in section.blocks -%}<div {{ block.shopify_attributes }}><strong>{{ block.settings.value }}</strong> {{ block.settings.label }}</div>{%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth page hero",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "inline_richtext", "id": "title", "label": "Title (defaults to page title)" },
+    { "type": "textarea", "id": "lead", "label": "Lead" }
+  ],
+  "blocks": [
+    { "type": "stat", "name": "Meta stat", "settings": [
+      { "type": "text", "id": "value", "label": "Value" },
+      { "type": "text", "id": "label", "label": "Label" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth page hero" }]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="content-page">
+  <div class="container">
+    <div class="content-page__grid">
+
+      <nav class="toc" aria-label="On this page">
+        <span class="toc__title">{{ section.settings.toc_title }}</span>
+        <ul class="toc__list">
+          {%- for block in section.blocks -%}
+          <li><a href="#{{ block.settings.heading | handleize }}" class="toc__link{% if forloop.first %} is-active{% endif %}">{{ block.settings.heading }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      <div class="content">
+        {%- for block in section.blocks -%}
+        <section id="{{ block.settings.heading | handleize }}" {{ block.shopify_attributes }}>
+          <h2>{{ block.settings.heading }}</h2>
+          {{ block.settings.body }}
+          {%- if block.settings.callout != blank -%}<div class="content__callout">{{ block.settings.callout }}</div>{%- endif -%}
+        </section>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var links = root.querySelectorAll('.toc__link');
+    var targets = root.querySelectorAll('.content > section');
+    if (!('IntersectionObserver' in window) || !targets.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var id = e.target.id;
+        Array.prototype.forEach.call(links, function (l) {
+          l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Array.prototype.forEach.call(targets, function (t) { io.observe(t); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth content page",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "toc_title", "label": "Sidebar title", "default": "Sections" }
+  ],
+  "blocks": [
+    { "type": "section", "name": "Section", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Section heading" },
+      { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Section text.</p>" },
+      { "type": "textarea", "id": "callout", "label": "Callout (optional)" }
+    ]}
+  ],
+  "presets": [{ "name": "UpHealth content page" }]
+}
+{% endschema %}

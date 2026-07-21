@@ -1,0 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "uphealth-404",
+      "blocks": {
+        "l1": { "type": "link", "settings": { "label": "Take the wellness test", "link": "/pages/wellness-test" } },
+        "l2": { "type": "link", "settings": { "label": "FAQ", "link": "/pages/faq" } },
+        "l3": { "type": "link", "settings": { "label": "Contact us", "link": "/pages/contact" } }
+      },
+      "block_order": ["l1", "l2", "l3"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

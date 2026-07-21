@@ -1,0 +1,50 @@
+<section class="why" aria-label="{{ section.settings.heading | escape }}">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-head__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.lead != blank -%}<p class="section-head__lead">{{ section.settings.lead }}</p>{%- endif -%}
+    </header>
+
+    <div class="why__grid">
+      {%- for block in section.blocks -%}
+      <article class="why-card" {{ block.shopify_attributes }}>
+        <div class="why-card__media">
+          {%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 700 }}" alt="" loading="lazy" />
+          {%- elsif block.settings.asset != blank -%}<img src="{{ block.settings.asset | asset_url }}" alt="" loading="lazy" />{%- endif -%}
+          {%- if block.settings.chip != blank -%}<span class="why-card__chip">{{ block.settings.chip }}</span>{%- endif -%}
+          <span class="why-card__num">{{ forloop.index | prepend: '0' }}</span>
+        </div>
+        <div class="why-card__reveal"><p>{{ block.settings.text }}</p></div>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth benefits",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why UpHealth?" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "Hover a card to learn more." }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Benefit card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "asset", "label": "Image — asset fallback" },
+      { "type": "text", "id": "chip", "label": "Chip" },
+      { "type": "textarea", "id": "text", "label": "Reveal text" }
+    ]}
+  ],
+  "presets": [{
+    "name": "UpHealth benefits",
+    "blocks": [
+      { "type": "card", "settings": { "asset": "newavatar.png", "chip": "Scientific approach", "text": "We use only tested nutrients in meaningful doses — and leave out the needless extras." } },
+      { "type": "card", "settings": { "asset": "avatar2.png", "chip": "Clean formula", "text": "Every ingredient works in concert with the others, amplifying the overall effect." } },
+      { "type": "card", "settings": { "asset": "avatr3.png", "chip": "Proven results", "text": "Developed with doctors and research labs, then tested batch by batch before it ships." } }
+    ]
+  }]
+}
+{% endschema %}

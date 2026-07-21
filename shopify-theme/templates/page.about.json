@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "uphealth-page-hero",
+      "blocks": {
+        "m1": { "type": "stat", "settings": { "value": "2021", "label": "Founded" } },
+        "m2": { "type": "stat", "settings": { "value": "4", "label": "Lab partners" } },
+        "m3": { "type": "stat", "settings": { "value": "26", "label": "Formulas" } }
+      },
+      "block_order": ["m1", "m2", "m3"],
+      "settings": {
+        "title": "Only ingredients with <em>proven action</em>",
+        "lead": "We're experts in building products that support the body — designed around current research, optimal doses and high bioavailability."
+      }
+    },
+    "story": { "type": "uphealth-story", "settings": {} },
+    "science": { "type": "uphealth-video", "settings": {} },
+    "why": {
+      "type": "uphealth-benefits",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "asset": "newavatar.png", "chip": "Scientific approach", "text": "We use only tested nutrients in meaningful doses — and leave out the needless extras." } },
+        "c2": { "type": "card", "settings": { "asset": "avatar2.png", "chip": "Clean formula", "text": "Every ingredient works in concert with the others, amplifying the overall effect." } },
+        "c3": { "type": "card", "settings": { "asset": "avatr3.png", "chip": "Proven results", "text": "Developed with doctors and research labs, then tested batch by batch before it ships." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {}
+    },
+    "srate": {
+      "type": "uphealth-srate",
+      "blocks": {
+        "r1": { "type": "rating", "settings": { "name": "Studied", "score": "4", "score_max": "4", "percent": 100, "note": "Plenty of data — multiple high-quality papers behind each active." } },
+        "r2": { "type": "rating", "settings": { "name": "Effectiveness", "score": "3", "score_max": "4", "percent": 75, "note": "Studies show a noticeable benefit after taking our supplements." } },
+        "r3": { "type": "rating", "settings": { "name": "Safety", "score": "4", "score_max": "4", "percent": 100, "note": "Very low risk — no side effects or overdose potential found." } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {}
+    },
+    "stats": {
+      "type": "uphealth-stats",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "10240", "suffix": "+", "label": "Active customers" } },
+        "s2": { "type": "stat", "settings": { "value": "26", "suffix": "", "label": "Formulas shipping" } },
+        "s3": { "type": "stat", "settings": { "value": "98", "suffix": "%", "label": "Would reorder" } },
+        "s4": { "type": "stat", "settings": { "value": "4", "suffix": "", "label": "Lab partners" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "statement": { "type": "uphealth-statement", "settings": {} },
+    "ingredients": {
+      "type": "uphealth-ingredients",
+      "blocks": {
+        "i1": { "type": "ingredient", "settings": { "asset": "ing-matcha.png", "title": "Matcha", "origin": "Japan, Shizuoka", "text": "Beyond caffeine, matcha brings L-theanine for calm, gradual energy without the spikes and crash of coffee." } },
+        "i2": { "type": "ingredient", "settings": { "asset": "ing-chocolate.png", "title": "Cacao", "origin": "Côte d'Ivoire, Abidjan", "text": "Raw cacao is rich in flavanols and magnesium that support mood, focus and recovery." } },
+        "i3": { "type": "ingredient", "settings": { "asset": "ing-turmeric.png", "title": "Turmeric", "origin": "India, Erode", "text": "Curcumin supports a healthy inflammatory response and everyday joint comfort." } },
+        "i4": { "type": "ingredient", "settings": { "asset": "ing-spirulina.png", "title": "Spirulina", "origin": "Hawaii, Kona", "text": "A blue-green algae packed with plant protein, iron and antioxidants." } },
+        "i5": { "type": "ingredient", "settings": { "asset": "ing-coconutmct.png", "title": "Coconut MCT", "origin": "Vietnam, Hanoi", "text": "Medium-chain triglycerides convert quickly into clean, usable energy." } },
+        "i6": { "type": "ingredient", "settings": { "asset": "ing-ginger.png", "title": "Ginger", "origin": "Peru, Junín", "text": "A warming root that soothes digestion and supports healthy circulation." } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"],
+      "settings": { "btn_link": "/pages/ingredients" }
+    },
+    "ticker": {
+      "type": "uphealth-ticker",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "asset": "ing-matcha.png", "name": "Matcha", "location": "Japan, Shizuoka" } },
+        "t2": { "type": "item", "settings": { "asset": "ing-chocolate.png", "name": "Cacao", "location": "Côte d'Ivoire" } },
+        "t3": { "type": "item", "settings": { "asset": "ing-turmeric.png", "name": "Turmeric", "location": "India, Erode" } },
+        "t4": { "type": "item", "settings": { "asset": "ing-spirulina.png", "name": "Spirulina", "location": "Hawaii, Kona" } },
+        "t5": { "type": "item", "settings": { "asset": "ing-coconutmct.png", "name": "Coconut MCT", "location": "Vietnam, Hanoi" } },
+        "t6": { "type": "item", "settings": { "asset": "ing-ginger.png", "name": "Ginger", "location": "Peru, Junín" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"],
+      "settings": {}
+    },
+    "marquee": { "type": "uphealth-marquee", "settings": { "phrases": "Feel your best self\nClean ingredients\nDoctor-formulated\nNo added sugar\nGMP certified labs" } },
+    "states": { "type": "uphealth-states-shop", "settings": {} },
+    "loyalty": { "type": "uphealth-loyalty", "settings": {} }
+  },
+  "order": ["hero", "story", "science", "why", "srate", "stats", "statement", "ingredients", "ticker", "marquee", "states", "loyalty"]
+}

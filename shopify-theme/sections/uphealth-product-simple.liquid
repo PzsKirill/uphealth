@@ -1,0 +1,164 @@
+<style>body { background: var(--color-bg); }</style>
+
+<div class="pdp" id="pdp-{{ section.id }}">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li><a href="{{ routes.root_url }}">Home</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+        <li>{{ product.title }}</li>
+      </ol>
+    </nav>
+
+    <div class="pdp__grid">
+      <div class="pdp__gallery">
+        <div class="pdp__stage">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+            <img class="pdp__img{% if forloop.first %} is-active{% endif %}" data-media="{{ media.id }}" src="{{ media | image_url: width: 1100 }}" alt="{{ product.title | escape }}"{% unless forloop.first %} loading="lazy"{% endunless %}>
+            {%- endfor -%}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'pdp__img is-active' }}
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+        <div class="pdp__thumbs">
+          {%- for media in product.media -%}
+          <button type="button" class="pdp__thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ media.id }}" aria-label="View image {{ forloop.index }}"><img src="{{ media | image_url: width: 180 }}" alt="" loading="lazy"></button>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pdp__info">
+        {%- if product.metafields.custom.rating != blank -%}<span class="pdp__rating"><span class="up-card__stars">★★★★★</span> {{ product.metafields.custom.rating }}</span>{%- endif -%}
+        <h1 class="pdp__title">{{ product.title }}</h1>
+        {%- if product.type != blank -%}<p class="pdp__type">{{ product.type }}</p>{%- endif -%}
+
+        <div class="pdp__price">
+          <span class="pdp__price-now" data-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+          <span class="pdp__price-old" data-compare{% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %} hidden{% endunless %}>{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        </div>
+
+        {%- form 'product', product, id: 'pdp-form', class: 'pdp__form' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+            <div class="pdp__option">
+              <span class="pdp__option-label">{{ option.name }}</span>
+              <div class="pdp__swatches">
+                {%- for value in option.values -%}
+                <label class="pdp__swatch">
+                  <input type="radio" name="option{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+                  <span>{{ value }}</span>
+                </label>
+                {%- endfor -%}
+              </div>
+            </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <select name="id" data-variant-id class="pdp__hidden-select" aria-hidden="true" tabindex="-1">
+            {%- for variant in product.variants -%}
+            <option value="{{ variant.id }}" data-option1="{{ variant.option1 | escape }}" data-option2="{{ variant.option2 | escape }}" data-option3="{{ variant.option3 | escape }}" data-price="{{ variant.price | money }}" data-compare="{{ variant.compare_at_price | money }}" data-available="{{ variant.available }}" data-media="{{ variant.featured_media.id }}"{% if variant == product.selected_or_first_available_variant %} selected{% endif %}>{{ variant.title }}</option>
+            {%- endfor -%}
+          </select>
+
+          <div class="pdp__buy">
+            <div class="pdp__qty">
+              <button type="button" class="pdp__qty-btn" data-qty="-1" aria-label="Decrease quantity">&minus;</button>
+              <input type="number" class="pdp__qty-input" name="quantity" value="1" min="1" data-qty-input aria-label="Quantity">
+              <button type="button" class="pdp__qty-btn" data-qty="1" aria-label="Increase quantity">+</button>
+            </div>
+            <button type="submit" class="btn btn--primary pdp__add" data-add{% unless product.available %} disabled{% endunless %}><span data-add-label>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span></button>
+          </div>
+        {%- endform -%}
+
+        {%- if section.settings.show_description and product.description != blank -%}<div class="pdp__desc rte">{{ product.description }}</div>{%- endif -%}
+
+        {%- if section.settings.show_trust -%}
+        <ul class="pdp__trust">
+          {%- assign tlines = section.settings.trust | newline_to_br | split: '<br />' -%}
+          {%- for t in tlines -%}{%- assign tt = t | strip -%}{%- if tt != blank -%}<li>{{ tt }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('pdp-{{ section.id }}');
+    if (!root) return;
+    var select = root.querySelector('[data-variant-id]');
+    var radios = root.querySelectorAll('.pdp__swatch input');
+    var priceEl = root.querySelector('[data-price]');
+    var compareEl = root.querySelector('[data-compare]');
+    var addBtn = root.querySelector('[data-add]');
+    var addLabel = root.querySelector('[data-add-label]');
+    var imgs = root.querySelectorAll('.pdp__img');
+    var thumbs = root.querySelectorAll('.pdp__thumb');
+    var qtyInput = root.querySelector('[data-qty-input]');
+
+    function showMedia(id) {
+      if (!id) return;
+      Array.prototype.forEach.call(imgs, function (im) { im.classList.toggle('is-active', im.getAttribute('data-media') === id); });
+      Array.prototype.forEach.call(thumbs, function (t) { t.classList.toggle('is-active', t.getAttribute('data-thumb') === id); });
+    }
+    function selected() {
+      var s = {};
+      Array.prototype.forEach.call(radios, function (r) { if (r.checked) s[r.name] = r.value; });
+      return s;
+    }
+    function match() {
+      var s = selected(), found = null;
+      Array.prototype.forEach.call(select.options, function (o) {
+        if (found) return;
+        var ok = true;
+        if (s.option1 !== undefined && o.getAttribute('data-option1') !== s.option1) ok = false;
+        if (s.option2 !== undefined && o.getAttribute('data-option2') !== s.option2) ok = false;
+        if (s.option3 !== undefined && o.getAttribute('data-option3') !== s.option3) ok = false;
+        if (ok) found = o;
+      });
+      return found;
+    }
+    function update() {
+      var o = match();
+      if (!o) return;
+      select.value = o.value;
+      if (priceEl) priceEl.textContent = o.getAttribute('data-price');
+      if (compareEl) {
+        var c = o.getAttribute('data-compare'), p = o.getAttribute('data-price');
+        if (c && c !== p && c !== '$0.00') { compareEl.textContent = c; compareEl.hidden = false; }
+        else compareEl.hidden = true;
+      }
+      var avail = o.getAttribute('data-available') === 'true';
+      if (addBtn) addBtn.disabled = !avail;
+      if (addLabel) addLabel.textContent = avail ? 'Add to cart' : 'Sold out';
+      showMedia(o.getAttribute('data-media'));
+    }
+    Array.prototype.forEach.call(radios, function (r) { r.addEventListener('change', update); });
+    Array.prototype.forEach.call(thumbs, function (t) { t.addEventListener('click', function () { showMedia(t.getAttribute('data-thumb')); }); });
+    Array.prototype.forEach.call(root.querySelectorAll('[data-qty]'), function (b) {
+      b.addEventListener('click', function () {
+        var v = (parseInt(qtyInput.value, 10) || 1) + parseInt(b.getAttribute('data-qty'), 10);
+        if (v < 1) v = 1;
+        qtyInput.value = v;
+      });
+    });
+    update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "UpHealth product (simple)",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Show description in buy box", "default": true },
+    { "type": "checkbox", "id": "show_trust", "label": "Show trust list", "default": true },
+    { "type": "textarea", "id": "trust", "label": "Trust list (one per line)", "default": "✓ Third-party tested\n✓ Ships in 1–2 days\n✓ 14-day returns" }
+  ],
+  "presets": [{ "name": "UpHealth product (simple)" }]
+}
+{% endschema %}

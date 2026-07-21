@@ -1,0 +1,65 @@
+<style>body { background: var(--color-bg); }</style>
+
+<section class="account">
+  <div class="container">
+    <div class="account__head">
+      <div>
+        <h1 class="account__title">Hi{% if customer.first_name != blank %}, {{ customer.first_name }}{% endif %}</h1>
+        <p>{{ customer.email }}</p>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="btn btn--ghost btn--sm">Log out</a>
+    </div>
+
+    <div class="account__grid">
+      <div class="account__orders">
+        <h2>Order history</h2>
+        {%- paginate customer.orders by 12 -%}
+          {%- if customer.orders.size > 0 -%}
+          <div class="account__table-wrap">
+            <table class="account__table">
+              <thead>
+                <tr><th>Order</th><th>Date</th><th>Status</th><th>Total</th></tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                <tr>
+                  <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: "%d %b %Y" }}</td>
+                  <td>{{ order.financial_status_label }}{% if order.fulfillment_status_label != blank %} · {{ order.fulfillment_status_label }}{% endif %}</td>
+                  <td>{{ order.total_net_amount | money }}</td>
+                </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+          {%- if paginate.pages > 1 -%}
+          <nav class="catalog__pagination" aria-label="Pagination">
+            {%- for part in paginate.parts -%}{%- if part.is_link -%}<a href="{{ part.url }}" class="catalog__page">{{ part.title }}</a>{%- else -%}<span class="catalog__page is-active">{{ part.title }}</span>{%- endif -%}{%- endfor -%}
+          </nav>
+          {%- endif -%}
+          {%- else -%}
+          <p class="account__empty">You haven't placed any orders yet. <a href="{{ routes.all_products_collection_url }}">Start shopping &rarr;</a></p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+      <aside class="account__side">
+        <h2>Default address</h2>
+        {%- if customer.default_address -%}
+          <address>{{ customer.default_address | format_address }}</address>
+        {%- else -%}
+          <p class="account__empty">No address saved yet.</p>
+        {%- endif -%}
+        <a href="{{ routes.account_addresses_url }}" class="btn btn--ghost btn--sm">Manage addresses</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UpHealth account",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}
