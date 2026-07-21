@@ -21,13 +21,29 @@
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Sticky header shrink + promo-bar dock ---------- */
+  /* ---------- Sticky header (pins after scroll) + promo-bar dock ---------- */
   const header = $('#site-header');
   const promoBar = $('.promo-bar');
+  const headerSpacer = $('.header-spacer');
   let footerEl = null;
+  // Scroll offset past which the header has fully left the viewport and should
+  // pin itself to the top. Measured from the header's resting position.
+  let stickPoint = 120;
+  const measureHeader = () => {
+    if (!header || header.classList.contains('is-stuck')) return;
+    stickPoint = header.getBoundingClientRect().bottom + window.scrollY;
+    if (headerSpacer) headerSpacer.style.height = header.offsetHeight + 'px';
+  };
   const onScroll = () => {
     const y = window.scrollY;
-    if (header) header.classList.toggle('is-stuck', y > 8);
+    // The header sits in normal flow at the top and scrolls away with the page.
+    // Once scrolled past it, it becomes fixed and slides in; the spacer of equal
+    // height keeps the layout from jumping when the header leaves the flow.
+    if (header) {
+      const stuck = y > stickPoint;
+      header.classList.toggle('is-stuck', stuck);
+      if (headerSpacer) headerSpacer.classList.toggle('is-active', stuck);
+    }
     // Once the user starts scrolling, slide the promo line to the bottom
     // of the viewport so it stays readable; restore it at the very top.
     // Release it once the footer comes into view so it never blocks it.
@@ -39,7 +55,9 @@
       promoBar.classList.toggle('is-docked', y > 80 && !footerVisible);
     }
   };
+  measureHeader();
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { measureHeader(); onScroll(); }, { passive: true });
   onScroll();
 
   /* ---------- Desktop dropdown menus ---------- */

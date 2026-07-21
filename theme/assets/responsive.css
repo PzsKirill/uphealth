@@ -39,8 +39,9 @@
   .mega-menu__inner--about   { grid-template-columns: repeat(3, 1fr); gap: var(--space-lg) var(--space-xl); }
   .mega-about__featured      { grid-column: 1 / -1; }
 
-  .hero__slide { padding-block: var(--space-xl) var(--space-2xl); }
+  .hero__slide { height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .hero__inner {
+    height: auto;
     grid-template-columns: 1fr;
     gap: var(--space-xl);
     text-align: left;
@@ -363,8 +364,9 @@
    New homepage blocks — responsive
    ============================================================ */
 @media (max-width: 1024px) {
+  .hero__slide { height: auto; }
   .hero__inner {
-    min-height: clamp(620px, 80vh, 820px);
+    height: auto;
     padding-block: var(--space-2xl) var(--space-3xl);
   }
   .hero__visual { max-width: 420px; }
@@ -390,7 +392,7 @@
 
 @media (max-width: 640px) {
   .hero__visual       { max-width: 360px; }
-  .hero__inner        { min-height: clamp(540px, 86vh, 740px); }
+  .hero__inner        { height: auto; }
   /* banner slide: keep the overlay minimal so the artwork isn't crowded */
   .hero__content--banner .hero__lead { display: none; }
   .bonus__card        { padding: var(--space-lg); }

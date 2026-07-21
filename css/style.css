@@ -271,7 +271,7 @@ body {
    Header
    ============================================================ */
 .header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: var(--z-header);
   background: var(--color-bg);
@@ -281,13 +281,28 @@ body {
     background var(--dur-base) var(--ease);
 }
 
+/* Pins to the top only once the user has scrolled past the header.
+   A .header-spacer of equal height fills the gap so content never jumps. */
 .header.is-stuck {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: rgba(254, 252, 249, 0.85);
   backdrop-filter: blur(16px) saturate(1.1);
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
   border-bottom-color: var(--color-border);
   box-shadow: 0 4px 24px rgba(30, 34, 72, 0.05);
+  animation: headerDrop var(--dur-base) var(--ease-out);
 }
+
+@keyframes headerDrop {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+.header-spacer { display: none; }
+.header-spacer.is-active { display: block; }
 
 .header__inner {
   display: flex;

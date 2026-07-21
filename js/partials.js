@@ -286,7 +286,9 @@
         </div>
       </div>
     </nav>
-  </header>`;
+  </header>
+
+  <div class="header-spacer" aria-hidden="true"></div>`;
 
   const FOOTER_HTML = `
   <footer class="footer" aria-label="Site footer">

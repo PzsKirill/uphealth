@@ -3,23 +3,25 @@
     {%- for block in section.blocks -%}
       {%- liquid
         assign theme = block.settings.colour_theme
+        assign is_banner = false
+        if theme == 'banner' or theme == 'range'
+          assign is_banner = true
+        endif
+        # resolve image: image_picker > image_url (CDN/from product export) > asset fallback
         if block.settings.image != blank
-          assign img_url = block.settings.image | image_url: width: 1000
+          assign img_url = block.settings.image | image_url: width: 1200
+        elsif block.settings.image_url != blank
+          assign img_url = block.settings.image_url
+        elsif block.settings.image_asset != blank
+          assign img_url = block.settings.image_asset | asset_url
         else
-          case theme
-            when 'range'  assign fb = 'photo_2026-06-01_10-27-57.jpg'
-            when 'pink'   assign fb = 'photo_2026-06-01_10-27-59.jpg'
-            when 'orange' assign fb = 'photo_2026-06-01_10-28-00.jpg'
-            when 'blue'   assign fb = 'photo_2026-06-01_10-28-02.jpg'
-            when 'mint'   assign fb = 'photo_2026-06-01_10-28-04.jpg'
-            else assign fb = 'photo_2026-06-01_10-27-57.jpg'
-          endcase
-          assign img_url = fb | asset_url
+          assign img_url = 'photo_2026-06-01_10-27-57.jpg' | asset_url
         endif
       -%}
-      <div class="hero__slide hero__slide--{{ theme }}"
-           {% if theme == 'range' %}style="background: url('{{ img_url }}') center right / cover no-repeat;"{% endif %}
-           {{ block.shopify_attributes }}>
+      <div class="hero__slide hero__slide--{{ theme }}" {{ block.shopify_attributes }}>
+        {%- if is_banner -%}
+          <div class="hero__banner"><img src="{{ img_url }}" alt="{{ block.settings.heading | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" /></div>
+        {%- endif -%}
         <div class="hero__inner container">
           <div class="hero__content">
             {%- if block.settings.eyebrow != blank -%}<span class="hero__eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
@@ -37,7 +39,7 @@
             </ul>
             {%- endif -%}
           </div>
-          {%- unless theme == 'range' -%}
+          {%- unless is_banner -%}
           <div class="hero__visual">
             <div class="hero__media"><img src="{{ img_url }}" alt="{{ block.settings.heading | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" /></div>
             {%- if block.settings.chip_top != blank -%}<div class="hero__chip hero__chip--top">{{ block.settings.chip_top }}</div>{%- endif -%}
@@ -69,7 +71,7 @@
         speed: 700,
         pauseOnHover: false,
         cssEase: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        adaptiveHeight: true
+        adaptiveHeight: false
       });
     });
   })();
@@ -89,19 +91,22 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "select", "id": "colour_theme", "label": "Colour theme", "default": "range",
+        { "type": "select", "id": "colour_theme", "label": "Colour theme", "default": "beige",
           "options": [
-            { "value": "range", "label": "Range (full image)" },
+            { "value": "banner", "label": "Banner (full photo · intro)" },
+            { "value": "beige", "label": "Beige (neutral)" },
             { "value": "pink", "label": "Pink" },
             { "value": "orange", "label": "Orange" },
             { "value": "blue", "label": "Blue" },
             { "value": "mint", "label": "Mint" }
           ] },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Five formulas. <em>One clean ritual.</em>" },
+        { "type": "image_picker", "id": "image", "label": "Image (upload)" },
+        { "type": "text", "id": "image_url", "label": "Image URL (CDN)", "info": "Paste a Shopify CDN image URL — used when no image is uploaded above." },
+        { "type": "text", "id": "image_asset", "label": "Image asset (theme file)", "info": "Theme asset filename, e.g. hero-intro.png — used when the two above are empty." },
+        { "type": "text", "id": "eyebrow", "label": "Badge (Новинка / New)" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Wrap the second line in <em> to make it the accent colour.", "default": "Whey Protein, <em>refined.</em>" },
         { "type": "textarea", "id": "lead", "label": "Lead text" },
-        { "type": "text", "id": "cta1_text", "label": "Button 1 text", "default": "Shop the range" },
+        { "type": "text", "id": "cta1_text", "label": "Button 1 text", "default": "Order now" },
         { "type": "url", "id": "cta1_url", "label": "Button 1 link" },
         { "type": "text", "id": "cta2_text", "label": "Button 2 text" },
         { "type": "url", "id": "cta2_url", "label": "Button 2 link" },
@@ -121,7 +126,7 @@
     {
       "name": "Hero slider",
       "blocks": [
-        { "type": "slide", "settings": { "colour_theme": "range" } }
+        { "type": "slide", "settings": { "colour_theme": "beige" } }
       ]
     }
   ]

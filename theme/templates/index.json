@@ -3,96 +3,56 @@
     "hero": {
       "type": "hero-slider",
       "blocks": {
-        "slide-1": {
+        "slide-intro": {
           "type": "slide",
           "settings": {
-            "colour_theme": "range",
-            "eyebrow": "The UpHealth range",
-            "heading": "Five formulas. <em>One clean ritual.</em>",
-            "lead": "Functional supplements in five colour-coded formulas — pick the one that fits your day, your body and your goal.",
+            "colour_theme": "banner",
+            "image_asset": "hero-intro.png",
+            "eyebrow": "New",
+            "heading": "Wellness that <em>works with you.</em>",
+            "lead": "Clean, science-backed supplements for energy, recovery and calm — made in GMP-certified USA labs.",
             "cta1_text": "Shop the range",
-            "cta1_url": "/collections/all",
-            "cta2_text": "Bestsellers",
-            "cta2_url": "#community-products",
-            "meta1_num": "5", "meta1_label": "formulas",
-            "meta2_num": "60", "meta2_label": "capsules each",
-            "meta3_num": "GMP", "meta3_label": "certified labs"
+            "cta1_url": "/collections/all"
           }
         },
-        "slide-2": {
-          "type": "slide",
-          "settings": {
-            "colour_theme": "pink",
-            "eyebrow": "Beauty & glow",
-            "heading": "Skin that <em>feels its best.</em>",
-            "lead": "Skin-loving actives for clarity, glow and balance that starts from within and shows on the outside.",
-            "cta1_text": "Shop Beauty",
-            "cta1_url": "/collections/state-beauty",
-            "cta2_text": "Learn more",
-            "cta2_url": "/products/marine-collagen-gummies",
-            "chip_top": "Glow from within",
-            "chip_bottom": "Clean label",
-            "meta1_num": "5 g", "meta1_label": "daily actives",
-            "meta2_num": "Vegan", "meta2_label": "capsules",
-            "meta3_num": "30", "meta3_label": "day supply"
-          }
-        },
-        "slide-3": {
+        "slide-energy": {
           "type": "slide",
           "settings": {
             "colour_theme": "orange",
-            "eyebrow": "Energy & metabolism",
-            "heading": "Steady energy, <em>all day long.</em>",
-            "lead": "Metabolic support that helps keep blood sugar steady and afternoons crash-free — clean fuel without the jitters.",
-            "cta1_text": "Shop Energy",
-            "cta1_url": "/collections/state-energy",
-            "cta2_text": "Learn more",
-            "cta2_url": "/products/energy-sticks",
-            "chip_top": "No jitters",
-            "chip_bottom": "Science-backed dose",
-            "meta1_num": "0", "meta1_label": "crash",
-            "meta2_num": "1x", "meta2_label": "a day",
-            "meta3_num": "Sugar", "meta3_label": "free"
+            "image_url": "https://uphealth-nqs6iukl.myshopify.com/cdn/shop/files/1782400761028-generated-label-image-0.jpg?v=1782400806&width=900",
+            "eyebrow": "Energy",
+            "heading": "Clean energy, <em>zero crash.</em>",
+            "lead": "Caffeine paired with L-theanine for steady focus — sugar-free fruit punch.",
+            "cta1_text": "Order now",
+            "cta1_url": "/products/energy-powder-fruit-punch"
           }
         },
-        "slide-4": {
-          "type": "slide",
-          "settings": {
-            "colour_theme": "blue",
-            "eyebrow": "Calm & balance",
-            "heading": "Calm focus, <em>clear nights.</em>",
-            "lead": "Calming minerals that help the body wind down, balance stress and reset overnight.",
-            "cta1_text": "Shop Calm",
-            "cta1_url": "/collections/state-relax",
-            "cta2_text": "Learn more",
-            "cta2_url": "/products/sleep-sticks",
-            "chip_top": "Wind-down support",
-            "chip_bottom": "Third-party tested",
-            "meta1_num": "PM", "meta1_label": "ritual",
-            "meta2_num": "Non", "meta2_label": "habit-forming",
-            "meta3_num": "Gentle", "meta3_label": "minerals"
-          }
-        },
-        "slide-5": {
+        "slide-hangover": {
           "type": "slide",
           "settings": {
             "colour_theme": "mint",
-            "eyebrow": "Gut & detox",
-            "heading": "A gut that <em>works with you.</em>",
-            "lead": "Supports healthy digestion and a balanced microbiome — light, fresh and easy to take every morning.",
-            "cta1_text": "Shop Gut",
-            "cta1_url": "/collections/state-strength",
-            "cta2_text": "Learn more",
-            "cta2_url": "/products/greens-drink",
-            "chip_top": "Microbiome support",
-            "chip_bottom": "No fillers",
-            "meta1_num": "AM", "meta1_label": "ritual",
-            "meta2_num": "Pre", "meta2_label": "& postbiotic",
-            "meta3_num": "Bloat", "meta3_label": "friendly"
+            "image_url": "https://uphealth-nqs6iukl.myshopify.com/cdn/shop/files/1782229224457-generated-label-image-2.jpg?v=1782286353&width=900",
+            "eyebrow": "Bounce back",
+            "heading": "Recover, <em>the morning after.</em>",
+            "lead": "Fast-dissolving strips to help you feel human again after a big night.",
+            "cta1_text": "Order now",
+            "cta1_url": "/products/hangover-strips"
+          }
+        },
+        "slide-recovery": {
+          "type": "slide",
+          "settings": {
+            "colour_theme": "pink",
+            "image_url": "https://uphealth-nqs6iukl.myshopify.com/cdn/shop/files/1782399506247-generated-label-image-2.jpg?v=1782722831&width=900",
+            "eyebrow": "Body care",
+            "heading": "Soothe &amp; <em>recover.</em>",
+            "lead": "Aloe and menthol cream for tired muscles, joints and skin.",
+            "cta1_text": "Order now",
+            "cta1_url": "/products/recovery-cream"
           }
         }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]
+      "block_order": ["slide-intro", "slide-energy", "slide-hangover", "slide-recovery"]
     }
   },
   "order": ["hero"]

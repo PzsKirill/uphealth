@@ -271,7 +271,7 @@ body {
    Header
    ============================================================ */
 .header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: var(--z-header);
   background: var(--color-bg);
@@ -281,13 +281,28 @@ body {
     background var(--dur-base) var(--ease);
 }
 
+/* Pins to the top only once the user has scrolled past the header.
+   A .header-spacer of equal height fills the gap so content never jumps. */
 .header.is-stuck {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: rgba(254, 252, 249, 0.85);
   backdrop-filter: blur(16px) saturate(1.1);
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
   border-bottom-color: var(--color-border);
   box-shadow: 0 4px 24px rgba(30, 34, 72, 0.05);
+  animation: headerDrop var(--dur-base) var(--ease-out);
 }
+
+@keyframes headerDrop {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+.header-spacer { display: none; }
+.header-spacer.is-active { display: block; }
 
 .header__inner {
   display: flex;
@@ -1188,6 +1203,7 @@ body {
 /* per-slide palette (defaults = brand range slide) */
 .hero__slide {
   outline: none;
+  height: 600px;
   /* full-bleed coloured background */
   background: var(--slide-bg, var(--grad-hero));
   --slide-accent: var(--color-accent);
@@ -1282,13 +1298,45 @@ body {
   --slide-accent: #2c7d68;
 }
 
+.hero__slide--beige {
+  --slide-bg: #efe6da;
+  --slide-accent: #9a7b4f;
+}
+
+/* intro splash — full-bleed lifestyle photo (product + person), text over a left scrim */
+.hero__slide--banner {
+  --slide-ink: #fff;
+  --slide-accent: #fff;
+  background: #2a2622;
+}
+.hero__slide--banner .hero__banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(24, 20, 16, 0.6) 0%, rgba(24, 20, 16, 0.28) 40%, rgba(24, 20, 16, 0) 68%);
+  z-index: 1;
+}
+.hero__slide--banner .hero__inner {
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+.hero__slide--banner .hero__content {
+  max-width: 560px;
+}
+.hero__slide--banner .hero__lead {
+  color: #fff;
+  opacity: 0.9;
+}
+.hero__slide--banner .hero__visual {
+  display: none;
+}
+
 .hero__inner {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-2xl);
   align-items: center;
-  padding-block: var(--space-3xl) calc(var(--space-3xl) + var(--space-lg));
-  min-height: clamp(860px, 72vh, 880px);
+  height: 600px;
 }
 
 /* slick dots override вЂ” sit on the coloured band */
@@ -1338,19 +1386,18 @@ body {
   z-index: 2;
 }
 
+/* re-feel style "Новинка" pill — outlined, no fill */
 .hero__eyebrow {
   display: inline-block;
-  padding: 0.45rem 1rem;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 0.55rem 1.35rem;
+  background: transparent;
+  border: 1.5px solid var(--slide-accent);
   border-radius: var(--radius-pill);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--slide-accent);
   margin-bottom: var(--space-lg);
-  backdrop-filter: blur(4px);
 }
 
 .hero__title {
@@ -1364,7 +1411,8 @@ body {
 }
 
 .hero__title em {
-  font-style: italic;
+  display: block;
+  font-style: normal;
   color: var(--slide-accent);
   font-weight: 500;
 }
@@ -1407,19 +1455,17 @@ body {
 
 .hero__visual {
   position: relative;
-  aspect-ratio: 4 / 5;
-  max-width: 520px;
-  margin-inline: auto;
+  height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__media {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 30px 70px rgba(42, 38, 32, 0.18);
-  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 90%;
 }
 
 .hero__media::before {
@@ -1439,8 +1485,10 @@ body {
   z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
+  filter: drop-shadow(0 24px 48px rgba(42, 38, 32, 0.20));
 }
 
 .hero__chip {
