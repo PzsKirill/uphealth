@@ -22,7 +22,11 @@
       `write_products, read_products, write_content, read_content,
       write_themes, read_themes, read_publications, write_publications` →
       скопировать Admin API access token (показывается один раз)
-- [ ] **Dev-стор не удалять** до конца Фазы 7 — он эталон для сверки
+- [ ] **Dev-стор не удалять** до конца Фазы 7 — он эталон для сверки.
+      Поддержка подтвердила (22.07.2026): dev-стор **не истекает**, спешки нет
+- [ ] Страховочный экспорт из dev-стора: Products → Export → All products
+      (CSV включает product-метаполя при наличии определений; цены, SKU,
+      привязка картинок — пригодится для сверки после Supliful-импорта)
 
 ## Фаза 1 — тема (автоматизировано, Claude)
 
@@ -42,6 +46,11 @@
 
 ## Фаза 3 — контент товаров (автоматизировано, Claude, по токену)
 
+- [ ] **Сначала создать определения метаполей** (Settings → Custom data или
+      API): `custom.content` (JSON), `custom.accent`/`custom.bg`/`custom.ink`
+      (Color), `custom.rating`, `custom.card_badge`, `custom.card_subtitle`,
+      `custom.ingredients`; на **вариантах** — `custom.pack_note`.
+      Без определений метаполя не видны ни в админке, ни в CSV
 - [ ] Метаполе `custom.content` из `product-content/*.json` (55 файлов,
       ветка `feature/shopify-real-product-range`) — по handle
 - [ ] Цветовые метаполя `custom.accent` / `custom.bg` / `custom.ink`
@@ -49,6 +58,8 @@
 - [ ] Назначить шаблон `product.universal` товарам с контентом
 - [ ] Варианты-паки (1/3 бутылки) — runbook Admin API мутаций;
       ⚠️ название варианта начинается с числа (см. PROJECT-GUIDE §3)
+- [ ] `custom.pack_note` на вариантах — **только через API или руками**:
+      variant-метаполя в CSV не переносятся (подтверждено поддержкой)
 
 ## Фаза 4 — коллекции, страницы, меню
 
