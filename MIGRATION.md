@@ -20,8 +20,14 @@
 - [ ] В админке нового стора: Settings → Apps and sales channels →
       **Develop apps** → создать custom app, выдать Admin API scopes:
       `write_products, read_products, write_content, read_content,
-      write_themes, read_themes, read_publications, write_publications` →
+      write_themes, read_themes, read_publications, write_publications,
+      write_files, read_files, write_online_store_pages,
+      read_online_store_pages, write_online_store_navigation,
+      read_online_store_navigation` →
       скопировать Admin API access token (показывается один раз)
+- [ ] То же на **dev-сторе**, но read-only: `read_products, read_content,
+      read_files, read_online_store_pages, read_online_store_navigation` —
+      для экспорта SEO, коллекций, меню и сверки
 - [ ] **Dev-стор не удалять** до конца Фазы 7 — он эталон для сверки.
       Поддержка подтвердила (22.07.2026): dev-стор **не истекает**, спешки нет
 - [ ] Страховочный экспорт из dev-стора: Products → Export → All products
@@ -34,8 +40,13 @@
       из ветки `backup/shopify-theme` (546 файлов, включая
       `config/settings_data.json` — настройки секций переезжают)
 - [ ] Проверить превью → опубликовать тему
-- [ ] ⚠️ Медиа из **Shopify Files** в git нет — их перезалить руками
-      (Content → Files) и перепривязать в theme editor, где использовались
+- [ ] ⚠️ Медиа из **Shopify Files**: тема ссылается на 8 файлов
+      (`shopify://shop_images/…`): `30893a0c-….png` (feature-ветка,
+      `assets/image/personal/`), `avatar2.png`, `newavatar.png` (personal/),
+      `bcomplex.png`, `magnesiumcalm.png`, `matchalatte.png`,
+      `tabletnewbanner.png` (png/), `nitricoxigen1.png` (realproduct/).
+      Перезалить в Content → Files нового стора **с теми же именами** —
+      ссылки в настройках темы подхватятся (автоматизируемо: `fileCreate`)
 
 ## Фаза 2 — товары (руками, владелец)
 
@@ -54,7 +65,9 @@
 - [ ] Метаполе `custom.content` из `product-content/*.json` (55 файлов,
       ветка `feature/shopify-real-product-range`) — по handle
 - [ ] Цветовые метаполя `custom.accent` / `custom.bg` / `custom.ink`
-- [ ] SEO: title/description товаров, alt-тексты (runbook прошлого прохода)
+- [ ] SEO: title/description товаров + alt-тексты картинок — источник:
+      CSV-экспорт dev-стора (колонки SEO Title / SEO Description /
+      Image Alt Text) или API-выгрузка; переносить по handle
 - [ ] Назначить шаблон `product.universal` товарам с контентом
 - [ ] Варианты-паки (1/3 бутылки) — runbook Admin API мутаций;
       ⚠️ название варианта начинается с числа (см. PROJECT-GUIDE §3)
@@ -63,12 +76,17 @@
 
 ## Фаза 4 — коллекции, страницы, меню
 
-- [ ] 10 outcome-коллекций — handle'ы в PROJECT-GUIDE §3 (Claude, API)
+- [ ] 10 outcome-коллекций — handle'ы в PROJECT-GUIDE §3 (Claude, API).
+      ⚠️ Описания (body) и SEO-поля коллекций **не имеют CSV-экспорта** —
+      вытянуть с dev-стора read-токеном и создать коллекции сразу с ними
 - [ ] Разложить товары по коллекциям (Claude, API + ручная проверка)
 - [ ] Страницы: about, contact, ingredients, delivery, bonuses, faq,
-      wellness-test — создать в админке, назначить шаблоны `page.*`
-      (шаблоны приедут с темой в Фазе 1)
-- [ ] Меню header/footer — руками: Content → Menus (в git не переносится)
+      wellness-test — создать с назначением шаблонов `page.*`
+      (Claude, API `write_online_store_pages`; шаблоны приедут в Фазе 1)
+- [ ] Меню header/footer — экспорт с dev-стора + `menuCreate` на новом
+      (Claude, API `write_online_store_navigation`); fallback — руками
+- [ ] Проверить на dev-сторе и перенести руками: URL-редиректы,
+      блог-посты (если есть), промокоды/скидки (промо-бар!)
 
 ## Фаза 5 — приложения (руками)
 
@@ -86,6 +104,12 @@
 - [ ] Зоны/тарифы доставки = регионам Supliful
 - [ ] Policies: refund, privacy, terms, shipping
 - [ ] Email-уведомления, GA4/пиксели
+- [ ] **Classic customer accounts** (Settings → Customer accounts) — без
+      этого кастомные login/register/account-шаблоны темы не работают
+- [ ] Checkout-брендинг (Settings → Checkout → Customize: лого, цвета)
+- [ ] Store details / Brand: название, контакты, адрес юрлица,
+      homepage meta title/description, social sharing image
+- [ ] Staff-доступы: пригласить разработчика (и Артёма) в новый стор
 
 ## Фаза 7 — переключение
 
