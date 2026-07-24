@@ -12,3 +12,6 @@ node_modules/
 
 # Shopify CLI local state
 .shopify/
+
+# Shopify Admin API credentials & tokens (NEVER commit)
+.shopify-secrets/
