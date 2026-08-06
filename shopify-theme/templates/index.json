@@ -15,74 +15,95 @@
         "intro": {
           "type": "slide",
           "settings": {
-            "color_scheme": "cream",
-            "bg_color": "#f2ece1",
-            "accent_color": "#8a6d4f",
-            "eyebrow": "New",
+            "color_scheme": "blue",
+            "bg_color": "#b8d4f0",
+            "accent_color": "#d9634c",
+            "text_color": "#123a6e",
+            "eyebrow": "Feel your best self",
             "title": "Wellness that <em>works with you.</em>",
             "lead": "Clean, science-backed supplements for energy, recovery and calm — made in GMP-certified USA labs.",
             "cta_label": "Shop the range",
             "cta_link": "/collections/all",
+            "layout": "cover",
             "image_fit": "cover",
-            "image": "shopify://shop_images/30893a0c-126d-4908-9d53-5fc211cf9697.png",
+            "image": "",
             "image_url": "",
-            "asset": ""
+            "asset": "hero-intro.jpg",
+            "asset_wide": "hero-intro-wide.jpg",
+            "stack_mobile": false,
+            "object_position": "right bottom",
+            "object_position_mobile": "center bottom"
           }
         },
-        "energy": {
+        "creatine": {
           "type": "slide",
           "settings": {
-            "color_scheme": "peach",
-            "bg_color": "#ece1cf",
-            "accent_color": "#a23e30",
-            "eyebrow": "New",
-            "title": "Clean energy, <em>zero crash.</em>",
-            "lead": "Caffeine paired with L-theanine for smooth, steady focus — sugar-free fruit punch, no jitters.",
-            "cta_label": "Order now",
-            "cta_link": "/products/energy-powder-fruit-punch",
-            "image_fit": "contain",
-            "image_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/fruitpunshhover.png?v=1782463207",
-            "asset": ""
+            "color_scheme": "blue",
+            "bg_color": "#cfe0ef",
+            "accent_color": "#d9634c",
+            "text_color": "#123a6e",
+            "eyebrow": "New · Hydration + Strength",
+            "title": "Hydrate hard, <em>recover harder.</em>",
+            "lead": "Creatine and electrolytes in one clean scoop — for muscle strength and hydration that keep up with your training.",
+            "cta_label": "Shop Creatine Hydration",
+            "cta_link": "/products/creatine-hydration-powder",
+            "layout": "cover",
+            "image_fit": "cover",
+            "image": "",
+            "image_url": "",
+            "asset": "hero-creatine.jpg",
+            "asset_wide": "hero-creatine-wide.jpg",
+            "asset_mobile": "hero-creatine-mobile.jpg"
           }
         },
-        "hangover": {
+        "collagen": {
           "type": "slide",
           "settings": {
             "color_scheme": "mint",
-            "bg_color": "#f5d6a1",
-            "accent_color": "#a5622c",
-            "eyebrow": "Bounce back",
-            "title": "Recover, <em>the morning after.</em>",
-            "lead": "Fast-dissolving oral strips with a mango-orange flavour — feel human again after a big night.",
-            "cta_label": "Order now",
-            "cta_link": "/products/hangover-strips",
-            "image_fit": "contain",
+            "bg_color": "#e3ede4",
+            "accent_color": "#c53c61",
+            "text_color": "#2f3d24",
+            "eyebrow": "Grass-Fed Collagen",
+            "title": "Beauty that starts <em>from within.</em>",
+            "lead": "Hydrolyzed collagen peptides for glowing skin, stronger hair and nails, and healthy joints — one unflavoured scoop a day.",
+            "cta_label": "Shop Collagen",
+            "cta_link": "/products/grass-fed-hydrolyzed-collagen-peptides",
+            "layout": "cover",
+            "image_fit": "cover",
+            "image": "",
             "image_url": "",
-            "asset": "hangoverhover.png"
+            "asset": "hero-collagen.jpg",
+            "asset_wide": "hero-collagen-wide.jpg",
+            "asset_mobile": "hero-collagen-mobile.jpg"
           }
         },
-        "recovery": {
+        "whey": {
           "type": "slide",
           "settings": {
-            "color_scheme": "pink",
-            "bg_color": "#dfe7e4",
-            "accent_color": "#4894a0",
-            "eyebrow": "Body care",
-            "title": "Soothe & <em>recover.</em>",
-            "lead": "A silky aloe and menthol cream that soothes tired muscles, joints and skin.",
-            "cta_label": "Order now",
-            "cta_link": "/products/recovery-cream",
-            "image_fit": "contain",
-            "image_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/recoverycreamhover.png?v=1782723140",
-            "asset": ""
+            "color_scheme": "cream",
+            "bg_color": "#efe7d8",
+            "accent_color": "#8272a6",
+            "text_color": "#3a2f22",
+            "eyebrow": "Advanced Whey Isolate",
+            "title": "Strength, <em>one scoop at a time.</em>",
+            "lead": "28g of fast-digesting whey isolate per serving for muscle growth and recovery. Smooth vanilla, zero fillers.",
+            "cta_label": "Shop Whey Protein",
+            "cta_link": "/products/advanced-100-whey-protein-isolate-vanilla-1",
+            "layout": "cover",
+            "image_fit": "cover",
+            "image": "",
+            "image_url": "",
+            "asset": "hero-whey.jpg",
+            "asset_wide": "hero-whey-wide.jpg",
+            "asset_mobile": "hero-whey-mobile.jpg"
           }
         }
       },
       "block_order": [
         "intro",
-        "energy",
-        "hangover",
-        "recovery"
+        "creatine",
+        "collagen",
+        "whey"
       ],
       "settings": {
         "autoplay": true,
@@ -125,7 +146,7 @@
         "button_link": "",
         "coin": "+500",
         "image": "shopify://shop_images/tabletnewbanner.png",
-        "video_url": ""
+        "video_url": "https://cdn.shopify.com/s/files/1/0674/0734/7918/files/uphealth-bonus.mp4?v=1785484852"
       }
     },
     "benefits": {
@@ -269,8 +290,8 @@
         "r2": {
           "type": "reel",
           "settings": {
-            "video_url": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-2.mp4?v=1784276512",
-            "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-2-poster.jpg?v=1784276717",
+            "video_url": "https://cdn.shopify.com/s/files/1/0674/0734/7918/files/uphealth-reel-marco.mp4?v=1785231672",
+            "poster": "",
             "duration": "0:16",
             "name": "Marco D.",
             "formula": "Energy formula"
@@ -299,20 +320,62 @@
         "r5": {
           "type": "reel",
           "settings": {
-            "video_url": "https://assets.mixkit.co/videos/1776/1776-720.mp4",
-            "poster": "https://assets.mixkit.co/videos/1776/1776-thumb-720-0.jpg",
+            "video_url": "https://cdn.shopify.com/s/files/1/0674/0734/7918/files/uphealth-reel-product.mp4?v=1785402300",
+            "poster": "",
             "duration": "0:22",
-            "name": "Eva M.",
-            "formula": "The Full Five"
+            "name": "",
+            "formula": ""
+          }
+        },
+        "tr1": {
+          "type": "text_review",
+          "settings": {
+            "title": "Part of my morning routine",
+            "text": "Two scoops before training and I'm dialled in — steady energy, no crash, and way easier to stick with than plain water.",
+            "name": "Jess R.",
+            "date": "06/01/2026",
+            "verified": true,
+            "product": "Creatine Hydration",
+            "product_image": "",
+            "shop_url": "/products/creatine-hydration-powder-1"
+          }
+        },
+        "tr2": {
+          "type": "text_review",
+          "settings": {
+            "title": "No more chalky shakes",
+            "text": "Switched from my old protein and I'm never going back. Mixes clean, tastes like real vanilla, and recovery feels faster.",
+            "name": "Marcus T.",
+            "date": "05/29/2026",
+            "verified": true,
+            "product": "Whey Protein",
+            "product_image": "",
+            "shop_url": "/products/advanced-100-whey-protein-isolate-vanilla"
+          }
+        },
+        "tr3": {
+          "type": "text_review",
+          "settings": {
+            "title": "My skin loves this",
+            "text": "Unflavoured, dissolves right into my coffee, and after a month my skin and nails genuinely look better. Daily habit now.",
+            "name": "Priya S.",
+            "date": "05/22/2026",
+            "verified": true,
+            "product": "Collagen Peptides",
+            "product_image": "",
+            "shop_url": "/products/grass-fed-hydrolyzed-collagen-peptides-1"
           }
         }
       },
       "block_order": [
         "r1",
+        "tr1",
         "r2",
         "r3",
+        "tr2",
         "r4",
-        "r5"
+        "r5",
+        "tr3"
       ],
       "settings": {
         "heading": "People are talking about us"

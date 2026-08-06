@@ -6,18 +6,30 @@
     {%- for block in section.blocks -%}
       {%- liquid
         assign fit = block.settings.image_fit | default: 'contain'
+        assign layout = block.settings.layout | default: 'split'
         assign img = ''
         if block.settings.image != blank
-          assign img = block.settings.image | image_url: width: 1100
+          assign img = block.settings.image | image_url: width: 2600
         elsif block.settings.image_url != blank
           assign img = block.settings.image_url
         elsif block.settings.asset != blank
           assign img = block.settings.asset | asset_url
         endif
       -%}
-      <article class="uh-hero__slide uh-hero__slide--{{ block.settings.color_scheme }}"
-        style="{% if block.settings.bg_color != blank %}background:{{ block.settings.bg_color }};{% endif %}{% if block.settings.accent_color != blank %}--uh-accent:{{ block.settings.accent_color }};{% endif %}"
+      <article class="uh-hero__slide uh-hero__slide--{{ block.settings.color_scheme }} uh-hero__slide--{{ layout }}{% if block.settings.stack_mobile %} uh-hero__slide--stackm{% endif %}"
+        style="{% if block.settings.bg_color != blank %}background:{{ block.settings.bg_color }};{% endif %}{% if block.settings.accent_color != blank %}--uh-accent:{{ block.settings.accent_color }};{% endif %}{% if block.settings.text_color != blank %}--uh-text:{{ block.settings.text_color }};{% endif %}{% if block.settings.object_position != blank %}--uh-objpos:{{ block.settings.object_position }};{% endif %}{% if block.settings.object_position_mobile != blank %}--uh-objpos-m:{{ block.settings.object_position_mobile }};{% endif %}"
         {{ block.shopify_attributes }}>
+        {%- if layout == 'cover' and img != blank -%}
+          {%- assign img_wide = '' -%}
+          {%- if block.settings.asset_wide != blank -%}{%- assign img_wide = block.settings.asset_wide | asset_url -%}{%- endif -%}
+          {%- assign img_mobile = '' -%}
+          {%- if block.settings.asset_mobile != blank -%}{%- assign img_mobile = block.settings.asset_mobile | asset_url -%}{%- endif -%}
+          <picture class="uh-hero__pic">
+            {%- if img_wide != blank -%}<source media="(min-width: 1200px)" srcset="{{ img_wide }}">{%- endif -%}
+            {%- if img_mobile != blank -%}<source media="(max-width: 600px)" srcset="{{ img_mobile }}">{%- endif -%}
+            <img class="uh-hero__bg" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />
+          </picture>
+        {%- endif -%}
         <div class="uh-hero__inner">
           <div class="uh-hero__copy">
             {%- if block.settings.eyebrow != blank -%}<span class="uh-hero__badge">{{ block.settings.eyebrow }}</span>{%- endif -%}
@@ -25,9 +37,11 @@
             {%- if block.settings.lead != blank -%}<p class="uh-hero__lead">{{ block.settings.lead }}</p>{%- endif -%}
             {%- if block.settings.cta_label != blank -%}<a class="uh-hero__cta" href="{{ block.settings.cta_link | default: '#' }}">{{ block.settings.cta_label }}</a>{%- endif -%}
           </div>
+          {%- if layout != 'cover' -%}
           <div class="uh-hero__figure">
             {%- if img != blank -%}<img class="uh-hero__img uh-hero__img--{{ fit }}" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />{%- endif -%}
           </div>
+          {%- endif -%}
         </div>
       </article>
     {%- endfor -%}
@@ -62,10 +76,10 @@
   .uh-hero__title {
     margin: 0 0 14px; font-family: var(--font-display, inherit);
     font-size: clamp(2rem, 3vw, 3rem); font-weight: 600; line-height: 1.04;
-    letter-spacing: -0.03em; color: #2a2622;
+    letter-spacing: -0.03em; color: var(--uh-text, #2a2622);
   }
   .uh-hero__title em { display: block; font-style: normal; font-weight: 500; color: var(--uh-accent); }
-  .uh-hero__lead { margin: 0 0 26px; max-width: 440px; font-size: 17px; line-height: 1.55; color: #4a453f; }
+  .uh-hero__lead { margin: 0 0 26px; max-width: 440px; font-size: 17px; line-height: 1.55; color: color-mix(in srgb, var(--uh-text, #4a453f) 82%, #ffffff); }
   .uh-hero__cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     padding: 14px 30px; color: #fff;
@@ -82,6 +96,16 @@
   .uh-hero__img--contain { object-fit: contain; padding: 0; }
   .uh-hero__img--cover { object-fit: cover; object-position: center 22%; }
 
+  /* Cover layout — designer banner as full-bleed background, copy overlaid left */
+  .uh-hero__slide--cover { position: relative; }
+  .uh-hero__pic { display: contents; }
+  .uh-hero__bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: var(--uh-objpos, right center); z-index: 0;
+  }
+  .uh-hero__slide--cover .uh-hero__inner { grid-template-columns: 1fr; position: relative; z-index: 2; }
+  .uh-hero__slide--cover .uh-hero__copy { max-width: 480px; }
+
   .uh-hero .slick-dots {
     position: absolute; bottom: 26px; left: 0; right: 0;
     display: flex !important; justify-content: center; gap: 8px;
@@ -95,13 +119,34 @@
   .uh-hero .slick-dots li.slick-active button { width: 30px; border-radius: 5px; background: var(--uh-dot-active, #74548e); }
   .uh-hero .slick-dots button::before { display: none; }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1199px) {
     .uh-hero__slide { height: auto; }
     .uh-hero__inner { height: auto; grid-template-columns: 1fr; gap: 24px; padding-block: 40px 64px; }
     .uh-hero__figure { order: -1; height: auto; }
     .uh-hero__img { height: 320px; }
     .uh-hero__img--contain { padding-block: 0; }
     .uh-hero__copy { max-width: none; }
+
+    /* Cover slides (tablet 600–1199): full-bleed banner, copy top-left, jar bottom-right */
+    .uh-hero__slide--cover { height: 730px; }
+    .uh-hero__slide--cover .uh-hero__inner { height: 730px; align-content: start; padding-block: 48px; }
+    .uh-hero__slide--cover .uh-hero__copy { max-width: 58%; }
+    .uh-hero__slide--cover .uh-hero__bg { object-position: var(--uh-objpos-m, var(--uh-objpos, right bottom)); }
+
+    /* Ultra-wide lifestyle slide: stack (image on top, copy below) instead of overlay */
+    .uh-hero__slide--cover.uh-hero__slide--stackm { height: auto; }
+    .uh-hero__slide--cover.uh-hero__slide--stackm .uh-hero__bg { position: relative; inset: auto; height: 360px; object-position: 68% center; }
+    .uh-hero__slide--cover.uh-hero__slide--stackm .uh-hero__inner { height: auto; align-content: start; padding-block: 28px 44px; }
+    .uh-hero__slide--cover.uh-hero__slide--stackm .uh-hero__copy { max-width: none; }
+  }
+
+  /* Cover slides on phones: stack banner on top, copy below on the pastel bg */
+  @media (max-width: 600px) {
+    .uh-hero__slide--cover { height: auto; }
+    .uh-hero__slide--cover .uh-hero__bg { position: relative; inset: auto; height: 360px; object-position: center; }
+    .uh-hero__slide--cover .uh-hero__inner { height: auto; align-content: start; padding-block: 25px 60px; }
+    .uh-hero__slide--cover .uh-hero__copy { max-width: none; }
+    .uh-hero__cta { padding: 10px 30px; width: 100%; font-size: 14px; }
   }
 </style>
 
@@ -157,20 +202,30 @@
           { "value": "blue", "label": "Blue" }
         ] },
         { "type": "color", "id": "bg_color", "label": "Background colour", "info": "Set to match the image background." },
-        { "type": "color", "id": "accent_color", "label": "Accent colour", "info": "Badge / heading accent / button." },
+        { "type": "color", "id": "accent_color", "label": "Accent colour", "info": "Badge / heading accent / button — match the jar's brand tag." },
+        { "type": "color", "id": "text_color", "label": "Text colour", "info": "Title + lead — match the jar's label text." },
         { "type": "text", "id": "eyebrow", "label": "Badge (New / Новинка)" },
         { "type": "inline_richtext", "id": "title", "label": "Title", "info": "Wrap the 2nd line in <em> for the accent colour." },
         { "type": "textarea", "id": "lead", "label": "Lead" },
         { "type": "text", "id": "cta_label", "label": "Button label", "default": "Order now" },
         { "type": "url", "id": "cta_link", "label": "Button link" },
         { "type": "header", "content": "Image" },
-        { "type": "select", "id": "image_fit", "label": "Image fit", "default": "contain", "options": [
+        { "type": "select", "id": "layout", "label": "Layout", "default": "split", "options": [
+          { "value": "split", "label": "Split (text left, product right)" },
+          { "value": "cover", "label": "Cover (full-bleed banner)" }
+        ] },
+        { "type": "select", "id": "image_fit", "label": "Image fit (split only)", "default": "contain", "options": [
           { "value": "contain", "label": "Contain (product floats)" },
           { "value": "cover", "label": "Cover (fills panel)" }
         ] },
         { "type": "image_picker", "id": "image", "label": "Image (upload)" },
         { "type": "text", "id": "image_url", "label": "Image URL (CDN)" },
-        { "type": "text", "id": "asset", "label": "Image asset (theme file)" }
+        { "type": "text", "id": "asset", "label": "Image asset — narrow / <1200px (theme file)" },
+        { "type": "text", "id": "asset_wide", "label": "Image asset — wide / ≥1200px (theme file)" },
+        { "type": "text", "id": "asset_mobile", "label": "Image asset — mobile / ≤600px (theme file)", "info": "Optional. Blank = use the narrow image below 600px too." },
+        { "type": "checkbox", "id": "stack_mobile", "label": "Stack below 1200px", "default": false, "info": "For ultra-wide lifestyle images: below 1200px show the image on top and text below, instead of overlaying text on the image." },
+        { "type": "text", "id": "object_position", "label": "Image focus — desktop", "info": "CSS object-position, e.g. 'right bottom'. Blank = right bottom." },
+        { "type": "text", "id": "object_position_mobile", "label": "Image focus — below 1200px", "info": "e.g. 'center bottom' to keep text room next to a large subject. Blank = same as desktop." }
       ]
     }
   ],

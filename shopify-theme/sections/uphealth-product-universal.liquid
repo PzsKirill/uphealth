@@ -80,103 +80,79 @@
           {%- if d.benefits -%}<ul class="showcase__benefits">{%- for b in d.benefits -%}<li>{{ b }}</li>{%- endfor -%}</ul>{%- endif -%}
 
           {%- liquid
-            assign the_plan = null
-            for grp in product.selling_plan_groups
-              for pl in grp.selling_plans
-                assign the_plan = pl
-                break
-              endfor
-              if the_plan != null
-                break
-              endif
+            assign sub_grp = null
+            for g in product.selling_plan_groups
+              assign sub_grp = g
+              break
             endfor
-            assign cv_sub = 0
-            if the_plan != null
-              for a in cv.selling_plan_allocations
-                if a.selling_plan.id == the_plan.id
-                  assign cv_sub = a.per_delivery_price
+            assign plan_a = null
+            assign plan_b = null
+            if sub_grp != null
+              for pl in sub_grp.selling_plans
+                if forloop.first
+                  assign plan_a = pl
+                else
+                  assign plan_b = pl
+                endif
+              endfor
+            endif
+            assign v1 = product.variants.first
+            assign v3 = null
+            if product.variants.size > 1
+              assign v3 = product.variants[1]
+            endif
+            assign price_a = 0
+            if plan_a != null
+              for a in v1.selling_plan_allocations
+                if a.selling_plan.id == plan_a.id
+                  assign price_a = a.per_delivery_price
+                  break
+                endif
+              endfor
+            endif
+            assign price_b = 0
+            if plan_b != null and v3 != null
+              for a in v3.selling_plan_allocations
+                if a.selling_plan.id == plan_b.id
+                  assign price_b = a.per_delivery_price
                   break
                 endif
               endfor
             endif
           -%}
           {%- form 'product', product -%}
-            {%- if product.variants.size > 1 -%}
             <div class="showcase__field">
               <span class="showcase__field-label">Build your routine</span>
-              {%- liquid
-                assign best_idx = 0
-                assign best_per = 2147483647
-                assign vi = 0
-                for bv in product.variants
-                  assign bq = bv.title | split: ' ' | first | plus: 0
-                  if bq < 1
-                    assign bq = 1
-                  endif
-                  assign bper = bv.price | divided_by: bq
-                  if bper < best_per
-                    assign best_per = bper
-                    assign best_idx = vi
-                  endif
-                  assign vi = vi | plus: 1
-                endfor
-              -%}
-              <div class="packs" data-packs>
-                {%- for v in product.variants -%}
-                  {%- liquid
-                    assign v_sub = 0
-                    if the_plan != null
-                      for a in v.selling_plan_allocations
-                        if a.selling_plan.id == the_plan.id
-                          assign v_sub = a.per_delivery_price
-                          break
-                        endif
-                      endfor
-                    endif
-                    assign nm = v.title
-                    assign q = nm | split: ' ' | first | plus: 0
-                    if q < 1
-                      assign q = 1
-                    endif
-                  -%}
-                  <label class="pack{% if v == cv %} is-active{% endif %}{% unless v.available %} is-soldout{% endunless %}" data-pack data-price="{{ v.price }}"{% if v.compare_at_price > v.price %} data-compare="{{ v.compare_at_price }}"{% endif %}{% if v_sub > 0 %} data-sub="{{ v_sub }}"{% endif %}>
-                    {%- if forloop.index0 == best_idx -%}<span class="pack__badge">Best value</span>{%- endif -%}
-                    <input type="radio" name="id" value="{{ v.id }}"{% if v == cv %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
-                    <span class="pack__radio" aria-hidden="true"></span>
-                    <span class="pack__body">
-                      <span class="pack__name">{%- if nm contains ' · ' -%}{{ nm | split: ' · ' | first }} · <em>{{ nm | split: ' · ' | last }}</em>{%- else -%}{{ nm }}{%- endif -%}</span>
-                      <span class="pack__note">{%- if v.metafields.custom.pack_note != blank -%}{{ v.metafields.custom.pack_note }}{%- elsif q > 1 -%}{{ v.price | divided_by: q | money }} / each{%- elsif d.note != blank -%}{{ d.note | split: ' · ship' | first | split: ' · free' | first }}{%- endif -%}</span>
-                    </span>
-                    <span class="pack__price">
-                      <span class="pack__now">{{ v.price | money }}</span>
-                      {%- if v.compare_at_price > v.price -%}<span class="pack__old">{{ v.compare_at_price | money }}</span>{%- endif -%}
-                    </span>
-                  </label>
-                {%- endfor -%}
+              <div class="packs" data-routine>
+                <label class="pack is-active" data-id="{{ v1.id }}" data-plan="" data-price="{{ v1.price }}">
+                  <input type="radio" name="rt" checked>
+                  <span class="pack__radio" aria-hidden="true"></span>
+                  <span class="pack__body"><span class="pack__name">1 jar · <em>one-time</em></span><span class="pack__note">Try it once — no commitment</span></span>
+                  <span class="pack__price"><span class="pack__now">{{ v1.price | money }}</span></span>
+                </label>
+                {%- if plan_a != null and price_a > 0 -%}
+                <label class="pack" data-id="{{ v1.id }}" data-plan="{{ plan_a.id }}" data-price="{{ price_a }}" data-compare="{{ v1.price }}">
+                  <span class="pack__badge">Save 10%</span>
+                  <input type="radio" name="rt">
+                  <span class="pack__radio" aria-hidden="true"></span>
+                  <span class="pack__body"><span class="pack__name">1 jar · <em>monthly</em></span><span class="pack__note">Delivered every month · cancel anytime</span></span>
+                  <span class="pack__price"><span class="pack__now">{{ price_a | money }}<small class="pack__per">/mo</small></span><span class="pack__old">{{ v1.price | money }}</span></span>
+                </label>
+                {%- endif -%}
+                {%- if plan_b != null and v3 != null and price_b > 0 -%}
+                <label class="pack" data-id="{{ v3.id }}" data-plan="{{ plan_b.id }}" data-price="{{ price_b }}" data-compare="{{ v3.price }}">
+                  <span class="pack__badge">Best value · Save 15%</span>
+                  <input type="radio" name="rt">
+                  <span class="pack__radio" aria-hidden="true"></span>
+                  <span class="pack__body"><span class="pack__name">3 jars · <em>every 3 months</em></span><span class="pack__note">3-month supply · ships quarterly</span></span>
+                  <span class="pack__price"><span class="pack__now">{{ price_b | money }}<small class="pack__per">/3 mo</small></span><span class="pack__old">{{ v3.price | money }}</span></span>
+                </label>
+                {%- endif -%}
               </div>
             </div>
-            {%- else -%}
-            <input type="hidden" name="id" value="{{ cv.id }}" data-single-id data-price="{{ cv.price }}"{% if cv.compare_at_price > cv.price %} data-compare="{{ cv.compare_at_price }}"{% endif %}{% if cv_sub > 0 %} data-sub="{{ cv_sub }}"{% endif %} />
-            {%- endif -%}
+            <input type="hidden" name="id" value="{{ v1.id }}" data-form-id>
+            <input type="hidden" name="selling_plan" value="" data-form-plan>
 
-            {%- if the_plan != null -%}
-            {%- assign sp_adj = the_plan.price_adjustments | first -%}
-            <div class="subscribe" data-subscribe data-plan="{{ the_plan.id }}">
-              <label class="subscribe__head">
-                <input type="checkbox" data-sub-toggle />
-                <span class="subscribe__visual" aria-hidden="true"><span class="subscribe__visual-knob"></span></span>
-                <span class="subscribe__copy">
-                  <strong>Subscribe &amp; save{% if sp_adj.value_type == 'percentage' %} another {{ sp_adj.value }}%{% endif %} <span class="subscribe__badge">Free shipping</span></strong>
-                  <span>{{ the_plan.name }} · skip, pause or cancel anytime</span>
-                </span>
-                <span class="subscribe__price">
-                  <strong data-sub-save></strong>
-                  <span>per delivery</span>
-                </span>
-              </label>
-            </div>
-            <input type="hidden" name="selling_plan" value="" data-selling-plan>
-            {%- endif -%}
 
             <div class="subscriptions_app_embed_block" hidden></div>
             <div class="showcase__buy">
@@ -433,43 +409,32 @@
           }
         });
       }
+      var routine = form.querySelector('[data-routine]');
+      if (!routine) return;
       var priceNow = form.querySelector('[data-price-now]');
       var priceOld = form.querySelector('[data-price-old]');
-      var packs = Array.prototype.slice.call(form.querySelectorAll('[data-pack]'));
-      var single = form.querySelector('[data-single-id]');
-      var subToggle = form.querySelector('[data-sub-toggle]');
-      var subSave = form.querySelector('[data-sub-save]');
-      var subRow = form.querySelector('[data-subscribe]');
-      var planInput = form.querySelector('[data-selling-plan]');
-      var planId = subRow ? subRow.getAttribute('data-plan') : '';
+      var idInput = form.querySelector('[data-form-id]');
+      var planInput = form.querySelector('[data-form-plan]');
+      var cards = Array.prototype.slice.call(routine.querySelectorAll('.pack'));
       function num(el, attr) { return parseInt((el && el.getAttribute(attr)) || '0', 10); }
-      /* best-value badge + pack notes are rendered server-side in Liquid */
-      function current() {
-        var checked = form.querySelector('[data-pack] input:checked');
-        if (checked) return checked.closest('[data-pack]');
-        if (packs.length) return packs[0];
-        return single;
-      }
-      function update() {
-        var el = current();
-        if (!el) return;
-        var price = num(el, 'data-price'), compare = num(el, 'data-compare'), sub = num(el, 'data-sub');
-        packs.forEach(function (p) { p.classList.toggle('is-active', p === el); });
-        var wantSub = !!(subToggle && subToggle.checked);
-        if (subRow) subRow.classList.toggle('is-active', wantSub);
-        var on = wantSub && sub > 0;
-        if (priceNow) priceNow.textContent = formatMoney(on ? sub : price);
+      function select(card) {
+        if (!card) return;
+        cards.forEach(function (c) { c.classList.toggle('is-active', c === card); });
+        var r = card.querySelector('input[type=radio]'); if (r) r.checked = true;
+        if (idInput) idInput.value = card.getAttribute('data-id') || '';
+        if (planInput) planInput.value = card.getAttribute('data-plan') || '';
+        var price = num(card, 'data-price'), compare = num(card, 'data-compare');
+        if (priceNow) priceNow.textContent = formatMoney(price);
         if (priceOld) {
-          if (on) { priceOld.textContent = formatMoney(price); priceOld.hidden = false; }
-          else if (compare > price) { priceOld.textContent = formatMoney(compare); priceOld.hidden = false; }
+          if (compare > price) { priceOld.textContent = formatMoney(compare); priceOld.hidden = false; }
           else { priceOld.hidden = true; }
         }
-        if (subSave) subSave.textContent = (sub > 0 && price > sub) ? ('−' + formatMoney(price - sub)) : '';
-        if (planInput) planInput.value = wantSub ? planId : '';
       }
-      packs.forEach(function (p) { var r = p.querySelector('input'); if (r) r.addEventListener('change', update); });
-      if (subToggle) subToggle.addEventListener('change', update);
-      update();
+      cards.forEach(function (c) {
+        c.addEventListener('click', function () { select(c); });
+        var r = c.querySelector('input[type=radio]'); if (r) r.addEventListener('change', function () { select(c); });
+      });
+      select(routine.querySelector('.pack.is-active') || cards[0]);
     })();
     var chartEl = root.querySelector('[data-up-chart]');
     if (chartEl) {
