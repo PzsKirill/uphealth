@@ -1,0 +1,1010 @@
+{%- comment -%}
+  UpHealth ad landing — Creatine Hydration Powder.
+  Standalone page landing (page.creatine-landing template) with native Shopify buy.
+  Reads the product via all_products[handle] + its custom.content JSON.
+  Design language adapted from the reference landing (Fraunces + Hanken, cards),
+  recoloured to the creatine jar (powder blue / navy / coral).
+{%- endcomment -%}
+{%- assign product = all_products[section.settings.product_handle] -%}
+{%- assign d = product.metafields.custom.content.value -%}
+{%- liquid
+  assign sub_grp = null
+  for g in product.selling_plan_groups
+    assign sub_grp = g
+    break
+  endfor
+  assign plan_a = null
+  assign plan_b = null
+  if sub_grp != null
+    for pl in sub_grp.selling_plans
+      if forloop.first
+        assign plan_a = pl
+      else
+        assign plan_b = pl
+      endif
+    endfor
+  endif
+  assign v1 = product.variants.first
+  assign v3 = null
+  if product.variants.size > 1
+    assign v3 = product.variants[1]
+  endif
+  assign price_a = 0
+  if plan_a != null
+    for a in v1.selling_plan_allocations
+      if a.selling_plan.id == plan_a.id
+        assign price_a = a.per_delivery_price
+      endif
+    endfor
+  endif
+  assign price_b = 0
+  if plan_b != null and v3 != null
+    for a in v3.selling_plan_allocations
+      if a.selling_plan.id == plan_b.id
+        assign price_b = a.per_delivery_price
+      endif
+    endfor
+  endif
+  # buy-box (.pack) colours read from the SAME source as the product page for 1:1 parity
+  assign pack_accent = d.colors.accent | default: '#5b8bb8'
+  assign pack_bg = d.colors.bg | default: '#e9f1f8'
+-%}
+
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+
+<div class="lp" id="lp-{{ section.id }}">
+
+  {%- comment -%} ===== HERO (informational, centered — buy-box lives lower at #buy) ===== {%- endcomment -%}
+  <section class="lp-hero" id="top">
+    <div class="lp-wrap lp-hero__inner">
+      {%- if d.eyebrow != blank -%}<p class="lp-hero__eyebrow">{{ d.eyebrow }}</p>{%- endif -%}
+      <h1 class="lp-hero__title">Strength that stays&nbsp;<em>hydrated</em></h1>
+      <p class="lp-hero__lead">5&nbsp;g of pure creatine monohydrate plus the electrolytes hard training burns through — the two things every session depletes, refilled in one clean scoop.</p>
+      <div class="lp-hero__cta">
+        <a class="lp-btn lp-btn--lg" href="#buy">Shop the routine</a>
+        <a class="lp-btn lp-btn--ghost lp-btn--lg" href="#how">How it works</a>
+      </div>
+      <ul class="lp-hero__checks">
+        <li><svg class="lp-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>5&nbsp;g creatine + 3 electrolytes</li>
+        <li><svg class="lp-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Mixes clean · no clumps</li>
+        <li><svg class="lp-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Made in the USA</li>
+      </ul>
+      <div class="lp-hero__stage">
+        <img class="lp-hero__cluster" src="{{ 'lp-hero-cluster.webp' | asset_url }}" alt="UpHealth Creatine Hydration Powder jar with a shaker, scoop, dumbbell and an energy bolt" width="1284" height="1300" fetchpriority="high">
+      </div>
+      <p class="lp-hero__legal">*Individual results vary. Dietary supplement — not intended to diagnose, treat, cure or prevent any disease.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ===== PHOTO STRIP (product photography marquee) ===== {%- endcomment -%}
+  <section class="strip lp-photos" aria-label="Product photography">
+    <div class="lp-photos__track">
+      {%- assign shots = "lp-strip-1.jpg|A woman mixing Creatine Hydration Powder into a glass of water;lp-strip-2.jpg|An athlete holding the jar and a shaker on a gym bench;lp-strip-3.jpg|Scooping creatine powder into a shaker bottle;lp-strip-4.jpg|Flat-lay of the jar with a scoop shaker and dumbbell;lp-strip-5.jpg|A smiling athlete holding the jar and a shaker at the gym;lp-strip-6.jpg|A woman holding the jar after a home workout" | split: ";" -%}
+      {%- for pass in (1..2) -%}
+        {%- for s in shots -%}
+          {%- assign c = s | split: "|" -%}
+          <figure class="lp-photos__tile"{% if pass == 2 %} aria-hidden="true"{% endif %}><img src="{{ c[0] | asset_url }}" alt="{% if pass == 1 %}{{ c[1] }}{% endif %}" loading="lazy" width="560" height="700"></figure>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} ===== BENEFITS ===== {%- endcomment -%}
+  {%- if d.benefits -%}
+  <section class="lp-benefits">
+    <div class="lp-wrap">
+      <header class="lp-head">
+        <h2 class="lp-h2">One scoop, <em>two jobs</em></h2>
+        <p class="lp-sub">Strength and hydration are the two things hard training depletes. This refills both — at once.</p>
+      </header>
+      <div class="lp-cards">
+        <article class="lp-card">
+          <span class="lp-art"><img src="{{ 'lp-icon-strength.png' | asset_url }}" alt="" loading="lazy"></span>
+          <h3>Real strength</h3>
+          <p>5&nbsp;g of pure creatine monohydrate — the most-studied ingredient for power, reps and lean strength.</p>
+        </article>
+        <article class="lp-card">
+          <span class="lp-art"><img src="{{ 'lp-icon-hydration.png' | asset_url }}" alt="" loading="lazy"></span>
+          <h3>Electrolyte hydration</h3>
+          <p>Sodium, potassium and magnesium keep you hydrated and cramp-free through every hard set.</p>
+        </article>
+        <article class="lp-card">
+          <span class="lp-art"><img src="{{ 'lp-icon-shake.png' | asset_url }}" alt="" loading="lazy"></span>
+          <h3>No mixing hassle</h3>
+          <p>Dissolves clean in water — no gritty clumps, no chalk. One scoop, shake, done.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
+  {%- if d.science.title != blank -%}
+  <section class="lp-science" id="how">
+    <div class="lp-wrap lp-science__grid">
+      <div class="lp-science__copy">
+        {%- if d.science.eyebrow != blank -%}<p class="lp-eyebrow lp-eyebrow--accent">{{ d.science.eyebrow }}</p>{%- endif -%}
+        <h2 class="lp-h2">{{ d.science.title }}</h2>
+        <p class="lp-body">{{ d.science.text }}</p>
+      </div>
+      {%- if d.absorb.points -%}
+      <ul class="lp-mech">
+        {%- for pt in d.absorb.points -%}
+        <li><strong>{{ pt.title }}</strong><span>{{ pt.text }}</span></li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== FEATURED RESULTS (survey stats) ===== {%- endcomment -%}
+  <section class="lp-results">
+    <div class="lp-wrap">
+      <div class="lp-results__head">
+        <div>
+          <span class="lp-eyebrow">Featured results</span>
+          <h2 class="lp-h2">Stronger sets, better <em>hydration</em></h2>
+        </div>
+        <p class="lp-results__intro">In a self-assessment survey, people taking Creatine Hydration daily reported real changes in how they trained, hydrated and recovered.</p>
+      </div>
+      <div class="lp-stats">
+        <div class="lp-stat"><span class="lp-stat__num">92%</span><p>felt they could push out more reps in training*</p></div>
+        <div class="lp-stat"><span class="lp-stat__num">88%</span><p>stayed better hydrated through hard sessions*</p></div>
+        <div class="lp-stat"><span class="lp-stat__num">84%</span><p>noticed easier day-to-day recovery*</p></div>
+      </div>
+      <div class="lp-results__foot">
+        <p class="lp-results__note">*Results from a user self-assessment survey after 8 weeks of daily use. Individual results may vary.</p>
+        <a class="lp-btn" href="#buy">Shop the routine</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== RESULTS CHART (built over 8 weeks) ===== {%- endcomment -%}
+  {%- assign ch = d.chart -%}
+  {%- if ch.series -%}
+  <section class="lp-chart">
+    <div class="lp-wrap" style="--cbar-a: {{ ch.line_a | default: '#46708f' }}; --cbar-b: {{ ch.line_b | default: '#9bc0dd' }};">
+      <header class="lp-head lp-head--center">
+        {%- if ch.eyebrow != blank -%}<span class="lp-eyebrow">{{ ch.eyebrow }}</span>{%- endif -%}
+        <h2 class="lp-h2">{{ ch.title }}</h2>
+      </header>
+      <div class="lp-charts">
+        {%- for s in ch.series -%}
+        <article class="lp-chartcard">
+          <span class="lp-chartcard__tag">{{ s.label }}</span>
+          <h3 class="lp-chartcard__title">{{ s.title }}</h3>
+          <div class="lp-graph" role="img" aria-label="{{ s.title | escape }} building up across 8 weeks">
+            {%- for va in s.values_a -%}
+              {%- assign vb = s.values_b[forloop.index0] -%}
+              <div class="lp-graph__grp">
+                <span class="lp-bar lp-bar--a" style="height: {{ va | times: 5 }}%"></span>
+                <span class="lp-bar lp-bar--b" style="height: {{ vb | times: 5 }}%"></span>
+                <span class="lp-graph__wk">{{ forloop.index0 | times: 2 }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+          <div class="lp-legend">
+            <span><i class="lp-dot lp-dot--a"></i>{{ s.legend_a }}</span>
+            <span><i class="lp-dot lp-dot--b"></i>{{ s.legend_b }}</span>
+          </div>
+          <p class="lp-chartcard__text">{{ s.text }}</p>
+        </article>
+        {%- endfor -%}
+      </div>
+      <p class="lp-chart__foot">Weeks 0–8. Illustrative of the kind of progress reported in creatine research — individual results vary.</p>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== HOW TO USE (split: media + numbered timeline) ===== {%- endcomment -%}
+  <section class="lp-howto">
+    <div class="lp-wrap lp-howto__grid">
+      <div class="lp-howto__media">
+        <img src="{{ 'lp-howto.jpg' | asset_url }}" alt="Creatine Hydration Powder jar with a scoop, ready to mix" loading="lazy" width="760" height="900">
+        <div class="lp-howto__dose">
+          <strong>1 scoop daily</strong>
+          <span>5&nbsp;g creatine + electrolytes · 22&nbsp;kcal · 30 servings</span>
+        </div>
+      </div>
+      <div class="lp-howto__body">
+        <header class="lp-head">
+          <span class="lp-eyebrow">How to take it</span>
+          <h2 class="lp-h2">Your daily <em>scoop</em></h2>
+          <p class="lp-sub">Three steps, ten seconds — that's the whole routine.</p>
+        </header>
+        <ol class="lp-timeline">
+          <li class="lp-tl">
+            <span class="lp-tl__num">1</span>
+            <span class="lp-tl__icon"><img src="{{ 'lp-icon-scoop.png' | asset_url }}" alt="" loading="lazy"></span>
+            <div class="lp-tl__text"><h3>One scoop in water</h3><p>Add one scoop to 300–400&nbsp;ml of water and give it a quick shake until it dissolves clean.</p></div>
+          </li>
+          <li class="lp-tl">
+            <span class="lp-tl__num">2</span>
+            <span class="lp-tl__icon"><img src="{{ 'lp-icon-drink.png' | asset_url }}" alt="" loading="lazy"></span>
+            <div class="lp-tl__text"><h3>Before or during training</h3><p>Sip it around your workout — strength and hydration exactly when your body is burning through both.</p></div>
+          </li>
+          <li class="lp-tl">
+            <span class="lp-tl__num">3</span>
+            <span class="lp-tl__icon"><img src="{{ 'lp-icon-daily.png' | asset_url }}" alt="" loading="lazy"></span>
+            <div class="lp-tl__text"><h3>Every day, even rest days</h3><p>Creatine works by building up in the muscle — take it daily and consistently to stay saturated.</p></div>
+          </li>
+        </ol>
+        <a class="lp-btn lp-btn--ghost" href="#buy">Start your routine</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== INGREDIENT TICKER (About-page ing-ticker style) ===== {%- endcomment -%}
+  <div class="ing-ticker lp-ticker" aria-hidden="true">
+    <div class="ing-ticker__track">
+      {%- assign tk = "lp-ing-creatine.png|Creatine Monohydrate|5,000 mg;lp-ing-sodium.png|Sodium|1,000 mg;lp-ing-potassium.png|Potassium|200 mg;lp-ing-magnesium.png|Magnesium|60 mg;lp-ing-stevia.png|Stevia leaf|0 g sugar" | split: ";" -%}
+      {%- for pass in (1..2) -%}
+        {%- for row in tk -%}
+          {%- assign c = row | split: "|" -%}
+          <span class="ing-ticker__item">
+            <span class="ing-ticker__dot"><img src="{{ c[0] | asset_url }}" alt="" loading="lazy" width="50" height="50" /></span><b>{{ c[1] }}</b>&nbsp;{{ c[2] }}
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} ===== INGREDIENTS (what's inside) ===== {%- endcomment -%}
+  {%- assign ing = d.ingredients -%}
+  {%- if ing.items -%}
+  <section class="lp-ingredients">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center">
+        {%- if ing.eyebrow != blank -%}<span class="lp-eyebrow">{{ ing.eyebrow }}</span>{%- endif -%}
+        <h2 class="lp-h2">{{ ing.title }}</h2>
+        {%- if ing.lead != blank -%}<p class="lp-sub">{{ ing.lead }}</p>{%- endif -%}
+      </header>
+      <div class="lp-ing-grid">
+        {%- for it in ing.items -%}
+        <article class="lp-ing">
+          <div class="lp-ing__top">
+            <span class="lp-ing__name">{{ it.name }}</span>
+            <span class="lp-ing__amt">{{ it.amount }}</span>
+          </div>
+          {%- if it.latin != blank -%}<span class="lp-ing__latin">{{ it.latin }}</span>{%- endif -%}
+          <p class="lp-ing__text">{{ it.text }}</p>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== COMPARISON (proof) ===== {%- endcomment -%}
+  <section class="lp-compare">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center">
+        <h2 class="lp-h2">Why <em>Creatine Hydration</em></h2>
+        <p class="lp-sub">Plain creatine builds strength but leaves you dry. Sports drinks hydrate but do nothing for power. This does both.</p>
+      </header>
+      <div class="lp-table-wrap">
+        <table class="lp-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="is-us"><span class="lp-table__crown">★ Best choice</span>Creatine Hydration</th>
+              <th>Plain creatine</th>
+              <th>Sports drink</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- assign rows = "5 g creatine monohydrate|1|1|0,Full electrolyte blend|1|0|1,Supports strength &amp; power|1|1|0,Keeps you hydrated|1|0|1,Sugar-free|1|1|0,One clean scoop|1|0|0" | split: "," -%}
+            {%- for r in rows -%}
+              {%- assign c = r | split: "|" -%}
+              <tr>
+                <td class="lp-table__label">{{ c[0] }}</td>
+                {%- for i in (1..3) -%}
+                <td{% if i == 1 %} class="is-us"{% endif %}>
+                  {%- if c[i] == "1" -%}<svg class="yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>{%- else -%}<span class="no">—</span>{%- endif -%}
+                </td>
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== ADVISORS — PLACEHOLDER PEOPLE. Replace with your real team/advisors before publishing (do not present fictional people as experts). ===== {%- endcomment -%}
+  <section class="lp-experts">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center lp-head--wide">
+        <h2 class="lp-h2">The best care, by the<br>best in <em>sports&nbsp;science</em></h2>
+        <p class="lp-sub">Meet the advisors who guide our formula — decades of combined experience in sports nutrition, strength training and product science.</p>
+      </header>
+      <div class="lp-experts-grid">
+        <article class="lp-expert">
+          <div class="lp-expert__photo">
+            <img src="{{ 'lp-expert-1.jpg' | asset_url }}" alt="Sofia Alvarez, sports nutrition advisor" loading="lazy" width="640" height="800">
+            <div class="lp-expert__meta">
+              <span class="lp-expert__role">Sports Nutrition Advisor</span>
+              <span class="lp-expert__tag">Hydration</span>
+              <span class="lp-expert__tag">Daily dosing</span>
+            </div>
+          </div>
+          <h3 class="lp-expert__name">Sofia Alvarez, MSc</h3>
+          <p class="lp-expert__bio">A sports nutritionist focused on hydration and everyday performance, Sofia guides how the electrolytes and creatine work together.</p>
+        </article>
+        <article class="lp-expert">
+          <div class="lp-expert__photo">
+            <img src="{{ 'lp-expert-2.jpg' | asset_url }}" alt="Marcus Reed, strength and conditioning coach" loading="lazy" width="640" height="800">
+            <div class="lp-expert__meta">
+              <span class="lp-expert__role">Strength &amp; Conditioning</span>
+              <span class="lp-expert__tag">Strength</span>
+              <span class="lp-expert__tag">Recovery</span>
+            </div>
+          </div>
+          <h3 class="lp-expert__name">Marcus Reed, CSCS</h3>
+          <p class="lp-expert__bio">A strength coach with fifteen years on the gym floor, Marcus keeps the dose and timing grounded in how people really train.</p>
+        </article>
+        <article class="lp-expert">
+          <div class="lp-expert__photo">
+            <img src="{{ 'lp-expert-3.jpg' | asset_url }}" alt="Hannah Weiss, product formulator" loading="lazy" width="640" height="800">
+            <div class="lp-expert__meta">
+              <span class="lp-expert__role">Product Formulator</span>
+              <span class="lp-expert__tag">Formulation</span>
+              <span class="lp-expert__tag">Electrolytes</span>
+            </div>
+          </div>
+          <h3 class="lp-expert__name">Dr. Hannah Weiss, PhD</h3>
+          <p class="lp-expert__bio">A food scientist with two decades in actives, Hannah balances a full 5&nbsp;g creatine dose with a clean, easy-mixing electrolyte base.</p>
+        </article>
+        <article class="lp-expert">
+          <div class="lp-expert__photo">
+            <img src="{{ 'lp-expert-4.jpg' | asset_url }}" alt="James Okoro, registered dietitian" loading="lazy" width="640" height="800">
+            <div class="lp-expert__meta">
+              <span class="lp-expert__role">Registered Dietitian</span>
+              <span class="lp-expert__tag">Nutrition</span>
+              <span class="lp-expert__tag">Safe use</span>
+            </div>
+          </div>
+          <h3 class="lp-expert__name">James Okoro, RD</h3>
+          <p class="lp-expert__bio">A dietitian focused on everyday athletes, James advises on hydration, sensible daily use and who should check in with a doctor first.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== REVIEWS (editable blocks — use REAL customer reviews) ===== {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+  <section class="lp-reviews">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center">
+        {%- if d.rating != blank -%}<span class="lp-eyebrow">★ {{ d.rating }}</span>{%- endif -%}
+        <h2 class="lp-h2">People are talking</h2>
+      </header>
+      <div class="lp-rev-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+          <article class="lp-rev" {{ block.shopify_attributes }}>
+            <div class="lp-rev__head">
+              {%- assign rav = block.settings.avatar -%}
+              <span class="lp-rev__avatar">
+                {%- if rav != blank -%}<img src="{% if rav contains '//' %}{{ rav }}{% else %}{{ rav | asset_url }}{% endif %}" alt="{{ block.settings.name | escape }}" loading="lazy" width="44" height="44" />
+                {%- else -%}<span class="lp-rev__initials">{{ block.settings.name | strip | slice: 0, 1 }}</span>{%- endif -%}
+              </span>
+              <span class="lp-rev__id">
+                <strong class="lp-rev__name">{{ block.settings.name }}</strong>
+                <span class="lp-rev__meta">{{ block.settings.location | default: 'United States' }}{% if block.settings.reviews_count != blank %} · {{ block.settings.reviews_count }} review{% unless block.settings.reviews_count == '1' %}s{% endunless %}{% endif %}</span>
+              </span>
+              {%- if block.settings.date != blank -%}<span class="lp-rev__date">{{ block.settings.date }}</span>{%- endif -%}
+            </div>
+            <span class="lp-rev__stars" aria-label="{{ block.settings.stars }} out of 5 stars">
+              {%- for i in (1..5) -%}<span class="lp-rev__star{% if i > block.settings.stars %} is-off{% endif %}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.94 6.36 6.86.86-5.06 4.71 1.34 6.79L12 18.5 5.98 21l1.34-6.79L2.26 9.42l6.86-.86z"/></svg></span>{%- endfor -%}
+            </span>
+            {%- if block.settings.title != blank -%}<h3 class="lp-rev__title">{{ block.settings.title }}</h3>{%- endif -%}
+            <p class="lp-rev__text">{{ block.settings.text }}</p>
+            <div class="lp-rev__foot">
+              {%- if block.settings.date != blank -%}<span class="lp-rev__tag">{{ block.settings.date }}</span>{%- endif -%}
+              <span class="lp-rev__tag lp-rev__tag--verified"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Verified purchase</span>
+            </div>
+          </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== BUY (Build your routine — gallery + subscription buy-box) ===== {%- endcomment -%}
+  <section class="lp-buy" id="buy">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center">
+        <span class="lp-eyebrow">Start today</span>
+        <h2 class="lp-h2">Build your <em>routine</em></h2>
+        <p class="lp-sub">One scoop a day. Subscribe and save — skip or cancel anytime.</p>
+      </header>
+      <div class="lp-pdp">
+        <div class="lp-gallery">
+          <div class="up-gallery" data-gallery>
+            <div class="up-gallery__viewport">
+              <div class="up-gallery__track" data-gallery-track>
+                {%- for media in product.media -%}<div class="up-gallery__slide"><img src="{{ media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="lazy" /></div>
+                {%- else -%}{%- if product.featured_media -%}<div class="up-gallery__slide"><img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" /></div>{%- endif -%}{%- endfor -%}
+              </div>
+            </div>
+            {%- if product.media.size > 1 -%}
+              <button type="button" class="gallery__arrow gallery__arrow--prev" data-gallery-prev aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button type="button" class="gallery__arrow gallery__arrow--next" data-gallery-next aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            {%- endif -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+          <div class="up-gallery-nav" data-gallery-nav>
+            {%- for media in product.media -%}<button type="button" class="up-gallery-nav__item{% if forloop.first %} is-active{% endif %}" data-gallery-go="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}"><img src="{{ media | image_url: width: 300 }}" alt="" loading="lazy" /></button>{%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+        <div class="lp-info">
+          {%- if d.rating != blank -%}<p class="lp-stars"><span aria-hidden="true">★★★★★</span> {{ d.rating }}</p>{%- endif -%}
+          <h3 class="lp-buy__title">Creatine Hydration <em>Powder</em></h3>
+          {%- if d.benefits -%}
+          <ul class="lp-checks">
+            {%- for b in d.benefits -%}
+            <li><svg class="lp-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ b }}</li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+
+          {%- form 'product', product -%}
+            <span class="lp-field-label">Choose your plan</span>
+            <div class="packs uphealth" data-routine>
+              <label class="pack is-active" data-id="{{ v1.id }}" data-plan="" data-price="{{ v1.price }}">
+                <input type="radio" name="rt" checked>
+                <span class="pack__radio" aria-hidden="true"></span>
+                <span class="pack__body"><span class="pack__name">1 jar · <em>one-time</em></span><span class="pack__note">Try it once — no commitment</span></span>
+                <span class="pack__price"><span class="pack__now">{{ v1.price | money }}</span></span>
+              </label>
+              {%- if plan_a != null and price_a > 0 -%}
+              <label class="pack" data-id="{{ v1.id }}" data-plan="{{ plan_a.id }}" data-price="{{ price_a }}" data-compare="{{ v1.price }}">
+                <span class="pack__badge">Save 10%</span>
+                <input type="radio" name="rt">
+                <span class="pack__radio" aria-hidden="true"></span>
+                <span class="pack__body"><span class="pack__name">1 jar · <em>monthly</em></span><span class="pack__note">Delivered every month · cancel anytime</span></span>
+                <span class="pack__price"><span class="pack__now">{{ price_a | money }}<small class="pack__per">/mo</small></span><span class="pack__old">{{ v1.price | money }}</span></span>
+              </label>
+              {%- endif -%}
+              {%- if plan_b != null and v3 != null and price_b > 0 -%}
+              <label class="pack" data-id="{{ v3.id }}" data-plan="{{ plan_b.id }}" data-price="{{ price_b }}" data-compare="{{ v3.price }}">
+                <span class="pack__badge">Best value · Save 15%</span>
+                <input type="radio" name="rt">
+                <span class="pack__radio" aria-hidden="true"></span>
+                <span class="pack__body"><span class="pack__name">3 jars · <em>every 3 months</em></span><span class="pack__note">3-month supply · ships quarterly</span></span>
+                <span class="pack__price"><span class="pack__now">{{ price_b | money }}<small class="pack__per">/3 mo</small></span><span class="pack__old">{{ v3.price | money }}</span></span>
+              </label>
+              {%- endif -%}
+            </div>
+            <input type="hidden" name="id" value="{{ v1.id }}" data-form-id>
+            <input type="hidden" name="selling_plan" value="" data-form-plan>
+
+            <div class="lp-buy__cta">
+              <span class="lp-price"><span class="lp-price__now" data-price-now>{{ v1.price | money }}</span><span class="lp-price__old" data-price-old hidden></span></span>
+              <button type="submit" name="add" class="lp-btn lp-btn--lg lp-btn--block"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
+            </div>
+            <p class="lp-reassure">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Free shipping over $40
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Skip or cancel anytime
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Made in the USA
+            </p>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== CROSS-SELL (protein products marquee → product pages) ===== {%- endcomment -%}
+  <section class="lp-xsell">
+    <div class="lp-wrap">
+      <header class="lp-head lp-head--center">
+        <span class="lp-eyebrow">Complete your stack</span>
+        <h2 class="lp-h2">Pair it with <em>protein</em></h2>
+        <p class="lp-sub">Creatine builds the strength — protein rebuilds the muscle. Add one to your routine.</p>
+      </header>
+    </div>
+    <div class="lp-xsell__strip">
+      <div class="lp-xsell__track">
+        {%- assign xh = "advanced-100-whey-protein-isolate-chocolate-1;pure3-100-whey-protein-isolate-chocolate-1;plant-protein-vanilla-1;advanced-100-whey-protein-isolate-vanilla;plant-protein-chocolate-1" | split: ";" -%}
+        {%- for pass in (1..4) -%}
+          {%- for h in xh -%}
+            {%- assign xp = all_products[h] -%}
+            {%- if xp != empty and xp.id -%}
+            <a class="lp-xcard" href="{{ xp.url }}"{% if pass > 1 %} tabindex="-1" aria-hidden="true"{% endif %}>
+              <span class="lp-xcard__media">
+                <span class="lp-xcard__tag">{% if xp.title contains 'Plant' %}Plant protein{% else %}Whey isolate{% endif %}</span>
+                {%- if xp.featured_media -%}<img src="{{ xp.featured_media | image_url: width: 500 }}" alt="{{ xp.title | escape }}" loading="lazy" width="260" height="260">{%- endif -%}
+              </span>
+              <span class="lp-xcard__info">
+                <span class="lp-xcard__name">{{ xp.title }}</span>
+                <span class="lp-xcard__row">
+                  <span class="lp-xcard__price">{{ xp.price | money }}</span>
+                  <span class="lp-xcard__go">View&nbsp;→</span>
+                </span>
+              </span>
+            </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FAQ (accordion) ===== {%- endcomment -%}
+  {%- assign faq = d.faq -%}
+  {%- if faq.items -%}
+  <section class="lp-faq">
+    <div class="lp-wrap lp-wrap--narrow">
+      <header class="lp-head lp-head--center">
+        <h2 class="lp-h2">{{ faq.title | default: 'Good to know' }}</h2>
+      </header>
+      <div class="lp-faq-list">
+        {%- for f in faq.items -%}
+        <details class="lp-faq-item"{% if forloop.first %} open{% endif %}>
+          <summary>{{ f.q }}<span class="lp-faq-ic" aria-hidden="true"></span></summary>
+          <div class="lp-faq-a"><p>{{ f.a }}</p></div>
+        </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== FINAL CTA ===== {%- endcomment -%}
+  <section class="lp-final">
+    <div class="lp-wrap lp-final__inner">
+      <h2 class="lp-h2">Train hard. <em>Recover harder.</em></h2>
+      <p class="lp-sub">Strength and hydration in one scoop — start your routine today.</p>
+      <a class="lp-btn lp-btn--lg" href="#buy">Get Creatine Hydration</a>
+      <p class="lp-reassure lp-reassure--center">Free shipping over $40 · Skip or cancel anytime · Made in the USA</p>
+    </div>
+  </section>
+
+  {%- comment -%} Sticky add-to-cart bar — landing only; replaces the docked promo-bar {%- endcomment -%}
+  <div class="lp-atc" data-atc aria-hidden="true">
+    <div class="lp-wrap lp-atc__inner">
+      <div class="lp-atc__info">
+        {%- if product.featured_media -%}<img class="lp-atc__thumb" src="{{ product.featured_media | image_url: width: 128 }}" alt="" width="46" height="46" loading="lazy">{%- endif -%}
+        <span class="lp-atc__txt"><strong>{{ product.title }}</strong><span class="lp-atc__price" data-atc-price>{{ v1.price | money }}</span></span>
+      </div>
+      <button type="button" class="lp-btn lp-atc__btn" data-atc-add aria-label="Add {{ product.title | escape }} to cart">Add to cart</button>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  #lp-{{ section.id }} {
+    --lp-paper: #f2f8fc; --lp-band: #dbe9f5; --lp-ink: #12325f; --lp-muted: #5a6b82;
+    --lp-btn: #143a6b; --lp-btn-hover: #0e2c52; --lp-accent: #e0654a; --lp-card: #ffffff;
+    --lp-line: rgba(18,50,95,.14); --lp-radius: 18px;
+    /* map global .pack tokens to the landing palette */
+    --color-purple: var(--lp-btn); --color-purple-soft: #9fb9d8; --color-purple-deep: #0e2c52;
+    --color-border: var(--lp-line); --color-bg-card: #fff; --color-bg: var(--lp-band);
+    --color-text: var(--lp-ink); --color-text-muted: var(--lp-muted); --color-accent: var(--lp-btn);
+    font-family: "Hanken Grotesk", system-ui, sans-serif; color: var(--lp-ink); background: var(--lp-paper);
+  }
+  #lp-{{ section.id }} * { box-sizing: border-box; }
+  #lp-{{ section.id }} .lp-wrap { max-width: 1480px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 48px); }
+  #lp-{{ section.id }} em { font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 500; }
+  #lp-{{ section.id }} .lp-h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.05; letter-spacing: -.02em; font-weight: 700; margin: 6px 0 12px; }
+  #lp-{{ section.id }} .lp-h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin: 0 0 10px; }
+  #lp-{{ section.id }} .lp-h1 em, #lp-{{ section.id }} .lp-h2 em { color: var(--lp-accent); }
+  #lp-{{ section.id }} .lp-sub, #lp-{{ section.id }} .lp-body { color: var(--lp-muted); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  #lp-{{ section.id }} .lp-eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--lp-muted); margin: 0 0 4px; }
+  #lp-{{ section.id }} .lp-eyebrow--accent { color: var(--lp-accent); }
+
+  /* hero (informational, centered) */
+  #lp-{{ section.id }} .lp-hero { background: radial-gradient(120% 90% at 50% 0%, var(--lp-band) 0%, var(--lp-paper) 66%); overflow: hidden; text-align: center; padding-block: clamp(30px, 4.5vw, 60px) clamp(48px, 7vw, 96px); }
+  #lp-{{ section.id }} .lp-hero__inner { display: flex; flex-direction: column; align-items: center; }
+  #lp-{{ section.id }} .lp-hero__eyebrow { font-size: .82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--lp-accent); margin: 0 0 14px; }
+  #lp-{{ section.id }} .lp-hero__title { font-size: clamp(2.2rem, 5.6vw, 4.2rem); line-height: 1.03; letter-spacing: -.02em; font-weight: 700; margin: 0; text-wrap: balance; }
+  #lp-{{ section.id }} .lp-hero__title em { color: var(--lp-accent); }
+  #lp-{{ section.id }} .lp-hero__lead { max-width: 56ch; margin: 18px auto 0; color: var(--lp-muted); font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.55; }
+  #lp-{{ section.id }} .lp-hero__cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+  #lp-{{ section.id }} .lp-hero__checks { list-style: none; padding: 0; display: flex; gap: 10px 28px; justify-content: center; flex-wrap: wrap; margin: 20px 0 0; font-size: .92rem; font-weight: 500; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-hero__checks li { display: flex; gap: 7px; align-items: center; }
+  #lp-{{ section.id }} .lp-hero__stage { position: relative; margin-top: 22px; width: 100%; padding-inline: clamp(12px, 4vw, 40px); }
+  #lp-{{ section.id }} .lp-hero__cluster { width: min(728px, 100%, 78vh); height: auto; margin: 0 auto; display: block; filter: drop-shadow(0 40px 48px rgba(18,50,95,.22)); }
+  #lp-{{ section.id }} .lp-hero__legal { margin: 0; padding-block: 18px 6px; font-size: .78rem; color: var(--lp-muted); }
+
+  /* buttons */
+  #lp-{{ section.id }} .lp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 30px; border: 0; border-radius: 999px; background: var(--lp-btn); color: #fff; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .15s ease, transform .15s ease, box-shadow .15s ease; }
+  #lp-{{ section.id }} .lp-btn:hover { background: var(--lp-btn-hover); transform: translateY(-1px); }
+  #lp-{{ section.id }} .lp-btn--lg { padding: 16px 34px; font-size: 1.05rem; }
+  #lp-{{ section.id }} .lp-btn--block { flex: 1; }
+  #lp-{{ section.id }} .lp-btn--ghost { background: transparent; color: var(--lp-btn); box-shadow: inset 0 0 0 1.5px var(--lp-line); }
+  #lp-{{ section.id }} .lp-btn--ghost:hover { background: #fff; color: var(--lp-btn); box-shadow: inset 0 0 0 1.5px var(--lp-btn); }
+
+  /* pdp (inside the buy section) */
+  #lp-{{ section.id }} .lp-pdp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  #lp-{{ section.id }} .lp-gallery { margin: 0; position: sticky; top: 20px; }
+  #lp-{{ section.id }} .lp-gallery .up-gallery__viewport { border-radius: var(--lp-radius); box-shadow: 0 24px 60px -34px rgba(18,50,95,.4); }
+  #lp-{{ section.id }} .lp-gallery .up-gallery-nav__item.is-active { border-color: var(--lp-btn); }
+  #lp-{{ section.id }} .lp-gallery .gallery__arrow { background: rgba(255,255,255,.9); color: var(--lp-btn); box-shadow: 0 6px 18px -8px rgba(18,50,95,.5); }
+  #lp-{{ section.id }} .lp-stars { margin: 0 0 12px; font-size: .95rem; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-stars span { color: #e6a53a; letter-spacing: 1px; }
+  #lp-{{ section.id }} .lp-checks { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 9px; }
+  #lp-{{ section.id }} .lp-checks li { display: flex; gap: 10px; align-items: flex-start; font-size: .96rem; }
+  #lp-{{ section.id }} .lp-check { width: 18px; height: 18px; flex: none; color: var(--lp-accent); margin-top: 1px; }
+  #lp-{{ section.id }} .lp-field-label { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lp-muted); margin-bottom: 12px; }
+  #lp-{{ section.id }} .lp-price { display: flex; flex-direction: column; }
+  #lp-{{ section.id }} .lp-price__now { font-size: 1.7rem; font-weight: 700; }
+  #lp-{{ section.id }} .lp-price__old { font-size: .95rem; color: var(--lp-muted); text-decoration: line-through; }
+  #lp-{{ section.id }} .lp-reassure { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 14px 0 0; font-size: .82rem; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-reassure svg { width: 14px; height: 14px; color: var(--lp-accent); vertical-align: -2px; }
+  #lp-{{ section.id }} .lp-reassure--center { justify-content: center; }
+
+  /* buy section */
+  #lp-{{ section.id }} .lp-buy { background: var(--lp-paper); padding-block: clamp(40px, 6vw, 72px); }
+  #lp-{{ section.id }} .lp-buy__title { margin: 0 0 14px; font-size: 1.5rem; font-weight: 700; }
+  #lp-{{ section.id }} .lp-buy__title em { color: var(--lp-accent); }
+  #lp-{{ section.id }} .lp-buy__cta { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+
+  /* buy-box 1:1 with the product page — remap the .pack colour tokens to the SAME accent/bg the universal template computes (scoped to .packs so the rest of the landing keeps its navy) */
+  #lp-{{ section.id }} .packs {
+    --color-purple: {{ pack_accent }};
+    --color-purple-soft: color-mix(in srgb, {{ pack_accent }} 22%, white);
+    --color-purple-deep: color-mix(in srgb, {{ pack_accent }} 70%, black);
+    --color-border: color-mix(in srgb, {{ pack_accent }} 20%, white);
+    --color-bg: {{ pack_bg }};
+    --color-bg-card: color-mix(in srgb, {{ pack_bg }} 35%, white);
+    --color-text: color-mix(in srgb, {{ pack_accent }} 72%, black);
+    --color-text-muted: color-mix(in srgb, color-mix(in srgb, {{ pack_accent }} 72%, black) 55%, {{ pack_bg }});
+  }
+
+  /* photo strip (product photography marquee) */
+  #lp-{{ section.id }} .lp-photos { overflow: hidden; padding-block: 0; background: var(--lp-paper); }
+  #lp-{{ section.id }} .lp-photos__track { display: flex; width: max-content; animation: lp-photoscroll-{{ section.id }} 52s linear infinite; }
+  #lp-{{ section.id }} .lp-photos:hover .lp-photos__track { animation-play-state: paused; }
+  #lp-{{ section.id }} .lp-photos__tile { flex: none; width: 430px; height: 600px; overflow: hidden; background: var(--lp-band); border-radius: var(--lp-radius); margin-right: 20px; }
+  #lp-{{ section.id }} .lp-photos__tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @keyframes lp-photoscroll-{{ section.id }} { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { #lp-{{ section.id }} .lp-photos__track { animation: none; } }
+
+  /* sections */
+  #lp-{{ section.id }} .lp-benefits, #lp-{{ section.id }} .lp-science, #lp-{{ section.id }} .lp-compare, #lp-{{ section.id }} .lp-howto, #lp-{{ section.id }} .lp-chart, #lp-{{ section.id }} .lp-ingredients, #lp-{{ section.id }} .lp-reviews, #lp-{{ section.id }} .lp-faq, #lp-{{ section.id }} .lp-results, #lp-{{ section.id }} .lp-experts { padding-block: clamp(40px, 6vw, 72px); }
+  #lp-{{ section.id }} .lp-wrap--narrow { max-width: 760px; }
+  #lp-{{ section.id }} .lp-eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--lp-accent); margin-bottom: 10px; }
+  #lp-{{ section.id }} .lp-head { max-width: 640px; margin-bottom: 32px; }
+  #lp-{{ section.id }} .lp-head--center { margin-inline: auto; text-align: center; }
+  #lp-{{ section.id }} .lp-head--wide { max-width: 860px; }
+  #lp-{{ section.id }} .lp-head--wide .lp-h2 { text-wrap: balance; }
+  #lp-{{ section.id }} .lp-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  #lp-{{ section.id }} .lp-card { background: var(--lp-card); border: 1px solid var(--lp-line); border-radius: var(--lp-radius); padding: 34px 26px 30px; text-align: center; }
+  #lp-{{ section.id }} .lp-art { display: grid; place-items: center; width: 128px; height: 128px; margin: 0 auto 18px; border-radius: 50%; background: var(--lp-band); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--lp-btn) 16%, transparent), 0 14px 30px -20px rgba(18,50,95,.55); }
+  #lp-{{ section.id }} .lp-art img { width: 92px; height: 92px; object-fit: contain; object-position: center; }
+  #lp-{{ section.id }} .lp-card h3 { margin: 0 0 8px; font-size: 1.22rem; font-weight: 600; }
+  #lp-{{ section.id }} .lp-card p { margin: 0; color: var(--lp-muted); font-size: .96rem; line-height: 1.55; }
+
+  /* how to use — media + numbered timeline */
+  #lp-{{ section.id }} .lp-howto__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 4vw, 60px); align-items: center; }
+  #lp-{{ section.id }} .lp-howto__media { position: relative; }
+  #lp-{{ section.id }} .lp-howto__media img { width: 100%; height: auto; border-radius: var(--lp-radius); display: block; box-shadow: 0 30px 60px -38px rgba(18,50,95,.55); }
+  #lp-{{ section.id }} .lp-howto__dose { position: absolute; left: 18px; bottom: 18px; right: 18px; background: rgba(255,255,255,.92); backdrop-filter: blur(4px); border-radius: 14px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; box-shadow: 0 14px 30px -18px rgba(18,50,95,.5); }
+  #lp-{{ section.id }} .lp-howto__dose strong { font-size: 1.05rem; font-weight: 700; color: var(--lp-ink); }
+  #lp-{{ section.id }} .lp-howto__dose span { font-size: .82rem; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-howto__body .lp-head { margin-bottom: 22px; }
+  #lp-{{ section.id }} .lp-timeline { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 4px; }
+  #lp-{{ section.id }} .lp-tl { position: relative; display: grid; grid-template-columns: auto auto 1fr; align-items: start; gap: 16px; padding-bottom: 22px; }
+  #lp-{{ section.id }} .lp-tl:not(:last-child)::before { content: ""; position: absolute; left: 18px; top: 40px; bottom: -2px; width: 2px; background: linear-gradient(var(--lp-accent), color-mix(in srgb, var(--lp-accent) 25%, transparent)); }
+  #lp-{{ section.id }} .lp-tl__num { position: relative; z-index: 1; width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--lp-btn); color: #fff; font-weight: 700; font-size: 1.02rem; }
+  #lp-{{ section.id }} .lp-tl__icon { width: 54px; height: 54px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--lp-band); }
+  #lp-{{ section.id }} .lp-tl__icon img { width: 42px; height: 42px; object-fit: contain; }
+  #lp-{{ section.id }} .lp-tl__text h3 { margin: 6px 0 4px; font-size: 1.12rem; font-weight: 600; }
+  #lp-{{ section.id }} .lp-tl__text p { margin: 0; color: var(--lp-muted); font-size: .95rem; line-height: 1.5; }
+
+  #lp-{{ section.id }} .lp-science { background: var(--lp-band); }
+  #lp-{{ section.id }} .lp-science__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  #lp-{{ section.id }} .lp-mech { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  #lp-{{ section.id }} .lp-mech li { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 3px; }
+  #lp-{{ section.id }} .lp-mech strong { font-weight: 600; }
+  #lp-{{ section.id }} .lp-mech span { color: var(--lp-muted); font-size: .92rem; line-height: 1.5; }
+
+  /* comparison table — defined card: visible grid lines, soft shadow, outlined winner column */
+  #lp-{{ section.id }} .lp-compare { background: var(--lp-paper); }
+  #lp-{{ section.id }} .lp-table-wrap { overflow: visible; padding: 26px 10px 26px; }
+  #lp-{{ section.id }} .lp-table { width: 100%; max-width: 960px; margin-inline: auto; border-collapse: separate; border-spacing: 0; min-width: 580px; background: #fff; border: 1px solid var(--lp-line); border-radius: 18px; overflow: hidden; box-shadow: 0 26px 56px -30px rgba(18,50,95,.5); }
+  #lp-{{ section.id }} .lp-table th, #lp-{{ section.id }} .lp-table td { padding: 15px 16px; text-align: center; border-bottom: 1px solid var(--lp-line); border-right: 1px solid var(--lp-line); }
+  #lp-{{ section.id }} .lp-table th:last-child, #lp-{{ section.id }} .lp-table td:last-child { border-right: 0; }
+  #lp-{{ section.id }} .lp-table tbody tr:last-child td { border-bottom: 0; }
+  #lp-{{ section.id }} .lp-table thead th { font-size: .95rem; font-weight: 700; color: var(--lp-ink); background: var(--lp-paper); vertical-align: middle; line-height: 1.25; border-bottom: 2px solid var(--lp-line); }
+  #lp-{{ section.id }} .lp-table__label { text-align: left; font-weight: 500; font-size: .96rem; color: var(--lp-ink); }
+  #lp-{{ section.id }} .lp-table tbody td { background: #fff; }
+  #lp-{{ section.id }} .lp-table tbody tr:hover td { background: color-mix(in srgb, var(--lp-band) 40%, #fff); }
+  /* featured column — clearly outlined in the brand accent */
+  #lp-{{ section.id }} .lp-table .is-us { background: color-mix(in srgb, var(--lp-btn) 7%, #fff); border-right: 2px solid var(--lp-btn); box-shadow: -2px 0 0 var(--lp-btn); }
+  #lp-{{ section.id }} .lp-table thead th.is-us { color: #fff; background: var(--lp-btn); border-bottom-color: var(--lp-btn); }
+  #lp-{{ section.id }} .lp-table tbody tr:hover td.is-us { background: color-mix(in srgb, var(--lp-btn) 13%, #fff); }
+  #lp-{{ section.id }} .lp-table tbody tr:last-child td.is-us { border-bottom: 2px solid var(--lp-btn); }
+  #lp-{{ section.id }} .lp-table__crown { display: block; width: max-content; margin: 0 auto 7px; font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--lp-accent); border-radius: 999px; padding: 4px 12px; box-shadow: 0 6px 14px -6px rgba(224,101,74,.8); }
+  #lp-{{ section.id }} .lp-table .yes { width: 18px; height: 18px; color: var(--lp-btn); }
+  #lp-{{ section.id }} .lp-table td.is-us .yes { width: 26px; height: 26px; color: #fff; background: var(--lp-accent); border-radius: 50%; padding: 5px; box-shadow: 0 5px 12px -5px rgba(224,101,74,.85); }
+  #lp-{{ section.id }} .lp-table .no { color: #c3ccd8; font-size: 1.15rem; }
+
+  /* final cta */
+  #lp-{{ section.id }} .lp-final { background: linear-gradient(180deg, var(--lp-paper), var(--lp-band)); padding-block: clamp(44px, 6vw, 80px); }
+  #lp-{{ section.id }} .lp-final__inner { text-align: center; max-width: 620px; }
+  #lp-{{ section.id }} .lp-final .lp-sub { margin-bottom: 22px; }
+
+  /* results chart */
+  #lp-{{ section.id }} .lp-chart { background: var(--lp-band); }
+  #lp-{{ section.id }} .lp-charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  #lp-{{ section.id }} .lp-chartcard { background: #fff; border: 1px solid var(--lp-line); border-radius: var(--lp-radius); padding: 24px 22px; }
+  #lp-{{ section.id }} .lp-chartcard__tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--lp-btn); background: var(--lp-band); border-radius: 999px; padding: 3px 11px; margin-bottom: 12px; }
+  #lp-{{ section.id }} .lp-chartcard__title { margin: 0 0 16px; font-size: 1.12rem; font-weight: 600; line-height: 1.25; }
+  #lp-{{ section.id }} .lp-graph { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding-bottom: 20px; border-bottom: 1px solid var(--lp-line); position: relative; }
+  #lp-{{ section.id }} .lp-graph__grp { flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 3px; position: relative; }
+  #lp-{{ section.id }} .lp-bar { width: 8px; border-radius: 4px 4px 2px 2px; align-self: flex-end; transition: height .5s ease; }
+  #lp-{{ section.id }} .lp-bar--a { background: var(--cbar-a, #46708f); }
+  #lp-{{ section.id }} .lp-bar--b { background: var(--cbar-b, #9bc0dd); }
+  #lp-{{ section.id }} .lp-graph__wk { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: .68rem; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 16px 0 12px; font-size: .82rem; color: var(--lp-muted); }
+  #lp-{{ section.id }} .lp-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  #lp-{{ section.id }} .lp-dot { width: 10px; height: 10px; border-radius: 3px; }
+  #lp-{{ section.id }} .lp-dot--a { background: var(--cbar-a, #46708f); }
+  #lp-{{ section.id }} .lp-dot--b { background: var(--cbar-b, #9bc0dd); }
+  #lp-{{ section.id }} .lp-chartcard__text { margin: 0; color: var(--lp-muted); font-size: .92rem; line-height: 1.5; }
+  #lp-{{ section.id }} .lp-chart__foot { text-align: center; margin: 26px 0 0; font-size: .78rem; color: var(--lp-muted); }
+
+  /* ingredients */
+  #lp-{{ section.id }} .lp-ing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  #lp-{{ section.id }} .lp-ing { background: #fff; border: 1px solid var(--lp-line); border-radius: var(--lp-radius); padding: 22px 24px; }
+  #lp-{{ section.id }} .lp-ing__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  #lp-{{ section.id }} .lp-ing__name { font-size: 1.1rem; font-weight: 600; }
+  #lp-{{ section.id }} .lp-ing__amt { flex: none; font-size: .82rem; font-weight: 700; color: var(--lp-btn); background: var(--lp-band); border-radius: 999px; padding: 4px 12px; }
+  #lp-{{ section.id }} .lp-ing__latin { display: block; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: .92rem; color: var(--lp-accent); margin-top: 2px; }
+  #lp-{{ section.id }} .lp-ing__text { margin: 10px 0 0; color: var(--lp-muted); font-size: .93rem; line-height: 1.5; }
+
+  /* reviews */
+  #lp-{{ section.id }} .lp-rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  #lp-{{ section.id }} .lp-rev { background: #fff; border: 1px solid var(--lp-line); border-radius: var(--lp-radius); padding: 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 16px 36px -26px rgba(18,50,95,.42); }
+  #lp-{{ section.id }} .lp-rev__head { display: flex; align-items: center; gap: 12px; }
+  #lp-{{ section.id }} .lp-rev__avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex: none; background: var(--lp-band); display: grid; place-items: center; }
+  #lp-{{ section.id }} .lp-rev__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #lp-{{ section.id }} .lp-rev__initials { font-weight: 700; color: var(--lp-btn); font-size: 1.05rem; }
+  #lp-{{ section.id }} .lp-rev__id { display: flex; flex-direction: column; min-width: 0; margin-right: auto; }
+  #lp-{{ section.id }} .lp-rev__name { font-weight: 700; font-size: 1rem; color: var(--lp-ink); line-height: 1.2; }
+  #lp-{{ section.id }} .lp-rev__meta { font-size: .8rem; color: var(--lp-muted); margin-top: 2px; }
+  #lp-{{ section.id }} .lp-rev__date { font-size: .8rem; color: var(--lp-muted); flex: none; align-self: flex-start; white-space: nowrap; }
+  #lp-{{ section.id }} .lp-rev__stars { display: inline-flex; gap: 3px; }
+  #lp-{{ section.id }} .lp-rev__star { width: 22px; height: 22px; background: #00b67a; border-radius: 4px; display: grid; place-items: center; }
+  #lp-{{ section.id }} .lp-rev__star.is-off { background: #dcdce6; }
+  #lp-{{ section.id }} .lp-rev__star svg { width: 14px; height: 14px; fill: #fff; }
+  #lp-{{ section.id }} .lp-rev__title { margin: 2px 0 0; font-size: 1.05rem; font-weight: 700; color: var(--lp-ink); line-height: 1.25; }
+  #lp-{{ section.id }} .lp-rev__text { margin: 0; font-size: .96rem; line-height: 1.55; color: var(--lp-ink); opacity: .85; }
+  #lp-{{ section.id }} .lp-rev__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; padding-top: 4px; }
+  #lp-{{ section.id }} .lp-rev__tag { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; color: var(--lp-muted); background: var(--lp-band); border-radius: 7px; padding: 4px 10px; }
+  #lp-{{ section.id }} .lp-rev__tag--verified { color: #00875a; }
+
+  /* faq */
+  #lp-{{ section.id }} .lp-faq-list { display: grid; gap: 10px; }
+  #lp-{{ section.id }} .lp-faq-item { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
+  #lp-{{ section.id }} .lp-faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; font-weight: 600; font-size: 1.03rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  #lp-{{ section.id }} .lp-faq-item summary::-webkit-details-marker { display: none; }
+  #lp-{{ section.id }} .lp-faq-ic { flex: none; width: 16px; height: 16px; position: relative; }
+  #lp-{{ section.id }} .lp-faq-ic::before, #lp-{{ section.id }} .lp-faq-ic::after { content: ''; position: absolute; background: var(--lp-btn); border-radius: 2px; }
+  #lp-{{ section.id }} .lp-faq-ic::before { top: 7px; left: 0; width: 16px; height: 2px; }
+  #lp-{{ section.id }} .lp-faq-ic::after { left: 7px; top: 0; width: 2px; height: 16px; transition: transform .25s ease, opacity .25s ease; }
+  #lp-{{ section.id }} .lp-faq-item[open] .lp-faq-ic::after { transform: rotate(90deg); opacity: 0; }
+  #lp-{{ section.id }} .lp-faq-a { padding: 0 22px 20px; color: var(--lp-muted); font-size: .96rem; line-height: 1.6; }
+  #lp-{{ section.id }} .lp-faq-a p { margin: 0; }
+
+  /* featured results (survey stats) */
+  #lp-{{ section.id }} .lp-results { background: var(--lp-band); }
+  #lp-{{ section.id }} .lp-results__head { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 4vw, 56px); align-items: end; margin-bottom: 38px; }
+  #lp-{{ section.id }} .lp-results__head .lp-h2 { margin: 0; }
+  #lp-{{ section.id }} .lp-results__intro { color: var(--lp-muted); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  #lp-{{ section.id }} .lp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 44px); }
+  #lp-{{ section.id }} .lp-stat { border-top: 2px solid var(--lp-btn); padding-top: 16px; }
+  #lp-{{ section.id }} .lp-stat__num { display: block; font-size: clamp(2.6rem, 6vw, 4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1; color: var(--lp-ink); margin-bottom: 12px; }
+  #lp-{{ section.id }} .lp-stat p { margin: 0; color: var(--lp-muted); font-size: .96rem; line-height: 1.5; }
+  #lp-{{ section.id }} .lp-results__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 34px; }
+  #lp-{{ section.id }} .lp-results__note { margin: 0; font-size: .8rem; color: var(--lp-muted); max-width: 540px; }
+
+  /* ingredient ticker (About ing-ticker, recoloured to a bolder band strip) */
+  #lp-{{ section.id }} .lp-ticker { background: var(--lp-band); border-top: 0; padding-block: 18px; }
+  /* seamless loop: no track padding/gap; each item owns its trailing space so -50% aligns perfectly */
+  #lp-{{ section.id }} .lp-ticker .ing-ticker__track { gap: 0; padding-left: 0; animation-duration: 48s; }
+  #lp-{{ section.id }} .lp-ticker .ing-ticker__item { font-size: 1.02rem; color: var(--lp-muted); gap: 12px; margin-right: clamp(2.2rem, 4vw, 3.6rem); white-space: nowrap; }
+  #lp-{{ section.id }} .lp-ticker .ing-ticker__item b { color: var(--lp-ink); font-weight: 700; }
+  #lp-{{ section.id }} .lp-ticker .ing-ticker__dot { width: 50px; height: 50px; flex: none; border: 2px solid var(--lp-accent); }
+  #lp-{{ section.id }} .lp-ticker .ing-ticker__dot img { width: 100%; height: 100%; object-fit: cover; }
+  @media (prefers-reduced-motion: reduce) { #lp-{{ section.id }} .lp-ticker .ing-ticker__track { animation: none; } }
+
+  /* experts / advisors */
+  #lp-{{ section.id }} .lp-experts { background: var(--lp-paper); }
+  #lp-{{ section.id }} .lp-experts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  #lp-{{ section.id }} .lp-expert__photo { position: relative; aspect-ratio: 4 / 5; border-radius: var(--lp-radius); overflow: hidden; background: var(--lp-band); box-shadow: 0 18px 40px -28px rgba(18,50,95,.5); }
+  #lp-{{ section.id }} .lp-expert__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #lp-{{ section.id }} .lp-expert__meta { position: absolute; top: 12px; right: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  #lp-{{ section.id }} .lp-expert__role { font-size: .72rem; font-weight: 700; color: #fff; background: var(--lp-btn); border-radius: 999px; padding: 5px 11px; text-align: right; box-shadow: 0 8px 18px -8px rgba(18,50,95,.7); }
+  #lp-{{ section.id }} .lp-expert__tag { font-size: .7rem; font-weight: 600; color: var(--lp-btn); background: rgba(255,255,255,.92); border-left: 3px solid var(--lp-accent); border-radius: 4px; padding: 3px 8px; }
+  #lp-{{ section.id }} .lp-expert__name { margin: 14px 0 4px; font-size: 1.06rem; font-weight: 600; }
+  #lp-{{ section.id }} .lp-expert__bio { margin: 0; color: var(--lp-muted); font-size: .9rem; line-height: 1.5; }
+
+  /* cross-sell product marquee */
+  #lp-{{ section.id }} .lp-xsell { padding-block: clamp(40px, 6vw, 72px); background: var(--lp-band); overflow: hidden; }
+  #lp-{{ section.id }} .lp-xsell__strip { overflow: hidden; margin-top: 6px; }
+  #lp-{{ section.id }} .lp-xsell__track { display: flex; width: max-content; animation: lp-xscroll-{{ section.id }} 46s linear infinite; }
+  #lp-{{ section.id }} .lp-xsell__strip:hover .lp-xsell__track { animation-play-state: paused; }
+  #lp-{{ section.id }} .lp-xcard { flex: none; width: 262px; margin-right: 20px; background: #fff; border: 1px solid var(--lp-line); border-radius: var(--lp-radius); overflow: hidden; text-decoration: none; color: var(--lp-ink); display: flex; flex-direction: column; box-shadow: 0 10px 26px -22px rgba(18,50,95,.4); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  #lp-{{ section.id }} .lp-xcard:hover { transform: translateY(-5px); box-shadow: 0 26px 48px -24px rgba(18,50,95,.6); border-color: color-mix(in srgb, var(--lp-btn) 35%, var(--lp-line)); }
+  #lp-{{ section.id }} .lp-xcard__media { position: relative; display: block; aspect-ratio: 1 / 1; background: var(--lp-paper); overflow: hidden; }
+  #lp-{{ section.id }} .lp-xcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+  #lp-{{ section.id }} .lp-xcard:hover .lp-xcard__media img { transform: scale(1.06); }
+  #lp-{{ section.id }} .lp-xcard__tag { position: absolute; top: 10px; left: 10px; font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--lp-btn); background: rgba(255,255,255,.94); border-radius: 999px; padding: 4px 10px; box-shadow: 0 4px 10px -5px rgba(18,50,95,.45); }
+  #lp-{{ section.id }} .lp-xcard__info { padding: 15px 16px 16px; display: flex; flex-direction: column; gap: 10px; height: 100%; max-height: max-content; }
+  #lp-{{ section.id }} .lp-xcard__name { font-size: .97rem; font-weight: 600; line-height: 1.32; min-height: 2.55em; }
+  #lp-{{ section.id }} .lp-xcard__row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+  #lp-{{ section.id }} .lp-xcard__price { font-weight: 700; font-size: 1.12rem; color: var(--lp-ink); }
+  #lp-{{ section.id }} .lp-xcard__go { flex: none; font-size: .82rem; font-weight: 700; color: #fff; background: var(--lp-btn); border-radius: 999px; padding: 7px 15px; transition: background .15s ease; }
+  #lp-{{ section.id }} .lp-xcard:hover .lp-xcard__go { background: var(--lp-btn-hover); }
+  @keyframes lp-xscroll-{{ section.id }} { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { #lp-{{ section.id }} .lp-xsell__track { animation: none; } }
+
+  @media (max-width: 860px) {
+    #lp-{{ section.id }} .lp-pdp, #lp-{{ section.id }} .lp-science__grid { grid-template-columns: 1fr; }
+    #lp-{{ section.id }} .lp-cards { grid-template-columns: 1fr; }
+    #lp-{{ section.id }} .lp-results__head { grid-template-columns: 1fr; align-items: start; }
+    #lp-{{ section.id }} .lp-stats { grid-template-columns: 1fr; }
+    #lp-{{ section.id }} .lp-experts-grid { grid-template-columns: repeat(2, 1fr); }
+    #lp-{{ section.id }} .lp-howto__grid { grid-template-columns: 1fr; }
+    #lp-{{ section.id }} .lp-howto__media { max-width: 460px; margin-inline: auto; }
+    #lp-{{ section.id }} .lp-art img { object-position: center; }
+    #lp-{{ section.id }} .lp-charts, #lp-{{ section.id }} .lp-rev-grid { grid-template-columns: 1fr; }
+    #lp-{{ section.id }} .lp-photos__tile { width: 300px; height: 420px; margin-right: 14px; }
+    #lp-{{ section.id }} .lp-table-wrap { overflow-x: auto; }
+  }
+
+  /* ===== Sticky add-to-cart bar (landing only) — replaces the docked promo-bar ===== */
+  .promo-bar.is-docked { display: none !important; }
+  #lp-{{ section.id }} .lp-atc { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; background: #fff; border-top: 1px solid var(--lp-line, #e6e7ef); box-shadow: 0 -12px 30px -20px rgba(20,22,50,.55); transform: translateY(115%); transition: transform .34s cubic-bezier(.4,0,.2,1); padding: 10px 0 max(10px, env(safe-area-inset-bottom)); }
+  #lp-{{ section.id }} .lp-atc.is-visible { transform: translateY(0); }
+  #lp-{{ section.id }} .lp-atc__inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  #lp-{{ section.id }} .lp-atc__info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  #lp-{{ section.id }} .lp-atc__thumb { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; flex: none; background: var(--lp-band); }
+  #lp-{{ section.id }} .lp-atc__txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+  #lp-{{ section.id }} .lp-atc__txt strong { font-size: .98rem; font-weight: 600; color: var(--lp-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #lp-{{ section.id }} .lp-atc__price { font-size: 1.02rem; font-weight: 700; color: var(--lp-ink); }
+  #lp-{{ section.id }} .lp-atc__btn { flex: none; padding: 13px 40px; font-size: 1rem; }
+  @media (max-width: 640px) {
+    #lp-{{ section.id }} .lp-atc { padding-top: 8px; }
+    #lp-{{ section.id }} .lp-atc__inner { gap: 12px; }
+    #lp-{{ section.id }} .lp-atc__thumb { width: 40px; height: 40px; }
+    #lp-{{ section.id }} .lp-atc__txt strong { font-size: .9rem; }
+    #lp-{{ section.id }} .lp-atc__price { font-size: .95rem; }
+    #lp-{{ section.id }} .lp-atc__btn { padding: 12px 22px; font-size: .95rem; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('lp-{{ section.id }}');
+    if (!root) return;
+    (function () {
+      var track = root.querySelector('[data-gallery-track]');
+      if (!track) return;
+      var n = track.children.length;
+      var nav = Array.prototype.slice.call(root.querySelectorAll('[data-gallery-go]'));
+      var prev = root.querySelector('[data-gallery-prev]'), next = root.querySelector('[data-gallery-next]'), gi = 0;
+      function go(idx) { gi = Math.max(0, Math.min(n - 1, idx)); track.style.transform = 'translateX(' + (-gi * 100) + '%)'; nav.forEach(function (b, k) { b.classList.toggle('is-active', k === gi); }); if (prev) prev.classList.toggle('is-disabled', gi === 0); if (next) next.classList.toggle('is-disabled', gi === n - 1); }
+      if (prev) prev.addEventListener('click', function () { go(gi - 1); });
+      if (next) next.addEventListener('click', function () { go(gi + 1); });
+      nav.forEach(function (b) { b.addEventListener('click', function () { go(parseInt(b.getAttribute('data-gallery-go'), 10)); }); });
+      go(0);
+    })();
+    var form = root.querySelector('form');
+    if (!form) return;
+    var routine = form.querySelector('[data-routine]');
+    var moneyFormat = {{ shop.money_format | json }};
+    function formatMoney(cents) {
+      cents = Math.round(cents || 0);
+      var withDec = (cents / 100).toFixed(2), whole = Math.round(cents / 100).toString();
+      return moneyFormat.replace(/\{\{\s*(\w+)\s*\}\}/g, function (m, n) {
+        if (n === 'amount_no_decimals' || n === 'amount_no_decimals_with_comma_separator') return whole;
+        if (n === 'amount_with_comma_separator') return withDec.replace('.', ',');
+        return withDec;
+      });
+    }
+    if (routine) {
+      var cards = Array.prototype.slice.call(routine.querySelectorAll('.pack'));
+      var idInput = form.querySelector('[data-form-id]'), planInput = form.querySelector('[data-form-plan]');
+      var priceNow = form.querySelector('[data-price-now]'), priceOld = form.querySelector('[data-price-old]');
+      var atcPrice = root.querySelector('[data-atc-price]');
+      function num(el, a) { return parseInt((el && el.getAttribute(a)) || '0', 10); }
+      function select(card) {
+        if (!card) return;
+        cards.forEach(function (c) { c.classList.toggle('is-active', c === card); });
+        var r = card.querySelector('input[type=radio]'); if (r) r.checked = true;
+        if (idInput) idInput.value = card.getAttribute('data-id') || '';
+        if (planInput) planInput.value = card.getAttribute('data-plan') || '';
+        var price = num(card, 'data-price'), compare = num(card, 'data-compare');
+        if (priceNow) priceNow.textContent = formatMoney(price);
+        if (atcPrice) atcPrice.textContent = formatMoney(price);
+        if (priceOld) { if (compare > price) { priceOld.textContent = formatMoney(compare); priceOld.hidden = false; } else { priceOld.hidden = true; } }
+      }
+      cards.forEach(function (c) {
+        c.addEventListener('click', function () { select(c); });
+        var r = c.querySelector('input[type=radio]'); if (r) r.addEventListener('change', function () { select(c); });
+      });
+      select(routine.querySelector('.pack.is-active') || cards[0]);
+    }
+
+    // ===== Sticky add-to-cart bar (landing only) =====
+    var atc = root.querySelector('[data-atc]');
+    if (atc) {
+      var atcAdd = atc.querySelector('[data-atc-add]');
+      if (atcAdd) atcAdd.addEventListener('click', function () {
+        var submit = form.querySelector('[name=add], button[type=submit]');
+        if (submit && !submit.disabled) { submit.click(); }
+        else if (form.requestSubmit) { form.requestSubmit(); }
+        else { form.submit(); }
+      });
+      var heroEl = root.querySelector('.lp-hero');
+      var buyBox = root.querySelector('.lp-buy');
+      var footerEl = document.querySelector('.footer') || document.querySelector('footer');
+      var scroller = document.querySelector('.page-wrapper');
+      function atcScrollTop() {
+        if (scroller && scroller.scrollHeight > scroller.clientHeight + 4) return scroller.scrollTop;
+        return window.pageYOffset || document.documentElement.scrollTop || 0;
+      }
+      function atcSync() {
+        var show = heroEl ? (heroEl.getBoundingClientRect().bottom < 80) : (atcScrollTop() > 480);
+        if (show && buyBox) {
+          var r = buyBox.getBoundingClientRect();
+          if (r.top < window.innerHeight - 60 && r.bottom > 80) show = false;
+        }
+        if (show && footerEl && footerEl.getBoundingClientRect().top < window.innerHeight + 80) show = false;
+        atc.classList.toggle('is-visible', show);
+        atc.setAttribute('aria-hidden', show ? 'false' : 'true');
+      }
+      window.addEventListener('scroll', atcSync, { passive: true });
+      if (scroller) scroller.addEventListener('scroll', atcSync, { passive: true });
+      window.addEventListener('resize', atcSync, { passive: true });
+      atcSync();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Creatine landing",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "creatine-hydration-powder-1" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "paragraph", "content": "Use REAL customer reviews only (FTC rule). Swap these examples for verified purchaser quotes before running ads." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Alex R." },
+        { "type": "text", "id": "avatar", "label": "Avatar (image URL or asset filename)" },
+        { "type": "text", "id": "title", "label": "Review title", "default": "Great product" },
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "location", "label": "Location", "default": "United States" },
+        { "type": "text", "id": "reviews_count", "label": "Reviews count", "default": "1" },
+        { "type": "text", "id": "date", "label": "Date" },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Great product — noticeably stronger and no cramps." }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Creatine landing",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Marcus T.", "stars": 5, "location": "Verified buyer · 3 months", "text": "Extra reps on my last sets and none of the cramping I used to get on long sessions. Mixes clean, tastes light. Easily my favourite creatine." } },
+        { "type": "review", "settings": { "name": "Priya S.", "stars": 5, "location": "Verified buyer · CrossFit", "text": "I sip it through training and actually stay hydrated now. Strength has crept up over a few weeks without any bloating." } },
+        { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "location": "Verified buyer", "text": "One scoop, done — no loading, no chalky mess. Would love a couple more flavours, but the results speak for themselves." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

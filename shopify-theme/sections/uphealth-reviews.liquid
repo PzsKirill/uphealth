@@ -24,8 +24,13 @@
                 {%- if block.settings.title != blank -%}<h3 class="rev-card__title">{{ block.settings.title }}</h3>{%- endif -%}
                 <p class="rev-card__text">{{ block.settings.text }}</p>
                 <div class="rev-card__author">
-                  <strong>{{ block.settings.name }}</strong>
-                  {%- if block.settings.verified -%}<span class="rev-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg> Verified Customer</span>{%- endif -%}
+                  {%- assign tav = block.settings.avatar -%}
+                  {%- if tav != blank -%}<img class="rev-card__avatar" src="{% if tav contains '//' %}{{ tav }}{% else %}{{ tav | asset_url }}{% endif %}" alt="{{ block.settings.name | escape }}" loading="lazy" width="40" height="40" />
+                  {%- else -%}<span class="rev-card__avatar rev-card__avatar--initials">{{ block.settings.name | strip | slice: 0, 1 }}</span>{%- endif -%}
+                  <span class="rev-card__author-txt">
+                    <strong>{{ block.settings.name }}</strong>
+                    {%- if block.settings.verified -%}<span class="rev-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg> Verified Customer</span>{%- endif -%}
+                  </span>
                 </div>
                 {%- if block.settings.product != blank or block.settings.shop_url != blank -%}
                 <div class="rev-card__foot">
@@ -44,7 +49,13 @@
                     <img src="{{ block.settings.poster }}" alt="" loading="lazy" />
                   {%- endif -%}
                   {%- if block.settings.duration != blank -%}<span class="reel__dur">{{ block.settings.duration }}</span>{%- endif -%}
-                  {%- if block.settings.name != blank -%}<div class="reel__caption"><strong>{{ block.settings.name }}</strong>{% if block.settings.formula != blank %} · {{ block.settings.formula }}{% endif %}</div>{%- endif -%}
+                  {%- if block.settings.name != blank -%}
+                  {%- assign rav = block.settings.avatar -%}
+                  <div class="reel__caption">
+                    <span class="reel__avatar">{%- if rav != blank -%}<img src="{% if rav contains '//' %}{{ rav }}{% else %}{{ rav | asset_url }}{% endif %}" alt="{{ block.settings.name | escape }}" loading="lazy" width="30" height="30" />{%- else -%}<span class="reel__initials">{{ block.settings.name | strip | slice: 0, 1 }}</span>{%- endif -%}</span>
+                    <span class="reel__cap-txt"><strong>{{ block.settings.name }}</strong>{% if block.settings.formula != blank %} · {{ block.settings.formula }}{% endif %}</span>
+                  </div>
+                  {%- endif -%}
                 </div>
               </div>
             {%- endcase -%}
@@ -57,6 +68,18 @@
     </div>
   </div>
 </section>
+
+<style>
+  /* avatars for realism — reel captions + text-review authors */
+  .testimonials .reel__caption { display: flex; align-items: center; gap: 8px; }
+  .testimonials .reel__avatar { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; flex: none; display: grid; place-items: center; background: rgba(255,255,255,.2); border: 1.5px solid rgba(255,255,255,.75); }
+  .testimonials .reel__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testimonials .reel__initials { font-weight: 700; font-size: .78rem; color: #fff; }
+  .testimonials .rev-card__author { display: flex; align-items: center; gap: 10px; }
+  .testimonials .rev-card__avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex: none; background: var(--color-accent-soft, #f6cfe0); }
+  .testimonials .rev-card__avatar--initials { display: grid; place-items: center; font-weight: 700; color: var(--color-accent-deep, #b23e72); font-size: .95rem; }
+  .testimonials .rev-card__author-txt { display: flex; flex-direction: column; min-width: 0; }
+</style>
 
 <script>
   (function () {
@@ -120,12 +143,14 @@
       { "type": "text", "id": "poster", "label": "Poster image URL" },
       { "type": "text", "id": "duration", "label": "Duration label" },
       { "type": "text", "id": "name", "label": "Person name" },
+      { "type": "text", "id": "avatar", "label": "Avatar (image URL or asset filename)" },
       { "type": "text", "id": "formula", "label": "Formula / tag" }
     ]},
     { "type": "text_review", "name": "Text review", "settings": [
       { "type": "text", "id": "title", "label": "Title" },
       { "type": "textarea", "id": "text", "label": "Review text" },
       { "type": "text", "id": "name", "label": "Person name" },
+      { "type": "text", "id": "avatar", "label": "Avatar (image URL or asset filename)" },
       { "type": "text", "id": "date", "label": "Date" },
       { "type": "checkbox", "id": "verified", "label": "Verified Customer", "default": true },
       { "type": "text", "id": "product", "label": "Review for (product name)" },

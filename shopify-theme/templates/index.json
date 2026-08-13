@@ -46,7 +46,7 @@
             "title": "Hydrate hard, <em>recover harder.</em>",
             "lead": "Creatine and electrolytes in one clean scoop — for muscle strength and hydration that keep up with your training.",
             "cta_label": "Shop Creatine Hydration",
-            "cta_link": "/products/creatine-hydration-powder",
+            "cta_link": "/products/creatine-hydration-powder-1",
             "layout": "cover",
             "image_fit": "cover",
             "image": "",
@@ -67,7 +67,7 @@
             "title": "Beauty that starts <em>from within.</em>",
             "lead": "Hydrolyzed collagen peptides for glowing skin, stronger hair and nails, and healthy joints — one unflavoured scoop a day.",
             "cta_label": "Shop Collagen",
-            "cta_link": "/products/grass-fed-hydrolyzed-collagen-peptides",
+            "cta_link": "/products/grass-fed-hydrolyzed-collagen-peptides-1",
             "layout": "cover",
             "image_fit": "cover",
             "image": "",
@@ -88,7 +88,7 @@
             "title": "Strength, <em>one scoop at a time.</em>",
             "lead": "28g of fast-digesting whey isolate per serving for muscle growth and recovery. Smooth vanilla, zero fillers.",
             "cta_label": "Shop Whey Protein",
-            "cta_link": "/products/advanced-100-whey-protein-isolate-vanilla-1",
+            "cta_link": "/products/advanced-100-whey-protein-isolate-vanilla",
             "layout": "cover",
             "image_fit": "cover",
             "image": "",
@@ -155,8 +155,8 @@
         "b1": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/newavatar.png",
-            "asset": "newavatar.png",
+            "image": "",
+            "asset": "whycard-1.webp",
             "chip": "Scientific approach",
             "text": "We use only tested nutrients in meaningful doses — and leave out the needless extras."
           }
@@ -164,17 +164,17 @@
         "b2": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/avatar2.png",
-            "asset": "avatar2.png",
+            "image": "",
+            "asset": "whycard-2.webp",
             "chip": "Clean formula",
-            "text": "Every ingredient works in concert with the others, amplifying the overall effect. 123"
+            "text": "Every ingredient works in concert with the others, amplifying the overall effect."
           }
         },
         "b3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/30893a0c-126d-4908-9d53-5fc211cf9697.png",
-            "asset": "avatr3.png",
+            "image": "",
+            "asset": "whycard-3.webp",
             "chip": "Proven results",
             "text": "Developed with doctors and research labs, then tested batch by batch before it ships."
           }
@@ -196,8 +196,8 @@
         "d1": {
           "type": "day",
           "settings": {
-            "image": "shopify://shop_images/matchalatte.png",
-            "asset": "matchalatte.png",
+            "image": "",
+            "asset": "matchalatte.webp",
             "time": "Morning",
             "title": "Matcha Latte",
             "price": "$29",
@@ -207,8 +207,8 @@
         "d2": {
           "type": "day",
           "settings": {
-            "image": "shopify://shop_images/bcomplex.png",
-            "asset": "bcomplex.png",
+            "image": "",
+            "asset": "bcomplex.webp",
             "time": "Day",
             "title": "B-Complex",
             "price": "$39",
@@ -218,8 +218,8 @@
         "d3": {
           "type": "day",
           "settings": {
-            "image": "shopify://shop_images/magnesiumcalm.png",
-            "asset": "magnesiumcalm.png",
+            "image": "",
+            "asset": "magnesiumcalm.webp",
             "time": "Evening",
             "title": "Magnesium Calm",
             "price": "$25",
@@ -271,7 +271,7 @@
         "perks": "500 points | as a gift on your first purchase\n4 levels | of the loyalty program to pay with points\nGifts & perks | for every tier you reach\nEarly access | to new launches and special projects\nInvitations | to closed brand events",
         "button_label": "Sign up",
         "button_link": "",
-        "asset": "gang.png"
+        "asset": "gang.webp"
       }
     },
     "reviews": {
@@ -284,7 +284,8 @@
             "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-1-poster.jpg?v=1784276717",
             "duration": "0:06",
             "name": "Anna K.",
-            "formula": "Beauty formula"
+            "formula": "Beauty formula",
+            "avatar": "lp-reel-anna.jpg"
           }
         },
         "r2": {
@@ -294,7 +295,8 @@
             "poster": "",
             "duration": "0:16",
             "name": "Marco D.",
-            "formula": "Energy formula"
+            "formula": "Energy formula",
+            "avatar": ""
           }
         },
         "r3": {
@@ -304,7 +306,8 @@
             "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-3-poster.jpg?v=1784280487",
             "duration": "0:16",
             "name": "Sofia R.",
-            "formula": "Calm formula"
+            "formula": "Calm formula",
+            "avatar": "lp-reel-sofia.jpg"
           }
         },
         "r4": {
@@ -314,7 +317,8 @@
             "poster": "https://cdn.shopify.com/s/files/1/1058/5217/4677/files/uphealth-reel-4-poster.jpg?v=1784281835",
             "duration": "0:16",
             "name": "Daniel P.",
-            "formula": "Gut formula"
+            "formula": "Gut formula",
+            "avatar": "lp-reel-daniel.jpg"
           }
         },
         "r5": {
@@ -337,7 +341,8 @@
             "verified": true,
             "product": "Creatine Hydration",
             "product_image": "",
-            "shop_url": "/products/creatine-hydration-powder-1"
+            "shop_url": "/products/creatine-hydration-powder-1",
+            "avatar": "lp-rev-jess.jpg"
           }
         },
         "tr2": {
@@ -350,7 +355,8 @@
             "verified": true,
             "product": "Whey Protein",
             "product_image": "",
-            "shop_url": "/products/advanced-100-whey-protein-isolate-vanilla"
+            "shop_url": "/products/advanced-100-whey-protein-isolate-vanilla",
+            "avatar": "lp-rev-marcus.jpg"
           }
         },
         "tr3": {
@@ -363,7 +369,8 @@
             "verified": true,
             "product": "Collagen Peptides",
             "product_image": "",
-            "shop_url": "/products/grass-fed-hydrolyzed-collagen-peptides-1"
+            "shop_url": "/products/grass-fed-hydrolyzed-collagen-peptides-1",
+            "avatar": "lp-rev-priya.jpg"
           }
         }
       },
@@ -387,36 +394,36 @@
         "p1": {
           "type": "logo",
           "settings": {
-            "name": "THE WELL",
-            "link": ""
+            "name": "HEALTHLINE",
+            "link": "https://www.healthline.com/nutrition/10-benefits-of-creatine"
           }
         },
         "p2": {
           "type": "logo",
           "settings": {
-            "name": "VITALIS",
-            "link": ""
+            "name": "CLEVELAND CLINIC",
+            "link": "https://my.clevelandclinic.org/health/treatments/17674-creatine"
           }
         },
         "p3": {
           "type": "logo",
           "settings": {
-            "name": "PURE",
-            "link": ""
+            "name": "MAYO CLINIC",
+            "link": "https://www.mayoclinic.org/drugs-supplements-creatine/art-20347591"
           }
         },
         "p4": {
           "type": "logo",
           "settings": {
-            "name": "FORMULA",
-            "link": ""
+            "name": "FORBES",
+            "link": "https://www.forbes.com/health/supplements/best-creatine-supplements/"
           }
         },
         "p5": {
           "type": "logo",
           "settings": {
-            "name": "GLOW JOURNAL",
-            "link": ""
+            "name": "TODAY",
+            "link": "https://www.today.com/health/diet-fitness/creatine-for-women-rcna191553"
           }
         }
       },

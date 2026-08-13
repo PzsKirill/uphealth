@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "landing": {
+      "type": "uphealth-landing-nmn",
+      "blocks": {
+        "rev1": {
+          "type": "review",
+          "settings": {
+            "name": "Priya N.",
+            "avatar": "lp-rev-nmn-priya.jpg",
+            "title": "Steady all-day energy",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "2",
+            "date": "May 30, 2026",
+            "text": "Three weeks in and the afternoon slump is gone — steady energy without the jittery feeling I got from coffee. Easy one-a-day habit."
+          }
+        },
+        "rev2": {
+          "type": "review",
+          "settings": {
+            "name": "David R.",
+            "avatar": "lp-rev-nmn-david.jpg",
+            "title": "Clean and simple",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "1",
+            "date": "Jun 6, 2026",
+            "text": "I wanted a clean single-ingredient NMN and this is exactly that. One capsule with my morning water and I'm set — feels like a smart long-term investment."
+          }
+        },
+        "rev3": {
+          "type": "review",
+          "settings": {
+            "name": "Marta K.",
+            "avatar": "lp-rev-nmn-marta.jpg",
+            "title": "Part of my longevity routine",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "3",
+            "date": "Jun 14, 2026",
+            "text": "Added it to my morning stack alongside resveratrol. Hard to isolate one thing, but overall I feel sharper. Would love a larger bottle option."
+          }
+        }
+      },
+      "block_order": ["rev1", "rev2", "rev3"],
+      "settings": {
+        "product_handle": "nmn-1"
+      }
+    }
+  },
+  "order": ["landing"]
+}

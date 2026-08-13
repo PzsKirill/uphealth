@@ -5,7 +5,7 @@
     </header>
     <ul class="press-strip__list">
       {%- for block in section.blocks -%}
-      <li {{ block.shopify_attributes }}><a class="press-strip__logo" href="{{ block.settings.link | default: '#' }}">{{ block.settings.name }}</a></li>
+      <li {{ block.shopify_attributes }}><a class="press-strip__logo" href="{{ block.settings.link | default: '#' }}"{% if block.settings.link contains '//' %} target="_blank" rel="nofollow noopener"{% endif %}>{{ block.settings.name }}</a></li>
       {%- endfor -%}
     </ul>
   </div>

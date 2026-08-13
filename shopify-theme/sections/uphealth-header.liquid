@@ -45,12 +45,12 @@
                 <div class="mega-cat">
                   <a href="{{ all }}" class="mega-cat__title">All products <span class="mega-cat__title-arrow" aria-hidden="true">&rarr;</span></a>
                   <ul class="mega-cat__links">
-                    <li><a href="{{ root }}collections/sticks"  class="mega-cat__link">Sticks</a></li>
-                    <li><a href="{{ root }}collections/drinks"  class="mega-cat__link">Drinks</a></li>
-                    <li><a href="{{ root }}collections/gummies" class="mega-cat__link">Gummies</a></li>
-                    <li><a href="{{ root }}collections/protein" class="mega-cat__link">Protein</a></li>
-                    <li><a href="{{ root }}collections/sale"    class="mega-cat__link">Sale</a></li>
-                    <li><a href="{{ root }}collections/bundles" class="mega-cat__link">Bundles</a></li>
+                    <li><a href="{{ root }}collections/state-energy" class="mega-cat__link">Energy &amp; Stamina</a></li>
+                    <li><a href="{{ root }}collections/state-strength" class="mega-cat__link">Strength &amp; Muscle Recovery</a></li>
+                    <li><a href="{{ root }}collections/state-immune" class="mega-cat__link">Immune Support</a></li>
+                    <li><a href="{{ root }}collections/joint-bone-health" class="mega-cat__link">Joint &amp; Bone Health</a></li>
+                    <li><a href="{{ root }}collections/state-sleep" class="mega-cat__link">Sleep &amp; Rest</a></li>
+                    <li><a href="{{ root }}collections/state-focus" class="mega-cat__link">Memory &amp; Focus</a></li>
                   </ul>
                 </div>
                 <div class="mega-cards">
@@ -154,7 +154,7 @@
                 <a class="mega-menu__featured mega-about__featured" href="{% if section.settings.about_link != blank %}{{ section.settings.about_link }}{% else %}{{ root }}pages/about{% endif %}">
                   <div class="mega-menu__featured-image" aria-hidden="true">
                     {%- if section.settings.about_image != blank -%}<img src="{{ section.settings.about_image | image_url: width: 520 }}" alt="" loading="lazy" />
-                    {%- else -%}<img src="{{ 'about-featured.png' | asset_url }}" alt="" loading="lazy" />{%- endif -%}
+                    {%- else -%}<img src="{{ 'about-featured.webp' | asset_url }}" alt="" loading="lazy" />{%- endif -%}
                   </div>
                   <div class="mega-menu__featured-body">
                     <span class="mega-menu__featured-label">{{ section.settings.about_label | default: 'Our story' }}</span>
@@ -208,11 +208,11 @@
           <button class="mobile-nav__group-toggle" aria-expanded="false">Catalog <span>+</span></button>
           <ul class="mobile-nav__sub">
             <li><a href="{{ all }}">All products</a></li>
-            <li><a href="{{ root }}collections/sticks">Sticks</a></li>
-            <li><a href="{{ root }}collections/gummies">Gummies</a></li>
-            <li><a href="{{ root }}collections/drinks">Drinks</a></li>
-            <li><a href="{{ root }}collections/protein">Protein</a></li>
-            <li><a href="{{ root }}collections/bundles">Bundles</a></li>
+            <li><a href="{{ root }}collections/state-energy">Energy &amp; Stamina</a></li>
+            <li><a href="{{ root }}collections/state-strength">Strength &amp; Muscle Recovery</a></li>
+            <li><a href="{{ root }}collections/state-immune">Immune Support</a></li>
+            <li><a href="{{ root }}collections/joint-bone-health">Joint &amp; Bone Health</a></li>
+            <li><a href="{{ root }}collections/state-sleep">Sleep &amp; Rest</a></li>
           </ul>
         </li>
         <li class="mobile-nav__group">

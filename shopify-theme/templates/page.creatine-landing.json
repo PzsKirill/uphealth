@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "landing": {
+      "type": "uphealth-landing-creatine",
+      "blocks": {
+        "rev1": {
+          "type": "review",
+          "settings": {
+            "name": "Marcus T.",
+            "avatar": "lp-rev-marcus.jpg",
+            "title": "Easily my favourite creatine",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "4",
+            "date": "May 28, 2026",
+            "text": "Extra reps on my last sets and none of the cramping I used to get on long sessions. Mixes clean, tastes light. Easily my favourite creatine."
+          }
+        },
+        "rev2": {
+          "type": "review",
+          "settings": {
+            "name": "Priya S.",
+            "avatar": "lp-rev-priya.jpg",
+            "title": "Hydrated through every session",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "2",
+            "date": "Jun 3, 2026",
+            "text": "I sip it through training and actually stay hydrated now. Strength has crept up over a few weeks without any bloating."
+          }
+        },
+        "rev3": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel K.",
+            "avatar": "",
+            "title": "One scoop, no mess",
+            "stars": 5,
+            "location": "United States",
+            "reviews_count": "1",
+            "date": "Jun 12, 2026",
+            "text": "One scoop, done — no loading, no chalky mess. Would love a couple more flavours, but the results speak for themselves."
+          }
+        }
+      },
+      "block_order": ["rev1", "rev2", "rev3"],
+      "settings": {
+        "product_handle": "creatine-hydration-powder-1"
+      }
+    }
+  },
+  "order": ["landing"]
+}
