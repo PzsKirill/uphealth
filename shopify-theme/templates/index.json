@@ -143,7 +143,7 @@
         "heading": "Bonus on your first order",
         "text": "We give you 500 bonus points just for creating an account — that's $5 toward day one.",
         "button_label": "Sign up",
-        "button_link": "",
+        "button_link": "/account/register",
         "coin": "+500",
         "image": "shopify://shop_images/tabletnewbanner.png",
         "video_url": "https://cdn.shopify.com/s/files/1/0674/0734/7918/files/uphealth-bonus.mp4?v=1785484852"
@@ -268,9 +268,9 @@
         "heading": "Wellness gang",
         "lead": "UpHealth isn't only what's in the bottle — it's a community of people for whom taking care of themselves is part of life.",
         "perks_title": "What you get after signing up:",
-        "perks": "500 points | as a gift on your first purchase\n4 levels | of the loyalty program to pay with points\nGifts & perks | for every tier you reach\nEarly access | to new launches and special projects\nInvitations | to closed brand events",
+        "perks": "500 points | as a gift when you sign up\n5 points | for every $1 you spend\n100 points | = $1 off, redeem anytime\nEarly access | to new launches and special projects\nInvitations | to closed brand events",
         "button_label": "Sign up",
-        "button_link": "",
+        "button_link": "/account/register",
         "asset": "gang.webp"
       }
     },
