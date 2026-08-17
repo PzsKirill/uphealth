@@ -1,5 +1,6 @@
 {%- comment -%} UpHealth hero — clean re-feel-style slider. Self-contained: markup + style + JS. {%- endcomment -%}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" /></noscript>
 
 <section class="uh-hero" aria-label="Hero" style="--uh-dot: {{ section.settings.dot_color | default: '#cbc6bf' }}; --uh-dot-active: {{ section.settings.dot_active_color | default: '#74548e' }};">
   <div class="uh-hero__track" id="uh-hero-{{ section.id }}">
@@ -27,7 +28,7 @@
           <picture class="uh-hero__pic">
             {%- if img_wide != blank -%}<source media="(min-width: 1200px)" srcset="{{ img_wide }}">{%- endif -%}
             {%- if img_mobile != blank -%}<source media="(max-width: 600px)" srcset="{{ img_mobile }}">{%- endif -%}
-            <img class="uh-hero__bg" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />
+            <img class="uh-hero__bg" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}"{% if forloop.first %} fetchpriority="high" loading="eager"{% else %} loading="lazy"{% endif %} />
           </picture>
         {%- endif -%}
         <div class="uh-hero__inner">
@@ -39,7 +40,7 @@
           </div>
           {%- if layout != 'cover' -%}
           <div class="uh-hero__figure">
-            {%- if img != blank -%}<img class="uh-hero__img uh-hero__img--{{ fit }}" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />{%- endif -%}
+            {%- if img != blank -%}<img class="uh-hero__img uh-hero__img--{{ fit }}" src="{{ img }}" alt="{{ block.settings.title | strip_html | escape }}"{% if forloop.first %} fetchpriority="high" loading="eager"{% else %} loading="lazy"{% endif %} />{%- endif -%}
           </div>
           {%- endif -%}
         </div>
@@ -50,8 +51,8 @@
 
 <style>
   .uh-hero { position: relative; overflow: hidden; background: #f2ece1; }
-  .uh-hero__track { visibility: hidden; }
-  .uh-hero__track.slick-initialized { visibility: visible; }
+  /* Show the first slide immediately (LCP); hide the rest until slick enhances — no dependency on external JS to paint the hero. */
+  .uh-hero__track:not(.slick-initialized) > .uh-hero__slide:not(:first-child) { display: none; }
 
   .uh-hero__slide { outline: none; height: 600px; overflow: hidden; }
   .uh-hero__slide--cream { background: #f2ece1; --uh-accent: #a8754e; }

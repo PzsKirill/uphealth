@@ -6,16 +6,23 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": {{ shop.name | json }},
+  "name": "UpHealth",
+  "alternateName": {{ shop.name | json }},
   "url": {{ shop.url | json }},
-  "logo": {{ 'logo.svg' | asset_url | prepend: 'https:' | json }}
+  "logo": {{ 'logo.svg' | asset_url | prepend: 'https:' | json }},
+  "description": "UpHealth makes clean, science-backed supplements — creatine, NMN, magnesium, collagen and more — in meaningful doses, third-party tested and made in GMP-certified USA labs.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "hello@uphealth.life"
+  }
 }
 </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": {{ shop.name | json }},
+  "name": "UpHealth",
   "url": {{ shop.url | json }},
   "potentialAction": {
     "@type": "SearchAction",
